@@ -1,0 +1,178 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateCrew(
+  $input: CreateCrewInput!
+  $condition: ModelCrewConditionInput
+) {
+  createCrew(input: $input, condition: $condition) {
+    id
+    name
+    type
+    orgnizationCode
+    phoneNumber
+    email
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateCrew(
+  $input: UpdateCrewInput!
+  $condition: ModelCrewConditionInput
+) {
+  updateCrew(input: $input, condition: $condition) {
+    id
+    name
+    type
+    orgnizationCode
+    phoneNumber
+    email
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCrew(
+  $input: DeleteCrewInput!
+  $condition: ModelCrewConditionInput
+) {
+  deleteCrew(input: $input, condition: $condition) {
+    id
+    name
+    type
+    orgnizationCode
+    phoneNumber
+    email
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateQuestion(
+  $input: CreateQuestionInput!
+  $condition: ModelQuestionConditionInput
+) {
+  createQuestion(input: $input, condition: $condition) {
+    id
+    title
+    options {
+      items {
+        id
+        label
+        value
+        createdAt
+        updatedAt
+        questionOptionsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateQuestion(
+  $input: UpdateQuestionInput!
+  $condition: ModelQuestionConditionInput
+) {
+  updateQuestion(input: $input, condition: $condition) {
+    id
+    title
+    options {
+      items {
+        id
+        label
+        value
+        createdAt
+        updatedAt
+        questionOptionsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteQuestion(
+  $input: DeleteQuestionInput!
+  $condition: ModelQuestionConditionInput
+) {
+  deleteQuestion(input: $input, condition: $condition) {
+    id
+    title
+    options {
+      items {
+        id
+        label
+        value
+        createdAt
+        updatedAt
+        questionOptionsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateOption(
+  $input: CreateOptionInput!
+  $condition: ModelOptionConditionInput
+) {
+  createOption(input: $input, condition: $condition) {
+    id
+    label
+    value
+    question {
+      id
+      title
+      options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    questionOptionsId
+  }
+}
+mutation UpdateOption(
+  $input: UpdateOptionInput!
+  $condition: ModelOptionConditionInput
+) {
+  updateOption(input: $input, condition: $condition) {
+    id
+    label
+    value
+    question {
+      id
+      title
+      options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    questionOptionsId
+  }
+}
+mutation DeleteOption(
+  $input: DeleteOptionInput!
+  $condition: ModelOptionConditionInput
+) {
+  deleteOption(input: $input, condition: $condition) {
+    id
+    label
+    value
+    question {
+      id
+      title
+      options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    questionOptionsId
+  }
+}

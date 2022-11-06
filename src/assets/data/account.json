@@ -1,0 +1,66 @@
+[
+  {
+    "isActive": true,
+    "roles": [
+      { "name": "Brad Grower", "location": "ACT", "id": "09003f0d-820e-4e25-aed1-7c09f0bbda1f", "type": "GROWER", "isActive": true }
+    ],
+    "accountType": 1,
+    "companyName": "Donald Bradman",
+    "createdAt": "2020-03-21T05:36:02.302Z",
+    "address": "Adelaide",
+    "email": "dbradman@gmail.com",
+    "id": "dbb469e3-140e-4e60-9c31-23d07f2d4446",
+    "partners": [
+      {
+        "id": "9d21ab4d-8175-4ff0-ae61-54d168373bec",
+        "isActive": true,
+        "roleId": "8a5c443d-7089-4d82-8a17-0633672ee789",
+        "partnerCompanyId": "92c16d75-b284-49d2-b177-57e17d42e51e"
+      }
+    ]
+  },
+  {
+    "isActive": true,
+    "roles": [
+      {
+        "name": "Nadal Distributor",
+        "location": "ACT",
+        "id": "79e42904-b4ec-43ca-8be1-7e80e7d07679",
+        "type": "DISTIBUTOR",
+        "isActive": true
+      }
+    ],
+    "accountType": 1,
+    "companyName": "Rafael Nadal",
+    "createdAt": "2020-03-21T05:34:14.994Z",
+    "address": "Madrid Spain",
+    "email": "rnadal@gmail.com",
+    "id": "cb5f893e-f85d-480e-8d43-595dbae48277",
+    "partners": []
+  },
+  {
+    "isActive": true,
+    "roles": [],
+    "accountType": 1,
+    "companyName": "Roger Federer",
+    "createdAt": "2020-03-21T05:32:37.780Z",
+    "address": "Higgins ACT",
+    "email": "roger.federer@gmail.com",
+    "id": "d4575c59-5523-42b4-87d5-005e140e046c",
+    "partners": []
+  },
+  {
+    "isActive": false,
+    "roles": [
+      { "name": "Pan Grower", "location": "ACT", "id": "8a5c443d-7089-4d82-8a17-0633672ee789", "type": "GROWER", "isActive": true },
+      { "name": "Pan Distributor", "location": "ACT", "id": "e910b269-d9d0-4942-a936-8eb6277d8290", "type": "DISTIBUTOR", "isActive": true }
+    ],
+    "accountType": 2,
+    "companyName": "PanTest2",
+    "createdAt": "2020-03-21T05:13:02.114Z",
+    "address": "Higgins ACT",
+    "email": "panneer.subramanian@gmail.com",
+    "id": "92c16d75-b284-49d2-b177-57e17d42e51e",
+    "partners": []
+  }
+]

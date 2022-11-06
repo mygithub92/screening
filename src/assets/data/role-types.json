@@ -1,0 +1,9 @@
+[
+  { "label": "Admin", "value": "ADMIN" },
+  { "label": "Grower", "value": "GROWER" },
+  { "label": "Logistics", "value": "LOGISTICS" },
+  { "label": "Winery", "value": "WINERY" },
+  { "label": "Bottling", "value": "BOTTLING" },
+  { "label": "Storage", "value": "STORAGE" },
+  { "label": "Distributo", "value": "DISTRIBUTOR" }
+]

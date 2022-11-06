@@ -1,0 +1,50 @@
+[
+  {
+    "id": "9d21ab4d-8175-4ff0-ae61-54d168373bec",
+    "companyName": "companyName1",
+    "vineyardAddress": "vineyardAddress",
+    "pickingDay": "2020-03-23 00:00:01",
+    "rowRange": "rowRange",
+    "numberOfBins": "numberOfBins",
+    "block": "block",
+    "region": "region",
+    "vintage": "vintage",
+    "variety": "variety",
+    "actualWeight": "actualWeight1",
+    "batchId": "batchId1",
+    "volume": "volume1",
+    "status": "status1",
+    "wineInfo": "wineInfo1",
+    "currentUser": { "id": "4421ab4d-8175-4ff0-ae61-54d16ff73b33", "role": "GROWER" },
+    "ownerships": [
+      {
+        "user": { "id": "4421ab4d-8175-4ff0-ae61-54d16ff73b33", "role": "GROWER" },
+        "date": "2020-05-23 00:00:01"
+      }
+    ]
+  },
+  {
+    "id": "4421ab4d-8175-4ff0-ae61-54d16ff73b33",
+    "companyName": "companyName2",
+    "vineyardAddress": "vineyardAddress2",
+    "pickingDay": "2020-05-23 00:00:01",
+    "rowRange": "rowRange2",
+    "numberOfBins": "numberOfBins2",
+    "block": "block2",
+    "region": "region2",
+    "vintage": "vintage2",
+    "variety": "variety2",
+    "actualWeight": "actualWeight2",
+    "batchId": "batchId2",
+    "volume": "volume2",
+    "status": "status2",
+    "wineInfo": "wineInfo2",
+    "currentUser": { "id": "4421ab4d-8175-4ff0-ae61-54d16ff73b33", "role": "GROWER" },
+    "ownerships": [
+      {
+        "user": { "id": "4421ab4d-8175-4ff0-ae61-54d16ff73b33", "role": "GROWER" },
+        "date": "2020-05-23 00:00:01"
+      }
+    ]
+  }
+]

@@ -1,0 +1,69 @@
+<div [formGroup]="form">
+  <div class="ui-g ui-g-nopad">
+    <div class="ui-g-12 ui-lg-6">
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12"><label for="actualWeight" class="account-label">Actual Weight</label></div>
+        <div class="ui-g-12">
+          <input type="text" pInputText formControlName="actualWeight" id="actualWeight" placeholder="Actual Weight" />
+          <div ngxErrors="actualWeight">
+            <div ngxError="required" when="touched">
+              <p-message severity="error" text="Field is required"></p-message>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-lg-6">
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12"><label for="batchId" class="account-label">Vineyard Address</label></div>
+        <div class="ui-g-12">
+          <input type="text" pInputText formControlName="batchId" id="batchId" placeholder="Batch Id" />
+          <div ngxErrors="batchId">
+            <div ngxError="required" when="touched">
+              <p-message severity="error" text="Field is required"></p-message>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-lg-6">
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12"><label for="volume" class="account-label">Volume</label></div>
+        <div class="ui-g-12">
+          <input type="text" pInputText formControlName="volume" id="volume" placeholder="Volume" />
+          <div ngxErrors="volume">
+            <div ngxError="required" when="touched">
+              <p-message severity="error" text="Field is required"></p-message>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-lg-6">
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12"><label for="status" class="account-label">Status</label></div>
+        <div class="ui-g-12">
+          <input type="text" pInputText formControlName="status" id="status" placeholder="Status" />
+          <div ngxErrors="status">
+            <div ngxError="required" when="touched">
+              <p-message severity="error" text="Field is required"></p-message>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-lg-6">
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-12"><label for="wineInfo" class="account-label">Wine Info</label></div>
+        <div class="ui-g-12">
+          <input type="text" pInputText formControlName="wineInfo" id="wineInfo" placeholder="Wine Info" />
+          <div ngxErrors="wineInfo">
+            <div ngxError="required" when="touched">
+              <p-message severity="error" text="Field is required"></p-message>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import Amplify, { Auth } from 'aws-amplify';
+import { environment } from 'environments/environment';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+
+@Injectable()
+export class AuthService {
+  public loggedIn: BehaviorSubject<boolean>;
+
+  constructor(private router: Router) {
+    Amplify.configure(environment.amplify);
+    this.loggedIn = new BehaviorSubject<boolean>(false);
+  }
+
+  public signUp(email, password): Observable<any> {
+    return from(Auth.signUp(email, password));
+  }
+
+  public confirmSignUp(email, code): Observable<any> {
+    return from(Auth.confirmSignUp(email, code));
+  }
+
+  public signIn(email, password): Observable<any> {
+    return from(Auth.signIn(email, password)).pipe(tap(() => this.loggedIn.next(true)));
+  }
+
+  public getCurrentSession(): Observable<any> {
+    return from(Auth.currentSession());
+  }
+
+  public getCurrentAuthenticatedUser() {
+    return from(Auth.currentAuthenticatedUser());
+  }
+
+  public isAuthenticated(): Observable<boolean> {
+    return from(Auth.currentAuthenticatedUser()).pipe(
+      map(result => {
+        this.loggedIn.next(true);
+        return true;
+      }),
+      catchError(error => {
+        this.loggedIn.next(false);
+        return of(false);
+      })
+    );
+  }
+
+  public signOut() {
+    from(Auth.signOut()).subscribe(
+      result => {
+        this.loggedIn.next(false);
+        this.router.navigate(['/login']);
+      },
+      error => console.log(error)
+    );
+  }
+}

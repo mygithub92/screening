@@ -1,0 +1,94 @@
+<p-blockUI [blocked]="loading$ | async" [target]="dt"><p class="center-spinner"></p></p-blockUI>
+
+<div class="card card-w-title">
+  <h1>Account List</h1>
+  <p-table #dt [columns]="cols" [value]="accounts$ | async" dataKey="id" [paginator]="true" [rows]="10" styleClass="ui-table-accounts">
+    <ng-template pTemplate="caption">
+      <p-button label="Add Account" icon="pi pi-plus" iconPos="left" [routerLink]="['../add-edit', -1]"></p-button>
+      <div class="ui-table-globalfilter-container">
+        <input
+          type="search"
+          pInputText
+          size="50"
+          placeholder="Global Filter"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          style="width: 250px;"
+        />
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 3em;"></th>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{ col.header }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+      <tr>
+        <td>
+          <a href="#" [pRowToggler]="rowData">
+            <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+          </a>
+        </td>
+        <td *ngFor="let col of columns">
+          {{ rowData | accountValue: col.field }}
+        </td>
+        <td><p-button label="Edit" icon="pi pi-pencil" iconPos="left" [routerLink]="['../add-edit', rowData.id]"></p-button></td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+      <tr>
+        <td [attr.colspan]="columns.length + 2">
+          <div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-lg-6">
+              <div class="card card-w-title">
+                <h1>Roles</h1>
+                <p-table #rdt [columns]="roleCols" [value]="rowData.roles" styleClass="ui-table-roles">
+                  <ng-template pTemplate="header" let-columns>
+                    <tr>
+                      <th *ngFor="let col of columns">
+                        {{ col.header }}
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowData let-i="rowIndex" let-columns="columns">
+                    <tr>
+                      <td *ngFor="let col of columns; let i = index">
+                        {{ rowData | accountValue: col.field }}
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+
+            <div class="ui-g-12 ui-lg-6">
+              <div class="card card-w-title">
+                <h1>Partners</h1>
+                <p-table #rdt [columns]="partnerCols" [value]="getPartner$(rowData) | async" styleClass="ui-table-roles">
+                  <ng-template pTemplate="header" let-columns>
+                    <tr>
+                      <th *ngFor="let col of columns">
+                        {{ col.header }}
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowData let-i="rowIndex" let-columns="columns">
+                    <tr>
+                      <td *ngFor="let col of columns; let i = index">
+                        {{ rowData | accountValue: col.field }}
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,0 +1,59 @@
+<p-blockUI [blocked]="loading$ | async" [target]="pnl"><p class="center-spinner"></p></p-blockUI>
+<div class="card card-w-title">
+  <h1>Product History List</h1>
+  <p-table [columns]="cols" [value]="products" dataKey="id" [paginator]="true" [rows]="10" #pnl>
+    <ng-template pTemplate="caption">
+      <div class="ui-table-globalfilter-container">
+        <input
+          type="search"
+          pInputText
+          size="50"
+          placeholder="Global Filter"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          style="width: 250px;"
+        />
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 3em;"></th>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{ col.header }}
+          <p-sortIcon
+            [field]="col.field"
+            ariaLabel="Activate to sort"
+            ariaLabelDesc="Activate to sort in descending order"
+            ariaLabelAsc="Activate to sort in ascending order"
+          ></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+      <tr>
+        <td>
+          <a href="#" [pRowToggler]="rowData">
+            <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+          </a>
+        </td>
+        <td *ngFor="let col of columns">
+          {{ rowData[col.field] }}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-rowData>
+      <tr>
+        <td [attr.colspan]="cols.length + 1">
+          <div class="card">
+            <div class="ui-g ui-fluid">
+              <div class="ui-md-6 ui-g" *ngFor="let subcol of subCols">
+                <div class="ui-g-12">
+                  <b>{{ subcol.header }}:</b> {{ rowData[subcol.field] }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

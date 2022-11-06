@@ -1,0 +1,37 @@
+<div [formGroup]="form">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-3">
+      <label for="transferDate" class="account-label">Transfer Date:</label>
+    </div>
+    <div class="ui-g-8">
+      <p-calendar formControlName="transferDate" id="transferDate" placeholder="DD/MM/YYYY" dateFormat="dd/mm/yy"></p-calendar>
+      <div ngxErrors="transferDate">
+        <div ngxError="required" when="touched">
+          <p-message severity="error" text="Field is required"></p-message>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g-3">
+    <label for="transferTo" class="account-label">Transfer To:</label>
+  </div>
+  <div class="ui-g-8">
+    <p-dropdown
+      [options]="partners"
+      formControlName="transferTo"
+      id="transferTo"
+      placeholder="Select a Partner"
+      optionLabel="companyName"
+      dataKey="companyId"
+    ></p-dropdown>
+    <div ngxErrors="transferTo">
+      <div ngxError="required" when="touched">
+        <p-message severity="error" text="Field is required"></p-message>
+      </div>
+    </div>
+  </div>
+</div>
+<p-footer>
+  <p-button label="Save" icon="pi pi-save" iconPos="left" (click)="save()" styleClass="ui-button-success"></p-button>
+  <p-button label="Cancel" styleClass="ui-button-secondary" (click)="cancel()"></p-button>
+</p-footer>

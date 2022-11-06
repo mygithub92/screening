@@ -1,0 +1,151 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateCrew {
+  onCreateCrew {
+    id
+    name
+    type
+    orgnizationCode
+    phoneNumber
+    email
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCrew {
+  onUpdateCrew {
+    id
+    name
+    type
+    orgnizationCode
+    phoneNumber
+    email
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCrew {
+  onDeleteCrew {
+    id
+    name
+    type
+    orgnizationCode
+    phoneNumber
+    email
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateQuestion {
+  onCreateQuestion {
+    id
+    title
+    options {
+      items {
+        id
+        label
+        value
+        createdAt
+        updatedAt
+        questionOptionsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateQuestion {
+  onUpdateQuestion {
+    id
+    title
+    options {
+      items {
+        id
+        label
+        value
+        createdAt
+        updatedAt
+        questionOptionsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteQuestion {
+  onDeleteQuestion {
+    id
+    title
+    options {
+      items {
+        id
+        label
+        value
+        createdAt
+        updatedAt
+        questionOptionsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateOption {
+  onCreateOption {
+    id
+    label
+    value
+    question {
+      id
+      title
+      options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    questionOptionsId
+  }
+}
+subscription OnUpdateOption {
+  onUpdateOption {
+    id
+    label
+    value
+    question {
+      id
+      title
+      options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    questionOptionsId
+  }
+}
+subscription OnDeleteOption {
+  onDeleteOption {
+    id
+    label
+    value
+    question {
+      id
+      title
+      options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    questionOptionsId
+  }
+}
