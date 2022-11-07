@@ -12,9 +12,14 @@
     'layout-menu-static-active': staticMenuMobileActive
   }"
 >
-  <tt-topbar id="header" [showMenuButton]="showSidebar" [roleTypes]="user.roleTypes"></tt-topbar>
+  <tt-topbar id="header" [showMenuButton]="showSidebar"></tt-topbar>
 
-  <div class="layout-menu-container" *ngIf="showSidebar" [ngClass]="{ 'layout-menu-dark': darkMenu }" (click)="onMenuClick($event)">
+  <div
+    class="layout-menu-container"
+    *ngIf="showSidebar"
+    [ngClass]="{ 'layout-menu-dark': darkMenu }"
+    (click)="onMenuClick($event)"
+  >
     <div class="menu-scroll-content">
       <tt-menu [menuModel]="menuModel"></tt-menu>
     </div>

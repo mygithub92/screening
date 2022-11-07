@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { User } from 'app/@shared/api-interfaces';
 import * as fromUser from 'app/@state/reducers';
 import { Subscription } from 'rxjs';
@@ -15,8 +15,8 @@ enum MenuOrientation {
 }
 
 @Component({
-  selector: 'tt-main',
-  templateUrl: './app.main.component.html',
+  selector: "tt-main",
+  templateUrl: "./app.main.component.html",
   styles: [
     `
       #container {
@@ -39,7 +39,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
 
   darkMenu = false;
 
-  profileMode = 'inline';
+  profileMode = "inline";
 
   rotateMenuButton: boolean;
 
@@ -66,23 +66,23 @@ export class AppMainComponent implements OnInit, OnDestroy {
   configClick: boolean;
   showSidebar = true;
 
-  adminUserName = 'cf5cede4-f7e1-430e-b90c-61d24f2fff0a';
+  adminUserName = "cf5cede4-f7e1-430e-b90c-61d24f2fff0a";
 
   user: User;
 
   menuModel = [
     {
-      label: 'Product',
-      icon: 'fa fa-fw fa-home',
-      routerLink: 'product/product-list',
-    },
-    {
-      label: 'History',
-      icon: 'fa fa-fw fa-users',
-      routerLink: 'product/history-list',
+      label: "Product",
+      icon: "fa fa-fw fa-home",
+      routerLink: "product/product-list",
     },
   ];
-  constructor(private router: Router, public renderer: Renderer2, private menuService: MenuService, private store: Store<fromUser.State>) {
+  constructor(
+    private router: Router,
+    public renderer: Renderer2,
+    private menuService: MenuService,
+    private store: Store<fromUser.State>
+  ) {
     this.subscriptions = [];
   }
 
@@ -91,18 +91,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscriptions.push(
-      this.store.pipe(select(fromUser.selecUser)).subscribe((user) => {
-        this.user = user;
-        if (this.adminUserName === user.userName) {
-          this.showSidebar = false;
-          this.staticMenuDesktopInactive = true;
-          this.router.navigate(['/main/admin']);
-        } else {
-          this.router.navigate(['/main/product']);
-        }
-      })
-    );
+    this.router.navigate(["/main/product"]);
   }
 
   onLayoutClick() {

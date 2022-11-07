@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CustomMenuItem } from '../models/menu-item.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class MenuDataService {
   public toggleMenuBar: BehaviorSubject<any> = new BehaviorSubject<any>(null);
@@ -12,19 +12,12 @@ export class MenuDataService {
   getMenuList(): CustomMenuItem[] {
     return [
       {
-        Label: 'Product',
-        Icon: 'fa-home',
-        RouterLink: '/product/product-list',
+        Label: "Product",
+        Icon: "fa-home",
+        RouterLink: "/product/product-list",
         Childs: null,
-        IsChildVisible: false
+        IsChildVisible: false,
       },
-      {
-        Label: 'History',
-        Icon: 'fa-users',
-        RouterLink: '/product/history-list',
-        Childs: null,
-        IsChildVisible: false
-      }
     ];
   }
 }

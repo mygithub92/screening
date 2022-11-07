@@ -4,13 +4,17 @@ import { select, Store } from '@ngrx/store';
 import { User } from 'app/@shared/api-interfaces';
 import { UserActions } from 'app/@state/actions';
 import * as fromUser from 'app/@state/reducers';
+import { Auth } from 'aws-amplify';
 import { ConfirmationService } from 'primeng/api';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'tt-inline-profile',
+  selector: "tt-inline-profile",
   template: `
-    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <p-confirmDialog
+      header="Confirmation"
+      icon="pi pi-exclamation-triangle"
+    ></p-confirmDialog>
     <div class="profile" [ngClass]="{ 'profile-expanded': active }">
       <a href="#" (click)="onClick($event)">
         <img class="profile-image" src="assets/layout/images/avatar.png" />
@@ -20,7 +24,11 @@ import { Observable } from 'rxjs';
       </a>
     </div>
 
-    <ul id="profile-menu" class="layout-menu" [@menu]="active ? 'visible' : 'hidden'">
+    <ul
+      id="profile-menu"
+      class="layout-menu"
+      [@menu]="active ? 'visible' : 'hidden'"
+    >
       <li role="menuitem">
         <a href="#" [attr.tabindex]="!active ? '-1' : null">
           <i class="fa fa-fw fa-user"></i>
@@ -64,21 +72,27 @@ import { Observable } from 'rxjs';
     </ul>
   `,
   animations: [
-    trigger('menu', [
+    trigger("menu", [
       state(
-        'hidden',
+        "hidden",
         style({
-          height: '0px',
+          height: "0px",
         })
       ),
       state(
-        'visible',
+        "visible",
         style({
-          height: '*',
+          height: "*",
         })
       ),
-      transition('visible => hidden', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)')),
-      transition('hidden => visible', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)')),
+      transition(
+        "visible => hidden",
+        animate("400ms cubic-bezier(0.86, 0, 0.07, 1)")
+      ),
+      transition(
+        "hidden => visible",
+        animate("400ms cubic-bezier(0.86, 0, 0.07, 1)")
+      ),
     ]),
   ],
 })
@@ -86,7 +100,10 @@ export class AppProfileComponent implements OnInit {
   active: boolean;
   user$: Observable<User>;
 
-  constructor(private store: Store<fromUser.State>, private confirmationService: ConfirmationService) {}
+  constructor(
+    private store: Store<fromUser.State>,
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit(): void {
     this.user$ = this.store.pipe(select(fromUser.selecUser));
@@ -98,10 +115,9 @@ export class AppProfileComponent implements OnInit {
   }
 
   onLogout() {
-    this.confirmationService.confirm({
-      message: 'Are you sure that you want to logout?',
-      accept: () => this.logout(),
-    });
+    Auth.signOut()
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   }
 
   private logout() {

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import Amplify, { Auth } from 'aws-amplify';
-import { environment } from 'environments/environment';
+import { Auth } from 'aws-amplify';
 import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -10,7 +9,6 @@ export class AuthService {
   public loggedIn: BehaviorSubject<boolean>;
 
   constructor(private router: Router) {
-    Amplify.configure(environment.amplify);
     this.loggedIn = new BehaviorSubject<boolean>(false);
   }
 
@@ -23,7 +21,9 @@ export class AuthService {
   }
 
   public signIn(email, password): Observable<any> {
-    return from(Auth.signIn(email, password)).pipe(tap(() => this.loggedIn.next(true)));
+    return from(Auth.signIn(email, password)).pipe(
+      tap(() => this.loggedIn.next(true))
+    );
   }
 
   public getCurrentSession(): Observable<any> {
@@ -36,11 +36,11 @@ export class AuthService {
 
   public isAuthenticated(): Observable<boolean> {
     return from(Auth.currentAuthenticatedUser()).pipe(
-      map(result => {
+      map((result) => {
         this.loggedIn.next(true);
         return true;
       }),
-      catchError(error => {
+      catchError((error) => {
         this.loggedIn.next(false);
         return of(false);
       })
@@ -49,11 +49,11 @@ export class AuthService {
 
   public signOut() {
     from(Auth.signOut()).subscribe(
-      result => {
+      () => {
         this.loggedIn.next(false);
-        this.router.navigate(['/login']);
+        this.router.navigate(["main"]);
       },
-      error => console.log(error)
+      (error) => console.log(error)
     );
   }
 }
