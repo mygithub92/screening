@@ -10,7 +10,7 @@ import { ConfirmationService } from 'primeng/api';
 })
 export class AddEditProductComponent implements OnInit {
   title = "Add Product";
-  private form: FormGroup;
+  public form: FormGroup;
   public questions = [
     "In the last 5 days, have you experienced any of these symptoms?: fever/chills, cough or barking cough, shortness of breath, decrease or loss of taste or smell, muscle aches/joint pain, extreme tiredness, sore throat, runny or stuffy/congested nose, headaches, nausea, vomiting, and/or diarrhea",
     "In the past 14 days have you been directed by a federal border agent to comply with federal quarantine requirements due to international travel?",
@@ -25,19 +25,12 @@ export class AddEditProductComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService
   ) {
-    // const controls = this.questions.map((q, i) => {
-    //   return {
-    //     [`question${i + 1}`]: q
-    //   }
-    // })
-    this.form = this.fb.group({
-      question1: [null, [Validators.required]],
-      question2: [null, [Validators.required]],
-      question3: [null, [Validators.required]],
-      question4: [null, [Validators.required]],
-      question5: [null, [Validators.required]],
-      question6: [null, [Validators.required]],
-    });
+    const control = [null, [Validators.required]];
+    const controls = this.questions.reduce((a, _, i) => {
+      a[`question${i + 1}`] = control;
+      return a;
+    }, {});
+    this.form = this.fb.group(controls);
   }
 
   ngOnInit(): void {}
