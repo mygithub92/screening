@@ -10,23 +10,12 @@ import { DialogService } from 'primeng/dynamicdialog';
 
 import { NgPrimeModule } from '../../app.ngprime.module';
 import { AddEditProductComponent } from './add-edit/add-edit-product/add-edit-product.component';
-import { GrowerComponent } from './add-edit/grower/grower.component';
-import { WineryComponent } from './add-edit/winery/winery.component';
-import { HistoryListComponent } from './history-list/history-list.component';
-import { ProductListComponent } from './product-list/product-list.component';
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductEffects, ProductHistoryEffects } from './state/effects';
 import { TransferDialogComponent } from './transfer-dialog/transfer-dialog.component';
 
 @NgModule({
-  declarations: [
-    ProductListComponent,
-    HistoryListComponent,
-    AddEditProductComponent,
-    GrowerComponent,
-    TransferDialogComponent,
-    WineryComponent,
-  ],
+  declarations: [AddEditProductComponent, TransferDialogComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,
@@ -38,6 +27,6 @@ import { TransferDialogComponent } from './transfer-dialog/transfer-dialog.compo
   ],
   providers: [DialogService, ConfirmationService],
   exports: [NgPrimeModule, NgxErrorsModule],
-  entryComponents: [GrowerComponent, WineryComponent, TransferDialogComponent],
+  entryComponents: [TransferDialogComponent],
 })
 export class ProductModule {}

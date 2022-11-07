@@ -59,7 +59,7 @@ import { AppTopBarComponent } from './app.topbar.component';
       routerState: RouterState.Minimal,
     }),
     StoreDevtoolsModule.instrument({
-      name: 'Titanium Thread',
+      name: "Screening",
     }),
     EffectsModule.forRoot([UserEffects]),
   ],

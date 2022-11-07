@@ -1,13 +1,51 @@
 <div class="ui-g">
   <div class="ui-g-12">
-    <div class="card card-w-title">
-      <h1>{{ title }}</h1>
-      <p-confirmDialog header="Confirmation" icon="fa fa-exclamation" [style]="{ width: '425px' }"></p-confirmDialog>
-      <ng-template #container></ng-template>
-      <p-footer style="padding-left: 12px;">
-        <p-button label="Save" icon="pi pi-save" iconPos="left" (click)="onSave()" styleClass="ui-button-success"></p-button>
-        <p-button label="Cancel" styleClass="ui-button-secondary" (click)="onCancel()"></p-button>
-      </p-footer>
+    <p-confirmDialog
+      header="Confirmation"
+      icon="fa fa-exclamation"
+      [style]="{ width: '425px' }"
+    ></p-confirmDialog>
+    <div [formGroup]="form">
+      <div
+        class="card card-dark"
+        *ngFor="let question of questions; let i = index"
+      >
+        <h2>{{ i + 1 }}. {{ question }}</h2>
+        <div class="ui-g">
+          <div class="ui-g-12 ui-md-1">
+            <p-radioButton
+              name="question{{ i + 1 }}"
+              [value]="true"
+              label="Yes"
+              inputId="yes"
+              formControlName="question{{ i + 1 }}"
+            ></p-radioButton>
+          </div>
+          <div class="ui-g-12 ui-md-1">
+            <p-radioButton
+              name="question{{ i + 1 }}"
+              [value]="false"
+              label="No"
+              inputId="no"
+              formControlName="question{{ i + 1 }}"
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
     </div>
+    <p-footer style="padding-left: 12px;">
+      <p-button
+        label="Submit"
+        icon="pi pi-save"
+        iconPos="left"
+        (click)="onSave()"
+        styleClass="ui-button-success"
+      ></p-button>
+      <p-button
+        label="Cancel"
+        styleClass="ui-button-secondary"
+        (click)="onCancel()"
+      ></p-button>
+    </p-footer>
   </div>
 </div>
