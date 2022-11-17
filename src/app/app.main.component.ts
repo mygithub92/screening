@@ -5,6 +5,7 @@ import { User } from 'app/@shared/api-interfaces';
 import * as fromUser from 'app/@state/reducers';
 import { Subscription } from 'rxjs';
 
+import { AuthService } from './@core/services/auth.service';
 import { MenuService } from './app.menu.service';
 
 enum MenuOrientation {
@@ -81,7 +82,8 @@ export class AppMainComponent implements OnInit, OnDestroy {
     private router: Router,
     public renderer: Renderer2,
     private menuService: MenuService,
-    private store: Store<fromUser.State>
+    private store: Store<fromUser.State>,
+    private authService: AuthService
   ) {
     this.subscriptions = [];
   }
@@ -91,7 +93,21 @@ export class AppMainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.router.navigate(["/main/product"]);
+    this.authService.getCurrentAuthenticatedUser().subscribe((user: any) => {
+      console.log(user);
+      const groups =
+        user.signInUserSession.accessToken.payload["cognito:groups"];
+      if (groups.length) {
+        if (groups[0] === "Admin") {
+          this.router.navigate(["/main/admin"]);
+        }
+        if (groups[0] === "Stuff") {
+          this.router.navigate(["/main/product"]);
+        }
+      } else {
+        this.router.navigate(["/main/product"]);
+      }
+    });
   }
 
   onLayoutClick() {

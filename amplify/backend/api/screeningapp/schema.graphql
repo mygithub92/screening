@@ -1,0 +1,49 @@
+type Sceening @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Jobs: [Job] @manyToMany(relationName: "SceeningJob")
+  Crews: [Crew] @manyToMany(relationName: "SceeningCrew")
+  Questions: [Question] @manyToMany(relationName: "SceeningQuestion")
+  Options: [Option] @manyToMany(relationName: "SceeningOption")
+}
+
+type Form @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  Questions: [Question] @manyToMany(relationName: "FormQuestion")
+  Jobs: [Job] @manyToMany(relationName: "FormJob")
+}
+
+type Job @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  code: String
+  sceenings: [Sceening] @manyToMany(relationName: "SceeningJob")
+  forms: [Form] @manyToMany(relationName: "FormJob")
+  crews: [Crew] @manyToMany(relationName: "CrewJob")
+}
+
+type Question @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  Options: [Option] @manyToMany(relationName: "QuestionOption")
+  forms: [Form] @manyToMany(relationName: "FormQuestion")
+  sceenings: [Sceening] @manyToMany(relationName: "SceeningQuestion")
+  order: Int
+  optionOrderDesc: Boolean
+}
+
+type Option @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  label: String
+  value: String
+  questions: [Question] @manyToMany(relationName: "QuestionOption")
+  sceenings: [Sceening] @manyToMany(relationName: "SceeningOption")
+  order: Int
+}
+
+type Crew @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  userName: String
+  sceenings: [Sceening] @manyToMany(relationName: "SceeningCrew")
+  Jobs: [Job] @manyToMany(relationName: "CrewJob")
+}
+ 

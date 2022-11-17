@@ -1,47 +1,503 @@
 # this is an auto generated file. This will be overwritten
-mutation CreateCrew(
-  $input: CreateCrewInput!
-  $condition: ModelCrewConditionInput
+mutation CreateSceening(
+  $input: CreateSceeningInput!
+  $condition: ModelSceeningConditionInput
 ) {
-  createCrew(input: $input, condition: $condition) {
+  createSceening(input: $input, condition: $condition) {
     id
-    name
-    type
-    orgnizationCode
-    phoneNumber
-    email
+    Jobs {
+      items {
+        id
+        sceeningID
+        jobID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Crews {
+      items {
+        id
+        sceeningID
+        crewID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Questions {
+      items {
+        id
+        sceeningID
+        questionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Options {
+      items {
+        id
+        sceeningID
+        optionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
-mutation UpdateCrew(
-  $input: UpdateCrewInput!
-  $condition: ModelCrewConditionInput
+mutation UpdateSceening(
+  $input: UpdateSceeningInput!
+  $condition: ModelSceeningConditionInput
 ) {
-  updateCrew(input: $input, condition: $condition) {
+  updateSceening(input: $input, condition: $condition) {
     id
-    name
-    type
-    orgnizationCode
-    phoneNumber
-    email
+    Jobs {
+      items {
+        id
+        sceeningID
+        jobID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Crews {
+      items {
+        id
+        sceeningID
+        crewID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Questions {
+      items {
+        id
+        sceeningID
+        questionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Options {
+      items {
+        id
+        sceeningID
+        optionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
-mutation DeleteCrew(
-  $input: DeleteCrewInput!
-  $condition: ModelCrewConditionInput
+mutation DeleteSceening(
+  $input: DeleteSceeningInput!
+  $condition: ModelSceeningConditionInput
 ) {
-  deleteCrew(input: $input, condition: $condition) {
+  deleteSceening(input: $input, condition: $condition) {
     id
-    name
-    type
-    orgnizationCode
-    phoneNumber
-    email
+    Jobs {
+      items {
+        id
+        sceeningID
+        jobID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Crews {
+      items {
+        id
+        sceeningID
+        crewID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Questions {
+      items {
+        id
+        sceeningID
+        questionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Options {
+      items {
+        id
+        sceeningID
+        optionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateForm(
+  $input: CreateFormInput!
+  $condition: ModelFormConditionInput
+) {
+  createForm(input: $input, condition: $condition) {
+    id
+    name
+    Questions {
+      items {
+        id
+        formID
+        questionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Jobs {
+      items {
+        id
+        formID
+        jobID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateForm(
+  $input: UpdateFormInput!
+  $condition: ModelFormConditionInput
+) {
+  updateForm(input: $input, condition: $condition) {
+    id
+    name
+    Questions {
+      items {
+        id
+        formID
+        questionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Jobs {
+      items {
+        id
+        formID
+        jobID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteForm(
+  $input: DeleteFormInput!
+  $condition: ModelFormConditionInput
+) {
+  deleteForm(input: $input, condition: $condition) {
+    id
+    name
+    Questions {
+      items {
+        id
+        formID
+        questionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Jobs {
+      items {
+        id
+        formID
+        jobID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateJob(
+  $input: CreateJobInput!
+  $condition: ModelJobConditionInput
+) {
+  createJob(input: $input, condition: $condition) {
+    id
+    code
+    sceenings {
+      items {
+        id
+        sceeningID
+        jobID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    forms {
+      items {
+        id
+        formID
+        jobID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    crews {
+      items {
+        id
+        jobID
+        crewID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateJob(
+  $input: UpdateJobInput!
+  $condition: ModelJobConditionInput
+) {
+  updateJob(input: $input, condition: $condition) {
+    id
+    code
+    sceenings {
+      items {
+        id
+        sceeningID
+        jobID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    forms {
+      items {
+        id
+        formID
+        jobID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    crews {
+      items {
+        id
+        jobID
+        crewID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteJob(
+  $input: DeleteJobInput!
+  $condition: ModelJobConditionInput
+) {
+  deleteJob(input: $input, condition: $condition) {
+    id
+    code
+    sceenings {
+      items {
+        id
+        sceeningID
+        jobID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    forms {
+      items {
+        id
+        formID
+        jobID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    crews {
+      items {
+        id
+        jobID
+        crewID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 mutation CreateQuestion(
@@ -51,19 +507,55 @@ mutation CreateQuestion(
   createQuestion(input: $input, condition: $condition) {
     id
     title
-    options {
+    Options {
       items {
         id
-        label
-        value
+        questionID
+        optionID
         createdAt
         updatedAt
-        questionOptionsId
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
+      startedAt
     }
+    forms {
+      items {
+        id
+        formID
+        questionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    sceenings {
+      items {
+        id
+        sceeningID
+        questionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    order
+    optionOrderDesc
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 mutation UpdateQuestion(
@@ -73,19 +565,55 @@ mutation UpdateQuestion(
   updateQuestion(input: $input, condition: $condition) {
     id
     title
-    options {
+    Options {
       items {
         id
-        label
-        value
+        questionID
+        optionID
         createdAt
         updatedAt
-        questionOptionsId
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
+      startedAt
     }
+    forms {
+      items {
+        id
+        formID
+        questionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    sceenings {
+      items {
+        id
+        sceeningID
+        questionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    order
+    optionOrderDesc
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 mutation DeleteQuestion(
@@ -95,19 +623,55 @@ mutation DeleteQuestion(
   deleteQuestion(input: $input, condition: $condition) {
     id
     title
-    options {
+    Options {
       items {
         id
-        label
-        value
+        questionID
+        optionID
         createdAt
         updatedAt
-        questionOptionsId
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
+      startedAt
     }
+    forms {
+      items {
+        id
+        formID
+        questionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    sceenings {
+      items {
+        id
+        sceeningID
+        questionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    order
+    optionOrderDesc
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 mutation CreateOption(
@@ -118,18 +682,40 @@ mutation CreateOption(
     id
     label
     value
-    question {
-      id
-      title
-      options {
-        nextToken
+    questions {
+      items {
+        id
+        questionID
+        optionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
-      createdAt
-      updatedAt
+      nextToken
+      startedAt
     }
+    sceenings {
+      items {
+        id
+        sceeningID
+        optionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    order
     createdAt
     updatedAt
-    questionOptionsId
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 mutation UpdateOption(
@@ -140,18 +726,40 @@ mutation UpdateOption(
     id
     label
     value
-    question {
-      id
-      title
-      options {
-        nextToken
+    questions {
+      items {
+        id
+        questionID
+        optionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
-      createdAt
-      updatedAt
+      nextToken
+      startedAt
     }
+    sceenings {
+      items {
+        id
+        sceeningID
+        optionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    order
     createdAt
     updatedAt
-    questionOptionsId
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 mutation DeleteOption(
@@ -162,17 +770,1527 @@ mutation DeleteOption(
     id
     label
     value
-    question {
-      id
-      title
-      options {
-        nextToken
+    questions {
+      items {
+        id
+        questionID
+        optionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
-      createdAt
-      updatedAt
+      nextToken
+      startedAt
+    }
+    sceenings {
+      items {
+        id
+        sceeningID
+        optionID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    order
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateCrew(
+  $input: CreateCrewInput!
+  $condition: ModelCrewConditionInput
+) {
+  createCrew(input: $input, condition: $condition) {
+    id
+    userName
+    sceenings {
+      items {
+        id
+        sceeningID
+        crewID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Jobs {
+      items {
+        id
+        jobID
+        crewID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
     }
     createdAt
     updatedAt
-    questionOptionsId
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateCrew(
+  $input: UpdateCrewInput!
+  $condition: ModelCrewConditionInput
+) {
+  updateCrew(input: $input, condition: $condition) {
+    id
+    userName
+    sceenings {
+      items {
+        id
+        sceeningID
+        crewID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Jobs {
+      items {
+        id
+        jobID
+        crewID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteCrew(
+  $input: DeleteCrewInput!
+  $condition: ModelCrewConditionInput
+) {
+  deleteCrew(input: $input, condition: $condition) {
+    id
+    userName
+    sceenings {
+      items {
+        id
+        sceeningID
+        crewID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    Jobs {
+      items {
+        id
+        jobID
+        crewID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateSceeningJob(
+  $input: CreateSceeningJobInput!
+  $condition: ModelSceeningJobConditionInput
+) {
+  createSceeningJob(input: $input, condition: $condition) {
+    id
+    sceeningID
+    jobID
+    sceening {
+      id
+      Jobs {
+        nextToken
+        startedAt
+      }
+      Crews {
+        nextToken
+        startedAt
+      }
+      Questions {
+        nextToken
+        startedAt
+      }
+      Options {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      crews {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateSceeningJob(
+  $input: UpdateSceeningJobInput!
+  $condition: ModelSceeningJobConditionInput
+) {
+  updateSceeningJob(input: $input, condition: $condition) {
+    id
+    sceeningID
+    jobID
+    sceening {
+      id
+      Jobs {
+        nextToken
+        startedAt
+      }
+      Crews {
+        nextToken
+        startedAt
+      }
+      Questions {
+        nextToken
+        startedAt
+      }
+      Options {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      crews {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteSceeningJob(
+  $input: DeleteSceeningJobInput!
+  $condition: ModelSceeningJobConditionInput
+) {
+  deleteSceeningJob(input: $input, condition: $condition) {
+    id
+    sceeningID
+    jobID
+    sceening {
+      id
+      Jobs {
+        nextToken
+        startedAt
+      }
+      Crews {
+        nextToken
+        startedAt
+      }
+      Questions {
+        nextToken
+        startedAt
+      }
+      Options {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      crews {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateSceeningCrew(
+  $input: CreateSceeningCrewInput!
+  $condition: ModelSceeningCrewConditionInput
+) {
+  createSceeningCrew(input: $input, condition: $condition) {
+    id
+    sceeningID
+    crewID
+    sceening {
+      id
+      Jobs {
+        nextToken
+        startedAt
+      }
+      Crews {
+        nextToken
+        startedAt
+      }
+      Questions {
+        nextToken
+        startedAt
+      }
+      Options {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+        startedAt
+      }
+      Jobs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateSceeningCrew(
+  $input: UpdateSceeningCrewInput!
+  $condition: ModelSceeningCrewConditionInput
+) {
+  updateSceeningCrew(input: $input, condition: $condition) {
+    id
+    sceeningID
+    crewID
+    sceening {
+      id
+      Jobs {
+        nextToken
+        startedAt
+      }
+      Crews {
+        nextToken
+        startedAt
+      }
+      Questions {
+        nextToken
+        startedAt
+      }
+      Options {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+        startedAt
+      }
+      Jobs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteSceeningCrew(
+  $input: DeleteSceeningCrewInput!
+  $condition: ModelSceeningCrewConditionInput
+) {
+  deleteSceeningCrew(input: $input, condition: $condition) {
+    id
+    sceeningID
+    crewID
+    sceening {
+      id
+      Jobs {
+        nextToken
+        startedAt
+      }
+      Crews {
+        nextToken
+        startedAt
+      }
+      Questions {
+        nextToken
+        startedAt
+      }
+      Options {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+        startedAt
+      }
+      Jobs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateSceeningQuestion(
+  $input: CreateSceeningQuestionInput!
+  $condition: ModelSceeningQuestionConditionInput
+) {
+  createSceeningQuestion(input: $input, condition: $condition) {
+    id
+    sceeningID
+    questionID
+    sceening {
+      id
+      Jobs {
+        nextToken
+        startedAt
+      }
+      Crews {
+        nextToken
+        startedAt
+      }
+      Questions {
+        nextToken
+        startedAt
+      }
+      Options {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateSceeningQuestion(
+  $input: UpdateSceeningQuestionInput!
+  $condition: ModelSceeningQuestionConditionInput
+) {
+  updateSceeningQuestion(input: $input, condition: $condition) {
+    id
+    sceeningID
+    questionID
+    sceening {
+      id
+      Jobs {
+        nextToken
+        startedAt
+      }
+      Crews {
+        nextToken
+        startedAt
+      }
+      Questions {
+        nextToken
+        startedAt
+      }
+      Options {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteSceeningQuestion(
+  $input: DeleteSceeningQuestionInput!
+  $condition: ModelSceeningQuestionConditionInput
+) {
+  deleteSceeningQuestion(input: $input, condition: $condition) {
+    id
+    sceeningID
+    questionID
+    sceening {
+      id
+      Jobs {
+        nextToken
+        startedAt
+      }
+      Crews {
+        nextToken
+        startedAt
+      }
+      Questions {
+        nextToken
+        startedAt
+      }
+      Options {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateSceeningOption(
+  $input: CreateSceeningOptionInput!
+  $condition: ModelSceeningOptionConditionInput
+) {
+  createSceeningOption(input: $input, condition: $condition) {
+    id
+    sceeningID
+    optionID
+    sceening {
+      id
+      Jobs {
+        nextToken
+        startedAt
+      }
+      Crews {
+        nextToken
+        startedAt
+      }
+      Questions {
+        nextToken
+        startedAt
+      }
+      Options {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateSceeningOption(
+  $input: UpdateSceeningOptionInput!
+  $condition: ModelSceeningOptionConditionInput
+) {
+  updateSceeningOption(input: $input, condition: $condition) {
+    id
+    sceeningID
+    optionID
+    sceening {
+      id
+      Jobs {
+        nextToken
+        startedAt
+      }
+      Crews {
+        nextToken
+        startedAt
+      }
+      Questions {
+        nextToken
+        startedAt
+      }
+      Options {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteSceeningOption(
+  $input: DeleteSceeningOptionInput!
+  $condition: ModelSceeningOptionConditionInput
+) {
+  deleteSceeningOption(input: $input, condition: $condition) {
+    id
+    sceeningID
+    optionID
+    sceening {
+      id
+      Jobs {
+        nextToken
+        startedAt
+      }
+      Crews {
+        nextToken
+        startedAt
+      }
+      Questions {
+        nextToken
+        startedAt
+      }
+      Options {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateFormQuestion(
+  $input: CreateFormQuestionInput!
+  $condition: ModelFormQuestionConditionInput
+) {
+  createFormQuestion(input: $input, condition: $condition) {
+    id
+    formID
+    questionID
+    form {
+      id
+      name
+      Questions {
+        nextToken
+        startedAt
+      }
+      Jobs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateFormQuestion(
+  $input: UpdateFormQuestionInput!
+  $condition: ModelFormQuestionConditionInput
+) {
+  updateFormQuestion(input: $input, condition: $condition) {
+    id
+    formID
+    questionID
+    form {
+      id
+      name
+      Questions {
+        nextToken
+        startedAt
+      }
+      Jobs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteFormQuestion(
+  $input: DeleteFormQuestionInput!
+  $condition: ModelFormQuestionConditionInput
+) {
+  deleteFormQuestion(input: $input, condition: $condition) {
+    id
+    formID
+    questionID
+    form {
+      id
+      name
+      Questions {
+        nextToken
+        startedAt
+      }
+      Jobs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateFormJob(
+  $input: CreateFormJobInput!
+  $condition: ModelFormJobConditionInput
+) {
+  createFormJob(input: $input, condition: $condition) {
+    id
+    formID
+    jobID
+    form {
+      id
+      name
+      Questions {
+        nextToken
+        startedAt
+      }
+      Jobs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      crews {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateFormJob(
+  $input: UpdateFormJobInput!
+  $condition: ModelFormJobConditionInput
+) {
+  updateFormJob(input: $input, condition: $condition) {
+    id
+    formID
+    jobID
+    form {
+      id
+      name
+      Questions {
+        nextToken
+        startedAt
+      }
+      Jobs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      crews {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteFormJob(
+  $input: DeleteFormJobInput!
+  $condition: ModelFormJobConditionInput
+) {
+  deleteFormJob(input: $input, condition: $condition) {
+    id
+    formID
+    jobID
+    form {
+      id
+      name
+      Questions {
+        nextToken
+        startedAt
+      }
+      Jobs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      crews {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateCrewJob(
+  $input: CreateCrewJobInput!
+  $condition: ModelCrewJobConditionInput
+) {
+  createCrewJob(input: $input, condition: $condition) {
+    id
+    jobID
+    crewID
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      crews {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+        startedAt
+      }
+      Jobs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateCrewJob(
+  $input: UpdateCrewJobInput!
+  $condition: ModelCrewJobConditionInput
+) {
+  updateCrewJob(input: $input, condition: $condition) {
+    id
+    jobID
+    crewID
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      crews {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+        startedAt
+      }
+      Jobs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteCrewJob(
+  $input: DeleteCrewJobInput!
+  $condition: ModelCrewJobConditionInput
+) {
+  deleteCrewJob(input: $input, condition: $condition) {
+    id
+    jobID
+    crewID
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      crews {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+        startedAt
+      }
+      Jobs {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateQuestionOption(
+  $input: CreateQuestionOptionInput!
+  $condition: ModelQuestionOptionConditionInput
+) {
+  createQuestionOption(input: $input, condition: $condition) {
+    id
+    questionID
+    optionID
+    question {
+      id
+      title
+      Options {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation UpdateQuestionOption(
+  $input: UpdateQuestionOptionInput!
+  $condition: ModelQuestionOptionConditionInput
+) {
+  updateQuestionOption(input: $input, condition: $condition) {
+    id
+    questionID
+    optionID
+    question {
+      id
+      title
+      Options {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation DeleteQuestionOption(
+  $input: DeleteQuestionOptionInput!
+  $condition: ModelQuestionOptionConditionInput
+) {
+  deleteQuestionOption(input: $input, condition: $condition) {
+    id
+    questionID
+    optionID
+    question {
+      id
+      title
+      Options {
+        nextToken
+        startedAt
+      }
+      forms {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+        startedAt
+      }
+      sceenings {
+        nextToken
+        startedAt
+      }
+      order
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }

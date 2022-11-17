@@ -3,34 +3,36 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Account } from 'app/@shared/api-interfaces';
+import { options, questions } from 'app/@shared/constant';
+import { APIService } from 'app/API.service';
 import { Observable } from 'rxjs';
 
 import * as fromAdmin from '../../state/reducers';
 
 @Component({
-  selector: 'tt-account-list',
-  templateUrl: './account-list.component.html',
-  styleUrls: ['./account-list.component.scss'],
+  selector: "tt-account-list",
+  templateUrl: "./account-list.component.html",
+  styleUrls: ["./account-list.component.scss"],
   animations: [
-    trigger('rowExpansionTrigger', [
+    trigger("rowExpansionTrigger", [
       state(
-        'void',
+        "void",
         style({
-          transform: 'translateX(-10%)',
-          opacity: 0
+          transform: "translateX(-10%)",
+          opacity: 0,
         })
       ),
       state(
-        'active',
+        "active",
         style({
-          transform: 'translateX(0)',
-          opacity: 1
+          transform: "translateX(0)",
+          opacity: 1,
         })
       ),
-      transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
-    ])
+      transition("* <=> *", animate("400ms cubic-bezier(0.86, 0, 0.07, 1)")),
+    ]),
   ],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class AccountListComponent implements OnInit {
   accounts$: Observable<Account[]>;
@@ -40,34 +42,107 @@ export class AccountListComponent implements OnInit {
   roleCols: any[];
   partnerCols: any[];
 
-  constructor(private store: Store<fromAdmin.State>, private router: Router, private route: ActivatedRoute) {
-    this.loading$ = this.store.pipe(select(fromAdmin.selectLoading));
-    this.accounts$ = this.store.pipe(select(fromAdmin.selectAccounts));
-  }
+  constructor(
+    private store: Store<fromAdmin.State>,
+    private router: Router,
+    private route: ActivatedRoute,
+    private api: APIService
+  ) {}
 
   ngOnInit() {
     this.cols = [
-      { field: 'companyName', header: 'Company Name' },
-      { field: 'email', header: 'Email' },
-      { field: 'address', header: 'Address' },
-      { field: 'accountType', header: 'Type' },
-      { field: 'isActive', header: 'Status' }
+      { field: "companyName", header: "Company Name" },
+      { field: "email", header: "Email" },
+      { field: "address", header: "Address" },
+      { field: "accountType", header: "Type" },
+      { field: "isActive", header: "Status" },
     ];
 
     this.roleCols = [
-      { field: 'name', header: 'Role Name' },
-      { field: 'location', header: 'Location' },
-      { field: 'type', header: 'Role Type' },
-      { field: 'isActive', header: 'Status' }
+      { field: "name", header: "Role Name" },
+      { field: "location", header: "Location" },
+      { field: "type", header: "Role Type" },
+      { field: "isActive", header: "Status" },
     ];
 
     this.partnerCols = [
-      { field: 'companyName', header: 'Company Name' },
-      { field: 'name', header: 'Partner Role' },
-      { field: 'type', header: 'Role Type' },
-      { field: 'isActive', header: 'Status' },
-      { field: 'location', header: 'Location' }
+      { field: "companyName", header: "Company Name" },
+      { field: "name", header: "Partner Role" },
+      { field: "type", header: "Role Type" },
+      { field: "isActive", header: "Status" },
+      { field: "location", header: "Location" },
     ];
+  }
+
+  async delete() {
+    const qpObjs = await this.api.ListQuestionOptions();
+    const optionObjs = await this.api.ListOptions();
+    const questionObjs = await this.api.ListOptions();
+    console.log(qpObjs);
+    const qos = [];
+    const options = [];
+    const questions = [];
+    qpObjs.items.forEach((item) => {
+      qos.push(
+        this.api.DeleteQuestionOption({ id: item.id, _version: item._version })
+      );
+    });
+    optionObjs.items.forEach((item) => {
+      options.push(
+        this.api.DeleteOption({
+          id: item.id,
+          _version: item._version,
+        })
+      );
+    });
+    questionObjs.items.forEach((item) => {
+      qos.push(
+        this.api.DeleteQuestionOption({ id: item.id, _version: item._version })
+      );
+      questions.push(
+        this.api.DeleteQuestion({
+          id: item.id,
+          _version: item._version,
+        })
+      );
+    });
+    await Promise.all(options);
+    await Promise.all(questions);
+    await Promise.all(qos);
+    console.log("Delettion done...");
+  }
+
+  async init() {
+    const optionObjs = await Promise.all(
+      options.map((option, i) =>
+        this.api.CreateOption({
+          label: option,
+          value: option,
+          order: i + 1,
+        })
+      )
+    );
+    const questionObjs = await Promise.all(
+      questions.map((question, i) =>
+        this.api.CreateQuestion({
+          title: question,
+          order: i + 1,
+        })
+      )
+    );
+    optionObjs.sort((o) => o.order);
+    questionObjs.sort((q) => q.order);
+
+    Promise.all(
+      questionObjs.map((q) =>
+        optionObjs.map((o) =>
+          this.api.CreateQuestionOption({
+            questionID: q.id,
+            optionID: o.id,
+          })
+        )
+      )
+    );
   }
 
   getPartner$(account: Account) {
@@ -75,10 +150,10 @@ export class AccountListComponent implements OnInit {
   }
 
   selectAccount(accountId: string) {
-    this.router.navigate(['add-edit', accountId]);
+    this.router.navigate(["add-edit", accountId]);
   }
 
   addAccount() {
-    this.router.navigate(['add-edit', -1]);
+    this.router.navigate(["add-edit", -1]);
   }
 }

@@ -1,31 +1,30 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
+import { APIService } from 'app/API.service';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
-import { AdminActions } from './state/actions';
 import * as fromAdmin from './state/reducers';
 
 @Component({
-  selector: 'tt-admin',
-  template: `
-    <p-blockUI [blocked]="true"></p-blockUI>
-  `
+  selector: "tt-admin",
+  template: ` <p-blockUI [blocked]="true"></p-blockUI> `,
 })
 export class AdminComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
-  constructor(private store: Store<fromAdmin.State>, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private store: Store<fromAdmin.State>,
+    private router: Router,
+    private route: ActivatedRoute,
+    private api: APIService
+  ) {}
 
   ngOnInit() {
-    this.store.dispatch(AdminActions.loadAccounts());
-    this.subscription = this.store
-      .pipe(select(fromAdmin.selectLoaded))
-      .pipe(filter(loaded => loaded))
-      .subscribe(() => this.router.navigate(['manage'], { relativeTo: this.route }));
+    this.router.navigate(["manage"], { relativeTo: this.route });
+    // this.init();
+    // this.delete();
   }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+
+  ngOnDestroy(): void {}
 }
