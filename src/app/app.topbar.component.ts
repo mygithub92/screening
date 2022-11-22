@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserActions } from 'app/@state/actions';
 import * as fromUser from 'app/@state/reducers';
 import { ConfirmationService } from 'primeng/api';
 
+import { AuthService } from './@core/services/auth.service';
 import { AppMainComponent } from './app.main.component';
 
 @Component({
@@ -57,7 +58,7 @@ import { AppMainComponent } from './app.main.component';
                 class="profile-image"
                 src="assets/layout/images/avatar.png"
               />
-              <span class="topbar-item-name">Isabel Lopez</span>
+              <span class="topbar-item-name">{{ user?.attributes?.name }}</span>
               <span class="topbar-item-role">Marketing</span>
             </a>
 
@@ -75,12 +76,6 @@ import { AppMainComponent } from './app.main.component';
                 </a>
               </li>
               <li role="menuitem">
-                <a href="#" (click)="app.onTopbarSubItemClick($event)">
-                  <i class="fa fa-fw fa-cog"></i>
-                  <span>Settings</span>
-                </a>
-              </li>
-              <li role="menuitem">
                 <a (click)="onLogout()">
                   <i class="fa fa-fw fa-sign-out"></i>
                   <span>Logout</span>
@@ -93,15 +88,23 @@ import { AppMainComponent } from './app.main.component';
     </div>
   `,
 })
-export class AppTopBarComponent {
+export class AppTopBarComponent implements OnInit {
   @Input()
   showMenuButton = true;
+  user: any;
 
   constructor(
     public app: AppMainComponent,
     private store: Store<fromUser.State>,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private authService: AuthService
   ) {}
+
+  ngOnInit(): void {
+    this.authService.getCurrentAuthenticatedUser().subscribe((user: any) => {
+      this.user = user;
+    });
+  }
 
   onLogout() {
     this.confirmationService.confirm({

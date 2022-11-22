@@ -23,20 +23,24 @@ export class AddEditProductComponent implements OnInit {
 
   async ngOnInit() {
     const quesitonOptionList = await this.api.ListQuestionOptions();
+    quesitonOptionList.items.sort(
+      (a, b) => a.question.order - b.question.order
+    );
     const qo = quesitonOptionList.items.reduce((a, c) => {
-      if (a[c.questionID]) {
-        a[c.questionID]["options"].push(c.option);
+      if (a[c.questionId]) {
+        a[c.questionId]["options"].push(c.option);
       } else {
-        a[c.questionID] = {};
-        a[c.questionID]["title"] = c.question.title;
-        a[c.questionID]["options"] = [];
-        a[c.questionID]["options"].push(c.option);
+        a[c.questionId] = {};
+        a[c.questionId]["title"] = c.question.title;
+        a[c.questionId]["order"] = c.question.order;
+        a[c.questionId]["options"] = [];
+        a[c.questionId]["options"].push(c.option);
       }
       return a;
     }, {});
-
     const control = [null, [Validators.required]];
     const controls = Object.keys(qo).reduce((a, c, i) => {
+      qo[c].options.sort((a, b) => a.order - b.order);
       this.questions.push({
         id: c,
         title: qo[c].title,

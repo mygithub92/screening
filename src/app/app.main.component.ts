@@ -71,13 +71,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
 
   user: User;
 
-  menuModel = [
-    {
-      label: "Product",
-      icon: "fa fa-fw fa-home",
-      routerLink: "product/product-list",
-    },
-  ];
+  menuModel = [];
   constructor(
     private router: Router,
     public renderer: Renderer2,
@@ -97,12 +91,46 @@ export class AppMainComponent implements OnInit, OnDestroy {
       console.log(user);
       const groups =
         user.signInUserSession.accessToken.payload["cognito:groups"];
-      if (groups.length) {
+      if (groups && groups.length) {
         if (groups[0] === "Admin") {
+          this.menuModel.push(
+            {
+              label: "Jobs",
+              icon: "fa fa-fw fa-home",
+              routerLink: "product/product-list",
+            },
+            {
+              label: "Forms",
+              icon: "fa fa-fw fa-home",
+              routerLink: "product/product-list",
+            },
+            {
+              label: "Questions",
+              icon: "fa fa-fw fa-home",
+              routerLink: "product/product-list",
+            },
+            {
+              label: "Crew",
+              icon: "fa fa-fw fa-home",
+              routerLink: "product/product-list",
+            }
+          );
           this.router.navigate(["/main/admin"]);
         }
         if (groups[0] === "Stuff") {
-          this.router.navigate(["/main/product"]);
+          this.menuModel.push(
+            {
+              label: "Screenings",
+              icon: "fa fa-fw fa-home",
+              routerLink: "product/product-list",
+            },
+            {
+              label: "Crew",
+              icon: "fa fa-fw fa-home",
+              routerLink: "product/product-list",
+            }
+          );
+          this.router.navigate(["/main/admin"]);
         }
       } else {
         this.router.navigate(["/main/product"]);

@@ -22,8 +22,6 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.router.navigate(["manage"], { relativeTo: this.route });
-    // this.init();
-    // this.delete();
   }
 
   ngOnDestroy(): void {}

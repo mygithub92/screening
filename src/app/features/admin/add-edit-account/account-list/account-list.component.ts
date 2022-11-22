@@ -74,62 +74,60 @@ export class AccountListComponent implements OnInit {
     ];
   }
 
-  async delete() {
-    const qpObjs = await this.api.ListQuestionOptions();
-    const optionObjs = await this.api.ListOptions();
-    const questionObjs = await this.api.ListOptions();
-    console.log(qpObjs);
-    const qos = [];
-    const options = [];
-    const questions = [];
-    qpObjs.items.forEach((item) => {
-      qos.push(
-        this.api.DeleteQuestionOption({ id: item.id, _version: item._version })
-      );
-    });
-    optionObjs.items.forEach((item) => {
-      options.push(
-        this.api.DeleteOption({
-          id: item.id,
-          _version: item._version,
-        })
-      );
-    });
-    questionObjs.items.forEach((item) => {
-      qos.push(
-        this.api.DeleteQuestionOption({ id: item.id, _version: item._version })
-      );
-      questions.push(
-        this.api.DeleteQuestion({
-          id: item.id,
-          _version: item._version,
-        })
-      );
-    });
-    await Promise.all(options);
-    await Promise.all(questions);
-    await Promise.all(qos);
-    console.log("Delettion done...");
-  }
+  // async delete() {
+  //   const qpObjs = await this.api.ListQuestionOptions();
+  //   const optionObjs = await this.api.ListOptions();
+  //   const questionObjs = await this.api.ListOptions();
+  //   console.log(qpObjs);
+  //   const qos = [];
+  //   const options = [];
+  //   const questions = [];
+  //   qpObjs.items.forEach((item) => {
+  //     qos.push(
+  //       this.api.DeleteQuestionOption({ id: item.id, _version: item._version })
+  //     );
+  //   });
+  //   optionObjs.items.forEach((item) => {
+  //     options.push(
+  //       this.api.DeleteOption({
+  //         id: item.id,
+  //         _version: item._version,
+  //       })
+  //     );
+  //   });
+  //   questionObjs.items.forEach((item) => {
+  //     qos.push(
+  //       this.api.DeleteQuestionOption({ id: item.id, _version: item._version })
+  //     );
+  //     questions.push(
+  //       this.api.DeleteQuestion({
+  //         id: item.id,
+  //         _version: item._version,
+  //       })
+  //     );
+  //   });
+  //   await Promise.all(options);
+  //   await Promise.all(questions);
+  //   await Promise.all(qos);
+  //   console.log("Delettion done...");
+  // }
 
   async init() {
-    const optionObjs = await Promise.all(
-      options.map((option, i) =>
-        this.api.CreateOption({
-          label: option,
-          value: option,
-          order: i + 1,
-        })
-      )
+    const optionsList$ = options.map((option, i) =>
+      this.api.CreateOption({
+        label: option,
+        value: option,
+        order: i + 1,
+      })
     );
-    const questionObjs = await Promise.all(
-      questions.map((question, i) =>
-        this.api.CreateQuestion({
-          title: question,
-          order: i + 1,
-        })
-      )
+    const questionLiist$ = questions.map((question, i) =>
+      this.api.CreateQuestion({
+        title: question,
+        order: i + 1,
+      })
     );
+    const optionObjs = await Promise.all(optionsList$);
+    const questionObjs = await Promise.all(questionLiist$);
     optionObjs.sort((o) => o.order);
     questionObjs.sort((q) => q.order);
 
@@ -137,8 +135,8 @@ export class AccountListComponent implements OnInit {
       questionObjs.map((q) =>
         optionObjs.map((o) =>
           this.api.CreateQuestionOption({
-            questionID: q.id,
-            optionID: o.id,
+            questionId: q.id,
+            optionId: o.id,
           })
         )
       )

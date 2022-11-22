@@ -5,64 +5,45 @@ query GetSceening($id: ID!) {
     Jobs {
       items {
         id
-        sceeningID
-        jobID
+        sceeningId
+        jobId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     Crews {
       items {
         id
-        sceeningID
-        crewID
+        sceeningId
+        crewId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     Questions {
       items {
         id
-        sceeningID
-        questionID
+        sceeningId
+        questionId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     Options {
       items {
         id
-        sceeningID
-        optionID
+        sceeningId
+        optionId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListSceenings(
@@ -75,68 +56,20 @@ query ListSceenings(
       id
       Jobs {
         nextToken
-        startedAt
       }
       Crews {
         nextToken
-        startedAt
       }
       Questions {
         nextToken
-        startedAt
       }
       Options {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncSceenings(
-  $filter: ModelSceeningFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncSceenings(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      Jobs {
-        nextToken
-        startedAt
-      }
-      Crews {
-        nextToken
-        startedAt
-      }
-      Questions {
-        nextToken
-        startedAt
-      }
-      Options {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetForm($id: ID!) {
@@ -146,36 +79,25 @@ query GetForm($id: ID!) {
     Questions {
       items {
         id
-        formID
-        questionID
+        formId
+        questionId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     Jobs {
       items {
         id
-        formID
-        jobID
+        formId
+        jobId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListForms(
@@ -189,53 +111,14 @@ query ListForms(
       name
       Questions {
         nextToken
-        startedAt
       }
       Jobs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncForms(
-  $filter: ModelFormFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncForms(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      name
-      Questions {
-        nextToken
-        startedAt
-      }
-      Jobs {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetJob($id: ID!) {
@@ -245,50 +128,35 @@ query GetJob($id: ID!) {
     sceenings {
       items {
         id
-        sceeningID
-        jobID
+        sceeningId
+        jobId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     forms {
       items {
         id
-        formID
-        jobID
+        formId
+        jobId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     crews {
       items {
         id
-        jobID
-        crewID
+        jobId
+        crewId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String) {
@@ -298,61 +166,17 @@ query ListJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String) {
       code
       sceenings {
         nextToken
-        startedAt
       }
       forms {
         nextToken
-        startedAt
       }
       crews {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncJobs(
-  $filter: ModelJobFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncJobs(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      code
-      sceenings {
-        nextToken
-        startedAt
-      }
-      forms {
-        nextToken
-        startedAt
-      }
-      crews {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetQuestion($id: ID!) {
@@ -362,52 +186,37 @@ query GetQuestion($id: ID!) {
     Options {
       items {
         id
-        questionID
-        optionID
+        questionId
+        optionId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     forms {
       items {
         id
-        formID
-        questionID
+        formId
+        questionId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     sceenings {
       items {
         id
-        sceeningID
-        questionID
+        sceeningId
+        questionId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     order
     optionOrderDesc
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListQuestions(
@@ -421,65 +230,19 @@ query ListQuestions(
       title
       Options {
         nextToken
-        startedAt
       }
       forms {
         nextToken
-        startedAt
       }
       sceenings {
         nextToken
-        startedAt
       }
       order
       optionOrderDesc
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncQuestions(
-  $filter: ModelQuestionFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncQuestions(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      title
-      Options {
-        nextToken
-        startedAt
-      }
-      forms {
-        nextToken
-        startedAt
-      }
-      sceenings {
-        nextToken
-        startedAt
-      }
-      order
-      optionOrderDesc
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetOption($id: ID!) {
@@ -490,37 +253,26 @@ query GetOption($id: ID!) {
     questions {
       items {
         id
-        questionID
-        optionID
+        questionId
+        optionId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     sceenings {
       items {
         id
-        sceeningID
-        optionID
+        sceeningId
+        optionId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     order
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListOptions(
@@ -535,56 +287,15 @@ query ListOptions(
       value
       questions {
         nextToken
-        startedAt
       }
       sceenings {
         nextToken
-        startedAt
       }
       order
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncOptions(
-  $filter: ModelOptionFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncOptions(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      label
-      value
-      questions {
-        nextToken
-        startedAt
-      }
-      sceenings {
-        nextToken
-        startedAt
-      }
-      order
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetCrew($id: ID!) {
@@ -594,36 +305,25 @@ query GetCrew($id: ID!) {
     sceenings {
       items {
         id
-        sceeningID
-        crewID
+        sceeningId
+        crewId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     Jobs {
       items {
         id
-        jobID
-        crewID
+        jobId
+        crewId
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListCrews(
@@ -637,110 +337,55 @@ query ListCrews(
       userName
       sceenings {
         nextToken
-        startedAt
       }
       Jobs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncCrews(
-  $filter: ModelCrewFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncCrews(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      userName
-      sceenings {
-        nextToken
-        startedAt
-      }
-      Jobs {
-        nextToken
-        startedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetSceeningJob($id: ID!) {
   getSceeningJob(id: $id) {
     id
-    sceeningID
-    jobID
+    sceeningId
+    jobId
     sceening {
       id
       Jobs {
         nextToken
-        startedAt
       }
       Crews {
         nextToken
-        startedAt
       }
       Questions {
         nextToken
-        startedAt
       }
       Options {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     job {
       id
       code
       sceenings {
         nextToken
-        startedAt
       }
       forms {
         nextToken
-        startedAt
       }
       crews {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListSceeningJobs(
@@ -751,129 +396,61 @@ query ListSceeningJobs(
   listSceeningJobs(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      sceeningID
-      jobID
+      sceeningId
+      jobId
       sceening {
         id
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       job {
         id
         code
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncSceeningJobs(
-  $filter: ModelSceeningJobFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncSceeningJobs(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      sceeningID
-      jobID
-      sceening {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      job {
-        id
-        code
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetSceeningCrew($id: ID!) {
   getSceeningCrew(id: $id) {
     id
-    sceeningID
-    crewID
+    sceeningId
+    crewId
     sceening {
       id
       Jobs {
         nextToken
-        startedAt
       }
       Crews {
         nextToken
-        startedAt
       }
       Questions {
         nextToken
-        startedAt
       }
       Options {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     crew {
       id
       userName
       sceenings {
         nextToken
-        startedAt
       }
       Jobs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListSceeningCrews(
@@ -884,135 +461,66 @@ query ListSceeningCrews(
   listSceeningCrews(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      sceeningID
-      crewID
+      sceeningId
+      crewId
       sceening {
         id
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       crew {
         id
         userName
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncSceeningCrews(
-  $filter: ModelSceeningCrewFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncSceeningCrews(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      sceeningID
-      crewID
-      sceening {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      crew {
-        id
-        userName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetSceeningQuestion($id: ID!) {
   getSceeningQuestion(id: $id) {
     id
-    sceeningID
-    questionID
+    sceeningId
+    questionId
     sceening {
       id
       Jobs {
         nextToken
-        startedAt
       }
       Crews {
         nextToken
-        startedAt
       }
       Questions {
         nextToken
-        startedAt
       }
       Options {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     question {
       id
       title
       Options {
         nextToken
-        startedAt
       }
       forms {
         nextToken
-        startedAt
       }
       sceenings {
         nextToken
-        startedAt
       }
       order
       optionOrderDesc
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListSceeningQuestions(
@@ -1023,15 +531,12 @@ query ListSceeningQuestions(
   listSceeningQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      sceeningID
-      questionID
+      sceeningId
+      questionId
       sceening {
         id
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       question {
         id
@@ -1040,93 +545,34 @@ query ListSceeningQuestions(
         optionOrderDesc
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncSceeningQuestions(
-  $filter: ModelSceeningQuestionFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncSceeningQuestions(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      sceeningID
-      questionID
-      sceening {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      question {
-        id
-        title
-        order
-        optionOrderDesc
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetSceeningOption($id: ID!) {
   getSceeningOption(id: $id) {
     id
-    sceeningID
-    optionID
+    sceeningId
+    optionId
     sceening {
       id
       Jobs {
         nextToken
-        startedAt
       }
       Crews {
         nextToken
-        startedAt
       }
       Questions {
         nextToken
-        startedAt
       }
       Options {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     option {
       id
@@ -1134,24 +580,16 @@ query GetSceeningOption($id: ID!) {
       value
       questions {
         nextToken
-        startedAt
       }
       sceenings {
         nextToken
-        startedAt
       }
       order
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListSceeningOptions(
@@ -1162,15 +600,12 @@ query ListSceeningOptions(
   listSceeningOptions(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      sceeningID
-      optionID
+      sceeningId
+      optionId
       sceening {
         id
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       option {
         id
@@ -1179,115 +614,49 @@ query ListSceeningOptions(
         order
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncSceeningOptions(
-  $filter: ModelSceeningOptionFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncSceeningOptions(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      sceeningID
-      optionID
-      sceening {
-        id
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      option {
-        id
-        label
-        value
-        order
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetFormQuestion($id: ID!) {
   getFormQuestion(id: $id) {
     id
-    formID
-    questionID
+    formId
+    questionId
     form {
       id
       name
       Questions {
         nextToken
-        startedAt
       }
       Jobs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     question {
       id
       title
       Options {
         nextToken
-        startedAt
       }
       forms {
         nextToken
-        startedAt
       }
       sceenings {
         nextToken
-        startedAt
       }
       order
       optionOrderDesc
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListFormQuestions(
@@ -1298,16 +667,13 @@ query ListFormQuestions(
   listFormQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      formID
-      questionID
+      formId
+      questionId
       form {
         id
         name
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       question {
         id
@@ -1316,114 +682,47 @@ query ListFormQuestions(
         optionOrderDesc
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncFormQuestions(
-  $filter: ModelFormQuestionFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncFormQuestions(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      formID
-      questionID
-      form {
-        id
-        name
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      question {
-        id
-        title
-        order
-        optionOrderDesc
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetFormJob($id: ID!) {
   getFormJob(id: $id) {
     id
-    formID
-    jobID
+    formId
+    jobId
     form {
       id
       name
       Questions {
         nextToken
-        startedAt
       }
       Jobs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     job {
       id
       code
       sceenings {
         nextToken
-        startedAt
       }
       forms {
         nextToken
-        startedAt
       }
       crews {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListFormJobs(
@@ -1434,128 +733,60 @@ query ListFormJobs(
   listFormJobs(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      formID
-      jobID
+      formId
+      jobId
       form {
         id
         name
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       job {
         id
         code
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncFormJobs(
-  $filter: ModelFormJobFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncFormJobs(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      formID
-      jobID
-      form {
-        id
-        name
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      job {
-        id
-        code
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetCrewJob($id: ID!) {
   getCrewJob(id: $id) {
     id
-    jobID
-    crewID
+    jobId
+    crewId
     job {
       id
       code
       sceenings {
         nextToken
-        startedAt
       }
       forms {
         nextToken
-        startedAt
       }
       crews {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     crew {
       id
       userName
       sceenings {
         nextToken
-        startedAt
       }
       Jobs {
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListCrewJobs(
@@ -1566,107 +797,47 @@ query ListCrewJobs(
   listCrewJobs(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      jobID
-      crewID
+      jobId
+      crewId
       job {
         id
         code
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       crew {
         id
         userName
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncCrewJobs(
-  $filter: ModelCrewJobFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncCrewJobs(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      jobID
-      crewID
-      job {
-        id
-        code
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      crew {
-        id
-        userName
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetQuestionOption($id: ID!) {
   getQuestionOption(id: $id) {
     id
-    questionID
-    optionID
+    questionId
+    optionId
     question {
       id
       title
       Options {
         nextToken
-        startedAt
       }
       forms {
         nextToken
-        startedAt
       }
       sceenings {
         nextToken
-        startedAt
       }
       order
       optionOrderDesc
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     option {
       id
@@ -1674,24 +845,16 @@ query GetQuestionOption($id: ID!) {
       value
       questions {
         nextToken
-        startedAt
       }
       sceenings {
         nextToken
-        startedAt
       }
       order
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListQuestionOptions(
@@ -1702,8 +865,8 @@ query ListQuestionOptions(
   listQuestionOptions(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      questionID
-      optionID
+      questionId
+      optionId
       question {
         id
         title
@@ -1711,9 +874,6 @@ query ListQuestionOptions(
         optionOrderDesc
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       option {
         id
@@ -1722,36 +882,176 @@ query ListQuestionOptions(
         order
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
   }
 }
-query SyncQuestionOptions(
-  $filter: ModelQuestionOptionFilterInput
+query SceeningJobsBySceeningId(
+  $sceeningId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningJobFilterInput
   $limit: Int
   $nextToken: String
-  $lastSync: AWSTimestamp
 ) {
-  syncQuestionOptions(
+  sceeningJobsBySceeningId(
+    sceeningId: $sceeningId
+    sortDirection: $sortDirection
     filter: $filter
     limit: $limit
     nextToken: $nextToken
-    lastSync: $lastSync
   ) {
     items {
       id
-      questionID
-      optionID
+      sceeningId
+      jobId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningJobsByJobId(
+  $jobId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningJobsByJobId(
+    jobId: $jobId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      jobId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningCrewsBySceeningId(
+  $sceeningId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningCrewFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningCrewsBySceeningId(
+    sceeningId: $sceeningId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      crewId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      crew {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningCrewsByCrewId(
+  $crewId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningCrewFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningCrewsByCrewId(
+    crewId: $crewId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      crewId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      crew {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningQuestionsBySceeningId(
+  $sceeningId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningQuestionsBySceeningId(
+    sceeningId: $sceeningId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      questionId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
       question {
         id
         title
@@ -1759,9 +1059,72 @@ query SyncQuestionOptions(
         optionOrderDesc
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningQuestionsByQuestionId(
+  $questionId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningQuestionsByQuestionId(
+    questionId: $questionId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      questionId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningOptionsBySceeningId(
+  $sceeningId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningOptionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningOptionsBySceeningId(
+    sceeningId: $sceeningId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      optionId
+      sceening {
+        id
+        createdAt
+        updatedAt
       }
       option {
         id
@@ -1770,17 +1133,347 @@ query SyncQuestionOptions(
         order
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
+  }
+}
+query SceeningOptionsByOptionId(
+  $optionId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningOptionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningOptionsByOptionId(
+    optionId: $optionId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      optionId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      option {
+        id
+        label
+        value
+        order
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query FormQuestionsByFormId(
+  $formId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelFormQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  formQuestionsByFormId(
+    formId: $formId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      formId
+      questionId
+      form {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query FormQuestionsByQuestionId(
+  $questionId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelFormQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  formQuestionsByQuestionId(
+    questionId: $questionId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      formId
+      questionId
+      form {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query FormJobsByFormId(
+  $formId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelFormJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  formJobsByFormId(
+    formId: $formId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      formId
+      jobId
+      form {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query FormJobsByJobId(
+  $jobId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelFormJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  formJobsByJobId(
+    jobId: $jobId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      formId
+      jobId
+      form {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query CrewJobsByJobId(
+  $jobId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelCrewJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  crewJobsByJobId(
+    jobId: $jobId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      jobId
+      crewId
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      crew {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query CrewJobsByCrewId(
+  $crewId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelCrewJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  crewJobsByCrewId(
+    crewId: $crewId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      jobId
+      crewId
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      crew {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query QuestionOptionsByQuestionId(
+  $questionId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelQuestionOptionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  questionOptionsByQuestionId(
+    questionId: $questionId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      questionId
+      optionId
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      option {
+        id
+        label
+        value
+        order
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query QuestionOptionsByOptionId(
+  $optionId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelQuestionOptionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  questionOptionsByOptionId(
+    optionId: $optionId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      questionId
+      optionId
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      option {
+        id
+        label
+        value
+        order
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
   }
 }
