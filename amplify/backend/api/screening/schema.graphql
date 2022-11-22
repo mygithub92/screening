@@ -1,26 +1,48 @@
-# This "input" configures a global authorization rule to enable public access to
-# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-input AMPLIFY {
-  globalAuthRule: AuthRule = { allow: public }
-} # FOR TESTING ONLY!
-type Crew @model {
+type Sceening @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  name: String!
-  type: String!
-  orgnizationCode: String!
-  phoneNumber: String!
-  email: String!
+  Jobs: [Job] @manyToMany(relationName: "SceeningJob")
+  Crews: [Crew] @manyToMany(relationName: "SceeningCrew")
+  Questions: [Question] @manyToMany(relationName: "SceeningQuestion")
+  Options: [Option] @manyToMany(relationName: "SceeningOption")
 }
 
-type Question @model {
+type Form @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  title: String!
-  options: [Option] @hasMany
+  name: String
+  Questions: [Question] @manyToMany(relationName: "FormQuestion")
+  Jobs: [Job] @manyToMany(relationName: "FormJob")
 }
 
-type Option @model {
+type Job @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  label: String!
-  value: String!
-  question: Question @belongsTo
+  code: String
+  sceenings: [Sceening] @manyToMany(relationName: "SceeningJob")
+  forms: [Form] @manyToMany(relationName: "FormJob")
+  crews: [Crew] @manyToMany(relationName: "CrewJob")
+}
+
+type Question @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  title: String
+  Options: [Option] @manyToMany(relationName: "QuestionOption")
+  forms: [Form] @manyToMany(relationName: "FormQuestion")
+  sceenings: [Sceening] @manyToMany(relationName: "SceeningQuestion")
+  order: Int @index
+  optionOrderDesc: Boolean
+}
+
+type Option @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  label: String
+  value: String
+  questions: [Question] @manyToMany(relationName: "QuestionOption")
+  sceenings: [Sceening] @manyToMany(relationName: "SceeningOption")
+  order: Int @index
+}
+
+type Crew @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  userName: String
+  sceenings: [Sceening] @manyToMany(relationName: "SceeningCrew")
+  Jobs: [Job] @manyToMany(relationName: "CrewJob")
 }

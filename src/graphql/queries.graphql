@@ -1,29 +1,178 @@
 # this is an auto generated file. This will be overwritten
-query GetCrew($id: ID!) {
-  getCrew(id: $id) {
+query GetSceening($id: ID!) {
+  getSceening(id: $id) {
     id
-    name
-    type
-    orgnizationCode
-    phoneNumber
-    email
+    Jobs {
+      items {
+        id
+        sceeningId
+        jobId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Crews {
+      items {
+        id
+        sceeningId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Questions {
+      items {
+        id
+        sceeningId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Options {
+      items {
+        id
+        sceeningId
+        optionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
 }
-query ListCrews(
-  $filter: ModelCrewFilterInput
+query ListSceenings(
+  $filter: ModelSceeningFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listCrews(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listSceenings(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetForm($id: ID!) {
+  getForm(id: $id) {
+    id
+    name
+    Questions {
+      items {
+        id
+        formId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Jobs {
+      items {
+        id
+        formId
+        jobId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListForms(
+  $filter: ModelFormFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listForms(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       name
-      type
-      orgnizationCode
-      phoneNumber
-      email
+      Questions {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetJob($id: ID!) {
+  getJob(id: $id) {
+    id
+    code
+    sceenings {
+      items {
+        id
+        sceeningId
+        jobId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    forms {
+      items {
+        id
+        formId
+        jobId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    crews {
+      items {
+        id
+        jobId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String) {
+  listJobs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      code
+      sceenings {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      crews {
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -34,17 +183,38 @@ query GetQuestion($id: ID!) {
   getQuestion(id: $id) {
     id
     title
-    options {
+    Options {
       items {
         id
-        label
-        value
+        questionId
+        optionId
         createdAt
         updatedAt
-        questionOptionsId
       }
       nextToken
     }
+    forms {
+      items {
+        id
+        formId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    sceenings {
+      items {
+        id
+        sceeningId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    order
+    optionOrderDesc
     createdAt
     updatedAt
   }
@@ -58,9 +228,17 @@ query ListQuestions(
     items {
       id
       title
-      options {
+      Options {
         nextToken
       }
+      forms {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      optionOrderDesc
       createdAt
       updatedAt
     }
@@ -72,18 +250,29 @@ query GetOption($id: ID!) {
     id
     label
     value
-    question {
-      id
-      title
-      options {
-        nextToken
+    questions {
+      items {
+        id
+        questionId
+        optionId
+        createdAt
+        updatedAt
       }
-      createdAt
-      updatedAt
+      nextToken
     }
+    sceenings {
+      items {
+        id
+        sceeningId
+        optionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    order
     createdAt
     updatedAt
-    questionOptionsId
   }
 }
 query ListOptions(
@@ -96,15 +285,1194 @@ query ListOptions(
       id
       label
       value
-      question {
+      questions {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetCrew($id: ID!) {
+  getCrew(id: $id) {
+    id
+    userName
+    sceenings {
+      items {
         id
-        title
+        sceeningId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Jobs {
+      items {
+        id
+        jobId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListCrews(
+  $filter: ModelCrewFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCrews(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      userName
+      sceenings {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetSceeningJob($id: ID!) {
+  getSceeningJob(id: $id) {
+    id
+    sceeningId
+    jobId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListSceeningJobs(
+  $filter: ModelSceeningJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSceeningJobs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      sceeningId
+      jobId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      job {
+        id
+        code
         createdAt
         updatedAt
       }
       createdAt
       updatedAt
-      questionOptionsId
+    }
+    nextToken
+  }
+}
+query GetSceeningCrew($id: ID!) {
+  getSceeningCrew(id: $id) {
+    id
+    sceeningId
+    crewId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListSceeningCrews(
+  $filter: ModelSceeningCrewFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSceeningCrews(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      sceeningId
+      crewId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      crew {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetSceeningQuestion($id: ID!) {
+  getSceeningQuestion(id: $id) {
+    id
+    sceeningId
+    questionId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListSceeningQuestions(
+  $filter: ModelSceeningQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSceeningQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      sceeningId
+      questionId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetSceeningOption($id: ID!) {
+  getSceeningOption(id: $id) {
+    id
+    sceeningId
+    optionId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListSceeningOptions(
+  $filter: ModelSceeningOptionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSceeningOptions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      sceeningId
+      optionId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      option {
+        id
+        label
+        value
+        order
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetFormQuestion($id: ID!) {
+  getFormQuestion(id: $id) {
+    id
+    formId
+    questionId
+    form {
+      id
+      name
+      Questions {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListFormQuestions(
+  $filter: ModelFormQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listFormQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      formId
+      questionId
+      form {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetFormJob($id: ID!) {
+  getFormJob(id: $id) {
+    id
+    formId
+    jobId
+    form {
+      id
+      name
+      Questions {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListFormJobs(
+  $filter: ModelFormJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listFormJobs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      formId
+      jobId
+      form {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetCrewJob($id: ID!) {
+  getCrewJob(id: $id) {
+    id
+    jobId
+    crewId
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListCrewJobs(
+  $filter: ModelCrewJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCrewJobs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      jobId
+      crewId
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      crew {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetQuestionOption($id: ID!) {
+  getQuestionOption(id: $id) {
+    id
+    questionId
+    optionId
+    question {
+      id
+      title
+      Options {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListQuestionOptions(
+  $filter: ModelQuestionOptionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listQuestionOptions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      questionId
+      optionId
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      option {
+        id
+        label
+        value
+        order
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningJobsBySceeningId(
+  $sceeningId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningJobsBySceeningId(
+    sceeningId: $sceeningId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      jobId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningJobsByJobId(
+  $jobId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningJobsByJobId(
+    jobId: $jobId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      jobId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningCrewsBySceeningId(
+  $sceeningId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningCrewFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningCrewsBySceeningId(
+    sceeningId: $sceeningId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      crewId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      crew {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningCrewsByCrewId(
+  $crewId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningCrewFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningCrewsByCrewId(
+    crewId: $crewId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      crewId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      crew {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningQuestionsBySceeningId(
+  $sceeningId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningQuestionsBySceeningId(
+    sceeningId: $sceeningId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      questionId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningQuestionsByQuestionId(
+  $questionId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningQuestionsByQuestionId(
+    questionId: $questionId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      questionId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningOptionsBySceeningId(
+  $sceeningId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningOptionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningOptionsBySceeningId(
+    sceeningId: $sceeningId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      optionId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      option {
+        id
+        label
+        value
+        order
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query SceeningOptionsByOptionId(
+  $optionId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelSceeningOptionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  sceeningOptionsByOptionId(
+    optionId: $optionId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      sceeningId
+      optionId
+      sceening {
+        id
+        createdAt
+        updatedAt
+      }
+      option {
+        id
+        label
+        value
+        order
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query FormQuestionsByFormId(
+  $formId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelFormQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  formQuestionsByFormId(
+    formId: $formId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      formId
+      questionId
+      form {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query FormQuestionsByQuestionId(
+  $questionId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelFormQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  formQuestionsByQuestionId(
+    questionId: $questionId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      formId
+      questionId
+      form {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query FormJobsByFormId(
+  $formId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelFormJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  formJobsByFormId(
+    formId: $formId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      formId
+      jobId
+      form {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query FormJobsByJobId(
+  $jobId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelFormJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  formJobsByJobId(
+    jobId: $jobId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      formId
+      jobId
+      form {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query CrewJobsByJobId(
+  $jobId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelCrewJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  crewJobsByJobId(
+    jobId: $jobId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      jobId
+      crewId
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      crew {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query CrewJobsByCrewId(
+  $crewId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelCrewJobFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  crewJobsByCrewId(
+    crewId: $crewId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      jobId
+      crewId
+      job {
+        id
+        code
+        createdAt
+        updatedAt
+      }
+      crew {
+        id
+        userName
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query QuestionOptionsByQuestionId(
+  $questionId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelQuestionOptionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  questionOptionsByQuestionId(
+    questionId: $questionId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      questionId
+      optionId
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      option {
+        id
+        label
+        value
+        order
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query QuestionOptionsByOptionId(
+  $optionId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelQuestionOptionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  questionOptionsByOptionId(
+    optionId: $optionId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      questionId
+      optionId
+      question {
+        id
+        title
+        order
+        optionOrderDesc
+        createdAt
+        updatedAt
+      }
+      option {
+        id
+        label
+        value
+        order
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
     }
     nextToken
   }

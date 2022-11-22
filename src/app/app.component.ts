@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'app/@core/services/auth.service';
-import { UserActions } from 'app/@state/actions';
 import * as fromUser from 'app/@state/reducers';
 
 @Component({
@@ -41,16 +40,6 @@ export class AppComponent {
     private authService: AuthService,
     private store: Store<fromUser.State>
   ) {
-    this.authService.getCurrentAuthenticatedUser().subscribe((user) => {
-      if (user) {
-        const currentUser = {
-          user: { userName: user.attributes.sub, email: user.attributes.email },
-        } as any;
-        currentUser.user.roleTypes = this.roleTypes;
-        currentUser.user.partners = this.partners;
-        this.store.dispatch(UserActions.userLoggedIn(currentUser));
-        this.router.navigate(["main"]);
-      }
-    });
+    this.router.navigate(["main"]);
   }
 }

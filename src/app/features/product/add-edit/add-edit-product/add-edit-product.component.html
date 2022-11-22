@@ -10,23 +10,14 @@
         class="card card-dark"
         *ngFor="let question of questions; let i = index"
       >
-        <h2>{{ i + 1 }}. {{ question }}</h2>
+        <h2>{{ i + 1 }}. {{ question["title"] }}</h2>
         <div class="ui-g">
-          <div class="ui-g-12 ui-md-1">
+          <div class="ui-g-12 ui-md-1" *ngFor="let option of question.options">
             <p-radioButton
               name="question{{ i + 1 }}"
-              [value]="true"
-              label="Yes"
-              inputId="yes"
-              formControlName="question{{ i + 1 }}"
-            ></p-radioButton>
-          </div>
-          <div class="ui-g-12 ui-md-1">
-            <p-radioButton
-              name="question{{ i + 1 }}"
-              [value]="false"
-              label="No"
-              inputId="no"
+              [value]="option.value"
+              [label]="option.label"
+              [inputId]="option.value"
               formControlName="question{{ i + 1 }}"
             ></p-radioButton>
           </div>

@@ -1,52 +1,44 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateCrew {
-  onCreateCrew {
+subscription OnCreateSceening($filter: ModelSubscriptionSceeningFilterInput) {
+  onCreateSceening(filter: $filter) {
     id
-    name
-    type
-    orgnizationCode
-    phoneNumber
-    email
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateCrew {
-  onUpdateCrew {
-    id
-    name
-    type
-    orgnizationCode
-    phoneNumber
-    email
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteCrew {
-  onDeleteCrew {
-    id
-    name
-    type
-    orgnizationCode
-    phoneNumber
-    email
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateQuestion {
-  onCreateQuestion {
-    id
-    title
-    options {
+    Jobs {
       items {
         id
-        label
-        value
+        sceeningId
+        jobId
         createdAt
         updatedAt
-        questionOptionsId
+      }
+      nextToken
+    }
+    Crews {
+      items {
+        id
+        sceeningId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Questions {
+      items {
+        id
+        sceeningId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Options {
+      items {
+        id
+        sceeningId
+        optionId
+        createdAt
+        updatedAt
       }
       nextToken
     }
@@ -54,18 +46,46 @@ subscription OnCreateQuestion {
     updatedAt
   }
 }
-subscription OnUpdateQuestion {
-  onUpdateQuestion {
+subscription OnUpdateSceening($filter: ModelSubscriptionSceeningFilterInput) {
+  onUpdateSceening(filter: $filter) {
     id
-    title
-    options {
+    Jobs {
       items {
         id
-        label
-        value
+        sceeningId
+        jobId
         createdAt
         updatedAt
-        questionOptionsId
+      }
+      nextToken
+    }
+    Crews {
+      items {
+        id
+        sceeningId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Questions {
+      items {
+        id
+        sceeningId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Options {
+      items {
+        id
+        sceeningId
+        optionId
+        createdAt
+        updatedAt
       }
       nextToken
     }
@@ -73,18 +93,46 @@ subscription OnUpdateQuestion {
     updatedAt
   }
 }
-subscription OnDeleteQuestion {
-  onDeleteQuestion {
+subscription OnDeleteSceening($filter: ModelSubscriptionSceeningFilterInput) {
+  onDeleteSceening(filter: $filter) {
     id
-    title
-    options {
+    Jobs {
       items {
         id
-        label
-        value
+        sceeningId
+        jobId
         createdAt
         updatedAt
-        questionOptionsId
+      }
+      nextToken
+    }
+    Crews {
+      items {
+        id
+        sceeningId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Questions {
+      items {
+        id
+        sceeningId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Options {
+      items {
+        id
+        sceeningId
+        optionId
+        createdAt
+        updatedAt
       }
       nextToken
     }
@@ -92,53 +140,532 @@ subscription OnDeleteQuestion {
     updatedAt
   }
 }
-subscription OnCreateOption {
-  onCreateOption {
+subscription OnCreateForm($filter: ModelSubscriptionFormFilterInput) {
+  onCreateForm(filter: $filter) {
     id
-    label
-    value
-    question {
-      id
-      title
-      options {
-        nextToken
+    name
+    Questions {
+      items {
+        id
+        formId
+        questionId
+        createdAt
+        updatedAt
       }
-      createdAt
-      updatedAt
+      nextToken
+    }
+    Jobs {
+      items {
+        id
+        formId
+        jobId
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
     createdAt
     updatedAt
-    questionOptionsId
   }
 }
-subscription OnUpdateOption {
-  onUpdateOption {
+subscription OnUpdateForm($filter: ModelSubscriptionFormFilterInput) {
+  onUpdateForm(filter: $filter) {
     id
-    label
-    value
-    question {
-      id
-      title
-      options {
-        nextToken
+    name
+    Questions {
+      items {
+        id
+        formId
+        questionId
+        createdAt
+        updatedAt
       }
-      createdAt
-      updatedAt
+      nextToken
+    }
+    Jobs {
+      items {
+        id
+        formId
+        jobId
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
     createdAt
     updatedAt
-    questionOptionsId
   }
 }
-subscription OnDeleteOption {
-  onDeleteOption {
+subscription OnDeleteForm($filter: ModelSubscriptionFormFilterInput) {
+  onDeleteForm(filter: $filter) {
+    id
+    name
+    Questions {
+      items {
+        id
+        formId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Jobs {
+      items {
+        id
+        formId
+        jobId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateJob($filter: ModelSubscriptionJobFilterInput) {
+  onCreateJob(filter: $filter) {
+    id
+    code
+    sceenings {
+      items {
+        id
+        sceeningId
+        jobId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    forms {
+      items {
+        id
+        formId
+        jobId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    crews {
+      items {
+        id
+        jobId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateJob($filter: ModelSubscriptionJobFilterInput) {
+  onUpdateJob(filter: $filter) {
+    id
+    code
+    sceenings {
+      items {
+        id
+        sceeningId
+        jobId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    forms {
+      items {
+        id
+        formId
+        jobId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    crews {
+      items {
+        id
+        jobId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteJob($filter: ModelSubscriptionJobFilterInput) {
+  onDeleteJob(filter: $filter) {
+    id
+    code
+    sceenings {
+      items {
+        id
+        sceeningId
+        jobId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    forms {
+      items {
+        id
+        formId
+        jobId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    crews {
+      items {
+        id
+        jobId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
+  onCreateQuestion(filter: $filter) {
+    id
+    title
+    Options {
+      items {
+        id
+        questionId
+        optionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    forms {
+      items {
+        id
+        formId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    sceenings {
+      items {
+        id
+        sceeningId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    order
+    optionOrderDesc
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
+  onUpdateQuestion(filter: $filter) {
+    id
+    title
+    Options {
+      items {
+        id
+        questionId
+        optionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    forms {
+      items {
+        id
+        formId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    sceenings {
+      items {
+        id
+        sceeningId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    order
+    optionOrderDesc
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteQuestion($filter: ModelSubscriptionQuestionFilterInput) {
+  onDeleteQuestion(filter: $filter) {
+    id
+    title
+    Options {
+      items {
+        id
+        questionId
+        optionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    forms {
+      items {
+        id
+        formId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    sceenings {
+      items {
+        id
+        sceeningId
+        questionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    order
+    optionOrderDesc
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateOption($filter: ModelSubscriptionOptionFilterInput) {
+  onCreateOption(filter: $filter) {
     id
     label
     value
-    question {
+    questions {
+      items {
+        id
+        questionId
+        optionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    sceenings {
+      items {
+        id
+        sceeningId
+        optionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    order
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateOption($filter: ModelSubscriptionOptionFilterInput) {
+  onUpdateOption(filter: $filter) {
+    id
+    label
+    value
+    questions {
+      items {
+        id
+        questionId
+        optionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    sceenings {
+      items {
+        id
+        sceeningId
+        optionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    order
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteOption($filter: ModelSubscriptionOptionFilterInput) {
+  onDeleteOption(filter: $filter) {
+    id
+    label
+    value
+    questions {
+      items {
+        id
+        questionId
+        optionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    sceenings {
+      items {
+        id
+        sceeningId
+        optionId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    order
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateCrew($filter: ModelSubscriptionCrewFilterInput) {
+  onCreateCrew(filter: $filter) {
+    id
+    userName
+    sceenings {
+      items {
+        id
+        sceeningId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Jobs {
+      items {
+        id
+        jobId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCrew($filter: ModelSubscriptionCrewFilterInput) {
+  onUpdateCrew(filter: $filter) {
+    id
+    userName
+    sceenings {
+      items {
+        id
+        sceeningId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Jobs {
+      items {
+        id
+        jobId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCrew($filter: ModelSubscriptionCrewFilterInput) {
+  onDeleteCrew(filter: $filter) {
+    id
+    userName
+    sceenings {
+      items {
+        id
+        sceeningId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    Jobs {
+      items {
+        id
+        jobId
+        crewId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateSceeningJob(
+  $filter: ModelSubscriptionSceeningJobFilterInput
+) {
+  onCreateSceeningJob(filter: $filter) {
+    id
+    sceeningId
+    jobId
+    sceening {
       id
-      title
-      options {
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      crews {
         nextToken
       }
       createdAt
@@ -146,6 +673,934 @@ subscription OnDeleteOption {
     }
     createdAt
     updatedAt
-    questionOptionsId
+  }
+}
+subscription OnUpdateSceeningJob(
+  $filter: ModelSubscriptionSceeningJobFilterInput
+) {
+  onUpdateSceeningJob(filter: $filter) {
+    id
+    sceeningId
+    jobId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteSceeningJob(
+  $filter: ModelSubscriptionSceeningJobFilterInput
+) {
+  onDeleteSceeningJob(filter: $filter) {
+    id
+    sceeningId
+    jobId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateSceeningCrew(
+  $filter: ModelSubscriptionSceeningCrewFilterInput
+) {
+  onCreateSceeningCrew(filter: $filter) {
+    id
+    sceeningId
+    crewId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateSceeningCrew(
+  $filter: ModelSubscriptionSceeningCrewFilterInput
+) {
+  onUpdateSceeningCrew(filter: $filter) {
+    id
+    sceeningId
+    crewId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteSceeningCrew(
+  $filter: ModelSubscriptionSceeningCrewFilterInput
+) {
+  onDeleteSceeningCrew(filter: $filter) {
+    id
+    sceeningId
+    crewId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateSceeningQuestion(
+  $filter: ModelSubscriptionSceeningQuestionFilterInput
+) {
+  onCreateSceeningQuestion(filter: $filter) {
+    id
+    sceeningId
+    questionId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateSceeningQuestion(
+  $filter: ModelSubscriptionSceeningQuestionFilterInput
+) {
+  onUpdateSceeningQuestion(filter: $filter) {
+    id
+    sceeningId
+    questionId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteSceeningQuestion(
+  $filter: ModelSubscriptionSceeningQuestionFilterInput
+) {
+  onDeleteSceeningQuestion(filter: $filter) {
+    id
+    sceeningId
+    questionId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateSceeningOption(
+  $filter: ModelSubscriptionSceeningOptionFilterInput
+) {
+  onCreateSceeningOption(filter: $filter) {
+    id
+    sceeningId
+    optionId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateSceeningOption(
+  $filter: ModelSubscriptionSceeningOptionFilterInput
+) {
+  onUpdateSceeningOption(filter: $filter) {
+    id
+    sceeningId
+    optionId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteSceeningOption(
+  $filter: ModelSubscriptionSceeningOptionFilterInput
+) {
+  onDeleteSceeningOption(filter: $filter) {
+    id
+    sceeningId
+    optionId
+    sceening {
+      id
+      Jobs {
+        nextToken
+      }
+      Crews {
+        nextToken
+      }
+      Questions {
+        nextToken
+      }
+      Options {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateFormQuestion(
+  $filter: ModelSubscriptionFormQuestionFilterInput
+) {
+  onCreateFormQuestion(filter: $filter) {
+    id
+    formId
+    questionId
+    form {
+      id
+      name
+      Questions {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateFormQuestion(
+  $filter: ModelSubscriptionFormQuestionFilterInput
+) {
+  onUpdateFormQuestion(filter: $filter) {
+    id
+    formId
+    questionId
+    form {
+      id
+      name
+      Questions {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteFormQuestion(
+  $filter: ModelSubscriptionFormQuestionFilterInput
+) {
+  onDeleteFormQuestion(filter: $filter) {
+    id
+    formId
+    questionId
+    form {
+      id
+      name
+      Questions {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    question {
+      id
+      title
+      Options {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateFormJob($filter: ModelSubscriptionFormJobFilterInput) {
+  onCreateFormJob(filter: $filter) {
+    id
+    formId
+    jobId
+    form {
+      id
+      name
+      Questions {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateFormJob($filter: ModelSubscriptionFormJobFilterInput) {
+  onUpdateFormJob(filter: $filter) {
+    id
+    formId
+    jobId
+    form {
+      id
+      name
+      Questions {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteFormJob($filter: ModelSubscriptionFormJobFilterInput) {
+  onDeleteFormJob(filter: $filter) {
+    id
+    formId
+    jobId
+    form {
+      id
+      name
+      Questions {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
+  onCreateCrewJob(filter: $filter) {
+    id
+    jobId
+    crewId
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
+  onUpdateCrewJob(filter: $filter) {
+    id
+    jobId
+    crewId
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
+  onDeleteCrewJob(filter: $filter) {
+    id
+    jobId
+    crewId
+    job {
+      id
+      code
+      sceenings {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      crews {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    crew {
+      id
+      userName
+      sceenings {
+        nextToken
+      }
+      Jobs {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateQuestionOption(
+  $filter: ModelSubscriptionQuestionOptionFilterInput
+) {
+  onCreateQuestionOption(filter: $filter) {
+    id
+    questionId
+    optionId
+    question {
+      id
+      title
+      Options {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateQuestionOption(
+  $filter: ModelSubscriptionQuestionOptionFilterInput
+) {
+  onUpdateQuestionOption(filter: $filter) {
+    id
+    questionId
+    optionId
+    question {
+      id
+      title
+      Options {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteQuestionOption(
+  $filter: ModelSubscriptionQuestionOptionFilterInput
+) {
+  onDeleteQuestionOption(filter: $filter) {
+    id
+    questionId
+    optionId
+    question {
+      id
+      title
+      Options {
+        nextToken
+      }
+      forms {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+    }
+    option {
+      id
+      label
+      value
+      questions {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
   }
 }

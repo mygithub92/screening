@@ -5,6 +5,7 @@ import { User } from 'app/@shared/api-interfaces';
 import * as fromUser from 'app/@state/reducers';
 import { Subscription } from 'rxjs';
 
+import { AuthService } from './@core/services/auth.service';
 import { MenuService } from './app.menu.service';
 
 enum MenuOrientation {
@@ -70,18 +71,13 @@ export class AppMainComponent implements OnInit, OnDestroy {
 
   user: User;
 
-  menuModel = [
-    {
-      label: "Product",
-      icon: "fa fa-fw fa-home",
-      routerLink: "product/product-list",
-    },
-  ];
+  menuModel = [];
   constructor(
     private router: Router,
     public renderer: Renderer2,
     private menuService: MenuService,
-    private store: Store<fromUser.State>
+    private store: Store<fromUser.State>,
+    private authService: AuthService
   ) {
     this.subscriptions = [];
   }
@@ -91,7 +87,55 @@ export class AppMainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.router.navigate(["/main/product"]);
+    this.authService.getCurrentAuthenticatedUser().subscribe((user: any) => {
+      console.log(user);
+      const groups =
+        user.signInUserSession.accessToken.payload["cognito:groups"];
+      if (groups && groups.length) {
+        if (groups[0] === "Admin") {
+          this.menuModel.push(
+            {
+              label: "Jobs",
+              icon: "fa fa-fw fa-home",
+              routerLink: "product/product-list",
+            },
+            {
+              label: "Forms",
+              icon: "fa fa-fw fa-home",
+              routerLink: "product/product-list",
+            },
+            {
+              label: "Questions",
+              icon: "fa fa-fw fa-home",
+              routerLink: "product/product-list",
+            },
+            {
+              label: "Crew",
+              icon: "fa fa-fw fa-home",
+              routerLink: "product/product-list",
+            }
+          );
+          this.router.navigate(["/main/admin"]);
+        }
+        if (groups[0] === "Stuff") {
+          this.menuModel.push(
+            {
+              label: "Screenings",
+              icon: "fa fa-fw fa-home",
+              routerLink: "product/product-list",
+            },
+            {
+              label: "Crew",
+              icon: "fa fa-fw fa-home",
+              routerLink: "product/product-list",
+            }
+          );
+          this.router.navigate(["/main/admin"]);
+        }
+      } else {
+        this.router.navigate(["/main/product"]);
+      }
+    });
   }
 
   onLayoutClick() {

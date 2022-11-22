@@ -1,10 +1,31 @@
-<p-blockUI [blocked]="loading$ | async" [target]="dt"><p class="center-spinner"></p></p-blockUI>
+<p-blockUI [blocked]="loading$ | async" [target]="dt"
+  ><p class="center-spinner"></p
+></p-blockUI>
 
 <div class="card card-w-title">
   <h1>Account List</h1>
-  <p-table #dt [columns]="cols" [value]="accounts$ | async" dataKey="id" [paginator]="true" [rows]="10" styleClass="ui-table-accounts">
+  <p-table
+    #dt
+    [columns]="cols"
+    [value]="accounts$ | async"
+    dataKey="id"
+    [paginator]="true"
+    [rows]="10"
+    styleClass="ui-table-accounts"
+  >
     <ng-template pTemplate="caption">
-      <p-button label="Add Account" icon="pi pi-plus" iconPos="left" [routerLink]="['../add-edit', -1]"></p-button>
+      <p-button
+        label="Init Question and Option"
+        icon="pi pi-plus"
+        iconPos="left"
+        (click)="init()"
+      ></p-button>
+      <p-button
+        label="Delete Question and Option"
+        icon="pi pi-plus"
+        iconPos="left"
+        (click)="delete()"
+      ></p-button>
       <div class="ui-table-globalfilter-container">
         <input
           type="search"
@@ -26,17 +47,33 @@
         <th>Action</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+    <ng-template
+      pTemplate="body"
+      let-rowData
+      let-expanded="expanded"
+      let-columns="columns"
+    >
       <tr>
         <td>
           <a href="#" [pRowToggler]="rowData">
-            <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+            <i
+              [ngClass]="
+                expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
+              "
+            ></i>
           </a>
         </td>
         <td *ngFor="let col of columns">
           {{ rowData | accountValue: col.field }}
         </td>
-        <td><p-button label="Edit" icon="pi pi-pencil" iconPos="left" [routerLink]="['../add-edit', rowData.id]"></p-button></td>
+        <td>
+          <p-button
+            label="Edit"
+            icon="pi pi-pencil"
+            iconPos="left"
+            [routerLink]="['../add-edit', rowData.id]"
+          ></p-button>
+        </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
@@ -46,7 +83,12 @@
             <div class="ui-g-12 ui-lg-6">
               <div class="card card-w-title">
                 <h1>Roles</h1>
-                <p-table #rdt [columns]="roleCols" [value]="rowData.roles" styleClass="ui-table-roles">
+                <p-table
+                  #rdt
+                  [columns]="roleCols"
+                  [value]="rowData.roles"
+                  styleClass="ui-table-roles"
+                >
                   <ng-template pTemplate="header" let-columns>
                     <tr>
                       <th *ngFor="let col of columns">
@@ -54,7 +96,12 @@
                       </th>
                     </tr>
                   </ng-template>
-                  <ng-template pTemplate="body" let-rowData let-i="rowIndex" let-columns="columns">
+                  <ng-template
+                    pTemplate="body"
+                    let-rowData
+                    let-i="rowIndex"
+                    let-columns="columns"
+                  >
                     <tr>
                       <td *ngFor="let col of columns; let i = index">
                         {{ rowData | accountValue: col.field }}
@@ -68,7 +115,12 @@
             <div class="ui-g-12 ui-lg-6">
               <div class="card card-w-title">
                 <h1>Partners</h1>
-                <p-table #rdt [columns]="partnerCols" [value]="getPartner$(rowData) | async" styleClass="ui-table-roles">
+                <p-table
+                  #rdt
+                  [columns]="partnerCols"
+                  [value]="getPartner$(rowData) | async"
+                  styleClass="ui-table-roles"
+                >
                   <ng-template pTemplate="header" let-columns>
                     <tr>
                       <th *ngFor="let col of columns">
@@ -76,7 +128,12 @@
                       </th>
                     </tr>
                   </ng-template>
-                  <ng-template pTemplate="body" let-rowData let-i="rowIndex" let-columns="columns">
+                  <ng-template
+                    pTemplate="body"
+                    let-rowData
+                    let-i="rowIndex"
+                    let-columns="columns"
+                  >
                     <tr>
                       <td *ngFor="let col of columns; let i = index">
                         {{ rowData | accountValue: col.field }}
