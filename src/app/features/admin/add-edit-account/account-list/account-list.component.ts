@@ -74,44 +74,6 @@ export class AccountListComponent implements OnInit {
     ];
   }
 
-  // async delete() {
-  //   const qpObjs = await this.api.ListQuestionOptions();
-  //   const optionObjs = await this.api.ListOptions();
-  //   const questionObjs = await this.api.ListOptions();
-  //   console.log(qpObjs);
-  //   const qos = [];
-  //   const options = [];
-  //   const questions = [];
-  //   qpObjs.items.forEach((item) => {
-  //     qos.push(
-  //       this.api.DeleteQuestionOption({ id: item.id, _version: item._version })
-  //     );
-  //   });
-  //   optionObjs.items.forEach((item) => {
-  //     options.push(
-  //       this.api.DeleteOption({
-  //         id: item.id,
-  //         _version: item._version,
-  //       })
-  //     );
-  //   });
-  //   questionObjs.items.forEach((item) => {
-  //     qos.push(
-  //       this.api.DeleteQuestionOption({ id: item.id, _version: item._version })
-  //     );
-  //     questions.push(
-  //       this.api.DeleteQuestion({
-  //         id: item.id,
-  //         _version: item._version,
-  //       })
-  //     );
-  //   });
-  //   await Promise.all(options);
-  //   await Promise.all(questions);
-  //   await Promise.all(qos);
-  //   console.log("Delettion done...");
-  // }
-
   async init() {
     const optionsList$ = options.map((option, i) =>
       this.api.CreateOption({

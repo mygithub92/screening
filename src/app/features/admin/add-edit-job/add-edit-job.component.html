@@ -1,0 +1,65 @@
+<p-blockUI [blocked]="loading" [target]="dt"
+  ><p class="center-spinner"></p
+></p-blockUI>
+<p-panel header="Add Job" #dt>
+  <ng-container *ngIf="!loading">
+    <div [formGroup]="form">
+      <div class="ui-g">
+        <div class="ui-g-12">
+          <label for="job-code" class="account-label">Job Code</label>
+        </div>
+        <div class="ui-g-12">
+          <input
+            type="text"
+            pInputText
+            formControlName="code"
+            id="job-code"
+            placeholder="job Code"
+          />
+          <p-message
+            severity="error"
+            text="Field is required"
+            *ngIf="isInvalid('code')"
+          ></p-message>
+        </div>
+      </div>
+      <div class="ui-g">
+        <div class="ui-g-12">
+          <label for="job-form" class="account-label">Form</label>
+        </div>
+        <div class="ui-g-12">
+          <p-dropdown
+            [options]="questionForms"
+            formControlName="questForm"
+          ></p-dropdown>
+          <p-message
+            severity="error"
+            text="Field is required"
+            *ngIf="isInvalid('questForm')"
+          ></p-message>
+        </div>
+      </div>
+    </div>
+    <div class="card card-w-title">
+      <p-toolbar>
+        <div class="ui-toolbar-group-left">
+          <button
+            pButton
+            type="button"
+            label="Save"
+            icon="fa fa-save"
+            (click)="save()"
+          ></button>
+          <button
+            pButton
+            type="button"
+            label="Cancel"
+            class="success-btn"
+            icon="fa fa-cross"
+            (click)="cancel()"
+          ></button>
+        </div>
+      </p-toolbar>
+    </div>
+  </ng-container>
+</p-panel>

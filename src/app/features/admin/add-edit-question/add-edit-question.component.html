@@ -1,0 +1,16 @@
+<p-panel>
+  <textarea
+    [rows]="3"
+    [cols]="30"
+    pInputTextarea
+    placeholder="Your Message"
+    autoResize="autoResize"
+    ([question])="(config.data.title)"
+  ></textarea>
+  <p-button
+    label="Save"
+    icon="fa fa-save"
+    iconPos="left"
+    (click)="saveQuestion()"
+  ></p-button>
+</p-panel>
