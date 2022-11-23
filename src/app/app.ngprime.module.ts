@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
@@ -39,6 +40,7 @@ import { TooltipModule } from 'primeng/tooltip';
     CalendarModule,
     SidebarModule,
     DynamicDialogModule,
+    DialogModule,
     InputTextareaModule,
     MessagesModule,
     SelectButtonModule,

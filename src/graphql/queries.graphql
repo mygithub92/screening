@@ -2,7 +2,7 @@
 query GetSceening($id: ID!) {
   getSceening(id: $id) {
     id
-    Jobs {
+    jobs {
       items {
         id
         sceeningId
@@ -12,7 +12,7 @@ query GetSceening($id: ID!) {
       }
       nextToken
     }
-    Crews {
+    crews {
       items {
         id
         sceeningId
@@ -22,17 +22,7 @@ query GetSceening($id: ID!) {
       }
       nextToken
     }
-    Questions {
-      items {
-        id
-        sceeningId
-        questionId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    Options {
+    options {
       items {
         id
         sceeningId
@@ -54,16 +44,13 @@ query ListSceenings(
   listSceenings(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      Jobs {
+      jobs {
         nextToken
       }
-      Crews {
+      crews {
         nextToken
       }
-      Questions {
-        nextToken
-      }
-      Options {
+      options {
         nextToken
       }
       createdAt
@@ -76,17 +63,19 @@ query GetForm($id: ID!) {
   getForm(id: $id) {
     id
     name
-    Questions {
+    questions {
       items {
         id
-        formId
-        questionId
+        title
+        order
+        optionOrderDesc
         createdAt
         updatedAt
+        formQuestionsId
       }
       nextToken
     }
-    Jobs {
+    jobs {
       items {
         id
         formId
@@ -109,10 +98,10 @@ query ListForms(
     items {
       id
       name
-      Questions {
+      questions {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
       createdAt
@@ -183,7 +172,7 @@ query GetQuestion($id: ID!) {
   getQuestion(id: $id) {
     id
     title
-    Options {
+    options {
       items {
         id
         questionId
@@ -193,30 +182,23 @@ query GetQuestion($id: ID!) {
       }
       nextToken
     }
-    forms {
-      items {
-        id
-        formId
-        questionId
-        createdAt
-        updatedAt
+    form {
+      id
+      name
+      questions {
+        nextToken
       }
-      nextToken
-    }
-    sceenings {
-      items {
-        id
-        sceeningId
-        questionId
-        createdAt
-        updatedAt
+      jobs {
+        nextToken
       }
-      nextToken
+      createdAt
+      updatedAt
     }
     order
     optionOrderDesc
     createdAt
     updatedAt
+    formQuestionsId
   }
 }
 query ListQuestions(
@@ -228,19 +210,20 @@ query ListQuestions(
     items {
       id
       title
-      Options {
+      options {
         nextToken
       }
-      forms {
-        nextToken
-      }
-      sceenings {
-        nextToken
+      form {
+        id
+        name
+        createdAt
+        updatedAt
       }
       order
       optionOrderDesc
       createdAt
       updatedAt
+      formQuestionsId
     }
     nextToken
   }
@@ -312,7 +295,7 @@ query GetCrew($id: ID!) {
       }
       nextToken
     }
-    Jobs {
+    jobs {
       items {
         id
         jobId
@@ -338,7 +321,7 @@ query ListCrews(
       sceenings {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
       createdAt
@@ -354,16 +337,13 @@ query GetSceeningJob($id: ID!) {
     jobId
     sceening {
       id
-      Jobs {
+      jobs {
         nextToken
       }
-      Crews {
+      crews {
         nextToken
       }
-      Questions {
-        nextToken
-      }
-      Options {
+      options {
         nextToken
       }
       createdAt
@@ -422,16 +402,13 @@ query GetSceeningCrew($id: ID!) {
     crewId
     sceening {
       id
-      Jobs {
+      jobs {
         nextToken
       }
-      Crews {
+      crews {
         nextToken
       }
-      Questions {
-        nextToken
-      }
-      Options {
+      options {
         nextToken
       }
       createdAt
@@ -443,7 +420,7 @@ query GetSceeningCrew($id: ID!) {
       sceenings {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
       createdAt
@@ -480,78 +457,6 @@ query ListSceeningCrews(
     nextToken
   }
 }
-query GetSceeningQuestion($id: ID!) {
-  getSceeningQuestion(id: $id) {
-    id
-    sceeningId
-    questionId
-    sceening {
-      id
-      Jobs {
-        nextToken
-      }
-      Crews {
-        nextToken
-      }
-      Questions {
-        nextToken
-      }
-      Options {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    question {
-      id
-      title
-      Options {
-        nextToken
-      }
-      forms {
-        nextToken
-      }
-      sceenings {
-        nextToken
-      }
-      order
-      optionOrderDesc
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-query ListSceeningQuestions(
-  $filter: ModelSceeningQuestionFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listSceeningQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      sceeningId
-      questionId
-      sceening {
-        id
-        createdAt
-        updatedAt
-      }
-      question {
-        id
-        title
-        order
-        optionOrderDesc
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
 query GetSceeningOption($id: ID!) {
   getSceeningOption(id: $id) {
     id
@@ -559,16 +464,13 @@ query GetSceeningOption($id: ID!) {
     optionId
     sceening {
       id
-      Jobs {
+      jobs {
         nextToken
       }
-      Crews {
+      crews {
         nextToken
       }
-      Questions {
-        nextToken
-      }
-      Options {
+      options {
         nextToken
       }
       createdAt
@@ -621,74 +523,6 @@ query ListSceeningOptions(
     nextToken
   }
 }
-query GetFormQuestion($id: ID!) {
-  getFormQuestion(id: $id) {
-    id
-    formId
-    questionId
-    form {
-      id
-      name
-      Questions {
-        nextToken
-      }
-      Jobs {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    question {
-      id
-      title
-      Options {
-        nextToken
-      }
-      forms {
-        nextToken
-      }
-      sceenings {
-        nextToken
-      }
-      order
-      optionOrderDesc
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-query ListFormQuestions(
-  $filter: ModelFormQuestionFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listFormQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      formId
-      questionId
-      form {
-        id
-        name
-        createdAt
-        updatedAt
-      }
-      question {
-        id
-        title
-        order
-        optionOrderDesc
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
 query GetFormJob($id: ID!) {
   getFormJob(id: $id) {
     id
@@ -697,10 +531,10 @@ query GetFormJob($id: ID!) {
     form {
       id
       name
-      Questions {
+      questions {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
       createdAt
@@ -779,7 +613,7 @@ query GetCrewJob($id: ID!) {
       sceenings {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
       createdAt
@@ -825,19 +659,20 @@ query GetQuestionOption($id: ID!) {
     question {
       id
       title
-      Options {
+      options {
         nextToken
       }
-      forms {
-        nextToken
-      }
-      sceenings {
-        nextToken
+      form {
+        id
+        name
+        createdAt
+        updatedAt
       }
       order
       optionOrderDesc
       createdAt
       updatedAt
+      formQuestionsId
     }
     option {
       id
@@ -874,6 +709,7 @@ query ListQuestionOptions(
         optionOrderDesc
         createdAt
         updatedAt
+        formQuestionsId
       }
       option {
         id
@@ -883,6 +719,72 @@ query ListQuestionOptions(
         createdAt
         updatedAt
       }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query QuestionsByOrder(
+  $order: Int!
+  $sortDirection: ModelSortDirection
+  $filter: ModelQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  questionsByOrder(
+    order: $order
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      title
+      options {
+        nextToken
+      }
+      form {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+      order
+      optionOrderDesc
+      createdAt
+      updatedAt
+      formQuestionsId
+    }
+    nextToken
+  }
+}
+query OptionsByOrder(
+  $order: Int!
+  $sortDirection: ModelSortDirection
+  $filter: ModelOptionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  optionsByOrder(
+    order: $order
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      label
+      value
+      questions {
+        nextToken
+      }
+      sceenings {
+        nextToken
+      }
+      order
       createdAt
       updatedAt
     }
@@ -1029,80 +931,6 @@ query SceeningCrewsByCrewId(
     nextToken
   }
 }
-query SceeningQuestionsBySceeningId(
-  $sceeningId: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelSceeningQuestionFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  sceeningQuestionsBySceeningId(
-    sceeningId: $sceeningId
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      sceeningId
-      questionId
-      sceening {
-        id
-        createdAt
-        updatedAt
-      }
-      question {
-        id
-        title
-        order
-        optionOrderDesc
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
-query SceeningQuestionsByQuestionId(
-  $questionId: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelSceeningQuestionFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  sceeningQuestionsByQuestionId(
-    questionId: $questionId
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      sceeningId
-      questionId
-      sceening {
-        id
-        createdAt
-        updatedAt
-      }
-      question {
-        id
-        title
-        order
-        optionOrderDesc
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
 query SceeningOptionsBySceeningId(
   $sceeningId: ID!
   $sortDirection: ModelSortDirection
@@ -1168,82 +996,6 @@ query SceeningOptionsByOptionId(
         label
         value
         order
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
-query FormQuestionsByFormId(
-  $formId: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelFormQuestionFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  formQuestionsByFormId(
-    formId: $formId
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      formId
-      questionId
-      form {
-        id
-        name
-        createdAt
-        updatedAt
-      }
-      question {
-        id
-        title
-        order
-        optionOrderDesc
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
-query FormQuestionsByQuestionId(
-  $questionId: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelFormQuestionFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  formQuestionsByQuestionId(
-    questionId: $questionId
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      formId
-      questionId
-      form {
-        id
-        name
-        createdAt
-        updatedAt
-      }
-      question {
-        id
-        title
-        order
-        optionOrderDesc
         createdAt
         updatedAt
       }
@@ -1422,6 +1174,7 @@ query QuestionOptionsByQuestionId(
         optionOrderDesc
         createdAt
         updatedAt
+        formQuestionsId
       }
       option {
         id
@@ -1462,6 +1215,7 @@ query QuestionOptionsByOptionId(
         optionOrderDesc
         createdAt
         updatedAt
+        formQuestionsId
       }
       option {
         id

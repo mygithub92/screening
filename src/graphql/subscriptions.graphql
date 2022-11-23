@@ -2,7 +2,7 @@
 subscription OnCreateSceening($filter: ModelSubscriptionSceeningFilterInput) {
   onCreateSceening(filter: $filter) {
     id
-    Jobs {
+    jobs {
       items {
         id
         sceeningId
@@ -12,7 +12,7 @@ subscription OnCreateSceening($filter: ModelSubscriptionSceeningFilterInput) {
       }
       nextToken
     }
-    Crews {
+    crews {
       items {
         id
         sceeningId
@@ -22,17 +22,7 @@ subscription OnCreateSceening($filter: ModelSubscriptionSceeningFilterInput) {
       }
       nextToken
     }
-    Questions {
-      items {
-        id
-        sceeningId
-        questionId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    Options {
+    options {
       items {
         id
         sceeningId
@@ -49,7 +39,7 @@ subscription OnCreateSceening($filter: ModelSubscriptionSceeningFilterInput) {
 subscription OnUpdateSceening($filter: ModelSubscriptionSceeningFilterInput) {
   onUpdateSceening(filter: $filter) {
     id
-    Jobs {
+    jobs {
       items {
         id
         sceeningId
@@ -59,7 +49,7 @@ subscription OnUpdateSceening($filter: ModelSubscriptionSceeningFilterInput) {
       }
       nextToken
     }
-    Crews {
+    crews {
       items {
         id
         sceeningId
@@ -69,17 +59,7 @@ subscription OnUpdateSceening($filter: ModelSubscriptionSceeningFilterInput) {
       }
       nextToken
     }
-    Questions {
-      items {
-        id
-        sceeningId
-        questionId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    Options {
+    options {
       items {
         id
         sceeningId
@@ -96,7 +76,7 @@ subscription OnUpdateSceening($filter: ModelSubscriptionSceeningFilterInput) {
 subscription OnDeleteSceening($filter: ModelSubscriptionSceeningFilterInput) {
   onDeleteSceening(filter: $filter) {
     id
-    Jobs {
+    jobs {
       items {
         id
         sceeningId
@@ -106,7 +86,7 @@ subscription OnDeleteSceening($filter: ModelSubscriptionSceeningFilterInput) {
       }
       nextToken
     }
-    Crews {
+    crews {
       items {
         id
         sceeningId
@@ -116,17 +96,7 @@ subscription OnDeleteSceening($filter: ModelSubscriptionSceeningFilterInput) {
       }
       nextToken
     }
-    Questions {
-      items {
-        id
-        sceeningId
-        questionId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    Options {
+    options {
       items {
         id
         sceeningId
@@ -144,17 +114,19 @@ subscription OnCreateForm($filter: ModelSubscriptionFormFilterInput) {
   onCreateForm(filter: $filter) {
     id
     name
-    Questions {
+    questions {
       items {
         id
-        formId
-        questionId
+        title
+        order
+        optionOrderDesc
         createdAt
         updatedAt
+        formQuestionsId
       }
       nextToken
     }
-    Jobs {
+    jobs {
       items {
         id
         formId
@@ -172,17 +144,19 @@ subscription OnUpdateForm($filter: ModelSubscriptionFormFilterInput) {
   onUpdateForm(filter: $filter) {
     id
     name
-    Questions {
+    questions {
       items {
         id
-        formId
-        questionId
+        title
+        order
+        optionOrderDesc
         createdAt
         updatedAt
+        formQuestionsId
       }
       nextToken
     }
-    Jobs {
+    jobs {
       items {
         id
         formId
@@ -200,17 +174,19 @@ subscription OnDeleteForm($filter: ModelSubscriptionFormFilterInput) {
   onDeleteForm(filter: $filter) {
     id
     name
-    Questions {
+    questions {
       items {
         id
-        formId
-        questionId
+        title
+        order
+        optionOrderDesc
         createdAt
         updatedAt
+        formQuestionsId
       }
       nextToken
     }
-    Jobs {
+    jobs {
       items {
         id
         formId
@@ -342,7 +318,7 @@ subscription OnCreateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
   onCreateQuestion(filter: $filter) {
     id
     title
-    Options {
+    options {
       items {
         id
         questionId
@@ -352,37 +328,30 @@ subscription OnCreateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
       }
       nextToken
     }
-    forms {
-      items {
-        id
-        formId
-        questionId
-        createdAt
-        updatedAt
+    form {
+      id
+      name
+      questions {
+        nextToken
       }
-      nextToken
-    }
-    sceenings {
-      items {
-        id
-        sceeningId
-        questionId
-        createdAt
-        updatedAt
+      jobs {
+        nextToken
       }
-      nextToken
+      createdAt
+      updatedAt
     }
     order
     optionOrderDesc
     createdAt
     updatedAt
+    formQuestionsId
   }
 }
 subscription OnUpdateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
   onUpdateQuestion(filter: $filter) {
     id
     title
-    Options {
+    options {
       items {
         id
         questionId
@@ -392,37 +361,30 @@ subscription OnUpdateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
       }
       nextToken
     }
-    forms {
-      items {
-        id
-        formId
-        questionId
-        createdAt
-        updatedAt
+    form {
+      id
+      name
+      questions {
+        nextToken
       }
-      nextToken
-    }
-    sceenings {
-      items {
-        id
-        sceeningId
-        questionId
-        createdAt
-        updatedAt
+      jobs {
+        nextToken
       }
-      nextToken
+      createdAt
+      updatedAt
     }
     order
     optionOrderDesc
     createdAt
     updatedAt
+    formQuestionsId
   }
 }
 subscription OnDeleteQuestion($filter: ModelSubscriptionQuestionFilterInput) {
   onDeleteQuestion(filter: $filter) {
     id
     title
-    Options {
+    options {
       items {
         id
         questionId
@@ -432,30 +394,23 @@ subscription OnDeleteQuestion($filter: ModelSubscriptionQuestionFilterInput) {
       }
       nextToken
     }
-    forms {
-      items {
-        id
-        formId
-        questionId
-        createdAt
-        updatedAt
+    form {
+      id
+      name
+      questions {
+        nextToken
       }
-      nextToken
-    }
-    sceenings {
-      items {
-        id
-        sceeningId
-        questionId
-        createdAt
-        updatedAt
+      jobs {
+        nextToken
       }
-      nextToken
+      createdAt
+      updatedAt
     }
     order
     optionOrderDesc
     createdAt
     updatedAt
+    formQuestionsId
   }
 }
 subscription OnCreateOption($filter: ModelSubscriptionOptionFilterInput) {
@@ -562,7 +517,7 @@ subscription OnCreateCrew($filter: ModelSubscriptionCrewFilterInput) {
       }
       nextToken
     }
-    Jobs {
+    jobs {
       items {
         id
         jobId
@@ -590,7 +545,7 @@ subscription OnUpdateCrew($filter: ModelSubscriptionCrewFilterInput) {
       }
       nextToken
     }
-    Jobs {
+    jobs {
       items {
         id
         jobId
@@ -618,7 +573,7 @@ subscription OnDeleteCrew($filter: ModelSubscriptionCrewFilterInput) {
       }
       nextToken
     }
-    Jobs {
+    jobs {
       items {
         id
         jobId
@@ -641,16 +596,13 @@ subscription OnCreateSceeningJob(
     jobId
     sceening {
       id
-      Jobs {
+      jobs {
         nextToken
       }
-      Crews {
+      crews {
         nextToken
       }
-      Questions {
-        nextToken
-      }
-      Options {
+      options {
         nextToken
       }
       createdAt
@@ -684,16 +636,13 @@ subscription OnUpdateSceeningJob(
     jobId
     sceening {
       id
-      Jobs {
+      jobs {
         nextToken
       }
-      Crews {
+      crews {
         nextToken
       }
-      Questions {
-        nextToken
-      }
-      Options {
+      options {
         nextToken
       }
       createdAt
@@ -727,16 +676,13 @@ subscription OnDeleteSceeningJob(
     jobId
     sceening {
       id
-      Jobs {
+      jobs {
         nextToken
       }
-      Crews {
+      crews {
         nextToken
       }
-      Questions {
-        nextToken
-      }
-      Options {
+      options {
         nextToken
       }
       createdAt
@@ -770,16 +716,13 @@ subscription OnCreateSceeningCrew(
     crewId
     sceening {
       id
-      Jobs {
+      jobs {
         nextToken
       }
-      Crews {
+      crews {
         nextToken
       }
-      Questions {
-        nextToken
-      }
-      Options {
+      options {
         nextToken
       }
       createdAt
@@ -791,7 +734,7 @@ subscription OnCreateSceeningCrew(
       sceenings {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
       createdAt
@@ -810,16 +753,13 @@ subscription OnUpdateSceeningCrew(
     crewId
     sceening {
       id
-      Jobs {
+      jobs {
         nextToken
       }
-      Crews {
+      crews {
         nextToken
       }
-      Questions {
-        nextToken
-      }
-      Options {
+      options {
         nextToken
       }
       createdAt
@@ -831,7 +771,7 @@ subscription OnUpdateSceeningCrew(
       sceenings {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
       createdAt
@@ -850,16 +790,13 @@ subscription OnDeleteSceeningCrew(
     crewId
     sceening {
       id
-      Jobs {
+      jobs {
         nextToken
       }
-      Crews {
+      crews {
         nextToken
       }
-      Questions {
-        nextToken
-      }
-      Options {
+      options {
         nextToken
       }
       createdAt
@@ -871,144 +808,9 @@ subscription OnDeleteSceeningCrew(
       sceenings {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateSceeningQuestion(
-  $filter: ModelSubscriptionSceeningQuestionFilterInput
-) {
-  onCreateSceeningQuestion(filter: $filter) {
-    id
-    sceeningId
-    questionId
-    sceening {
-      id
-      Jobs {
-        nextToken
-      }
-      Crews {
-        nextToken
-      }
-      Questions {
-        nextToken
-      }
-      Options {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    question {
-      id
-      title
-      Options {
-        nextToken
-      }
-      forms {
-        nextToken
-      }
-      sceenings {
-        nextToken
-      }
-      order
-      optionOrderDesc
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateSceeningQuestion(
-  $filter: ModelSubscriptionSceeningQuestionFilterInput
-) {
-  onUpdateSceeningQuestion(filter: $filter) {
-    id
-    sceeningId
-    questionId
-    sceening {
-      id
-      Jobs {
-        nextToken
-      }
-      Crews {
-        nextToken
-      }
-      Questions {
-        nextToken
-      }
-      Options {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    question {
-      id
-      title
-      Options {
-        nextToken
-      }
-      forms {
-        nextToken
-      }
-      sceenings {
-        nextToken
-      }
-      order
-      optionOrderDesc
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteSceeningQuestion(
-  $filter: ModelSubscriptionSceeningQuestionFilterInput
-) {
-  onDeleteSceeningQuestion(filter: $filter) {
-    id
-    sceeningId
-    questionId
-    sceening {
-      id
-      Jobs {
-        nextToken
-      }
-      Crews {
-        nextToken
-      }
-      Questions {
-        nextToken
-      }
-      Options {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    question {
-      id
-      title
-      Options {
-        nextToken
-      }
-      forms {
-        nextToken
-      }
-      sceenings {
-        nextToken
-      }
-      order
-      optionOrderDesc
       createdAt
       updatedAt
     }
@@ -1025,16 +827,13 @@ subscription OnCreateSceeningOption(
     optionId
     sceening {
       id
-      Jobs {
+      jobs {
         nextToken
       }
-      Crews {
+      crews {
         nextToken
       }
-      Questions {
-        nextToken
-      }
-      Options {
+      options {
         nextToken
       }
       createdAt
@@ -1067,16 +866,13 @@ subscription OnUpdateSceeningOption(
     optionId
     sceening {
       id
-      Jobs {
+      jobs {
         nextToken
       }
-      Crews {
+      crews {
         nextToken
       }
-      Questions {
-        nextToken
-      }
-      Options {
+      options {
         nextToken
       }
       createdAt
@@ -1109,16 +905,13 @@ subscription OnDeleteSceeningOption(
     optionId
     sceening {
       id
-      Jobs {
+      jobs {
         nextToken
       }
-      Crews {
+      crews {
         nextToken
       }
-      Questions {
-        nextToken
-      }
-      Options {
+      options {
         nextToken
       }
       createdAt
@@ -1142,126 +935,6 @@ subscription OnDeleteSceeningOption(
     updatedAt
   }
 }
-subscription OnCreateFormQuestion(
-  $filter: ModelSubscriptionFormQuestionFilterInput
-) {
-  onCreateFormQuestion(filter: $filter) {
-    id
-    formId
-    questionId
-    form {
-      id
-      name
-      Questions {
-        nextToken
-      }
-      Jobs {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    question {
-      id
-      title
-      Options {
-        nextToken
-      }
-      forms {
-        nextToken
-      }
-      sceenings {
-        nextToken
-      }
-      order
-      optionOrderDesc
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateFormQuestion(
-  $filter: ModelSubscriptionFormQuestionFilterInput
-) {
-  onUpdateFormQuestion(filter: $filter) {
-    id
-    formId
-    questionId
-    form {
-      id
-      name
-      Questions {
-        nextToken
-      }
-      Jobs {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    question {
-      id
-      title
-      Options {
-        nextToken
-      }
-      forms {
-        nextToken
-      }
-      sceenings {
-        nextToken
-      }
-      order
-      optionOrderDesc
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteFormQuestion(
-  $filter: ModelSubscriptionFormQuestionFilterInput
-) {
-  onDeleteFormQuestion(filter: $filter) {
-    id
-    formId
-    questionId
-    form {
-      id
-      name
-      Questions {
-        nextToken
-      }
-      Jobs {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    question {
-      id
-      title
-      Options {
-        nextToken
-      }
-      forms {
-        nextToken
-      }
-      sceenings {
-        nextToken
-      }
-      order
-      optionOrderDesc
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
 subscription OnCreateFormJob($filter: ModelSubscriptionFormJobFilterInput) {
   onCreateFormJob(filter: $filter) {
     id
@@ -1270,10 +943,10 @@ subscription OnCreateFormJob($filter: ModelSubscriptionFormJobFilterInput) {
     form {
       id
       name
-      Questions {
+      questions {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
       createdAt
@@ -1306,10 +979,10 @@ subscription OnUpdateFormJob($filter: ModelSubscriptionFormJobFilterInput) {
     form {
       id
       name
-      Questions {
+      questions {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
       createdAt
@@ -1342,10 +1015,10 @@ subscription OnDeleteFormJob($filter: ModelSubscriptionFormJobFilterInput) {
     form {
       id
       name
-      Questions {
+      questions {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
       createdAt
@@ -1396,7 +1069,7 @@ subscription OnCreateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
       sceenings {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
       createdAt
@@ -1432,7 +1105,7 @@ subscription OnUpdateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
       sceenings {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
       createdAt
@@ -1468,7 +1141,7 @@ subscription OnDeleteCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
       sceenings {
         nextToken
       }
-      Jobs {
+      jobs {
         nextToken
       }
       createdAt
@@ -1488,19 +1161,20 @@ subscription OnCreateQuestionOption(
     question {
       id
       title
-      Options {
+      options {
         nextToken
       }
-      forms {
-        nextToken
-      }
-      sceenings {
-        nextToken
+      form {
+        id
+        name
+        createdAt
+        updatedAt
       }
       order
       optionOrderDesc
       createdAt
       updatedAt
+      formQuestionsId
     }
     option {
       id
@@ -1530,19 +1204,20 @@ subscription OnUpdateQuestionOption(
     question {
       id
       title
-      Options {
+      options {
         nextToken
       }
-      forms {
-        nextToken
-      }
-      sceenings {
-        nextToken
+      form {
+        id
+        name
+        createdAt
+        updatedAt
       }
       order
       optionOrderDesc
       createdAt
       updatedAt
+      formQuestionsId
     }
     option {
       id
@@ -1572,19 +1247,20 @@ subscription OnDeleteQuestionOption(
     question {
       id
       title
-      Options {
+      options {
         nextToken
       }
-      forms {
-        nextToken
-      }
-      sceenings {
-        nextToken
+      form {
+        id
+        name
+        createdAt
+        updatedAt
       }
       order
       optionOrderDesc
       createdAt
       updatedAt
+      formQuestionsId
     }
     option {
       id

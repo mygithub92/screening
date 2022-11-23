@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { User } from 'app/@shared/api-interfaces';
-import * as fromUser from 'app/@state/reducers';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from './@core/services/auth.service';
@@ -76,7 +74,6 @@ export class AppMainComponent implements OnInit, OnDestroy {
     private router: Router,
     public renderer: Renderer2,
     private menuService: MenuService,
-    private store: Store<fromUser.State>,
     private authService: AuthService
   ) {
     this.subscriptions = [];
@@ -96,23 +93,18 @@ export class AppMainComponent implements OnInit, OnDestroy {
           this.menuModel.push(
             {
               label: "Jobs",
-              icon: "fa fa-fw fa-home",
-              routerLink: "product/product-list",
+              icon: "fa fa-fw fa-tasks",
+              routerLink: "admin/jobs",
             },
             {
               label: "Forms",
-              icon: "fa fa-fw fa-home",
-              routerLink: "product/product-list",
-            },
-            {
-              label: "Questions",
-              icon: "fa fa-fw fa-home",
-              routerLink: "product/product-list",
+              icon: "fa fa-fw fa-newspaper-o",
+              routerLink: "admin/forms",
             },
             {
               label: "Crew",
-              icon: "fa fa-fw fa-home",
-              routerLink: "product/product-list",
+              icon: "fa fa-fw fa-users",
+              routerLink: "admin/crew",
             }
           );
           this.router.navigate(["/main/admin"]);

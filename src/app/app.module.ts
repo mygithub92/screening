@@ -9,6 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { UserEffects } from 'app/@state/effects';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 
 import { AuthGuard } from './@core/guards/auth.guard';
 import { JwtInterceptor } from './@core/http-interceptors/jwt.interceptor';
@@ -66,6 +67,7 @@ import { AppTopBarComponent } from './app.topbar.component';
   providers: [
     ConfirmationService,
     MessageService,
+    DialogService,
     AuthService,
     AuthGuard,
     MenuService,
