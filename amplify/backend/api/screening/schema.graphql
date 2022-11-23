@@ -1,16 +1,15 @@
 type Sceening @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  Jobs: [Job] @manyToMany(relationName: "SceeningJob")
-  Crews: [Crew] @manyToMany(relationName: "SceeningCrew")
-  Questions: [Question] @manyToMany(relationName: "SceeningQuestion")
-  Options: [Option] @manyToMany(relationName: "SceeningOption")
+  jobs: [Job] @manyToMany(relationName: "SceeningJob")
+  crews: [Crew] @manyToMany(relationName: "SceeningCrew")
+  options: [Option] @manyToMany(relationName: "SceeningOption")
 }
 
 type Form @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String
-  Questions: [Question] @manyToMany(relationName: "FormQuestion")
-  Jobs: [Job] @manyToMany(relationName: "FormJob")
+  questions: [Question] @hasMany
+  jobs: [Job] @manyToMany(relationName: "FormJob")
 }
 
 type Job @model @auth(rules: [{ allow: public }]) {
@@ -24,9 +23,8 @@ type Job @model @auth(rules: [{ allow: public }]) {
 type Question @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String
-  Options: [Option] @manyToMany(relationName: "QuestionOption")
-  forms: [Form] @manyToMany(relationName: "FormQuestion")
-  sceenings: [Sceening] @manyToMany(relationName: "SceeningQuestion")
+  options: [Option] @manyToMany(relationName: "QuestionOption")
+  form: Form @belongsTo
   order: Int @index
   optionOrderDesc: Boolean
 }
@@ -44,5 +42,5 @@ type Crew @model @auth(rules: [{ allow: public }]) {
   id: ID!
   userName: String
   sceenings: [Sceening] @manyToMany(relationName: "SceeningCrew")
-  Jobs: [Job] @manyToMany(relationName: "CrewJob")
+  jobs: [Job] @manyToMany(relationName: "CrewJob")
 }
