@@ -8,7 +8,8 @@ import * as fromAdmin from './state/reducers';
 
 @Component({
   selector: "tt-admin",
-  template: ` <p-blockUI [blocked]="true"></p-blockUI> `,
+  template: ` <p-blockUI [blocked]="true"></p-blockUI>
+    <router-outlet></router-outlet>`,
 })
 export class AdminComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
@@ -21,7 +22,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.router.navigate(["manage"], { relativeTo: this.route });
+    this.router.navigate(["jobs"], { relativeTo: this.route });
   }
 
   ngOnDestroy(): void {}

@@ -1,0 +1,40 @@
+<p-blockUI [blocked]="loading" [target]="dt"
+  ><p class="center-spinner"></p
+></p-blockUI>
+<p-panel header="Questions" #dt>
+  <p-table [columns]="cols" [value]="questions" dataKey="title">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{ col.header }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td *ngFor="let col of columns">
+          {{ rowData[col.field] }}
+        </td>
+        <td>
+          <p-button
+            label="Edit"
+            icon="fa fa-pencil"
+            iconPos="left"
+            (click)="show(rowData)"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div>
+    <p-button
+      label="Add"
+      icon="fa fa-plus"
+      iconPos="left"
+      (click)="show()"
+    ></p-button>
+  </div>
+</p-panel>
+<p-toast [style]="{ marginTop: '80px' }"></p-toast>
