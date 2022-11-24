@@ -12,6 +12,7 @@ import { UserEffects } from 'app/@state/effects';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 
+import { AuthService } from './@core/services/auth.service';
 import { metaReducers, ROOT_REDUCERS } from './@state/reducers';
 import { AppCommonModule } from './app.common.module';
 import { AppComponent } from './app.component';
@@ -81,7 +82,13 @@ const routes: Routes = [
     }),
     EffectsModule.forRoot([UserEffects]),
   ],
-  providers: [ConfirmationService, MessageService, DialogService, MenuService],
+  providers: [
+    ConfirmationService,
+    MessageService,
+    DialogService,
+    MenuService,
+    AuthService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
