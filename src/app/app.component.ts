@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AuthService } from 'app/@core/services/auth.service';
 import * as fromUser from 'app/@state/reducers';
 
 @Component({
@@ -35,11 +34,7 @@ export class AppComponent {
     },
   ];
 
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-    private store: Store<fromUser.State>
-  ) {
+  constructor(private router: Router, private store: Store<fromUser.State>) {
     this.router.navigate(["main"]);
   }
 }
