@@ -13,6 +13,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 
 import { AuthService } from './@core/services/auth.service';
+import { NodeService } from './@core/services/nodeservice';
 import { metaReducers, ROOT_REDUCERS } from './@state/reducers';
 import { AppCommonModule } from './app.common.module';
 import { AppComponent } from './app.component';
@@ -23,7 +24,6 @@ import { AppMenuComponent } from './app.menu.component';
 import { MenuService } from './app.menu.service';
 import { AppMenuitemComponent } from './app.menuitem.component';
 import { NgPrimeModule } from './app.ngprime.module';
-import { AppProfileComponent } from './app.profile.component';
 import { AppTopBarComponent } from './app.topbar.component';
 
 const routes: Routes = [
@@ -43,6 +43,30 @@ const routes: Routes = [
           },
         ],
       },
+      {
+        path: "profile",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../app/features/profile/profile.module").then(
+                (m) => m.ProfileModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "screening",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../app/features/screening/screening.module").then(
+                (m) => m.ScreeningModule
+              ),
+          },
+        ],
+      },
     ],
   },
 ];
@@ -55,7 +79,6 @@ const routes: Routes = [
     AppMenuitemComponent,
     AppMenuComponent,
     AppConfigComponent,
-    AppProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,6 +111,7 @@ const routes: Routes = [
     DialogService,
     MenuService,
     AuthService,
+    NodeService,
   ],
   bootstrap: [AppComponent],
 })

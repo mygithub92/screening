@@ -15,6 +15,8 @@ type Form @model @auth(rules: [{ allow: public }]) {
 type Job @model @auth(rules: [{ allow: public }]) {
   id: ID!
   code: String
+  startDate: String
+  endDate: String
   sceenings: [Sceening] @manyToMany(relationName: "SceeningJob")
   forms: [Form] @manyToMany(relationName: "FormJob")
   crews: [Crew] @manyToMany(relationName: "CrewJob")
@@ -41,6 +43,12 @@ type Option @model @auth(rules: [{ allow: public }]) {
 type Crew @model @auth(rules: [{ allow: public }]) {
   id: ID!
   userName: String
+  companyName: String
+  address: String
+  phonenumber: String
+  name: String
+  email: String
+  defaultJobId: String
   sceenings: [Sceening] @manyToMany(relationName: "SceeningCrew")
   jobs: [Job] @manyToMany(relationName: "CrewJob")
 }

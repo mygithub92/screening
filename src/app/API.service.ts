@@ -89,6 +89,8 @@ export type Job = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
   sceenings?: ModelSceeningJobConnection | null;
   forms?: ModelFormJobConnection | null;
   crews?: ModelCrewJobConnection | null;
@@ -209,6 +211,12 @@ export type Crew = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  companyName?: string | null;
+  address?: string | null;
+  phonenumber?: string | null;
+  name?: string | null;
+  email?: string | null;
+  defaultJobId?: string | null;
   sceenings?: ModelSceeningCrewConnection | null;
   jobs?: ModelCrewJobConnection | null;
   createdAt: string;
@@ -303,10 +311,14 @@ export type DeleteFormInput = {
 export type CreateJobInput = {
   id?: string | null;
   code?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
 };
 
 export type ModelJobConditionInput = {
   code?: ModelStringInput | null;
+  startDate?: ModelStringInput | null;
+  endDate?: ModelStringInput | null;
   and?: Array<ModelJobConditionInput | null> | null;
   or?: Array<ModelJobConditionInput | null> | null;
   not?: ModelJobConditionInput | null;
@@ -315,6 +327,8 @@ export type ModelJobConditionInput = {
 export type UpdateJobInput = {
   id: string;
   code?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
 };
 
 export type DeleteJobInput = {
@@ -416,10 +430,22 @@ export type DeleteOptionInput = {
 export type CreateCrewInput = {
   id?: string | null;
   userName?: string | null;
+  companyName?: string | null;
+  address?: string | null;
+  phonenumber?: string | null;
+  name?: string | null;
+  email?: string | null;
+  defaultJobId?: string | null;
 };
 
 export type ModelCrewConditionInput = {
   userName?: ModelStringInput | null;
+  companyName?: ModelStringInput | null;
+  address?: ModelStringInput | null;
+  phonenumber?: ModelStringInput | null;
+  name?: ModelStringInput | null;
+  email?: ModelStringInput | null;
+  defaultJobId?: ModelStringInput | null;
   and?: Array<ModelCrewConditionInput | null> | null;
   or?: Array<ModelCrewConditionInput | null> | null;
   not?: ModelCrewConditionInput | null;
@@ -428,6 +454,12 @@ export type ModelCrewConditionInput = {
 export type UpdateCrewInput = {
   id: string;
   userName?: string | null;
+  companyName?: string | null;
+  address?: string | null;
+  phonenumber?: string | null;
+  name?: string | null;
+  email?: string | null;
+  defaultJobId?: string | null;
 };
 
 export type DeleteCrewInput = {
@@ -608,6 +640,8 @@ export type ModelFormConnection = {
 export type ModelJobFilterInput = {
   id?: ModelIDInput | null;
   code?: ModelStringInput | null;
+  startDate?: ModelStringInput | null;
+  endDate?: ModelStringInput | null;
   and?: Array<ModelJobFilterInput | null> | null;
   or?: Array<ModelJobFilterInput | null> | null;
   not?: ModelJobFilterInput | null;
@@ -649,6 +683,12 @@ export type ModelOptionConnection = {
 export type ModelCrewFilterInput = {
   id?: ModelIDInput | null;
   userName?: ModelStringInput | null;
+  companyName?: ModelStringInput | null;
+  address?: ModelStringInput | null;
+  phonenumber?: ModelStringInput | null;
+  name?: ModelStringInput | null;
+  email?: ModelStringInput | null;
+  defaultJobId?: ModelStringInput | null;
   and?: Array<ModelCrewFilterInput | null> | null;
   or?: Array<ModelCrewFilterInput | null> | null;
   not?: ModelCrewFilterInput | null;
@@ -765,6 +805,8 @@ export type ModelSubscriptionStringInput = {
 export type ModelSubscriptionJobFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   code?: ModelSubscriptionStringInput | null;
+  startDate?: ModelSubscriptionStringInput | null;
+  endDate?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionJobFilterInput | null> | null;
   or?: Array<ModelSubscriptionJobFilterInput | null> | null;
 };
@@ -807,6 +849,12 @@ export type ModelSubscriptionOptionFilterInput = {
 export type ModelSubscriptionCrewFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   userName?: ModelSubscriptionStringInput | null;
+  companyName?: ModelSubscriptionStringInput | null;
+  address?: ModelSubscriptionStringInput | null;
+  phonenumber?: ModelSubscriptionStringInput | null;
+  name?: ModelSubscriptionStringInput | null;
+  email?: ModelSubscriptionStringInput | null;
+  defaultJobId?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionCrewFilterInput | null> | null;
   or?: Array<ModelSubscriptionCrewFilterInput | null> | null;
 };
@@ -1094,6 +1142,8 @@ export type CreateJobMutation = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
   sceenings?: {
     __typename: "ModelSceeningJobConnection";
     items: Array<{
@@ -1138,6 +1188,8 @@ export type UpdateJobMutation = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
   sceenings?: {
     __typename: "ModelSceeningJobConnection";
     items: Array<{
@@ -1182,6 +1234,8 @@ export type DeleteJobMutation = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
   sceenings?: {
     __typename: "ModelSceeningJobConnection";
     items: Array<{
@@ -1442,6 +1496,12 @@ export type CreateCrewMutation = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  companyName?: string | null;
+  address?: string | null;
+  phonenumber?: string | null;
+  name?: string | null;
+  email?: string | null;
+  defaultJobId?: string | null;
   sceenings?: {
     __typename: "ModelSceeningCrewConnection";
     items: Array<{
@@ -1474,6 +1534,12 @@ export type UpdateCrewMutation = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  companyName?: string | null;
+  address?: string | null;
+  phonenumber?: string | null;
+  name?: string | null;
+  email?: string | null;
+  defaultJobId?: string | null;
   sceenings?: {
     __typename: "ModelSceeningCrewConnection";
     items: Array<{
@@ -1506,6 +1572,12 @@ export type DeleteCrewMutation = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  companyName?: string | null;
+  address?: string | null;
+  phonenumber?: string | null;
+  name?: string | null;
+  email?: string | null;
+  defaultJobId?: string | null;
   sceenings?: {
     __typename: "ModelSceeningCrewConnection";
     items: Array<{
@@ -1561,6 +1633,8 @@ export type CreateSceeningJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -1607,6 +1681,8 @@ export type UpdateSceeningJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -1653,6 +1729,8 @@ export type DeleteSceeningJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -1699,6 +1777,12 @@ export type CreateSceeningCrewMutation = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -1741,6 +1825,12 @@ export type UpdateSceeningCrewMutation = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -1783,6 +1873,12 @@ export type DeleteSceeningCrewMutation = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -1954,6 +2050,8 @@ export type CreateFormJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -1997,6 +2095,8 @@ export type UpdateFormJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -2040,6 +2140,8 @@ export type DeleteFormJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -2068,6 +2170,8 @@ export type CreateCrewJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -2087,6 +2191,12 @@ export type CreateCrewJobMutation = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -2111,6 +2221,8 @@ export type UpdateCrewJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -2130,6 +2242,12 @@ export type UpdateCrewJobMutation = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -2154,6 +2272,8 @@ export type DeleteCrewJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -2173,6 +2293,12 @@ export type DeleteCrewJobMutation = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -2453,6 +2579,8 @@ export type GetJobQuery = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
   sceenings?: {
     __typename: "ModelSceeningJobConnection";
     items: Array<{
@@ -2499,6 +2627,8 @@ export type ListJobsQuery = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -2641,6 +2771,12 @@ export type GetCrewQuery = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  companyName?: string | null;
+  address?: string | null;
+  phonenumber?: string | null;
+  name?: string | null;
+  email?: string | null;
+  defaultJobId?: string | null;
   sceenings?: {
     __typename: "ModelSceeningCrewConnection";
     items: Array<{
@@ -2675,6 +2811,12 @@ export type ListCrewsQuery = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -2716,6 +2858,8 @@ export type GetSceeningJobQuery = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -2752,6 +2896,8 @@ export type ListSceeningJobsQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -2788,6 +2934,12 @@ export type GetSceeningCrewQuery = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -2820,6 +2972,12 @@ export type ListSceeningCrewsQuery = {
       __typename: "Crew";
       id: string;
       userName?: string | null;
+      companyName?: string | null;
+      address?: string | null;
+      phonenumber?: string | null;
+      name?: string | null;
+      email?: string | null;
+      defaultJobId?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -2925,6 +3083,8 @@ export type GetFormJobQuery = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -2962,6 +3122,8 @@ export type ListFormJobsQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -2980,6 +3142,8 @@ export type GetCrewJobQuery = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -2999,6 +3163,12 @@ export type GetCrewJobQuery = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -3025,6 +3195,8 @@ export type ListCrewJobsQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3032,6 +3204,12 @@ export type ListCrewJobsQuery = {
       __typename: "Crew";
       id: string;
       userName?: string | null;
+      companyName?: string | null;
+      address?: string | null;
+      phonenumber?: string | null;
+      name?: string | null;
+      email?: string | null;
+      defaultJobId?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3185,6 +3363,8 @@ export type SceeningJobsBySceeningIdQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3211,6 +3391,8 @@ export type SceeningJobsByJobIdQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3237,6 +3419,12 @@ export type SceeningCrewsBySceeningIdQuery = {
       __typename: "Crew";
       id: string;
       userName?: string | null;
+      companyName?: string | null;
+      address?: string | null;
+      phonenumber?: string | null;
+      name?: string | null;
+      email?: string | null;
+      defaultJobId?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3263,6 +3451,12 @@ export type SceeningCrewsByCrewIdQuery = {
       __typename: "Crew";
       id: string;
       userName?: string | null;
+      companyName?: string | null;
+      address?: string | null;
+      phonenumber?: string | null;
+      name?: string | null;
+      email?: string | null;
+      defaultJobId?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3346,6 +3540,8 @@ export type FormJobsByFormIdQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3373,6 +3569,8 @@ export type FormJobsByJobIdQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3393,6 +3591,8 @@ export type CrewJobsByJobIdQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3400,6 +3600,12 @@ export type CrewJobsByJobIdQuery = {
       __typename: "Crew";
       id: string;
       userName?: string | null;
+      companyName?: string | null;
+      address?: string | null;
+      phonenumber?: string | null;
+      name?: string | null;
+      email?: string | null;
+      defaultJobId?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3420,6 +3626,8 @@ export type CrewJobsByCrewIdQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3427,6 +3635,12 @@ export type CrewJobsByCrewIdQuery = {
       __typename: "Crew";
       id: string;
       userName?: string | null;
+      companyName?: string | null;
+      address?: string | null;
+      phonenumber?: string | null;
+      name?: string | null;
+      email?: string | null;
+      defaultJobId?: string | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3735,6 +3949,8 @@ export type OnCreateJobSubscription = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
   sceenings?: {
     __typename: "ModelSceeningJobConnection";
     items: Array<{
@@ -3779,6 +3995,8 @@ export type OnUpdateJobSubscription = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
   sceenings?: {
     __typename: "ModelSceeningJobConnection";
     items: Array<{
@@ -3823,6 +4041,8 @@ export type OnDeleteJobSubscription = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
   sceenings?: {
     __typename: "ModelSceeningJobConnection";
     items: Array<{
@@ -4083,6 +4303,12 @@ export type OnCreateCrewSubscription = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  companyName?: string | null;
+  address?: string | null;
+  phonenumber?: string | null;
+  name?: string | null;
+  email?: string | null;
+  defaultJobId?: string | null;
   sceenings?: {
     __typename: "ModelSceeningCrewConnection";
     items: Array<{
@@ -4115,6 +4341,12 @@ export type OnUpdateCrewSubscription = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  companyName?: string | null;
+  address?: string | null;
+  phonenumber?: string | null;
+  name?: string | null;
+  email?: string | null;
+  defaultJobId?: string | null;
   sceenings?: {
     __typename: "ModelSceeningCrewConnection";
     items: Array<{
@@ -4147,6 +4379,12 @@ export type OnDeleteCrewSubscription = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  companyName?: string | null;
+  address?: string | null;
+  phonenumber?: string | null;
+  name?: string | null;
+  email?: string | null;
+  defaultJobId?: string | null;
   sceenings?: {
     __typename: "ModelSceeningCrewConnection";
     items: Array<{
@@ -4202,6 +4440,8 @@ export type OnCreateSceeningJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -4248,6 +4488,8 @@ export type OnUpdateSceeningJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -4294,6 +4536,8 @@ export type OnDeleteSceeningJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -4340,6 +4584,12 @@ export type OnCreateSceeningCrewSubscription = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -4382,6 +4632,12 @@ export type OnUpdateSceeningCrewSubscription = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -4424,6 +4680,12 @@ export type OnDeleteSceeningCrewSubscription = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -4595,6 +4857,8 @@ export type OnCreateFormJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -4638,6 +4902,8 @@ export type OnUpdateFormJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -4681,6 +4947,8 @@ export type OnDeleteFormJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -4709,6 +4977,8 @@ export type OnCreateCrewJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -4728,6 +4998,12 @@ export type OnCreateCrewJobSubscription = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -4752,6 +5028,8 @@ export type OnUpdateCrewJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -4771,6 +5049,12 @@ export type OnUpdateCrewJobSubscription = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -4795,6 +5079,8 @@ export type OnDeleteCrewJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
     sceenings?: {
       __typename: "ModelSceeningJobConnection";
       nextToken?: string | null;
@@ -4814,6 +5100,12 @@ export type OnDeleteCrewJobSubscription = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
     sceenings?: {
       __typename: "ModelSceeningCrewConnection";
       nextToken?: string | null;
@@ -5310,6 +5602,8 @@ export class APIService {
           __typename
           id
           code
+          startDate
+          endDate
           sceenings {
             __typename
             items {
@@ -5370,6 +5664,8 @@ export class APIService {
           __typename
           id
           code
+          startDate
+          endDate
           sceenings {
             __typename
             items {
@@ -5430,6 +5726,8 @@ export class APIService {
           __typename
           id
           code
+          startDate
+          endDate
           sceenings {
             __typename
             items {
@@ -5802,6 +6100,12 @@ export class APIService {
           __typename
           id
           userName
+          companyName
+          address
+          phonenumber
+          name
+          email
+          defaultJobId
           sceenings {
             __typename
             items {
@@ -5850,6 +6154,12 @@ export class APIService {
           __typename
           id
           userName
+          companyName
+          address
+          phonenumber
+          name
+          email
+          defaultJobId
           sceenings {
             __typename
             items {
@@ -5898,6 +6208,12 @@ export class APIService {
           __typename
           id
           userName
+          companyName
+          address
+          phonenumber
+          name
+          email
+          defaultJobId
           sceenings {
             __typename
             items {
@@ -5969,6 +6285,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -6031,6 +6349,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -6093,6 +6413,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -6155,6 +6477,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -6213,6 +6541,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -6271,6 +6605,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -6506,6 +6846,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -6565,6 +6907,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -6624,6 +6968,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -6668,6 +7014,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -6687,6 +7035,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -6727,6 +7081,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -6746,6 +7102,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -6786,6 +7148,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -6805,6 +7169,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -7208,6 +7578,8 @@ export class APIService {
           __typename
           id
           code
+          startDate
+          endDate
           sceenings {
             __typename
             items {
@@ -7268,6 +7640,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -7489,6 +7863,12 @@ export class APIService {
           __typename
           id
           userName
+          companyName
+          address
+          phonenumber
+          name
+          email
+          defaultJobId
           sceenings {
             __typename
             items {
@@ -7537,6 +7917,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -7595,6 +7981,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -7645,6 +8033,8 @@ export class APIService {
               __typename
               id
               code
+              startDate
+              endDate
               createdAt
               updatedAt
             }
@@ -7698,6 +8088,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -7744,6 +8140,12 @@ export class APIService {
               __typename
               id
               userName
+              companyName
+              address
+              phonenumber
+              name
+              email
+              defaultJobId
               createdAt
               updatedAt
             }
@@ -7897,6 +8299,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -7948,6 +8352,8 @@ export class APIService {
               __typename
               id
               code
+              startDate
+              endDate
               createdAt
               updatedAt
             }
@@ -7983,6 +8389,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -8002,6 +8410,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -8042,6 +8456,8 @@ export class APIService {
               __typename
               id
               code
+              startDate
+              endDate
               createdAt
               updatedAt
             }
@@ -8049,6 +8465,12 @@ export class APIService {
               __typename
               id
               userName
+              companyName
+              address
+              phonenumber
+              name
+              email
+              defaultJobId
               createdAt
               updatedAt
             }
@@ -8312,6 +8734,8 @@ export class APIService {
               __typename
               id
               code
+              startDate
+              endDate
               createdAt
               updatedAt
             }
@@ -8368,6 +8792,8 @@ export class APIService {
               __typename
               id
               code
+              startDate
+              endDate
               createdAt
               updatedAt
             }
@@ -8422,6 +8848,12 @@ export class APIService {
               __typename
               id
               userName
+              companyName
+              address
+              phonenumber
+              name
+              email
+              defaultJobId
               createdAt
               updatedAt
             }
@@ -8478,6 +8910,12 @@ export class APIService {
               __typename
               id
               userName
+              companyName
+              address
+              phonenumber
+              name
+              email
+              defaultJobId
               createdAt
               updatedAt
             }
@@ -8649,6 +9087,8 @@ export class APIService {
               __typename
               id
               code
+              startDate
+              endDate
               createdAt
               updatedAt
             }
@@ -8704,6 +9144,8 @@ export class APIService {
               __typename
               id
               code
+              startDate
+              endDate
               createdAt
               updatedAt
             }
@@ -8752,6 +9194,8 @@ export class APIService {
               __typename
               id
               code
+              startDate
+              endDate
               createdAt
               updatedAt
             }
@@ -8759,6 +9203,12 @@ export class APIService {
               __typename
               id
               userName
+              companyName
+              address
+              phonenumber
+              name
+              email
+              defaultJobId
               createdAt
               updatedAt
             }
@@ -8807,6 +9257,8 @@ export class APIService {
               __typename
               id
               code
+              startDate
+              endDate
               createdAt
               updatedAt
             }
@@ -8814,6 +9266,12 @@ export class APIService {
               __typename
               id
               userName
+              companyName
+              address
+              phonenumber
+              name
+              email
+              defaultJobId
               createdAt
               updatedAt
             }
@@ -9310,6 +9768,8 @@ export class APIService {
           __typename
           id
           code
+          startDate
+          endDate
           sceenings {
             __typename
             items {
@@ -9371,6 +9831,8 @@ export class APIService {
           __typename
           id
           code
+          startDate
+          endDate
           sceenings {
             __typename
             items {
@@ -9432,6 +9894,8 @@ export class APIService {
           __typename
           id
           code
+          startDate
+          endDate
           sceenings {
             __typename
             items {
@@ -9811,6 +10275,12 @@ export class APIService {
           __typename
           id
           userName
+          companyName
+          address
+          phonenumber
+          name
+          email
+          defaultJobId
           sceenings {
             __typename
             items {
@@ -9860,6 +10330,12 @@ export class APIService {
           __typename
           id
           userName
+          companyName
+          address
+          phonenumber
+          name
+          email
+          defaultJobId
           sceenings {
             __typename
             items {
@@ -9909,6 +10385,12 @@ export class APIService {
           __typename
           id
           userName
+          companyName
+          address
+          phonenumber
+          name
+          email
+          defaultJobId
           sceenings {
             __typename
             items {
@@ -9981,6 +10463,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -10044,6 +10528,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -10107,6 +10593,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -10170,6 +10658,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -10231,6 +10725,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -10292,6 +10792,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -10545,6 +11051,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -10605,6 +11113,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -10665,6 +11175,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -10710,6 +11222,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -10729,6 +11243,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -10770,6 +11290,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -10789,6 +11311,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken
@@ -10830,6 +11358,8 @@ export class APIService {
             __typename
             id
             code
+            startDate
+            endDate
             sceenings {
               __typename
               nextToken
@@ -10849,6 +11379,12 @@ export class APIService {
             __typename
             id
             userName
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
             sceenings {
               __typename
               nextToken

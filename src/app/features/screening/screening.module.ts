@@ -5,22 +5,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { PipesModule } from 'app/@shared/pipes';
 import { NgPrimeModule } from 'app/app.ngprime.module';
 
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { JobComponent } from './job/job.component';
+import { ScreeningFormComponent } from './screening-form/screening-form.component';
 
 const routes: Routes = [
   {
     path: "",
-    component: JobComponent,
-  },
-  {
-    path: "profile",
-    component: EditProfileComponent,
+    component: ScreeningFormComponent,
   },
 ];
 
 @NgModule({
-  declarations: [EditProfileComponent, JobComponent],
+  declarations: [ScreeningFormComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -29,4 +24,4 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
 })
-export class ProfileModule {}
+export class ScreeningModule {}

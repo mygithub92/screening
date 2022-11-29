@@ -114,6 +114,8 @@ query GetJob($id: ID!) {
   getJob(id: $id) {
     id
     code
+    startDate
+    endDate
     sceenings {
       items {
         id
@@ -153,6 +155,8 @@ query ListJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String) {
     items {
       id
       code
+      startDate
+      endDate
       sceenings {
         nextToken
       }
@@ -285,6 +289,12 @@ query GetCrew($id: ID!) {
   getCrew(id: $id) {
     id
     userName
+    companyName
+    address
+    phonenumber
+    name
+    email
+    defaultJobId
     sceenings {
       items {
         id
@@ -318,6 +328,12 @@ query ListCrews(
     items {
       id
       userName
+      companyName
+      address
+      phonenumber
+      name
+      email
+      defaultJobId
       sceenings {
         nextToken
       }
@@ -352,6 +368,8 @@ query GetSceeningJob($id: ID!) {
     job {
       id
       code
+      startDate
+      endDate
       sceenings {
         nextToken
       }
@@ -386,6 +404,8 @@ query ListSceeningJobs(
       job {
         id
         code
+        startDate
+        endDate
         createdAt
         updatedAt
       }
@@ -417,6 +437,12 @@ query GetSceeningCrew($id: ID!) {
     crew {
       id
       userName
+      companyName
+      address
+      phonenumber
+      name
+      email
+      defaultJobId
       sceenings {
         nextToken
       }
@@ -448,6 +474,12 @@ query ListSceeningCrews(
       crew {
         id
         userName
+        companyName
+        address
+        phonenumber
+        name
+        email
+        defaultJobId
         createdAt
         updatedAt
       }
@@ -543,6 +575,8 @@ query GetFormJob($id: ID!) {
     job {
       id
       code
+      startDate
+      endDate
       sceenings {
         nextToken
       }
@@ -578,6 +612,8 @@ query ListFormJobs(
       job {
         id
         code
+        startDate
+        endDate
         createdAt
         updatedAt
       }
@@ -595,6 +631,8 @@ query GetCrewJob($id: ID!) {
     job {
       id
       code
+      startDate
+      endDate
       sceenings {
         nextToken
       }
@@ -610,6 +648,12 @@ query GetCrewJob($id: ID!) {
     crew {
       id
       userName
+      companyName
+      address
+      phonenumber
+      name
+      email
+      defaultJobId
       sceenings {
         nextToken
       }
@@ -636,12 +680,20 @@ query ListCrewJobs(
       job {
         id
         code
+        startDate
+        endDate
         createdAt
         updatedAt
       }
       crew {
         id
         userName
+        companyName
+        address
+        phonenumber
+        name
+        email
+        defaultJobId
         createdAt
         updatedAt
       }
@@ -817,6 +869,8 @@ query SceeningJobsBySceeningId(
       job {
         id
         code
+        startDate
+        endDate
         createdAt
         updatedAt
       }
@@ -852,6 +906,8 @@ query SceeningJobsByJobId(
       job {
         id
         code
+        startDate
+        endDate
         createdAt
         updatedAt
       }
@@ -887,6 +943,12 @@ query SceeningCrewsBySceeningId(
       crew {
         id
         userName
+        companyName
+        address
+        phonenumber
+        name
+        email
+        defaultJobId
         createdAt
         updatedAt
       }
@@ -922,6 +984,12 @@ query SceeningCrewsByCrewId(
       crew {
         id
         userName
+        companyName
+        address
+        phonenumber
+        name
+        email
+        defaultJobId
         createdAt
         updatedAt
       }
@@ -1032,6 +1100,8 @@ query FormJobsByFormId(
       job {
         id
         code
+        startDate
+        endDate
         createdAt
         updatedAt
       }
@@ -1068,6 +1138,8 @@ query FormJobsByJobId(
       job {
         id
         code
+        startDate
+        endDate
         createdAt
         updatedAt
       }
@@ -1098,12 +1170,20 @@ query CrewJobsByJobId(
       job {
         id
         code
+        startDate
+        endDate
         createdAt
         updatedAt
       }
       crew {
         id
         userName
+        companyName
+        address
+        phonenumber
+        name
+        email
+        defaultJobId
         createdAt
         updatedAt
       }
@@ -1134,12 +1214,20 @@ query CrewJobsByCrewId(
       job {
         id
         code
+        startDate
+        endDate
         createdAt
         updatedAt
       }
       crew {
         id
         userName
+        companyName
+        address
+        phonenumber
+        name
+        email
+        defaultJobId
         createdAt
         updatedAt
       }

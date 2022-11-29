@@ -11,8 +11,8 @@
           "EMAIL"
         ],
         "signupAttributes": [
-          "NAME",
-          "PHONE_NUMBER"
+          "EMAIL",
+          "NAME"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
@@ -49,6 +49,13 @@
           "additionalAuthenticationProviders": []
         }
       }
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "providerPlugin": "awscloudformation",
+      "type": "manual"
     }
   }
 }

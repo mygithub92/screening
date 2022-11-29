@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'app/@shared/api-interfaces';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from './@core/services/auth.service';
+import { APIService } from './API.service';
 import { MenuService } from './app.menu.service';
 
 enum MenuOrientation {
@@ -72,9 +73,11 @@ export class AppMainComponent implements OnInit, OnDestroy {
   menuModel = [];
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     public renderer: Renderer2,
     private menuService: MenuService,
-    private authService: AuthService
+    private authService: AuthService,
+    private api: APIService
   ) {
     this.subscriptions = [];
   }
@@ -83,11 +86,32 @@ export class AppMainComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
-  ngOnInit() {
-    this.authService.getCurrentAuthenticatedUser().subscribe((user: any) => {
+  async ngOnInit() {
+    this.route.paramMap.subscribe((param) => {
+      const path = param.get("path");
+      if ("profile-topbar" === path) {
+        this.menuModel = [];
+        this.menuModel.push(
+          {
+            label: "Job",
+            icon: "fa fa-fw fa-tasks",
+            routerLink: "profile",
+          },
+          {
+            label: "Profile",
+            icon: "fa fa-fw fa-newspaper-o",
+            routerLink: "profile/profile",
+          }
+        );
+        this.router.navigate(["/main/profile"]);
+      }
+    });
+
+    this.authService.getCurrentAuthenticatedUser().subscribe(async (user) => {
       console.log(user);
       const groups =
         user.signInUserSession.accessToken.payload["cognito:groups"];
+      const userName = user.signInUserSession.accessToken.payload["username"];
       if (groups && groups.length) {
         if (groups[0] === "Admin") {
           this.menuModel.push(
@@ -125,7 +149,26 @@ export class AppMainComponent implements OnInit, OnDestroy {
           this.router.navigate(["/main/admin"]);
         }
       } else {
-        this.router.navigate(["/main/product"]);
+        const crews = await this.api.ListCrews({
+          userName: { eq: userName },
+        });
+        if (crews && crews.items.length) {
+          this.router.navigate(["/main/screening"]);
+        } else {
+          this.menuModel.push(
+            {
+              label: "Job",
+              icon: "fa fa-fw fa-tasks",
+              routerLink: "profile",
+            },
+            {
+              label: "Profile",
+              icon: "fa fa-fw fa-newspaper-o",
+              routerLink: "profile/profile",
+            }
+          );
+          this.router.navigate(["/main/profile/profile"]);
+        }
       }
     });
   }

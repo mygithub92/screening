@@ -3,7 +3,7 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "screene465d66c",
+    "resourceNameTruncated": "screend999f7a4",
     "userPoolName": "screening",
     "autoVerifiedAttributes": [
       "email"
@@ -25,17 +25,17 @@
       "Requires Uppercase"
     ],
     "requiredAttributes": [
-      "name",
-      "phone_number"
+      "email",
+      "name"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "screene465d66c_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "screend999f7a4_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "e465d66c",
+    "sharedId": "d999f7a4",
     "resourceName": "screening",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",

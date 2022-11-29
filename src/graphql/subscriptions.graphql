@@ -204,6 +204,8 @@ subscription OnCreateJob($filter: ModelSubscriptionJobFilterInput) {
   onCreateJob(filter: $filter) {
     id
     code
+    startDate
+    endDate
     sceenings {
       items {
         id
@@ -242,6 +244,8 @@ subscription OnUpdateJob($filter: ModelSubscriptionJobFilterInput) {
   onUpdateJob(filter: $filter) {
     id
     code
+    startDate
+    endDate
     sceenings {
       items {
         id
@@ -280,6 +284,8 @@ subscription OnDeleteJob($filter: ModelSubscriptionJobFilterInput) {
   onDeleteJob(filter: $filter) {
     id
     code
+    startDate
+    endDate
     sceenings {
       items {
         id
@@ -507,6 +513,12 @@ subscription OnCreateCrew($filter: ModelSubscriptionCrewFilterInput) {
   onCreateCrew(filter: $filter) {
     id
     userName
+    companyName
+    address
+    phonenumber
+    name
+    email
+    defaultJobId
     sceenings {
       items {
         id
@@ -535,6 +547,12 @@ subscription OnUpdateCrew($filter: ModelSubscriptionCrewFilterInput) {
   onUpdateCrew(filter: $filter) {
     id
     userName
+    companyName
+    address
+    phonenumber
+    name
+    email
+    defaultJobId
     sceenings {
       items {
         id
@@ -563,6 +581,12 @@ subscription OnDeleteCrew($filter: ModelSubscriptionCrewFilterInput) {
   onDeleteCrew(filter: $filter) {
     id
     userName
+    companyName
+    address
+    phonenumber
+    name
+    email
+    defaultJobId
     sceenings {
       items {
         id
@@ -611,6 +635,8 @@ subscription OnCreateSceeningJob(
     job {
       id
       code
+      startDate
+      endDate
       sceenings {
         nextToken
       }
@@ -651,6 +677,8 @@ subscription OnUpdateSceeningJob(
     job {
       id
       code
+      startDate
+      endDate
       sceenings {
         nextToken
       }
@@ -691,6 +719,8 @@ subscription OnDeleteSceeningJob(
     job {
       id
       code
+      startDate
+      endDate
       sceenings {
         nextToken
       }
@@ -731,6 +761,12 @@ subscription OnCreateSceeningCrew(
     crew {
       id
       userName
+      companyName
+      address
+      phonenumber
+      name
+      email
+      defaultJobId
       sceenings {
         nextToken
       }
@@ -768,6 +804,12 @@ subscription OnUpdateSceeningCrew(
     crew {
       id
       userName
+      companyName
+      address
+      phonenumber
+      name
+      email
+      defaultJobId
       sceenings {
         nextToken
       }
@@ -805,6 +847,12 @@ subscription OnDeleteSceeningCrew(
     crew {
       id
       userName
+      companyName
+      address
+      phonenumber
+      name
+      email
+      defaultJobId
       sceenings {
         nextToken
       }
@@ -955,6 +1003,8 @@ subscription OnCreateFormJob($filter: ModelSubscriptionFormJobFilterInput) {
     job {
       id
       code
+      startDate
+      endDate
       sceenings {
         nextToken
       }
@@ -991,6 +1041,8 @@ subscription OnUpdateFormJob($filter: ModelSubscriptionFormJobFilterInput) {
     job {
       id
       code
+      startDate
+      endDate
       sceenings {
         nextToken
       }
@@ -1027,6 +1079,8 @@ subscription OnDeleteFormJob($filter: ModelSubscriptionFormJobFilterInput) {
     job {
       id
       code
+      startDate
+      endDate
       sceenings {
         nextToken
       }
@@ -1051,6 +1105,8 @@ subscription OnCreateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
     job {
       id
       code
+      startDate
+      endDate
       sceenings {
         nextToken
       }
@@ -1066,6 +1122,12 @@ subscription OnCreateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
     crew {
       id
       userName
+      companyName
+      address
+      phonenumber
+      name
+      email
+      defaultJobId
       sceenings {
         nextToken
       }
@@ -1087,6 +1149,8 @@ subscription OnUpdateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
     job {
       id
       code
+      startDate
+      endDate
       sceenings {
         nextToken
       }
@@ -1102,6 +1166,12 @@ subscription OnUpdateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
     crew {
       id
       userName
+      companyName
+      address
+      phonenumber
+      name
+      email
+      defaultJobId
       sceenings {
         nextToken
       }
@@ -1123,6 +1193,8 @@ subscription OnDeleteCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
     job {
       id
       code
+      startDate
+      endDate
       sceenings {
         nextToken
       }
@@ -1138,6 +1210,12 @@ subscription OnDeleteCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
     crew {
       id
       userName
+      companyName
+      address
+      phonenumber
+      name
+      email
+      defaultJobId
       sceenings {
         nextToken
       }
