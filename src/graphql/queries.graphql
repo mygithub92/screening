@@ -7,6 +7,11 @@ query GetSceening($id: ID!) {
     crewId
     crewName
     result
+    staffId
+    staffName
+    processed
+    processedAt
+    submittedAt
     answeredQuestions {
       items {
         id
@@ -19,12 +24,18 @@ query GetSceening($id: ID!) {
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             nextToken
           }
           createdAt
           updatedAt
         }
+        order
         createdAt
         updatedAt
         sceeningAnsweredQuestionsId
@@ -48,6 +59,11 @@ query ListSceenings(
       crewId
       crewName
       result
+      staffId
+      staffName
+      processed
+      processedAt
+      submittedAt
       answeredQuestions {
         items {
           id
@@ -60,9 +76,15 @@ query ListSceenings(
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -87,6 +109,11 @@ query GetAnsweredQuestion($id: ID!) {
       crewId
       crewName
       result
+      staffId
+      staffName
+      processed
+      processedAt
+      submittedAt
       answeredQuestions {
         items {
           id
@@ -99,9 +126,15 @@ query GetAnsweredQuestion($id: ID!) {
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -111,6 +144,7 @@ query GetAnsweredQuestion($id: ID!) {
       createdAt
       updatedAt
     }
+    order
     createdAt
     updatedAt
     sceeningAnsweredQuestionsId
@@ -133,11 +167,17 @@ query ListAnsweredQuestions(
         crewId
         crewName
         result
+        staffId
+        staffName
+        processed
+        processedAt
+        submittedAt
         answeredQuestions {
           items {
             id
             question
             answer
+            order
             createdAt
             updatedAt
             sceeningAnsweredQuestionsId
@@ -147,6 +187,7 @@ query ListAnsweredQuestions(
         createdAt
         updatedAt
       }
+      order
       createdAt
       updatedAt
       sceeningAnsweredQuestionsId

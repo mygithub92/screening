@@ -5,6 +5,11 @@ type Sceening @model @auth(rules: [{ allow: public }]) {
   crewId: String
   crewName: String
   result: String
+  staffId: String
+  staffName: String
+  processed: Boolean
+  processedAt: AWSDateTime
+  submittedAt: AWSDateTime
   answeredQuestions: [AnsweredQuestion] @hasMany
 }
 
@@ -13,6 +18,7 @@ type AnsweredQuestion @model @auth(rules: [{ allow: public }]) {
   question: String
   answer: String
   sceening: Sceening @belongsTo
+  order: Int
 }
 
 type Form @model @auth(rules: [{ allow: public }]) {
@@ -25,8 +31,8 @@ type Form @model @auth(rules: [{ allow: public }]) {
 type Job @model @auth(rules: [{ allow: public }]) {
   id: ID!
   code: String
-  startDate: String
-  endDate: String
+  startDate: AWSDateTime
+  endDate: AWSDateTime
   forms: [Form] @manyToMany(relationName: "FormJob")
   crews: [Crew] @manyToMany(relationName: "CrewJob")
 }

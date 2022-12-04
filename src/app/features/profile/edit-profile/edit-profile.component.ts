@@ -12,6 +12,7 @@ import { APIService } from 'app/API.service';
 export class EditProfileComponent implements OnInit {
   form: FormGroup;
   user;
+  group;
 
   constructor(
     private router: Router,

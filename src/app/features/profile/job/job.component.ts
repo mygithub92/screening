@@ -11,9 +11,12 @@ import { APIService } from 'app/API.service';
 })
 export class JobComponent implements OnInit {
   form: FormGroup;
-  radioValue: string;
   jobs;
   crewId;
+  currentDefaultJobName;
+
+  filteredJobs = [];
+  loading = true;
 
   constructor(
     private router: Router,
@@ -32,14 +35,23 @@ export class JobComponent implements OnInit {
       const userName = user.signInUserSession.accessToken.payload["username"];
       const crew = await this.api.ListCrews({ userName: { eq: userName } });
       this.crewId = crew.items[0].id;
-      const jobs = await this.api.ListCrewJobs({
-        crewId: { eq: this.crewId },
-      });
+      const jobs = await this.api.ListJobs();
       console.log(jobs);
       this.jobs = jobs.items;
-      this.form.patchValue({ jobCode: crew.items[0].defaultJobId });
+      const currentDefaultJobId = crew.items[0].defaultJobId;
+      this.setCurrentProjectName(currentDefaultJobId);
+      this.form.patchValue({ jobCode: currentDefaultJobId });
+      this.loading = false;
     });
-    this.api.ListCrewJobs();
+  }
+
+  private setCurrentProjectName(currentDefaultJobId) {
+    const currentDefaultJob = this.jobs.find(
+      (job) => job.id === currentDefaultJobId
+    );
+    if (currentDefaultJob) {
+      this.currentDefaultJobName = currentDefaultJob.code;
+    }
   }
 
   public isInvalid(controlName: string) {
@@ -50,8 +62,24 @@ export class JobComponent implements OnInit {
     );
   }
 
-  public save() {
+  public async save() {
     const values = this.form.getRawValue();
-    this.api.UpdateCrew({ id: this.crewId, defaultJobId: values.jobCode });
+    const result = await this.api.UpdateCrew({
+      id: this.crewId,
+      defaultJobId: values.jobCode.id,
+    });
+    this.setCurrentProjectName(values.jobCode.id);
+    console.log(result);
+  }
+
+  public filterJob(event) {
+    this.filteredJobs = [];
+    const query = event.query;
+    for (const item of this.jobs) {
+      const job = item;
+      if (job.code.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+        this.filteredJobs.push(job);
+      }
+    }
   }
 }

@@ -6,16 +6,21 @@ import { PipesModule } from 'app/@shared/pipes';
 import { NgPrimeModule } from 'app/app.ngprime.module';
 
 import { ScreeningFormComponent } from './screening-form/screening-form.component';
+import { ScreeningResultComponent } from './screening-result/screening-result.component';
 
 const routes: Routes = [
   {
     path: "",
     component: ScreeningFormComponent,
   },
+  {
+    path: "result",
+    component: ScreeningResultComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [ScreeningFormComponent],
+  declarations: [ScreeningFormComponent, ScreeningResultComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

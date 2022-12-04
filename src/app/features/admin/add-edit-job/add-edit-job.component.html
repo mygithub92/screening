@@ -1,87 +1,94 @@
 <p-blockUI [blocked]="loading" [target]="dt"
   ><p class="center-spinner"></p
 ></p-blockUI>
-<p-panel header="Add Job" #dt>
+<p-panel header="Add Job" #d class="screening-panel">
   <ng-container *ngIf="!loading">
-    <div [formGroup]="form">
-      <div class="ui-g">
-        <div class="ui-g-12">
-          <label for="job-code" class="account-label">Job Code</label>
-        </div>
-        <div class="ui-g-12">
-          <input
-            type="text"
-            pInputText
-            formControlName="code"
-            id="job-code"
-            placeholder="job Code"
-          />
-          <p-message
-            severity="error"
-            text="Field is required"
-            *ngIf="isInvalid('code')"
-          ></p-message>
-        </div>
-      </div>
-      <div class="ui-g">
-        <div class="ui-g-12">
-          <label for="job-form" class="account-label">Form</label>
-        </div>
-        <div class="ui-g-12">
-          <p-dropdown
-            [options]="questionForms"
-            formControlName="questionForm"
-          ></p-dropdown>
-          <p-message
-            severity="error"
-            text="Field is required"
-            *ngIf="isInvalid('questionForm')"
-          ></p-message>
-        </div>
-      </div>
-      <div class="ui-g">
-        <div class="ui-g-12">
-          <label for="job-form" class="account-label">Crew</label>
-        </div>
-        <div class="ui-g-12">
-          <p-treeTable
-            [value]="crews"
-            [columns]="cols"
-            selectionMode="checkbox"
-            [(selection)]="selectedCrew"
-          >
-            <ng-template pTemplate="header">
-              <tr>
-                <th>Name</th>
-                <th>Phone number</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Compnay name</th>
-              </tr>
-            </ng-template>
-            <ng-template
-              pTemplate="body"
-              let-rowNode
-              let-rowData="rowData"
-              let-columns="columns"
-            >
-              <tr>
-                <td *ngFor="let col of columns; let i = index">
-                  <p-treeTableCheckbox
-                    [value]="rowNode"
-                    *ngIf="i == 0"
-                  ></p-treeTableCheckbox>
-                  {{ rowData[col.field] }}
-                </td>
-              </tr>
-            </ng-template>
-          </p-treeTable>
-        </div>
-      </div>
-    </div>
     <div class="card card-w-title">
-      <p-toolbar>
-        <div class="ui-toolbar-group-left">
+      <div [formGroup]="form">
+        <div class="ui-g form-group ui-fluid">
+          <div class="ui-g-6">
+            <div class="ui-g">
+              <div class="ui-g-12">
+                <label for="job-code" class="account-label">Project Name</label>
+              </div>
+              <div class="ui-g-12">
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="code"
+                  id="job-code"
+                  placeholder="Project Name"
+                />
+                <p-message
+                  severity="error"
+                  text="Field is required"
+                  *ngIf="isInvalid('code')"
+                ></p-message>
+              </div>
+            </div>
+            <div class="ui-g">
+              <div class="ui-g-12">
+                <label for="job-form" class="account-label">Form</label>
+              </div>
+              <div class="ui-g-12">
+                <p-dropdown
+                  [options]="questionForms"
+                  formControlName="questionForm"
+                ></p-dropdown>
+                <p-message
+                  severity="error"
+                  text="Field is required"
+                  *ngIf="isInvalid('questionForm')"
+                ></p-message>
+              </div>
+            </div>
+          </div>
+          <div class="ui-g-6">
+            <div class="ui-g">
+              <div class="ui-g-12">
+                <label for="startDate" class="account-label">Start Date</label>
+              </div>
+              <div class="ui-g-12">
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="startDate"
+                  id="startDate"
+                  placeholder="Start Date"
+                />
+                <p-message
+                  severity="error"
+                  text="Field is required"
+                  *ngIf="isInvalid('startDate')"
+                ></p-message>
+              </div>
+            </div>
+            <div class="ui-g">
+              <div class="ui-g-12">
+                <label for="endDate" class="account-label">End Date</label>
+              </div>
+              <div class="ui-g-12">
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="endDate"
+                  id="endDate"
+                  placeholder="End Date"
+                />
+                <p-message
+                  severity="error"
+                  text="Field is required"
+                  *ngIf="isInvalid('questionForm')"
+                ></p-message>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-g"></div>
+      </div>
+      <div class="ui-g form-group">
+        <div class="ui-g-12">
           <button
             pButton
             type="button"
@@ -89,16 +96,8 @@
             icon="fa fa-save"
             (click)="save()"
           ></button>
-          <button
-            pButton
-            type="button"
-            label="Cancel"
-            class="success-btn"
-            icon="fa fa-cross"
-            (click)="cancel()"
-          ></button>
         </div>
-      </p-toolbar>
+      </div>
     </div>
   </ng-container>
 </p-panel>

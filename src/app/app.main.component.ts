@@ -89,6 +89,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.route.paramMap.subscribe((param) => {
       const path = param.get("path");
+      let nav = [];
       if ("profile-topbar" === path) {
         this.menuModel = [];
         this.menuModel.push(
@@ -103,16 +104,19 @@ export class AppMainComponent implements OnInit, OnDestroy {
             routerLink: "profile/profile",
           }
         );
-        this.router.navigate(["/main/profile"]);
+        nav = ["/main/profile"];
       }
       if ("screening-topbar" === path) {
         this.menuModel = [];
-        this.router.navigate(["/main/screening"]);
+        nav = ["/main/screening"];
       }
+      this.router.navigate(nav);
     });
 
     this.authService.getCurrentAuthenticatedUser().subscribe(async (user) => {
       console.log(user);
+      let nav = [];
+
       const groups =
         user.signInUserSession.accessToken.payload["cognito:groups"];
       const userName = user.signInUserSession.accessToken.payload["username"];
@@ -128,52 +132,58 @@ export class AppMainComponent implements OnInit, OnDestroy {
               label: "Forms",
               icon: "fa fa-fw fa-newspaper-o",
               routerLink: "admin/forms",
-            },
-            {
-              label: "Crew",
-              icon: "fa fa-fw fa-users",
-              routerLink: "admin/crew",
             }
           );
-          this.router.navigate(["/main/admin"]);
+          nav = ["/main/admin"];
         }
-        if (groups[0] === "Stuff") {
+        if (groups[0] === "Staff") {
           this.menuModel.push(
             {
               label: "Screenings",
               icon: "fa fa-fw fa-home",
-              routerLink: "product/product-list",
+              routerLink: "staff",
+            },
+            {
+              label: "Report",
+              icon: "fa fa-fw fa-home",
+              routerLink: "staff/report",
             },
             {
               label: "Crew",
               icon: "fa fa-fw fa-home",
-              routerLink: "product/product-list",
+              routerLink: "staff/crew",
             }
           );
-          this.router.navigate(["/main/admin"]);
+          nav = ["/main/staff"];
         }
       } else {
         const crews = await this.api.ListCrews({
           userName: { eq: userName },
         });
+        this.menuModel.push(
+          {
+            label: "Screening",
+            icon: "fa fa-fw fa-tasks",
+            routerLink: "screening",
+          },
+          {
+            label: "Default Project",
+            icon: "fa fa-fw fa-tasks",
+            routerLink: "profile",
+          },
+          {
+            label: "Profile",
+            icon: "fa fa-fw fa-newspaper-o",
+            routerLink: "profile/profile",
+          }
+        );
         if (crews && crews.items.length) {
-          this.router.navigate(["/main/screening"]);
+          nav = ["/main/screening"];
         } else {
-          this.menuModel.push(
-            {
-              label: "Project",
-              icon: "fa fa-fw fa-tasks",
-              routerLink: "profile",
-            },
-            {
-              label: "Profile",
-              icon: "fa fa-fw fa-newspaper-o",
-              routerLink: "profile/profile",
-            }
-          );
-          this.router.navigate(["/main/profile/profile"]);
+          nav = ["/main/profile/profile"];
         }
       }
+      this.router.navigate(nav);
     });
   }
 

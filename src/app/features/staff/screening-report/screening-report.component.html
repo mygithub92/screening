@@ -1,0 +1,123 @@
+<p-blockUI [blocked]="loading" [target]="dt"
+  ><p class="center-spinner"></p
+></p-blockUI>
+<p-panel header="Report" #dt class="screening-panel">
+  <ng-container *ngIf="!loading">
+    <div class="card card-w-title">
+      <h4>Search on processed date</h4>
+      <div class="ui-g ui-fluid" [formGroup]="form">
+        <div class="ui-g-12 ui-lg-4">
+          <div class="ui-g form-group">
+            <label class="ui-g-12" for="startDate">Start Date</label>
+            <div class="ui-g-12">
+              <input
+                type="text"
+                id="startDate"
+                pInputText
+                formControlName="startDate"
+                placeholder="Start Date"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-lg-4">
+          <div class="ui-g form-group">
+            <label class="ui-g-12" for="endDate">End Date</label>
+            <div class="ui-g-12">
+              <input
+                type="text"
+                id="endDate"
+                pInputText
+                formControlName="endDate"
+                placeholder="End Date"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-lg-2">
+          <div class="ui-g form-group">
+            <label class="ui-g-12">&nbsp;</label>
+            <div class="ui-g-12">
+              <button
+                pButton
+                type="button"
+                label="Fetch"
+                icon="fa fa-save"
+                (click)="fetch()"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-w-title">
+      <p-table [columns]="cols" #dt [value]="screenings" dataKey="id">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th style="width: 3em;"></th>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+              {{ col.header }}
+              <p-sortIcon
+                [field]="col.field"
+                ariaLabel="Activate to sort"
+                ariaLabelDesc="Activate to sort in descending order"
+                ariaLabelAsc="Activate to sort in ascending order"
+              ></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template
+          pTemplate="body"
+          let-rowData
+          let-expanded="expanded"
+          let-columns="columns"
+          let-rowIndex="rowIndex"
+        >
+          <tr>
+            <td>
+              <a href="#" [pRowToggler]="rowData">
+                <i
+                  [ngClass]="
+                    expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
+                  "
+                ></i>
+              </a>
+            </td>
+            <td *ngFor="let col of columns">
+              {{ rowData[col.field] }}
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+          <tr>
+            <td [attr.colspan]="columns.length + 1">
+              <p-table
+                [columns]="subCols"
+                [value]="rowData['answeredQuestions']['items']"
+                dataKey="id"
+              >
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th>
+                      Answer
+                    </th>
+                    <th width="90%">
+                      Question
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr>
+                    <td *ngFor="let col of columns">
+                      {{ rowData[col.field] }}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </ng-container>
+</p-panel>

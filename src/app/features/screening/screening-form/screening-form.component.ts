@@ -1,5 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'app/@core/services/auth.service';
 import { APIService } from 'app/API.service';
 
@@ -19,9 +21,12 @@ export class ScreeningFormComponent implements OnInit {
   totalNumberQuestion = 0;
   crew;
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private api: APIService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private datePipe: DatePipe
   ) {
     this.form = this.fb.group({
       selectedJob: [null, Validators.required],
@@ -119,6 +124,7 @@ export class ScreeningFormComponent implements OnInit {
   public async submit() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
+      this.loading = true;
       const rawValue = this.form.getRawValue();
       console.log(rawValue);
       let noAnswer = true;
@@ -128,6 +134,7 @@ export class ScreeningFormComponent implements OnInit {
         jobName: this.findJobName(rawValue.selectedJob),
         crewId: this.crew.id,
         crewName: this.crew.name,
+        submittedAt: new Date().toISOString(),
       });
       this.totalQuestions.forEach((question, i) => {
         const questionIndex = `question${i + 1}`;
@@ -149,12 +156,14 @@ export class ScreeningFormComponent implements OnInit {
             sceeningAnsweredQuestionsId: sceeningObj.id,
             question: answeredQuestion.question,
             answer: answeredQuestion.answer,
+            order: question.order,
           })
         );
       });
 
       const result = await Promise.all(answeredQuestionArray);
       console.log(result);
+      this.router.navigate(["result"], { relativeTo: this.route });
     }
   }
 

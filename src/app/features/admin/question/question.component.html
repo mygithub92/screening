@@ -1,7 +1,7 @@
 <p-blockUI [blocked]="loading" [target]="dt"
   ><p class="center-spinner"></p
 ></p-blockUI>
-<p-panel header="Questions" #dt>
+<p-panel header="Questions" #dt class="screening-panel">
   <p-table [columns]="cols" [value]="questions" dataKey="title">
     <ng-template pTemplate="header" let-columns>
       <tr>
