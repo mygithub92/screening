@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { BlockUIModule } from 'primeng/blockui';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
@@ -8,6 +9,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { FieldsetModule } from 'primeng/fieldset';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MegaMenuModule } from 'primeng/megamenu';
@@ -54,6 +56,8 @@ import { TreeTableModule } from 'primeng/treetable';
     TabViewModule,
     ToolbarModule,
     TreeTableModule,
+    FieldsetModule,
+    AutoCompleteModule,
   ],
 })
 export class NgPrimeModule {}

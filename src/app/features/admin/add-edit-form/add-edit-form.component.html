@@ -1,66 +1,78 @@
 <p-blockUI [blocked]="loading" [target]="dt"
   ><p class="center-spinner"></p
 ></p-blockUI>
-<p-panel header="Add Form" #dt>
+<p-panel header="Add Form" #dt class="screening-panel">
   <ng-container *ngIf="!loading">
-    <div [formGroup]="form">
-      <div class="ui-g">
-        <div class="ui-g-12">
-          <label for="form-name" class="account-label">Form Name</label>
-        </div>
-        <div class="ui-g-12">
-          <input
-            type="text"
-            pInputText
-            formControlName="name"
-            id="form-name"
-            placeholder="Form Name"
-          />
-          <p-message
-            severity="error"
-            text="Field is required"
-            *ngIf="isInvalid('name')"
-          ></p-message>
-        </div>
-      </div>
-
-      <ng-container formArrayName="questions">
-        <h2>Questions</h2>
-        <ng-container
-          *ngFor="let questionForm of questions.controls; let i = index"
-        >
-          <div [formGroup]="questionForm">
+    <div class="card card-w-title">
+      <div [formGroup]="form">
+        <div class="ui-g form-group ui-fluid">
+          <div class="ui-g-12">
             <div class="ui-g">
-              <div class="ui-g-12">
+              <div class="ui-g-6">
+                <label for="form-name" class="account-label">Form Name</label>
+              </div>
+            </div>
+            <div class="ui-g">
+              <div class="ui-g-6">
                 <input
                   type="text"
                   pInputText
-                  formControlName="title"
-                  id="title"
-                  placeholder="Title"
+                  formControlName="name"
+                  id="form-name"
+                  placeholder="Form Name"
                 />
-                <p-button
-                  icon="fa fa-trash"
-                  iconPos="left"
-                  (click)="deleteQuestion(i)"
-                ></p-button>
+                <p-message
+                  severity="error"
+                  text="Field is required"
+                  *ngIf="isInvalid('name')"
+                ></p-message>
               </div>
             </div>
+            <ng-container formArrayName="questions">
+              <label>Questions</label>
+              <ng-container
+                *ngFor="let questionForm of questions.controls; let i = index"
+              >
+                <div [formGroup]="questionForm">
+                  <div class="ui-g">
+                    <div class="ui-g-11">
+                      <input
+                        type="text"
+                        pInputText
+                        formControlName="title"
+                        id="title"
+                        placeholder="Title"
+                      />
+                    </div>
+                    <div class="ui-g-1">
+                      <p-button
+                        icon="fa fa-trash"
+                        iconPos="left"
+                        (click)="deleteQuestion(i)"
+                      ></p-button>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
           </div>
-        </ng-container>
-      </ng-container>
-
-      <button
-        pButton
-        type="button"
-        label="Add Question"
-        (click)="add()"
-        icon="fa fa-plus"
-      ></button>
+        </div>
+        <div class="ui-g form-group">
+          <div class="ui-g-2">
+            <button
+              pButton
+              type="button"
+              label="Add Question"
+              (click)="add()"
+              icon="fa fa-plus"
+            ></button>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="card card-w-title">
-      <p-toolbar>
-        <div class="ui-toolbar-group-left">
+      <div class="ui-g">
+        <div class="ui-g-2">
           <button
             pButton
             type="button"
@@ -68,16 +80,8 @@
             icon="fa fa-save"
             (click)="save()"
           ></button>
-          <button
-            pButton
-            type="button"
-            label="Cancel"
-            class="success-btn"
-            icon="fa fa-cross"
-            (click)="cancel()"
-          ></button>
         </div>
-      </p-toolbar>
+      </div>
     </div>
   </ng-container>
 </p-panel>

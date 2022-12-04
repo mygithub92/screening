@@ -5,31 +5,46 @@
   <ng-container *ngIf="!loading">
     <div [formGroup]="form">
       <div class="card card-w-title">
-        <h1>Please select the default job</h1>
         <div class="ui-g">
-          <div class="ui-g-12 ui-md-4" *ngFor="let job of jobs">
-            <p-radioButton
-              name="rg"
-              [value]="job.job.id"
-              [label]="job.job.code"
-              formControlName="jobCode"
-            ></p-radioButton>
+          <div class="ui-g-12">
+            <div class="ui-g">
+              <div class="ui-g-2">
+                <label>Current default project name: </label>
+              </div>
+              <div class="ui-g-6">
+                <label>{{ currentDefaultJobName }}</label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="card card-w-title">
-      <p-toolbar>
-        <div class="ui-toolbar-group-left">
-          <button
-            pButton
-            type="button"
-            label="Save"
-            icon="fa fa-save"
-            (click)="save()"
-          ></button>
+      <div class="card card-w-title">
+        <div class="ui-g">
+          <div class="ui-g-12">
+            <h1>Please select a project as default</h1>
+            <p-autoComplete
+              id="acSimple"
+              formControlName="jobCode"
+              [suggestions]="filteredJobs"
+              (completeMethod)="filterJob($event)"
+              field="code"
+              [size]="30"
+              placeholder="Projects"
+              forceSelection="true"
+              [minLength]="1"
+            ></p-autoComplete>
+          </div>
+          <div class="ui-g-12">
+            <button
+              pButton
+              type="button"
+              label="Save"
+              icon="fa fa-save"
+              (click)="save()"
+            ></button>
+          </div>
         </div>
-      </p-toolbar>
+      </div>
     </div>
   </ng-container>
 </p-panel>

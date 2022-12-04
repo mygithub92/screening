@@ -60,20 +60,10 @@ import { AppMainComponent } from './app.main.component';
                 src="assets/layout/images/avatar.png"
               />
               <span class="topbar-item-name">{{ user?.attributes?.name }}</span>
-              <span class="topbar-item-role">Marketing</span>
+              <span class="topbar-item-role">{{ role }}</span>
             </a>
 
             <ul class="layout-menu fadeInDown">
-              <li role="menuitem">
-                <a (click)="onScreeningClick()">
-                  <i class="fa fa-fw fa-user"></i>
-                  <span>Screening</span>
-                </a>
-                <a (click)="onProfileClick()">
-                  <i class="fa fa-fw fa-user"></i>
-                  <span>Settings</span>
-                </a>
-              </li>
               <li role="menuitem">
                 <a (click)="onLogout()">
                   <i class="fa fa-fw fa-sign-out"></i>
@@ -91,6 +81,7 @@ export class AppTopBarComponent implements OnInit {
   @Input()
   showMenuButton = true;
   user: any;
+  role;
 
   constructor(
     public app: AppMainComponent,
@@ -104,6 +95,13 @@ export class AppTopBarComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getCurrentAuthenticatedUser().subscribe((user: any) => {
       this.user = user;
+      const groups =
+        user.signInUserSession.accessToken.payload["cognito:groups"];
+      if (groups) {
+        this.role = groups[0];
+      } else {
+        this.role = "Crew";
+      }
     });
   }
 

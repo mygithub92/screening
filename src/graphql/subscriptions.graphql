@@ -7,6 +7,11 @@ subscription OnCreateSceening($filter: ModelSubscriptionSceeningFilterInput) {
     crewId
     crewName
     result
+    staffId
+    staffName
+    processed
+    processedAt
+    submittedAt
     answeredQuestions {
       items {
         id
@@ -19,12 +24,18 @@ subscription OnCreateSceening($filter: ModelSubscriptionSceeningFilterInput) {
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             nextToken
           }
           createdAt
           updatedAt
         }
+        order
         createdAt
         updatedAt
         sceeningAnsweredQuestionsId
@@ -43,6 +54,11 @@ subscription OnUpdateSceening($filter: ModelSubscriptionSceeningFilterInput) {
     crewId
     crewName
     result
+    staffId
+    staffName
+    processed
+    processedAt
+    submittedAt
     answeredQuestions {
       items {
         id
@@ -55,12 +71,18 @@ subscription OnUpdateSceening($filter: ModelSubscriptionSceeningFilterInput) {
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             nextToken
           }
           createdAt
           updatedAt
         }
+        order
         createdAt
         updatedAt
         sceeningAnsweredQuestionsId
@@ -79,6 +101,11 @@ subscription OnDeleteSceening($filter: ModelSubscriptionSceeningFilterInput) {
     crewId
     crewName
     result
+    staffId
+    staffName
+    processed
+    processedAt
+    submittedAt
     answeredQuestions {
       items {
         id
@@ -91,12 +118,18 @@ subscription OnDeleteSceening($filter: ModelSubscriptionSceeningFilterInput) {
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             nextToken
           }
           createdAt
           updatedAt
         }
+        order
         createdAt
         updatedAt
         sceeningAnsweredQuestionsId
@@ -121,6 +154,11 @@ subscription OnCreateAnsweredQuestion(
       crewId
       crewName
       result
+      staffId
+      staffName
+      processed
+      processedAt
+      submittedAt
       answeredQuestions {
         items {
           id
@@ -133,9 +171,15 @@ subscription OnCreateAnsweredQuestion(
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -145,6 +189,7 @@ subscription OnCreateAnsweredQuestion(
       createdAt
       updatedAt
     }
+    order
     createdAt
     updatedAt
     sceeningAnsweredQuestionsId
@@ -164,6 +209,11 @@ subscription OnUpdateAnsweredQuestion(
       crewId
       crewName
       result
+      staffId
+      staffName
+      processed
+      processedAt
+      submittedAt
       answeredQuestions {
         items {
           id
@@ -176,9 +226,15 @@ subscription OnUpdateAnsweredQuestion(
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -188,6 +244,7 @@ subscription OnUpdateAnsweredQuestion(
       createdAt
       updatedAt
     }
+    order
     createdAt
     updatedAt
     sceeningAnsweredQuestionsId
@@ -207,6 +264,11 @@ subscription OnDeleteAnsweredQuestion(
       crewId
       crewName
       result
+      staffId
+      staffName
+      processed
+      processedAt
+      submittedAt
       answeredQuestions {
         items {
           id
@@ -219,9 +281,15 @@ subscription OnDeleteAnsweredQuestion(
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -231,6 +299,7 @@ subscription OnDeleteAnsweredQuestion(
       createdAt
       updatedAt
     }
+    order
     createdAt
     updatedAt
     sceeningAnsweredQuestionsId

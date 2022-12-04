@@ -10,6 +10,11 @@ mutation CreateSceening(
     crewId
     crewName
     result
+    staffId
+    staffName
+    processed
+    processedAt
+    submittedAt
     answeredQuestions {
       items {
         id
@@ -22,12 +27,18 @@ mutation CreateSceening(
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             nextToken
           }
           createdAt
           updatedAt
         }
+        order
         createdAt
         updatedAt
         sceeningAnsweredQuestionsId
@@ -49,6 +60,11 @@ mutation UpdateSceening(
     crewId
     crewName
     result
+    staffId
+    staffName
+    processed
+    processedAt
+    submittedAt
     answeredQuestions {
       items {
         id
@@ -61,12 +77,18 @@ mutation UpdateSceening(
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             nextToken
           }
           createdAt
           updatedAt
         }
+        order
         createdAt
         updatedAt
         sceeningAnsweredQuestionsId
@@ -88,6 +110,11 @@ mutation DeleteSceening(
     crewId
     crewName
     result
+    staffId
+    staffName
+    processed
+    processedAt
+    submittedAt
     answeredQuestions {
       items {
         id
@@ -100,12 +127,18 @@ mutation DeleteSceening(
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             nextToken
           }
           createdAt
           updatedAt
         }
+        order
         createdAt
         updatedAt
         sceeningAnsweredQuestionsId
@@ -131,6 +164,11 @@ mutation CreateAnsweredQuestion(
       crewId
       crewName
       result
+      staffId
+      staffName
+      processed
+      processedAt
+      submittedAt
       answeredQuestions {
         items {
           id
@@ -143,9 +181,15 @@ mutation CreateAnsweredQuestion(
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -155,6 +199,7 @@ mutation CreateAnsweredQuestion(
       createdAt
       updatedAt
     }
+    order
     createdAt
     updatedAt
     sceeningAnsweredQuestionsId
@@ -175,6 +220,11 @@ mutation UpdateAnsweredQuestion(
       crewId
       crewName
       result
+      staffId
+      staffName
+      processed
+      processedAt
+      submittedAt
       answeredQuestions {
         items {
           id
@@ -187,9 +237,15 @@ mutation UpdateAnsweredQuestion(
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -199,6 +255,7 @@ mutation UpdateAnsweredQuestion(
       createdAt
       updatedAt
     }
+    order
     createdAt
     updatedAt
     sceeningAnsweredQuestionsId
@@ -219,6 +276,11 @@ mutation DeleteAnsweredQuestion(
       crewId
       crewName
       result
+      staffId
+      staffName
+      processed
+      processedAt
+      submittedAt
       answeredQuestions {
         items {
           id
@@ -231,9 +293,15 @@ mutation DeleteAnsweredQuestion(
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -243,6 +311,7 @@ mutation DeleteAnsweredQuestion(
       createdAt
       updatedAt
     }
+    order
     createdAt
     updatedAt
     sceeningAnsweredQuestionsId

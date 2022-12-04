@@ -59,3 +59,7 @@ body .ui-table .ui-table-caption,
 body .ui-table .ui-table-summary {
   height: 54px;
 }
+
+body .screening-panel>.ui-widget-content {
+  background-color: inherit;
+}

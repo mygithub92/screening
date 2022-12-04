@@ -49,6 +49,11 @@ export type CreateSceeningInput = {
   crewId?: string | null;
   crewName?: string | null;
   result?: string | null;
+  staffId?: string | null;
+  staffName?: string | null;
+  processed?: boolean | null;
+  processedAt?: string | null;
+  submittedAt?: string | null;
 };
 
 export type ModelSceeningConditionInput = {
@@ -57,6 +62,11 @@ export type ModelSceeningConditionInput = {
   crewId?: ModelStringInput | null;
   crewName?: ModelStringInput | null;
   result?: ModelStringInput | null;
+  staffId?: ModelStringInput | null;
+  staffName?: ModelStringInput | null;
+  processed?: ModelBooleanInput | null;
+  processedAt?: ModelStringInput | null;
+  submittedAt?: ModelStringInput | null;
   and?: Array<ModelSceeningConditionInput | null> | null;
   or?: Array<ModelSceeningConditionInput | null> | null;
   not?: ModelSceeningConditionInput | null;
@@ -101,6 +111,13 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null;
+  eq?: boolean | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+};
+
 export type Sceening = {
   __typename: "Sceening";
   id: string;
@@ -109,6 +126,11 @@ export type Sceening = {
   crewId?: string | null;
   crewName?: string | null;
   result?: string | null;
+  staffId?: string | null;
+  staffName?: string | null;
+  processed?: boolean | null;
+  processedAt?: string | null;
+  submittedAt?: string | null;
   answeredQuestions?: ModelAnsweredQuestionConnection | null;
   createdAt: string;
   updatedAt: string;
@@ -126,6 +148,7 @@ export type AnsweredQuestion = {
   question?: string | null;
   answer?: string | null;
   sceening?: Sceening | null;
+  order?: number | null;
   createdAt: string;
   updatedAt: string;
   sceeningAnsweredQuestionsId?: string | null;
@@ -138,6 +161,11 @@ export type UpdateSceeningInput = {
   crewId?: string | null;
   crewName?: string | null;
   result?: string | null;
+  staffId?: string | null;
+  staffName?: string | null;
+  processed?: boolean | null;
+  processedAt?: string | null;
+  submittedAt?: string | null;
 };
 
 export type DeleteSceeningInput = {
@@ -148,16 +176,30 @@ export type CreateAnsweredQuestionInput = {
   id?: string | null;
   question?: string | null;
   answer?: string | null;
+  order?: number | null;
   sceeningAnsweredQuestionsId?: string | null;
 };
 
 export type ModelAnsweredQuestionConditionInput = {
   question?: ModelStringInput | null;
   answer?: ModelStringInput | null;
+  order?: ModelIntInput | null;
   and?: Array<ModelAnsweredQuestionConditionInput | null> | null;
   or?: Array<ModelAnsweredQuestionConditionInput | null> | null;
   not?: ModelAnsweredQuestionConditionInput | null;
   sceeningAnsweredQuestionsId?: ModelIDInput | null;
+};
+
+export type ModelIntInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
 };
 
 export type ModelIDInput = {
@@ -180,6 +222,7 @@ export type UpdateAnsweredQuestionInput = {
   id: string;
   question?: string | null;
   answer?: string | null;
+  order?: number | null;
   sceeningAnsweredQuestionsId?: string | null;
 };
 
@@ -372,25 +415,6 @@ export type ModelQuestionConditionInput = {
   formQuestionsId?: ModelIDInput | null;
 };
 
-export type ModelIntInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-};
-
-export type ModelBooleanInput = {
-  ne?: boolean | null;
-  eq?: boolean | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-};
-
 export type UpdateQuestionInput = {
   id: string;
   title?: string | null;
@@ -551,6 +575,11 @@ export type ModelSceeningFilterInput = {
   crewId?: ModelStringInput | null;
   crewName?: ModelStringInput | null;
   result?: ModelStringInput | null;
+  staffId?: ModelStringInput | null;
+  staffName?: ModelStringInput | null;
+  processed?: ModelBooleanInput | null;
+  processedAt?: ModelStringInput | null;
+  submittedAt?: ModelStringInput | null;
   and?: Array<ModelSceeningFilterInput | null> | null;
   or?: Array<ModelSceeningFilterInput | null> | null;
   not?: ModelSceeningFilterInput | null;
@@ -566,6 +595,7 @@ export type ModelAnsweredQuestionFilterInput = {
   id?: ModelIDInput | null;
   question?: ModelStringInput | null;
   answer?: ModelStringInput | null;
+  order?: ModelIntInput | null;
   and?: Array<ModelAnsweredQuestionFilterInput | null> | null;
   or?: Array<ModelAnsweredQuestionFilterInput | null> | null;
   not?: ModelAnsweredQuestionFilterInput | null;
@@ -689,6 +719,11 @@ export type ModelSubscriptionSceeningFilterInput = {
   crewId?: ModelSubscriptionStringInput | null;
   crewName?: ModelSubscriptionStringInput | null;
   result?: ModelSubscriptionStringInput | null;
+  staffId?: ModelSubscriptionStringInput | null;
+  staffName?: ModelSubscriptionStringInput | null;
+  processed?: ModelSubscriptionBooleanInput | null;
+  processedAt?: ModelSubscriptionStringInput | null;
+  submittedAt?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionSceeningFilterInput | null> | null;
   or?: Array<ModelSubscriptionSceeningFilterInput | null> | null;
 };
@@ -723,12 +758,30 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array<string | null> | null;
 };
 
+export type ModelSubscriptionBooleanInput = {
+  ne?: boolean | null;
+  eq?: boolean | null;
+};
+
 export type ModelSubscriptionAnsweredQuestionFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   question?: ModelSubscriptionStringInput | null;
   answer?: ModelSubscriptionStringInput | null;
+  order?: ModelSubscriptionIntInput | null;
   and?: Array<ModelSubscriptionAnsweredQuestionFilterInput | null> | null;
   or?: Array<ModelSubscriptionAnsweredQuestionFilterInput | null> | null;
+};
+
+export type ModelSubscriptionIntInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+  in?: Array<number | null> | null;
+  notIn?: Array<number | null> | null;
 };
 
 export type ModelSubscriptionFormFilterInput = {
@@ -754,23 +807,6 @@ export type ModelSubscriptionQuestionFilterInput = {
   optionOrderDesc?: ModelSubscriptionBooleanInput | null;
   and?: Array<ModelSubscriptionQuestionFilterInput | null> | null;
   or?: Array<ModelSubscriptionQuestionFilterInput | null> | null;
-};
-
-export type ModelSubscriptionIntInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-  in?: Array<number | null> | null;
-  notIn?: Array<number | null> | null;
-};
-
-export type ModelSubscriptionBooleanInput = {
-  ne?: boolean | null;
-  eq?: boolean | null;
 };
 
 export type ModelSubscriptionOptionFilterInput = {
@@ -828,6 +864,11 @@ export type CreateSceeningMutation = {
   crewId?: string | null;
   crewName?: string | null;
   result?: string | null;
+  staffId?: string | null;
+  staffName?: string | null;
+  processed?: boolean | null;
+  processedAt?: string | null;
+  submittedAt?: string | null;
   answeredQuestions?: {
     __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
@@ -843,6 +884,11 @@ export type CreateSceeningMutation = {
         crewId?: string | null;
         crewName?: string | null;
         result?: string | null;
+        staffId?: string | null;
+        staffName?: string | null;
+        processed?: boolean | null;
+        processedAt?: string | null;
+        submittedAt?: string | null;
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
@@ -850,6 +896,7 @@ export type CreateSceeningMutation = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      order?: number | null;
       createdAt: string;
       updatedAt: string;
       sceeningAnsweredQuestionsId?: string | null;
@@ -868,6 +915,11 @@ export type UpdateSceeningMutation = {
   crewId?: string | null;
   crewName?: string | null;
   result?: string | null;
+  staffId?: string | null;
+  staffName?: string | null;
+  processed?: boolean | null;
+  processedAt?: string | null;
+  submittedAt?: string | null;
   answeredQuestions?: {
     __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
@@ -883,6 +935,11 @@ export type UpdateSceeningMutation = {
         crewId?: string | null;
         crewName?: string | null;
         result?: string | null;
+        staffId?: string | null;
+        staffName?: string | null;
+        processed?: boolean | null;
+        processedAt?: string | null;
+        submittedAt?: string | null;
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
@@ -890,6 +947,7 @@ export type UpdateSceeningMutation = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      order?: number | null;
       createdAt: string;
       updatedAt: string;
       sceeningAnsweredQuestionsId?: string | null;
@@ -908,6 +966,11 @@ export type DeleteSceeningMutation = {
   crewId?: string | null;
   crewName?: string | null;
   result?: string | null;
+  staffId?: string | null;
+  staffName?: string | null;
+  processed?: boolean | null;
+  processedAt?: string | null;
+  submittedAt?: string | null;
   answeredQuestions?: {
     __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
@@ -923,6 +986,11 @@ export type DeleteSceeningMutation = {
         crewId?: string | null;
         crewName?: string | null;
         result?: string | null;
+        staffId?: string | null;
+        staffName?: string | null;
+        processed?: boolean | null;
+        processedAt?: string | null;
+        submittedAt?: string | null;
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
@@ -930,6 +998,7 @@ export type DeleteSceeningMutation = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      order?: number | null;
       createdAt: string;
       updatedAt: string;
       sceeningAnsweredQuestionsId?: string | null;
@@ -953,6 +1022,11 @@ export type CreateAnsweredQuestionMutation = {
     crewId?: string | null;
     crewName?: string | null;
     result?: string | null;
+    staffId?: string | null;
+    staffName?: string | null;
+    processed?: boolean | null;
+    processedAt?: string | null;
+    submittedAt?: string | null;
     answeredQuestions?: {
       __typename: "ModelAnsweredQuestionConnection";
       items: Array<{
@@ -968,9 +1042,15 @@ export type CreateAnsweredQuestionMutation = {
           crewId?: string | null;
           crewName?: string | null;
           result?: string | null;
+          staffId?: string | null;
+          staffName?: string | null;
+          processed?: boolean | null;
+          processedAt?: string | null;
+          submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
         } | null;
+        order?: number | null;
         createdAt: string;
         updatedAt: string;
         sceeningAnsweredQuestionsId?: string | null;
@@ -980,6 +1060,7 @@ export type CreateAnsweredQuestionMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  order?: number | null;
   createdAt: string;
   updatedAt: string;
   sceeningAnsweredQuestionsId?: string | null;
@@ -998,6 +1079,11 @@ export type UpdateAnsweredQuestionMutation = {
     crewId?: string | null;
     crewName?: string | null;
     result?: string | null;
+    staffId?: string | null;
+    staffName?: string | null;
+    processed?: boolean | null;
+    processedAt?: string | null;
+    submittedAt?: string | null;
     answeredQuestions?: {
       __typename: "ModelAnsweredQuestionConnection";
       items: Array<{
@@ -1013,9 +1099,15 @@ export type UpdateAnsweredQuestionMutation = {
           crewId?: string | null;
           crewName?: string | null;
           result?: string | null;
+          staffId?: string | null;
+          staffName?: string | null;
+          processed?: boolean | null;
+          processedAt?: string | null;
+          submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
         } | null;
+        order?: number | null;
         createdAt: string;
         updatedAt: string;
         sceeningAnsweredQuestionsId?: string | null;
@@ -1025,6 +1117,7 @@ export type UpdateAnsweredQuestionMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  order?: number | null;
   createdAt: string;
   updatedAt: string;
   sceeningAnsweredQuestionsId?: string | null;
@@ -1043,6 +1136,11 @@ export type DeleteAnsweredQuestionMutation = {
     crewId?: string | null;
     crewName?: string | null;
     result?: string | null;
+    staffId?: string | null;
+    staffName?: string | null;
+    processed?: boolean | null;
+    processedAt?: string | null;
+    submittedAt?: string | null;
     answeredQuestions?: {
       __typename: "ModelAnsweredQuestionConnection";
       items: Array<{
@@ -1058,9 +1156,15 @@ export type DeleteAnsweredQuestionMutation = {
           crewId?: string | null;
           crewName?: string | null;
           result?: string | null;
+          staffId?: string | null;
+          staffName?: string | null;
+          processed?: boolean | null;
+          processedAt?: string | null;
+          submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
         } | null;
+        order?: number | null;
         createdAt: string;
         updatedAt: string;
         sceeningAnsweredQuestionsId?: string | null;
@@ -1070,6 +1174,7 @@ export type DeleteAnsweredQuestionMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  order?: number | null;
   createdAt: string;
   updatedAt: string;
   sceeningAnsweredQuestionsId?: string | null;
@@ -3552,6 +3657,11 @@ export type GetSceeningQuery = {
   crewId?: string | null;
   crewName?: string | null;
   result?: string | null;
+  staffId?: string | null;
+  staffName?: string | null;
+  processed?: boolean | null;
+  processedAt?: string | null;
+  submittedAt?: string | null;
   answeredQuestions?: {
     __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
@@ -3567,6 +3677,11 @@ export type GetSceeningQuery = {
         crewId?: string | null;
         crewName?: string | null;
         result?: string | null;
+        staffId?: string | null;
+        staffName?: string | null;
+        processed?: boolean | null;
+        processedAt?: string | null;
+        submittedAt?: string | null;
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
@@ -3574,6 +3689,7 @@ export type GetSceeningQuery = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      order?: number | null;
       createdAt: string;
       updatedAt: string;
       sceeningAnsweredQuestionsId?: string | null;
@@ -3594,6 +3710,11 @@ export type ListSceeningsQuery = {
     crewId?: string | null;
     crewName?: string | null;
     result?: string | null;
+    staffId?: string | null;
+    staffName?: string | null;
+    processed?: boolean | null;
+    processedAt?: string | null;
+    submittedAt?: string | null;
     answeredQuestions?: {
       __typename: "ModelAnsweredQuestionConnection";
       items: Array<{
@@ -3609,9 +3730,15 @@ export type ListSceeningsQuery = {
           crewId?: string | null;
           crewName?: string | null;
           result?: string | null;
+          staffId?: string | null;
+          staffName?: string | null;
+          processed?: boolean | null;
+          processedAt?: string | null;
+          submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
         } | null;
+        order?: number | null;
         createdAt: string;
         updatedAt: string;
         sceeningAnsweredQuestionsId?: string | null;
@@ -3637,6 +3764,11 @@ export type GetAnsweredQuestionQuery = {
     crewId?: string | null;
     crewName?: string | null;
     result?: string | null;
+    staffId?: string | null;
+    staffName?: string | null;
+    processed?: boolean | null;
+    processedAt?: string | null;
+    submittedAt?: string | null;
     answeredQuestions?: {
       __typename: "ModelAnsweredQuestionConnection";
       items: Array<{
@@ -3652,9 +3784,15 @@ export type GetAnsweredQuestionQuery = {
           crewId?: string | null;
           crewName?: string | null;
           result?: string | null;
+          staffId?: string | null;
+          staffName?: string | null;
+          processed?: boolean | null;
+          processedAt?: string | null;
+          submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
         } | null;
+        order?: number | null;
         createdAt: string;
         updatedAt: string;
         sceeningAnsweredQuestionsId?: string | null;
@@ -3664,6 +3802,7 @@ export type GetAnsweredQuestionQuery = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  order?: number | null;
   createdAt: string;
   updatedAt: string;
   sceeningAnsweredQuestionsId?: string | null;
@@ -3684,6 +3823,11 @@ export type ListAnsweredQuestionsQuery = {
       crewId?: string | null;
       crewName?: string | null;
       result?: string | null;
+      staffId?: string | null;
+      staffName?: string | null;
+      processed?: boolean | null;
+      processedAt?: string | null;
+      submittedAt?: string | null;
       answeredQuestions?: {
         __typename: "ModelAnsweredQuestionConnection";
         items: Array<{
@@ -3691,6 +3835,7 @@ export type ListAnsweredQuestionsQuery = {
           id: string;
           question?: string | null;
           answer?: string | null;
+          order?: number | null;
           createdAt: string;
           updatedAt: string;
           sceeningAnsweredQuestionsId?: string | null;
@@ -3700,6 +3845,7 @@ export type ListAnsweredQuestionsQuery = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    order?: number | null;
     createdAt: string;
     updatedAt: string;
     sceeningAnsweredQuestionsId?: string | null;
@@ -5648,6 +5794,11 @@ export type OnCreateSceeningSubscription = {
   crewId?: string | null;
   crewName?: string | null;
   result?: string | null;
+  staffId?: string | null;
+  staffName?: string | null;
+  processed?: boolean | null;
+  processedAt?: string | null;
+  submittedAt?: string | null;
   answeredQuestions?: {
     __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
@@ -5663,6 +5814,11 @@ export type OnCreateSceeningSubscription = {
         crewId?: string | null;
         crewName?: string | null;
         result?: string | null;
+        staffId?: string | null;
+        staffName?: string | null;
+        processed?: boolean | null;
+        processedAt?: string | null;
+        submittedAt?: string | null;
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
@@ -5670,6 +5826,7 @@ export type OnCreateSceeningSubscription = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      order?: number | null;
       createdAt: string;
       updatedAt: string;
       sceeningAnsweredQuestionsId?: string | null;
@@ -5688,6 +5845,11 @@ export type OnUpdateSceeningSubscription = {
   crewId?: string | null;
   crewName?: string | null;
   result?: string | null;
+  staffId?: string | null;
+  staffName?: string | null;
+  processed?: boolean | null;
+  processedAt?: string | null;
+  submittedAt?: string | null;
   answeredQuestions?: {
     __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
@@ -5703,6 +5865,11 @@ export type OnUpdateSceeningSubscription = {
         crewId?: string | null;
         crewName?: string | null;
         result?: string | null;
+        staffId?: string | null;
+        staffName?: string | null;
+        processed?: boolean | null;
+        processedAt?: string | null;
+        submittedAt?: string | null;
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
@@ -5710,6 +5877,7 @@ export type OnUpdateSceeningSubscription = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      order?: number | null;
       createdAt: string;
       updatedAt: string;
       sceeningAnsweredQuestionsId?: string | null;
@@ -5728,6 +5896,11 @@ export type OnDeleteSceeningSubscription = {
   crewId?: string | null;
   crewName?: string | null;
   result?: string | null;
+  staffId?: string | null;
+  staffName?: string | null;
+  processed?: boolean | null;
+  processedAt?: string | null;
+  submittedAt?: string | null;
   answeredQuestions?: {
     __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
@@ -5743,6 +5916,11 @@ export type OnDeleteSceeningSubscription = {
         crewId?: string | null;
         crewName?: string | null;
         result?: string | null;
+        staffId?: string | null;
+        staffName?: string | null;
+        processed?: boolean | null;
+        processedAt?: string | null;
+        submittedAt?: string | null;
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
@@ -5750,6 +5928,7 @@ export type OnDeleteSceeningSubscription = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      order?: number | null;
       createdAt: string;
       updatedAt: string;
       sceeningAnsweredQuestionsId?: string | null;
@@ -5773,6 +5952,11 @@ export type OnCreateAnsweredQuestionSubscription = {
     crewId?: string | null;
     crewName?: string | null;
     result?: string | null;
+    staffId?: string | null;
+    staffName?: string | null;
+    processed?: boolean | null;
+    processedAt?: string | null;
+    submittedAt?: string | null;
     answeredQuestions?: {
       __typename: "ModelAnsweredQuestionConnection";
       items: Array<{
@@ -5788,9 +5972,15 @@ export type OnCreateAnsweredQuestionSubscription = {
           crewId?: string | null;
           crewName?: string | null;
           result?: string | null;
+          staffId?: string | null;
+          staffName?: string | null;
+          processed?: boolean | null;
+          processedAt?: string | null;
+          submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
         } | null;
+        order?: number | null;
         createdAt: string;
         updatedAt: string;
         sceeningAnsweredQuestionsId?: string | null;
@@ -5800,6 +5990,7 @@ export type OnCreateAnsweredQuestionSubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  order?: number | null;
   createdAt: string;
   updatedAt: string;
   sceeningAnsweredQuestionsId?: string | null;
@@ -5818,6 +6009,11 @@ export type OnUpdateAnsweredQuestionSubscription = {
     crewId?: string | null;
     crewName?: string | null;
     result?: string | null;
+    staffId?: string | null;
+    staffName?: string | null;
+    processed?: boolean | null;
+    processedAt?: string | null;
+    submittedAt?: string | null;
     answeredQuestions?: {
       __typename: "ModelAnsweredQuestionConnection";
       items: Array<{
@@ -5833,9 +6029,15 @@ export type OnUpdateAnsweredQuestionSubscription = {
           crewId?: string | null;
           crewName?: string | null;
           result?: string | null;
+          staffId?: string | null;
+          staffName?: string | null;
+          processed?: boolean | null;
+          processedAt?: string | null;
+          submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
         } | null;
+        order?: number | null;
         createdAt: string;
         updatedAt: string;
         sceeningAnsweredQuestionsId?: string | null;
@@ -5845,6 +6047,7 @@ export type OnUpdateAnsweredQuestionSubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  order?: number | null;
   createdAt: string;
   updatedAt: string;
   sceeningAnsweredQuestionsId?: string | null;
@@ -5863,6 +6066,11 @@ export type OnDeleteAnsweredQuestionSubscription = {
     crewId?: string | null;
     crewName?: string | null;
     result?: string | null;
+    staffId?: string | null;
+    staffName?: string | null;
+    processed?: boolean | null;
+    processedAt?: string | null;
+    submittedAt?: string | null;
     answeredQuestions?: {
       __typename: "ModelAnsweredQuestionConnection";
       items: Array<{
@@ -5878,9 +6086,15 @@ export type OnDeleteAnsweredQuestionSubscription = {
           crewId?: string | null;
           crewName?: string | null;
           result?: string | null;
+          staffId?: string | null;
+          staffName?: string | null;
+          processed?: boolean | null;
+          processedAt?: string | null;
+          submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
         } | null;
+        order?: number | null;
         createdAt: string;
         updatedAt: string;
         sceeningAnsweredQuestionsId?: string | null;
@@ -5890,6 +6104,7 @@ export type OnDeleteAnsweredQuestionSubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  order?: number | null;
   createdAt: string;
   updatedAt: string;
   sceeningAnsweredQuestionsId?: string | null;
@@ -8381,6 +8596,11 @@ export class APIService {
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             __typename
             items {
@@ -8396,6 +8616,11 @@ export class APIService {
                 crewId
                 crewName
                 result
+                staffId
+                staffName
+                processed
+                processedAt
+                submittedAt
                 answeredQuestions {
                   __typename
                   nextToken
@@ -8403,6 +8628,7 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              order
               createdAt
               updatedAt
               sceeningAnsweredQuestionsId
@@ -8437,6 +8663,11 @@ export class APIService {
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             __typename
             items {
@@ -8452,6 +8683,11 @@ export class APIService {
                 crewId
                 crewName
                 result
+                staffId
+                staffName
+                processed
+                processedAt
+                submittedAt
                 answeredQuestions {
                   __typename
                   nextToken
@@ -8459,6 +8695,7 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              order
               createdAt
               updatedAt
               sceeningAnsweredQuestionsId
@@ -8493,6 +8730,11 @@ export class APIService {
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             __typename
             items {
@@ -8508,6 +8750,11 @@ export class APIService {
                 crewId
                 crewName
                 result
+                staffId
+                staffName
+                processed
+                processedAt
+                submittedAt
                 answeredQuestions {
                   __typename
                   nextToken
@@ -8515,6 +8762,7 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              order
               createdAt
               updatedAt
               sceeningAnsweredQuestionsId
@@ -8554,6 +8802,11 @@ export class APIService {
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             answeredQuestions {
               __typename
               items {
@@ -8569,9 +8822,15 @@ export class APIService {
                   crewId
                   crewName
                   result
+                  staffId
+                  staffName
+                  processed
+                  processedAt
+                  submittedAt
                   createdAt
                   updatedAt
                 }
+                order
                 createdAt
                 updatedAt
                 sceeningAnsweredQuestionsId
@@ -8581,6 +8840,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -8615,6 +8875,11 @@ export class APIService {
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             answeredQuestions {
               __typename
               items {
@@ -8630,9 +8895,15 @@ export class APIService {
                   crewId
                   crewName
                   result
+                  staffId
+                  staffName
+                  processed
+                  processedAt
+                  submittedAt
                   createdAt
                   updatedAt
                 }
+                order
                 createdAt
                 updatedAt
                 sceeningAnsweredQuestionsId
@@ -8642,6 +8913,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -8676,6 +8948,11 @@ export class APIService {
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             answeredQuestions {
               __typename
               items {
@@ -8691,9 +8968,15 @@ export class APIService {
                   crewId
                   crewName
                   result
+                  staffId
+                  staffName
+                  processed
+                  processedAt
+                  submittedAt
                   createdAt
                   updatedAt
                 }
+                order
                 createdAt
                 updatedAt
                 sceeningAnsweredQuestionsId
@@ -8703,6 +8986,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -11582,6 +11866,11 @@ export class APIService {
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             __typename
             items {
@@ -11597,6 +11886,11 @@ export class APIService {
                 crewId
                 crewName
                 result
+                staffId
+                staffName
+                processed
+                processedAt
+                submittedAt
                 answeredQuestions {
                   __typename
                   nextToken
@@ -11604,6 +11898,7 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              order
               createdAt
               updatedAt
               sceeningAnsweredQuestionsId
@@ -11638,6 +11933,11 @@ export class APIService {
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             answeredQuestions {
               __typename
               items {
@@ -11653,9 +11953,15 @@ export class APIService {
                   crewId
                   crewName
                   result
+                  staffId
+                  staffName
+                  processed
+                  processedAt
+                  submittedAt
                   createdAt
                   updatedAt
                 }
+                order
                 createdAt
                 updatedAt
                 sceeningAnsweredQuestionsId
@@ -11698,6 +12004,11 @@ export class APIService {
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             answeredQuestions {
               __typename
               items {
@@ -11713,9 +12024,15 @@ export class APIService {
                   crewId
                   crewName
                   result
+                  staffId
+                  staffName
+                  processed
+                  processedAt
+                  submittedAt
                   createdAt
                   updatedAt
                 }
+                order
                 createdAt
                 updatedAt
                 sceeningAnsweredQuestionsId
@@ -11725,6 +12042,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -11759,6 +12077,11 @@ export class APIService {
               crewId
               crewName
               result
+              staffId
+              staffName
+              processed
+              processedAt
+              submittedAt
               answeredQuestions {
                 __typename
                 items {
@@ -11766,6 +12089,7 @@ export class APIService {
                   id
                   question
                   answer
+                  order
                   createdAt
                   updatedAt
                   sceeningAnsweredQuestionsId
@@ -11775,6 +12099,7 @@ export class APIService {
               createdAt
               updatedAt
             }
+            order
             createdAt
             updatedAt
             sceeningAnsweredQuestionsId
@@ -14220,6 +14545,11 @@ export class APIService {
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             __typename
             items {
@@ -14235,6 +14565,11 @@ export class APIService {
                 crewId
                 crewName
                 result
+                staffId
+                staffName
+                processed
+                processedAt
+                submittedAt
                 answeredQuestions {
                   __typename
                   nextToken
@@ -14242,6 +14577,7 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              order
               createdAt
               updatedAt
               sceeningAnsweredQuestionsId
@@ -14277,6 +14613,11 @@ export class APIService {
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             __typename
             items {
@@ -14292,6 +14633,11 @@ export class APIService {
                 crewId
                 crewName
                 result
+                staffId
+                staffName
+                processed
+                processedAt
+                submittedAt
                 answeredQuestions {
                   __typename
                   nextToken
@@ -14299,6 +14645,7 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              order
               createdAt
               updatedAt
               sceeningAnsweredQuestionsId
@@ -14334,6 +14681,11 @@ export class APIService {
           crewId
           crewName
           result
+          staffId
+          staffName
+          processed
+          processedAt
+          submittedAt
           answeredQuestions {
             __typename
             items {
@@ -14349,6 +14701,11 @@ export class APIService {
                 crewId
                 crewName
                 result
+                staffId
+                staffName
+                processed
+                processedAt
+                submittedAt
                 answeredQuestions {
                   __typename
                   nextToken
@@ -14356,6 +14713,7 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              order
               createdAt
               updatedAt
               sceeningAnsweredQuestionsId
@@ -14398,6 +14756,11 @@ export class APIService {
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             answeredQuestions {
               __typename
               items {
@@ -14413,9 +14776,15 @@ export class APIService {
                   crewId
                   crewName
                   result
+                  staffId
+                  staffName
+                  processed
+                  processedAt
+                  submittedAt
                   createdAt
                   updatedAt
                 }
+                order
                 createdAt
                 updatedAt
                 sceeningAnsweredQuestionsId
@@ -14425,6 +14794,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -14464,6 +14834,11 @@ export class APIService {
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             answeredQuestions {
               __typename
               items {
@@ -14479,9 +14854,15 @@ export class APIService {
                   crewId
                   crewName
                   result
+                  staffId
+                  staffName
+                  processed
+                  processedAt
+                  submittedAt
                   createdAt
                   updatedAt
                 }
+                order
                 createdAt
                 updatedAt
                 sceeningAnsweredQuestionsId
@@ -14491,6 +14872,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId
@@ -14530,6 +14912,11 @@ export class APIService {
             crewId
             crewName
             result
+            staffId
+            staffName
+            processed
+            processedAt
+            submittedAt
             answeredQuestions {
               __typename
               items {
@@ -14545,9 +14932,15 @@ export class APIService {
                   crewId
                   crewName
                   result
+                  staffId
+                  staffName
+                  processed
+                  processedAt
+                  submittedAt
                   createdAt
                   updatedAt
                 }
+                order
                 createdAt
                 updatedAt
                 sceeningAnsweredQuestionsId
@@ -14557,6 +14950,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          order
           createdAt
           updatedAt
           sceeningAnsweredQuestionsId

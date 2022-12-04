@@ -13,7 +13,9 @@ export class JobComponent implements OnInit {
   loading = true;
   jobs;
   public cols = [
-    { field: "code", header: "Code" },
+    { field: "code", header: "Name" },
+    { field: "startDate", header: "Start Date" },
+    { field: "endDate", header: "End Date" },
     { field: "createdAt", header: "Created Date" },
   ];
   constructor(

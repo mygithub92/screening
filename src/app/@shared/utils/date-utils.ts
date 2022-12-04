@@ -6,7 +6,7 @@ export class DateUtils {
       return body;
     }
 
-    if (typeof body !== 'object') {
+    if (typeof body !== "object") {
       return body;
     }
 
@@ -14,7 +14,7 @@ export class DateUtils {
       const value = body[key];
       if (this.isIso8601(value)) {
         body[key] = new Date(value);
-      } else if (typeof value === 'object') {
+      } else if (typeof value === "object") {
         this.convertToDate(value);
       }
     }
