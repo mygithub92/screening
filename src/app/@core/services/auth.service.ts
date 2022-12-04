@@ -30,6 +30,19 @@ export class AuthService {
     return from(Auth.currentSession());
   }
 
+  public getUserGroup(): Observable<any> {
+    return from(Auth.currentAuthenticatedUser()).pipe(
+      (user: any) =>
+        user.signInUserSession.accessToken.payload["cognito:groups"]
+    );
+  }
+
+  public getUserName(): Observable<any> {
+    return from(Auth.currentAuthenticatedUser()).pipe(
+      (user: any) => user.signInUserSession.accessToken.payload["username"]
+    );
+  }
+
   public getCurrentAuthenticatedUser() {
     return from(Auth.currentAuthenticatedUser());
   }

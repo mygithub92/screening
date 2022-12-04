@@ -1,8 +1,18 @@
 type Sceening @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  jobs: [Job] @manyToMany(relationName: "SceeningJob")
-  crews: [Crew] @manyToMany(relationName: "SceeningCrew")
-  options: [Option] @manyToMany(relationName: "SceeningOption")
+  jobId: String
+  jobName: String
+  crewId: String
+  crewName: String
+  result: String
+  answeredQuestions: [AnsweredQuestion] @hasMany
+}
+
+type AnsweredQuestion @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  question: String
+  answer: String
+  sceening: Sceening @belongsTo
 }
 
 type Form @model @auth(rules: [{ allow: public }]) {
@@ -15,7 +25,8 @@ type Form @model @auth(rules: [{ allow: public }]) {
 type Job @model @auth(rules: [{ allow: public }]) {
   id: ID!
   code: String
-  sceenings: [Sceening] @manyToMany(relationName: "SceeningJob")
+  startDate: String
+  endDate: String
   forms: [Form] @manyToMany(relationName: "FormJob")
   crews: [Crew] @manyToMany(relationName: "CrewJob")
 }
@@ -34,13 +45,18 @@ type Option @model @auth(rules: [{ allow: public }]) {
   label: String
   value: String
   questions: [Question] @manyToMany(relationName: "QuestionOption")
-  sceenings: [Sceening] @manyToMany(relationName: "SceeningOption")
   order: Int @index
 }
 
 type Crew @model @auth(rules: [{ allow: public }]) {
   id: ID!
   userName: String
-  sceenings: [Sceening] @manyToMany(relationName: "SceeningCrew")
+  role: String
+  companyName: String
+  address: String
+  phonenumber: String
+  name: String
+  email: String
+  defaultJobId: String
   jobs: [Job] @manyToMany(relationName: "CrewJob")
 }

@@ -1,0 +1,87 @@
+<p-blockUI [blocked]="loading" [target]="dt"
+  ><p class="center-spinner"></p
+></p-blockUI>
+<p-panel header="Profile" #dt>
+  <ng-container *ngIf="!loading">
+    <div [formGroup]="form">
+      <div class="ui-g">
+        <div class="ui-g-12">
+          <label for="phone-number" class="account-label">Phone number</label>
+        </div>
+        <div class="ui-g-12">
+          <input
+            type="text"
+            pInputText
+            formControlName="phonenumber"
+            id="phone-number"
+            placeholder="Phone number"
+          />
+          <p-message
+            severity="error"
+            text="Field is required"
+            *ngIf="isInvalid('phonenumber')"
+          ></p-message>
+        </div>
+      </div>
+      <div class="ui-g">
+        <div class="ui-g-12">
+          <label for="address" class="account-label">Address</label>
+        </div>
+        <div class="ui-g-12">
+          <input
+            type="text"
+            pInputText
+            formControlName="address"
+            id="address"
+            placeholder="Address"
+          />
+          <p-message
+            severity="error"
+            text="Field is required"
+            *ngIf="isInvalid('address')"
+          ></p-message>
+        </div>
+      </div>
+      <div class="ui-g">
+        <div class="ui-g-12">
+          <label for="companyName" class="account-label">Company Name</label>
+        </div>
+        <div class="ui-g-12">
+          <input
+            type="text"
+            pInputText
+            formControlName="companyName"
+            id="companyName"
+            placeholder="Company Name"
+          />
+          <p-message
+            severity="error"
+            text="Field is required"
+            *ngIf="isInvalid('companyName')"
+          ></p-message>
+        </div>
+      </div>
+    </div>
+    <div class="card card-w-title">
+      <p-toolbar>
+        <div class="ui-toolbar-group-left">
+          <button
+            pButton
+            type="button"
+            label="Save"
+            icon="fa fa-save"
+            (click)="save()"
+          ></button>
+          <button
+            pButton
+            type="button"
+            label="Cancel"
+            class="success-btn"
+            icon="fa fa-cross"
+            (click)="cancel()"
+          ></button>
+        </div>
+      </p-toolbar>
+    </div>
+  </ng-container>
+</p-panel>

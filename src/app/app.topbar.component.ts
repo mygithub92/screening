@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { UserActions } from 'app/@state/actions';
 import * as fromUser from 'app/@state/reducers';
@@ -64,15 +65,13 @@ import { AppMainComponent } from './app.main.component';
 
             <ul class="layout-menu fadeInDown">
               <li role="menuitem">
-                <a href="#" (click)="app.onTopbarSubItemClick($event)">
+                <a (click)="onScreeningClick()">
                   <i class="fa fa-fw fa-user"></i>
-                  <span>Profile</span>
+                  <span>Screening</span>
                 </a>
-              </li>
-              <li role="menuitem">
-                <a href="#" (click)="app.onTopbarSubItemClick($event)">
-                  <i class="fa fa-fw fa-user-secret"></i>
-                  <span>Privacy</span>
+                <a (click)="onProfileClick()">
+                  <i class="fa fa-fw fa-user"></i>
+                  <span>Settings</span>
                 </a>
               </li>
               <li role="menuitem">
@@ -97,7 +96,9 @@ export class AppTopBarComponent implements OnInit {
     public app: AppMainComponent,
     private store: Store<fromUser.State>,
     private confirmationService: ConfirmationService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -111,6 +112,14 @@ export class AppTopBarComponent implements OnInit {
       message: "Are you sure that you want to logout?",
       accept: () => this.logout(),
     });
+  }
+
+  onProfileClick() {
+    this.router.navigate(["main", { path: "profile-topbar" }]);
+  }
+
+  onScreeningClick() {
+    this.router.navigate(["main", { path: "screening-topbar" }]);
   }
 
   private logout() {

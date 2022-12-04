@@ -22,7 +22,9 @@ import { SidebarModule } from 'primeng/sidebar';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
 import { TooltipModule } from 'primeng/tooltip';
+import { TreeTableModule } from 'primeng/treetable';
 
 @NgModule({
   exports: [
@@ -50,6 +52,8 @@ import { TooltipModule } from 'primeng/tooltip';
     BlockUIModule,
     TooltipModule,
     TabViewModule,
+    ToolbarModule,
+    TreeTableModule,
   ],
 })
 export class NgPrimeModule {}

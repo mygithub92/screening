@@ -5,33 +5,32 @@ mutation CreateSceening(
 ) {
   createSceening(input: $input, condition: $condition) {
     id
-    jobs {
+    jobId
+    jobName
+    crewId
+    crewName
+    result
+    answeredQuestions {
       items {
         id
-        sceeningId
-        jobId
+        question
+        answer
+        sceening {
+          id
+          jobId
+          jobName
+          crewId
+          crewName
+          result
+          answeredQuestions {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
-      }
-      nextToken
-    }
-    crews {
-      items {
-        id
-        sceeningId
-        crewId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    options {
-      items {
-        id
-        sceeningId
-        optionId
-        createdAt
-        updatedAt
+        sceeningAnsweredQuestionsId
       }
       nextToken
     }
@@ -45,33 +44,32 @@ mutation UpdateSceening(
 ) {
   updateSceening(input: $input, condition: $condition) {
     id
-    jobs {
+    jobId
+    jobName
+    crewId
+    crewName
+    result
+    answeredQuestions {
       items {
         id
-        sceeningId
-        jobId
+        question
+        answer
+        sceening {
+          id
+          jobId
+          jobName
+          crewId
+          crewName
+          result
+          answeredQuestions {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
-      }
-      nextToken
-    }
-    crews {
-      items {
-        id
-        sceeningId
-        crewId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    options {
-      items {
-        id
-        sceeningId
-        optionId
-        createdAt
-        updatedAt
+        sceeningAnsweredQuestionsId
       }
       nextToken
     }
@@ -85,38 +83,169 @@ mutation DeleteSceening(
 ) {
   deleteSceening(input: $input, condition: $condition) {
     id
-    jobs {
+    jobId
+    jobName
+    crewId
+    crewName
+    result
+    answeredQuestions {
       items {
         id
-        sceeningId
-        jobId
+        question
+        answer
+        sceening {
+          id
+          jobId
+          jobName
+          crewId
+          crewName
+          result
+          answeredQuestions {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
-      }
-      nextToken
-    }
-    crews {
-      items {
-        id
-        sceeningId
-        crewId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    options {
-      items {
-        id
-        sceeningId
-        optionId
-        createdAt
-        updatedAt
+        sceeningAnsweredQuestionsId
       }
       nextToken
     }
     createdAt
     updatedAt
+  }
+}
+mutation CreateAnsweredQuestion(
+  $input: CreateAnsweredQuestionInput!
+  $condition: ModelAnsweredQuestionConditionInput
+) {
+  createAnsweredQuestion(input: $input, condition: $condition) {
+    id
+    question
+    answer
+    sceening {
+      id
+      jobId
+      jobName
+      crewId
+      crewName
+      result
+      answeredQuestions {
+        items {
+          id
+          question
+          answer
+          sceening {
+            id
+            jobId
+            jobName
+            crewId
+            crewName
+            result
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          sceeningAnsweredQuestionsId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    sceeningAnsweredQuestionsId
+  }
+}
+mutation UpdateAnsweredQuestion(
+  $input: UpdateAnsweredQuestionInput!
+  $condition: ModelAnsweredQuestionConditionInput
+) {
+  updateAnsweredQuestion(input: $input, condition: $condition) {
+    id
+    question
+    answer
+    sceening {
+      id
+      jobId
+      jobName
+      crewId
+      crewName
+      result
+      answeredQuestions {
+        items {
+          id
+          question
+          answer
+          sceening {
+            id
+            jobId
+            jobName
+            crewId
+            crewName
+            result
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          sceeningAnsweredQuestionsId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    sceeningAnsweredQuestionsId
+  }
+}
+mutation DeleteAnsweredQuestion(
+  $input: DeleteAnsweredQuestionInput!
+  $condition: ModelAnsweredQuestionConditionInput
+) {
+  deleteAnsweredQuestion(input: $input, condition: $condition) {
+    id
+    question
+    answer
+    sceening {
+      id
+      jobId
+      jobName
+      crewId
+      crewName
+      result
+      answeredQuestions {
+        items {
+          id
+          question
+          answer
+          sceening {
+            id
+            jobId
+            jobName
+            crewId
+            crewName
+            result
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          sceeningAnsweredQuestionsId
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+    sceeningAnsweredQuestionsId
   }
 }
 mutation CreateForm(
@@ -130,6 +259,28 @@ mutation CreateForm(
       items {
         id
         title
+        options {
+          items {
+            id
+            questionId
+            optionId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        form {
+          id
+          name
+          questions {
+            nextToken
+          }
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         order
         optionOrderDesc
         createdAt
@@ -143,6 +294,32 @@ mutation CreateForm(
         id
         formId
         jobId
+        form {
+          id
+          name
+          questions {
+            nextToken
+          }
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        job {
+          id
+          code
+          startDate
+          endDate
+          forms {
+            nextToken
+          }
+          crews {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -163,6 +340,28 @@ mutation UpdateForm(
       items {
         id
         title
+        options {
+          items {
+            id
+            questionId
+            optionId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        form {
+          id
+          name
+          questions {
+            nextToken
+          }
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         order
         optionOrderDesc
         createdAt
@@ -176,6 +375,32 @@ mutation UpdateForm(
         id
         formId
         jobId
+        form {
+          id
+          name
+          questions {
+            nextToken
+          }
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        job {
+          id
+          code
+          startDate
+          endDate
+          forms {
+            nextToken
+          }
+          crews {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -196,6 +421,28 @@ mutation DeleteForm(
       items {
         id
         title
+        options {
+          items {
+            id
+            questionId
+            optionId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        form {
+          id
+          name
+          questions {
+            nextToken
+          }
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         order
         optionOrderDesc
         createdAt
@@ -209,6 +456,32 @@ mutation DeleteForm(
         id
         formId
         jobId
+        form {
+          id
+          name
+          questions {
+            nextToken
+          }
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        job {
+          id
+          code
+          startDate
+          endDate
+          forms {
+            nextToken
+          }
+          crews {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -225,21 +498,39 @@ mutation CreateJob(
   createJob(input: $input, condition: $condition) {
     id
     code
-    sceenings {
-      items {
-        id
-        sceeningId
-        jobId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    startDate
+    endDate
     forms {
       items {
         id
         formId
         jobId
+        form {
+          id
+          name
+          questions {
+            nextToken
+          }
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        job {
+          id
+          code
+          startDate
+          endDate
+          forms {
+            nextToken
+          }
+          crews {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -250,6 +541,36 @@ mutation CreateJob(
         id
         jobId
         crewId
+        job {
+          id
+          code
+          startDate
+          endDate
+          forms {
+            nextToken
+          }
+          crews {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        crew {
+          id
+          userName
+          role
+          companyName
+          address
+          phonenumber
+          name
+          email
+          defaultJobId
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -266,21 +587,39 @@ mutation UpdateJob(
   updateJob(input: $input, condition: $condition) {
     id
     code
-    sceenings {
-      items {
-        id
-        sceeningId
-        jobId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    startDate
+    endDate
     forms {
       items {
         id
         formId
         jobId
+        form {
+          id
+          name
+          questions {
+            nextToken
+          }
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        job {
+          id
+          code
+          startDate
+          endDate
+          forms {
+            nextToken
+          }
+          crews {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -291,6 +630,36 @@ mutation UpdateJob(
         id
         jobId
         crewId
+        job {
+          id
+          code
+          startDate
+          endDate
+          forms {
+            nextToken
+          }
+          crews {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        crew {
+          id
+          userName
+          role
+          companyName
+          address
+          phonenumber
+          name
+          email
+          defaultJobId
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -307,21 +676,39 @@ mutation DeleteJob(
   deleteJob(input: $input, condition: $condition) {
     id
     code
-    sceenings {
-      items {
-        id
-        sceeningId
-        jobId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    startDate
+    endDate
     forms {
       items {
         id
         formId
         jobId
+        form {
+          id
+          name
+          questions {
+            nextToken
+          }
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        job {
+          id
+          code
+          startDate
+          endDate
+          forms {
+            nextToken
+          }
+          crews {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -332,6 +719,36 @@ mutation DeleteJob(
         id
         jobId
         crewId
+        job {
+          id
+          code
+          startDate
+          endDate
+          forms {
+            nextToken
+          }
+          crews {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        crew {
+          id
+          userName
+          role
+          companyName
+          address
+          phonenumber
+          name
+          email
+          defaultJobId
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -353,6 +770,35 @@ mutation CreateQuestion(
         id
         questionId
         optionId
+        question {
+          id
+          title
+          options {
+            nextToken
+          }
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          order
+          optionOrderDesc
+          createdAt
+          updatedAt
+          formQuestionsId
+        }
+        option {
+          id
+          label
+          value
+          questions {
+            nextToken
+          }
+          order
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -362,9 +808,48 @@ mutation CreateQuestion(
       id
       name
       questions {
+        items {
+          id
+          title
+          options {
+            nextToken
+          }
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          order
+          optionOrderDesc
+          createdAt
+          updatedAt
+          formQuestionsId
+        }
         nextToken
       }
       jobs {
+        items {
+          id
+          formId
+          jobId
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -389,6 +874,35 @@ mutation UpdateQuestion(
         id
         questionId
         optionId
+        question {
+          id
+          title
+          options {
+            nextToken
+          }
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          order
+          optionOrderDesc
+          createdAt
+          updatedAt
+          formQuestionsId
+        }
+        option {
+          id
+          label
+          value
+          questions {
+            nextToken
+          }
+          order
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -398,9 +912,48 @@ mutation UpdateQuestion(
       id
       name
       questions {
+        items {
+          id
+          title
+          options {
+            nextToken
+          }
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          order
+          optionOrderDesc
+          createdAt
+          updatedAt
+          formQuestionsId
+        }
         nextToken
       }
       jobs {
+        items {
+          id
+          formId
+          jobId
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -425,6 +978,35 @@ mutation DeleteQuestion(
         id
         questionId
         optionId
+        question {
+          id
+          title
+          options {
+            nextToken
+          }
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          order
+          optionOrderDesc
+          createdAt
+          updatedAt
+          formQuestionsId
+        }
+        option {
+          id
+          label
+          value
+          questions {
+            nextToken
+          }
+          order
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -434,9 +1016,48 @@ mutation DeleteQuestion(
       id
       name
       questions {
+        items {
+          id
+          title
+          options {
+            nextToken
+          }
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          order
+          optionOrderDesc
+          createdAt
+          updatedAt
+          formQuestionsId
+        }
         nextToken
       }
       jobs {
+        items {
+          id
+          formId
+          jobId
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -462,16 +1083,35 @@ mutation CreateOption(
         id
         questionId
         optionId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    sceenings {
-      items {
-        id
-        sceeningId
-        optionId
+        question {
+          id
+          title
+          options {
+            nextToken
+          }
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          order
+          optionOrderDesc
+          createdAt
+          updatedAt
+          formQuestionsId
+        }
+        option {
+          id
+          label
+          value
+          questions {
+            nextToken
+          }
+          order
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -495,16 +1135,35 @@ mutation UpdateOption(
         id
         questionId
         optionId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    sceenings {
-      items {
-        id
-        sceeningId
-        optionId
+        question {
+          id
+          title
+          options {
+            nextToken
+          }
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          order
+          optionOrderDesc
+          createdAt
+          updatedAt
+          formQuestionsId
+        }
+        option {
+          id
+          label
+          value
+          questions {
+            nextToken
+          }
+          order
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -528,16 +1187,35 @@ mutation DeleteOption(
         id
         questionId
         optionId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    sceenings {
-      items {
-        id
-        sceeningId
-        optionId
+        question {
+          id
+          title
+          options {
+            nextToken
+          }
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          order
+          optionOrderDesc
+          createdAt
+          updatedAt
+          formQuestionsId
+        }
+        option {
+          id
+          label
+          value
+          questions {
+            nextToken
+          }
+          order
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -555,21 +1233,48 @@ mutation CreateCrew(
   createCrew(input: $input, condition: $condition) {
     id
     userName
-    sceenings {
-      items {
-        id
-        sceeningId
-        crewId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    role
+    companyName
+    address
+    phonenumber
+    name
+    email
+    defaultJobId
     jobs {
       items {
         id
         jobId
         crewId
+        job {
+          id
+          code
+          startDate
+          endDate
+          forms {
+            nextToken
+          }
+          crews {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        crew {
+          id
+          userName
+          role
+          companyName
+          address
+          phonenumber
+          name
+          email
+          defaultJobId
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -586,21 +1291,48 @@ mutation UpdateCrew(
   updateCrew(input: $input, condition: $condition) {
     id
     userName
-    sceenings {
-      items {
-        id
-        sceeningId
-        crewId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    role
+    companyName
+    address
+    phonenumber
+    name
+    email
+    defaultJobId
     jobs {
       items {
         id
         jobId
         crewId
+        job {
+          id
+          code
+          startDate
+          endDate
+          forms {
+            nextToken
+          }
+          crews {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        crew {
+          id
+          userName
+          role
+          companyName
+          address
+          phonenumber
+          name
+          email
+          defaultJobId
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -617,382 +1349,52 @@ mutation DeleteCrew(
   deleteCrew(input: $input, condition: $condition) {
     id
     userName
-    sceenings {
-      items {
-        id
-        sceeningId
-        crewId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    role
+    companyName
+    address
+    phonenumber
+    name
+    email
+    defaultJobId
     jobs {
       items {
         id
         jobId
         crewId
+        job {
+          id
+          code
+          startDate
+          endDate
+          forms {
+            nextToken
+          }
+          crews {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        crew {
+          id
+          userName
+          role
+          companyName
+          address
+          phonenumber
+          name
+          email
+          defaultJobId
+          jobs {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
       nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateSceeningJob(
-  $input: CreateSceeningJobInput!
-  $condition: ModelSceeningJobConditionInput
-) {
-  createSceeningJob(input: $input, condition: $condition) {
-    id
-    sceeningId
-    jobId
-    sceening {
-      id
-      jobs {
-        nextToken
-      }
-      crews {
-        nextToken
-      }
-      options {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    job {
-      id
-      code
-      sceenings {
-        nextToken
-      }
-      forms {
-        nextToken
-      }
-      crews {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateSceeningJob(
-  $input: UpdateSceeningJobInput!
-  $condition: ModelSceeningJobConditionInput
-) {
-  updateSceeningJob(input: $input, condition: $condition) {
-    id
-    sceeningId
-    jobId
-    sceening {
-      id
-      jobs {
-        nextToken
-      }
-      crews {
-        nextToken
-      }
-      options {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    job {
-      id
-      code
-      sceenings {
-        nextToken
-      }
-      forms {
-        nextToken
-      }
-      crews {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteSceeningJob(
-  $input: DeleteSceeningJobInput!
-  $condition: ModelSceeningJobConditionInput
-) {
-  deleteSceeningJob(input: $input, condition: $condition) {
-    id
-    sceeningId
-    jobId
-    sceening {
-      id
-      jobs {
-        nextToken
-      }
-      crews {
-        nextToken
-      }
-      options {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    job {
-      id
-      code
-      sceenings {
-        nextToken
-      }
-      forms {
-        nextToken
-      }
-      crews {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateSceeningCrew(
-  $input: CreateSceeningCrewInput!
-  $condition: ModelSceeningCrewConditionInput
-) {
-  createSceeningCrew(input: $input, condition: $condition) {
-    id
-    sceeningId
-    crewId
-    sceening {
-      id
-      jobs {
-        nextToken
-      }
-      crews {
-        nextToken
-      }
-      options {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    crew {
-      id
-      userName
-      sceenings {
-        nextToken
-      }
-      jobs {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateSceeningCrew(
-  $input: UpdateSceeningCrewInput!
-  $condition: ModelSceeningCrewConditionInput
-) {
-  updateSceeningCrew(input: $input, condition: $condition) {
-    id
-    sceeningId
-    crewId
-    sceening {
-      id
-      jobs {
-        nextToken
-      }
-      crews {
-        nextToken
-      }
-      options {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    crew {
-      id
-      userName
-      sceenings {
-        nextToken
-      }
-      jobs {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteSceeningCrew(
-  $input: DeleteSceeningCrewInput!
-  $condition: ModelSceeningCrewConditionInput
-) {
-  deleteSceeningCrew(input: $input, condition: $condition) {
-    id
-    sceeningId
-    crewId
-    sceening {
-      id
-      jobs {
-        nextToken
-      }
-      crews {
-        nextToken
-      }
-      options {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    crew {
-      id
-      userName
-      sceenings {
-        nextToken
-      }
-      jobs {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateSceeningOption(
-  $input: CreateSceeningOptionInput!
-  $condition: ModelSceeningOptionConditionInput
-) {
-  createSceeningOption(input: $input, condition: $condition) {
-    id
-    sceeningId
-    optionId
-    sceening {
-      id
-      jobs {
-        nextToken
-      }
-      crews {
-        nextToken
-      }
-      options {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    option {
-      id
-      label
-      value
-      questions {
-        nextToken
-      }
-      sceenings {
-        nextToken
-      }
-      order
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateSceeningOption(
-  $input: UpdateSceeningOptionInput!
-  $condition: ModelSceeningOptionConditionInput
-) {
-  updateSceeningOption(input: $input, condition: $condition) {
-    id
-    sceeningId
-    optionId
-    sceening {
-      id
-      jobs {
-        nextToken
-      }
-      crews {
-        nextToken
-      }
-      options {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    option {
-      id
-      label
-      value
-      questions {
-        nextToken
-      }
-      sceenings {
-        nextToken
-      }
-      order
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteSceeningOption(
-  $input: DeleteSceeningOptionInput!
-  $condition: ModelSceeningOptionConditionInput
-) {
-  deleteSceeningOption(input: $input, condition: $condition) {
-    id
-    sceeningId
-    optionId
-    sceening {
-      id
-      jobs {
-        nextToken
-      }
-      crews {
-        nextToken
-      }
-      options {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    option {
-      id
-      label
-      value
-      questions {
-        nextToken
-      }
-      sceenings {
-        nextToken
-      }
-      order
-      createdAt
-      updatedAt
     }
     createdAt
     updatedAt
@@ -1010,9 +1412,48 @@ mutation CreateFormJob(
       id
       name
       questions {
+        items {
+          id
+          title
+          options {
+            nextToken
+          }
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          order
+          optionOrderDesc
+          createdAt
+          updatedAt
+          formQuestionsId
+        }
         nextToken
       }
       jobs {
+        items {
+          id
+          formId
+          jobId
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -1021,13 +1462,61 @@ mutation CreateFormJob(
     job {
       id
       code
-      sceenings {
-        nextToken
-      }
+      startDate
+      endDate
       forms {
+        items {
+          id
+          formId
+          jobId
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       crews {
+        items {
+          id
+          jobId
+          crewId
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          crew {
+            id
+            userName
+            role
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -1049,9 +1538,48 @@ mutation UpdateFormJob(
       id
       name
       questions {
+        items {
+          id
+          title
+          options {
+            nextToken
+          }
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          order
+          optionOrderDesc
+          createdAt
+          updatedAt
+          formQuestionsId
+        }
         nextToken
       }
       jobs {
+        items {
+          id
+          formId
+          jobId
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -1060,13 +1588,61 @@ mutation UpdateFormJob(
     job {
       id
       code
-      sceenings {
-        nextToken
-      }
+      startDate
+      endDate
       forms {
+        items {
+          id
+          formId
+          jobId
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       crews {
+        items {
+          id
+          jobId
+          crewId
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          crew {
+            id
+            userName
+            role
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -1088,9 +1664,48 @@ mutation DeleteFormJob(
       id
       name
       questions {
+        items {
+          id
+          title
+          options {
+            nextToken
+          }
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          order
+          optionOrderDesc
+          createdAt
+          updatedAt
+          formQuestionsId
+        }
         nextToken
       }
       jobs {
+        items {
+          id
+          formId
+          jobId
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -1099,13 +1714,61 @@ mutation DeleteFormJob(
     job {
       id
       code
-      sceenings {
-        nextToken
-      }
+      startDate
+      endDate
       forms {
+        items {
+          id
+          formId
+          jobId
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       crews {
+        items {
+          id
+          jobId
+          crewId
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          crew {
+            id
+            userName
+            role
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -1126,13 +1789,61 @@ mutation CreateCrewJob(
     job {
       id
       code
-      sceenings {
-        nextToken
-      }
+      startDate
+      endDate
       forms {
+        items {
+          id
+          formId
+          jobId
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       crews {
+        items {
+          id
+          jobId
+          crewId
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          crew {
+            id
+            userName
+            role
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -1141,10 +1852,42 @@ mutation CreateCrewJob(
     crew {
       id
       userName
-      sceenings {
-        nextToken
-      }
+      role
+      companyName
+      address
+      phonenumber
+      name
+      email
+      defaultJobId
       jobs {
+        items {
+          id
+          jobId
+          crewId
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          crew {
+            id
+            userName
+            role
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -1165,13 +1908,61 @@ mutation UpdateCrewJob(
     job {
       id
       code
-      sceenings {
-        nextToken
-      }
+      startDate
+      endDate
       forms {
+        items {
+          id
+          formId
+          jobId
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       crews {
+        items {
+          id
+          jobId
+          crewId
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          crew {
+            id
+            userName
+            role
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -1180,10 +1971,42 @@ mutation UpdateCrewJob(
     crew {
       id
       userName
-      sceenings {
-        nextToken
-      }
+      role
+      companyName
+      address
+      phonenumber
+      name
+      email
+      defaultJobId
       jobs {
+        items {
+          id
+          jobId
+          crewId
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          crew {
+            id
+            userName
+            role
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -1204,13 +2027,61 @@ mutation DeleteCrewJob(
     job {
       id
       code
-      sceenings {
-        nextToken
-      }
+      startDate
+      endDate
       forms {
+        items {
+          id
+          formId
+          jobId
+          form {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       crews {
+        items {
+          id
+          jobId
+          crewId
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          crew {
+            id
+            userName
+            role
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -1219,10 +2090,42 @@ mutation DeleteCrewJob(
     crew {
       id
       userName
-      sceenings {
-        nextToken
-      }
+      role
+      companyName
+      address
+      phonenumber
+      name
+      email
+      defaultJobId
       jobs {
+        items {
+          id
+          jobId
+          crewId
+          job {
+            id
+            code
+            startDate
+            endDate
+            createdAt
+            updatedAt
+          }
+          crew {
+            id
+            userName
+            role
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -1244,11 +2147,57 @@ mutation CreateQuestionOption(
       id
       title
       options {
+        items {
+          id
+          questionId
+          optionId
+          question {
+            id
+            title
+            order
+            optionOrderDesc
+            createdAt
+            updatedAt
+            formQuestionsId
+          }
+          option {
+            id
+            label
+            value
+            order
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       form {
         id
         name
+        questions {
+          items {
+            id
+            title
+            order
+            optionOrderDesc
+            createdAt
+            updatedAt
+            formQuestionsId
+          }
+          nextToken
+        }
+        jobs {
+          items {
+            id
+            formId
+            jobId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1263,9 +2212,30 @@ mutation CreateQuestionOption(
       label
       value
       questions {
-        nextToken
-      }
-      sceenings {
+        items {
+          id
+          questionId
+          optionId
+          question {
+            id
+            title
+            order
+            optionOrderDesc
+            createdAt
+            updatedAt
+            formQuestionsId
+          }
+          option {
+            id
+            label
+            value
+            order
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       order
@@ -1288,11 +2258,57 @@ mutation UpdateQuestionOption(
       id
       title
       options {
+        items {
+          id
+          questionId
+          optionId
+          question {
+            id
+            title
+            order
+            optionOrderDesc
+            createdAt
+            updatedAt
+            formQuestionsId
+          }
+          option {
+            id
+            label
+            value
+            order
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       form {
         id
         name
+        questions {
+          items {
+            id
+            title
+            order
+            optionOrderDesc
+            createdAt
+            updatedAt
+            formQuestionsId
+          }
+          nextToken
+        }
+        jobs {
+          items {
+            id
+            formId
+            jobId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1307,9 +2323,30 @@ mutation UpdateQuestionOption(
       label
       value
       questions {
-        nextToken
-      }
-      sceenings {
+        items {
+          id
+          questionId
+          optionId
+          question {
+            id
+            title
+            order
+            optionOrderDesc
+            createdAt
+            updatedAt
+            formQuestionsId
+          }
+          option {
+            id
+            label
+            value
+            order
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       order
@@ -1332,11 +2369,57 @@ mutation DeleteQuestionOption(
       id
       title
       options {
+        items {
+          id
+          questionId
+          optionId
+          question {
+            id
+            title
+            order
+            optionOrderDesc
+            createdAt
+            updatedAt
+            formQuestionsId
+          }
+          option {
+            id
+            label
+            value
+            order
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       form {
         id
         name
+        questions {
+          items {
+            id
+            title
+            order
+            optionOrderDesc
+            createdAt
+            updatedAt
+            formQuestionsId
+          }
+          nextToken
+        }
+        jobs {
+          items {
+            id
+            formId
+            jobId
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1351,9 +2434,30 @@ mutation DeleteQuestionOption(
       label
       value
       questions {
-        nextToken
-      }
-      sceenings {
+        items {
+          id
+          questionId
+          optionId
+          question {
+            id
+            title
+            order
+            optionOrderDesc
+            createdAt
+            updatedAt
+            formQuestionsId
+          }
+          option {
+            id
+            label
+            value
+            order
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       order

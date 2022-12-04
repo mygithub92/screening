@@ -1,0 +1,35 @@
+<p-blockUI [blocked]="loading" [target]="dt"
+  ><p class="center-spinner"></p
+></p-blockUI>
+<p-panel header="Default Job" #dt>
+  <ng-container *ngIf="!loading">
+    <div [formGroup]="form">
+      <div class="card card-w-title">
+        <h1>Please select the default job</h1>
+        <div class="ui-g">
+          <div class="ui-g-12 ui-md-4" *ngFor="let job of jobs">
+            <p-radioButton
+              name="rg"
+              [value]="job.job.id"
+              [label]="job.job.code"
+              formControlName="jobCode"
+            ></p-radioButton>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-w-title">
+      <p-toolbar>
+        <div class="ui-toolbar-group-left">
+          <button
+            pButton
+            type="button"
+            label="Save"
+            icon="fa fa-save"
+            (click)="save()"
+          ></button>
+        </div>
+      </p-toolbar>
+    </div>
+  </ng-container>
+</p-panel>

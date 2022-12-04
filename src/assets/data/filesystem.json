@@ -1,0 +1,17 @@
+{
+    "data":
+    [
+    {
+        "data": {
+            "address": "27 Cherub St",
+            "companyName": "test"
+        }
+    },
+    {
+        "data": {
+            "address": "27 Cherub St",
+            "companyName": "admin"
+        }
+    }
+]
+}

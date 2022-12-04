@@ -1,7 +1,8 @@
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -11,9 +12,8 @@ import { UserEffects } from 'app/@state/effects';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 
-import { AuthGuard } from './@core/guards/auth.guard';
-import { JwtInterceptor } from './@core/http-interceptors/jwt.interceptor';
 import { AuthService } from './@core/services/auth.service';
+import { NodeService } from './@core/services/nodeservice';
 import { metaReducers, ROOT_REDUCERS } from './@state/reducers';
 import { AppCommonModule } from './app.common.module';
 import { AppComponent } from './app.component';
@@ -24,10 +24,52 @@ import { AppMenuComponent } from './app.menu.component';
 import { MenuService } from './app.menu.service';
 import { AppMenuitemComponent } from './app.menuitem.component';
 import { NgPrimeModule } from './app.ngprime.module';
-import { AppProfileComponent } from './app.profile.component';
-import { AppRoutingModule } from './app.routing.module';
 import { AppTopBarComponent } from './app.topbar.component';
 
+const routes: Routes = [
+  {
+    path: "main",
+    component: AppMainComponent,
+    children: [
+      {
+        path: "admin",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../app/features/admin/admin.module").then(
+                (m) => m.AdminModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "profile",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../app/features/profile/profile.module").then(
+                (m) => m.ProfileModule
+              ),
+          },
+        ],
+      },
+      {
+        path: "screening",
+        children: [
+          {
+            path: "",
+            loadChildren: () =>
+              import("../app/features/screening/screening.module").then(
+                (m) => m.ScreeningModule
+              ),
+          },
+        ],
+      },
+    ],
+  },
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,12 +79,10 @@ import { AppTopBarComponent } from './app.topbar.component';
     AppMenuitemComponent,
     AppMenuComponent,
     AppConfigComponent,
-    AppProfileComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
     AppCommonModule,
     BrowserAnimationsModule,
     NgPrimeModule,
@@ -56,6 +96,7 @@ import { AppTopBarComponent } from './app.topbar.component';
         strictActionSerializability: true,
       },
     }),
+    RouterModule.forRoot(routes, { enableTracing: false }),
     StoreRouterConnectingModule.forRoot({
       routerState: RouterState.Minimal,
     }),
@@ -68,14 +109,9 @@ import { AppTopBarComponent } from './app.topbar.component';
     ConfirmationService,
     MessageService,
     DialogService,
-    AuthService,
-    AuthGuard,
     MenuService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true,
-    },
+    AuthService,
+    NodeService,
   ],
   bootstrap: [AppComponent],
 })

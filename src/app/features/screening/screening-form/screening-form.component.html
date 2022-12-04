@@ -1,0 +1,61 @@
+<p-blockUI [blocked]="loading" [target]="dt"
+  ><p class="center-spinner"></p
+></p-blockUI>
+<p-panel header="Screening" #dt>
+  <ng-container *ngIf="!loading">
+    <div [formGroup]="form">
+      <div class="ui-g form-group">
+        <div class="ui-g-12">
+          <label for="job-code" class="account-label">Job Code</label>
+        </div>
+        <div class="ui-g-12">
+          <p-dropdown
+            [options]="jobs"
+            formControlName="selectedJob"
+          ></p-dropdown>
+        </div>
+      </div>
+
+      <div class="ui-g form-group" formGroupName="questionForm">
+        <div
+          *ngFor="let question of questions; let i = index"
+          class="ui-g-12 ui-md-12"
+        >
+          <label class="ui-g-12 ui-md-12" for="quesiton{{ i + 1 }}"
+            >{{ i + 1 }}. {{ question["title"] }}</label
+          >
+          <div class="ui-g-12 ui-md-12">
+            <div *ngFor="let option of question.options" class="ui-g-1 ui-md-1">
+              <p-radioButton
+                id="question{{ i + 1 }}"
+                name="question{{ i + 1 }}"
+                [value]="option.value"
+                [label]="option.label"
+                [inputId]="option.value"
+                formControlName="question{{ i + 1 }}"
+              ></p-radioButton>
+              <p-message
+                severity="error"
+                text="Field is required"
+                *ngIf="isInvalid(i)"
+              ></p-message>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-w-title">
+      <p-toolbar>
+        <div class="ui-toolbar-group-left">
+          <button
+            pButton
+            type="button"
+            label="Submit"
+            icon="fa fa-save"
+            (click)="submit()"
+          ></button>
+        </div>
+      </p-toolbar>
+    </div>
+  </ng-container>
+</p-panel>
