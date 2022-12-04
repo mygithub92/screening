@@ -13,6 +13,9 @@ export type __SubscriptionContainer = {
   onCreateSceening: OnCreateSceeningSubscription;
   onUpdateSceening: OnUpdateSceeningSubscription;
   onDeleteSceening: OnDeleteSceeningSubscription;
+  onCreateAnsweredQuestion: OnCreateAnsweredQuestionSubscription;
+  onUpdateAnsweredQuestion: OnUpdateAnsweredQuestionSubscription;
+  onDeleteAnsweredQuestion: OnDeleteAnsweredQuestionSubscription;
   onCreateForm: OnCreateFormSubscription;
   onUpdateForm: OnUpdateFormSubscription;
   onDeleteForm: OnDeleteFormSubscription;
@@ -28,15 +31,6 @@ export type __SubscriptionContainer = {
   onCreateCrew: OnCreateCrewSubscription;
   onUpdateCrew: OnUpdateCrewSubscription;
   onDeleteCrew: OnDeleteCrewSubscription;
-  onCreateSceeningJob: OnCreateSceeningJobSubscription;
-  onUpdateSceeningJob: OnUpdateSceeningJobSubscription;
-  onDeleteSceeningJob: OnDeleteSceeningJobSubscription;
-  onCreateSceeningCrew: OnCreateSceeningCrewSubscription;
-  onUpdateSceeningCrew: OnUpdateSceeningCrewSubscription;
-  onDeleteSceeningCrew: OnDeleteSceeningCrewSubscription;
-  onCreateSceeningOption: OnCreateSceeningOptionSubscription;
-  onUpdateSceeningOption: OnUpdateSceeningOptionSubscription;
-  onDeleteSceeningOption: OnDeleteSceeningOptionSubscription;
   onCreateFormJob: OnCreateFormJobSubscription;
   onUpdateFormJob: OnUpdateFormJobSubscription;
   onDeleteFormJob: OnDeleteFormJobSubscription;
@@ -50,69 +44,159 @@ export type __SubscriptionContainer = {
 
 export type CreateSceeningInput = {
   id?: string | null;
+  jobId?: string | null;
+  jobName?: string | null;
+  crewId?: string | null;
+  crewName?: string | null;
+  result?: string | null;
 };
 
 export type ModelSceeningConditionInput = {
+  jobId?: ModelStringInput | null;
+  jobName?: ModelStringInput | null;
+  crewId?: ModelStringInput | null;
+  crewName?: ModelStringInput | null;
+  result?: ModelStringInput | null;
   and?: Array<ModelSceeningConditionInput | null> | null;
   or?: Array<ModelSceeningConditionInput | null> | null;
   not?: ModelSceeningConditionInput | null;
 };
 
+export type ModelStringInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null"
+}
+
+export type ModelSizeInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+};
+
 export type Sceening = {
   __typename: "Sceening";
   id: string;
-  jobs?: ModelSceeningJobConnection | null;
-  crews?: ModelSceeningCrewConnection | null;
-  options?: ModelSceeningOptionConnection | null;
+  jobId?: string | null;
+  jobName?: string | null;
+  crewId?: string | null;
+  crewName?: string | null;
+  result?: string | null;
+  answeredQuestions?: ModelAnsweredQuestionConnection | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type ModelSceeningJobConnection = {
-  __typename: "ModelSceeningJobConnection";
-  items: Array<SceeningJob | null>;
+export type ModelAnsweredQuestionConnection = {
+  __typename: "ModelAnsweredQuestionConnection";
+  items: Array<AnsweredQuestion | null>;
   nextToken?: string | null;
 };
 
-export type SceeningJob = {
-  __typename: "SceeningJob";
+export type AnsweredQuestion = {
+  __typename: "AnsweredQuestion";
   id: string;
-  sceeningId: string;
-  jobId: string;
-  sceening: Sceening;
-  job: Job;
+  question?: string | null;
+  answer?: string | null;
+  sceening?: Sceening | null;
   createdAt: string;
   updatedAt: string;
+  sceeningAnsweredQuestionsId?: string | null;
 };
 
-export type Job = {
-  __typename: "Job";
+export type UpdateSceeningInput = {
   id: string;
-  code?: string | null;
-  startDate?: string | null;
-  endDate?: string | null;
-  sceenings?: ModelSceeningJobConnection | null;
-  forms?: ModelFormJobConnection | null;
-  crews?: ModelCrewJobConnection | null;
-  createdAt: string;
-  updatedAt: string;
+  jobId?: string | null;
+  jobName?: string | null;
+  crewId?: string | null;
+  crewName?: string | null;
+  result?: string | null;
 };
 
-export type ModelFormJobConnection = {
-  __typename: "ModelFormJobConnection";
-  items: Array<FormJob | null>;
-  nextToken?: string | null;
-};
-
-export type FormJob = {
-  __typename: "FormJob";
+export type DeleteSceeningInput = {
   id: string;
-  formId: string;
-  jobId: string;
-  form: Form;
-  job: Job;
-  createdAt: string;
-  updatedAt: string;
+};
+
+export type CreateAnsweredQuestionInput = {
+  id?: string | null;
+  question?: string | null;
+  answer?: string | null;
+  sceeningAnsweredQuestionsId?: string | null;
+};
+
+export type ModelAnsweredQuestionConditionInput = {
+  question?: ModelStringInput | null;
+  answer?: ModelStringInput | null;
+  and?: Array<ModelAnsweredQuestionConditionInput | null> | null;
+  or?: Array<ModelAnsweredQuestionConditionInput | null> | null;
+  not?: ModelAnsweredQuestionConditionInput | null;
+  sceeningAnsweredQuestionsId?: ModelIDInput | null;
+};
+
+export type ModelIDInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
+export type UpdateAnsweredQuestionInput = {
+  id: string;
+  question?: string | null;
+  answer?: string | null;
+  sceeningAnsweredQuestionsId?: string | null;
+};
+
+export type DeleteAnsweredQuestionInput = {
+  id: string;
+};
+
+export type CreateFormInput = {
+  id?: string | null;
+  name?: string | null;
+};
+
+export type ModelFormConditionInput = {
+  name?: ModelStringInput | null;
+  and?: Array<ModelFormConditionInput | null> | null;
+  or?: Array<ModelFormConditionInput | null> | null;
+  not?: ModelFormConditionInput | null;
 };
 
 export type Form = {
@@ -167,25 +251,36 @@ export type Option = {
   label?: string | null;
   value?: string | null;
   questions?: ModelQuestionOptionConnection | null;
-  sceenings?: ModelSceeningOptionConnection | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type ModelSceeningOptionConnection = {
-  __typename: "ModelSceeningOptionConnection";
-  items: Array<SceeningOption | null>;
+export type ModelFormJobConnection = {
+  __typename: "ModelFormJobConnection";
+  items: Array<FormJob | null>;
   nextToken?: string | null;
 };
 
-export type SceeningOption = {
-  __typename: "SceeningOption";
+export type FormJob = {
+  __typename: "FormJob";
   id: string;
-  sceeningId: string;
-  optionId: string;
-  sceening: Sceening;
-  option: Option;
+  formId: string;
+  jobId: string;
+  form: Form;
+  job: Job;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Job = {
+  __typename: "Job";
+  id: string;
+  code?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  forms?: ModelFormJobConnection | null;
+  crews?: ModelCrewJobConnection | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -211,92 +306,16 @@ export type Crew = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  role?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
   name?: string | null;
   email?: string | null;
   defaultJobId?: string | null;
-  sceenings?: ModelSceeningCrewConnection | null;
   jobs?: ModelCrewJobConnection | null;
   createdAt: string;
   updatedAt: string;
-};
-
-export type ModelSceeningCrewConnection = {
-  __typename: "ModelSceeningCrewConnection";
-  items: Array<SceeningCrew | null>;
-  nextToken?: string | null;
-};
-
-export type SceeningCrew = {
-  __typename: "SceeningCrew";
-  id: string;
-  sceeningId: string;
-  crewId: string;
-  sceening: Sceening;
-  crew: Crew;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateSceeningInput = {
-  id: string;
-};
-
-export type DeleteSceeningInput = {
-  id: string;
-};
-
-export type CreateFormInput = {
-  id?: string | null;
-  name?: string | null;
-};
-
-export type ModelFormConditionInput = {
-  name?: ModelStringInput | null;
-  and?: Array<ModelFormConditionInput | null> | null;
-  or?: Array<ModelFormConditionInput | null> | null;
-  not?: ModelFormConditionInput | null;
-};
-
-export type ModelStringInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
-};
-
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null"
-}
-
-export type ModelSizeInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
 };
 
 export type UpdateFormInput = {
@@ -372,22 +391,6 @@ export type ModelBooleanInput = {
   attributeType?: ModelAttributeTypes | null;
 };
 
-export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
-};
-
 export type UpdateQuestionInput = {
   id: string;
   title?: string | null;
@@ -430,6 +433,7 @@ export type DeleteOptionInput = {
 export type CreateCrewInput = {
   id?: string | null;
   userName?: string | null;
+  role?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
@@ -440,6 +444,7 @@ export type CreateCrewInput = {
 
 export type ModelCrewConditionInput = {
   userName?: ModelStringInput | null;
+  role?: ModelStringInput | null;
   companyName?: ModelStringInput | null;
   address?: ModelStringInput | null;
   phonenumber?: ModelStringInput | null;
@@ -454,6 +459,7 @@ export type ModelCrewConditionInput = {
 export type UpdateCrewInput = {
   id: string;
   userName?: string | null;
+  role?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
@@ -463,78 +469,6 @@ export type UpdateCrewInput = {
 };
 
 export type DeleteCrewInput = {
-  id: string;
-};
-
-export type CreateSceeningJobInput = {
-  id?: string | null;
-  sceeningId: string;
-  jobId: string;
-};
-
-export type ModelSceeningJobConditionInput = {
-  sceeningId?: ModelIDInput | null;
-  jobId?: ModelIDInput | null;
-  and?: Array<ModelSceeningJobConditionInput | null> | null;
-  or?: Array<ModelSceeningJobConditionInput | null> | null;
-  not?: ModelSceeningJobConditionInput | null;
-};
-
-export type UpdateSceeningJobInput = {
-  id: string;
-  sceeningId?: string | null;
-  jobId?: string | null;
-};
-
-export type DeleteSceeningJobInput = {
-  id: string;
-};
-
-export type CreateSceeningCrewInput = {
-  id?: string | null;
-  sceeningId: string;
-  crewId: string;
-};
-
-export type ModelSceeningCrewConditionInput = {
-  sceeningId?: ModelIDInput | null;
-  crewId?: ModelIDInput | null;
-  and?: Array<ModelSceeningCrewConditionInput | null> | null;
-  or?: Array<ModelSceeningCrewConditionInput | null> | null;
-  not?: ModelSceeningCrewConditionInput | null;
-};
-
-export type UpdateSceeningCrewInput = {
-  id: string;
-  sceeningId?: string | null;
-  crewId?: string | null;
-};
-
-export type DeleteSceeningCrewInput = {
-  id: string;
-};
-
-export type CreateSceeningOptionInput = {
-  id?: string | null;
-  sceeningId: string;
-  optionId: string;
-};
-
-export type ModelSceeningOptionConditionInput = {
-  sceeningId?: ModelIDInput | null;
-  optionId?: ModelIDInput | null;
-  and?: Array<ModelSceeningOptionConditionInput | null> | null;
-  or?: Array<ModelSceeningOptionConditionInput | null> | null;
-  not?: ModelSceeningOptionConditionInput | null;
-};
-
-export type UpdateSceeningOptionInput = {
-  id: string;
-  sceeningId?: string | null;
-  optionId?: string | null;
-};
-
-export type DeleteSceeningOptionInput = {
   id: string;
 };
 
@@ -612,6 +546,11 @@ export type DeleteQuestionOptionInput = {
 
 export type ModelSceeningFilterInput = {
   id?: ModelIDInput | null;
+  jobId?: ModelStringInput | null;
+  jobName?: ModelStringInput | null;
+  crewId?: ModelStringInput | null;
+  crewName?: ModelStringInput | null;
+  result?: ModelStringInput | null;
   and?: Array<ModelSceeningFilterInput | null> | null;
   or?: Array<ModelSceeningFilterInput | null> | null;
   not?: ModelSceeningFilterInput | null;
@@ -621,6 +560,16 @@ export type ModelSceeningConnection = {
   __typename: "ModelSceeningConnection";
   items: Array<Sceening | null>;
   nextToken?: string | null;
+};
+
+export type ModelAnsweredQuestionFilterInput = {
+  id?: ModelIDInput | null;
+  question?: ModelStringInput | null;
+  answer?: ModelStringInput | null;
+  and?: Array<ModelAnsweredQuestionFilterInput | null> | null;
+  or?: Array<ModelAnsweredQuestionFilterInput | null> | null;
+  not?: ModelAnsweredQuestionFilterInput | null;
+  sceeningAnsweredQuestionsId?: ModelIDInput | null;
 };
 
 export type ModelFormFilterInput = {
@@ -683,6 +632,7 @@ export type ModelOptionConnection = {
 export type ModelCrewFilterInput = {
   id?: ModelIDInput | null;
   userName?: ModelStringInput | null;
+  role?: ModelStringInput | null;
   companyName?: ModelStringInput | null;
   address?: ModelStringInput | null;
   phonenumber?: ModelStringInput | null;
@@ -698,33 +648,6 @@ export type ModelCrewConnection = {
   __typename: "ModelCrewConnection";
   items: Array<Crew | null>;
   nextToken?: string | null;
-};
-
-export type ModelSceeningJobFilterInput = {
-  id?: ModelIDInput | null;
-  sceeningId?: ModelIDInput | null;
-  jobId?: ModelIDInput | null;
-  and?: Array<ModelSceeningJobFilterInput | null> | null;
-  or?: Array<ModelSceeningJobFilterInput | null> | null;
-  not?: ModelSceeningJobFilterInput | null;
-};
-
-export type ModelSceeningCrewFilterInput = {
-  id?: ModelIDInput | null;
-  sceeningId?: ModelIDInput | null;
-  crewId?: ModelIDInput | null;
-  and?: Array<ModelSceeningCrewFilterInput | null> | null;
-  or?: Array<ModelSceeningCrewFilterInput | null> | null;
-  not?: ModelSceeningCrewFilterInput | null;
-};
-
-export type ModelSceeningOptionFilterInput = {
-  id?: ModelIDInput | null;
-  sceeningId?: ModelIDInput | null;
-  optionId?: ModelIDInput | null;
-  and?: Array<ModelSceeningOptionFilterInput | null> | null;
-  or?: Array<ModelSceeningOptionFilterInput | null> | null;
-  not?: ModelSceeningOptionFilterInput | null;
 };
 
 export type ModelFormJobFilterInput = {
@@ -761,6 +684,11 @@ export enum ModelSortDirection {
 
 export type ModelSubscriptionSceeningFilterInput = {
   id?: ModelSubscriptionIDInput | null;
+  jobId?: ModelSubscriptionStringInput | null;
+  jobName?: ModelSubscriptionStringInput | null;
+  crewId?: ModelSubscriptionStringInput | null;
+  crewName?: ModelSubscriptionStringInput | null;
+  result?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionSceeningFilterInput | null> | null;
   or?: Array<ModelSubscriptionSceeningFilterInput | null> | null;
 };
@@ -780,13 +708,6 @@ export type ModelSubscriptionIDInput = {
   notIn?: Array<string | null> | null;
 };
 
-export type ModelSubscriptionFormFilterInput = {
-  id?: ModelSubscriptionIDInput | null;
-  name?: ModelSubscriptionStringInput | null;
-  and?: Array<ModelSubscriptionFormFilterInput | null> | null;
-  or?: Array<ModelSubscriptionFormFilterInput | null> | null;
-};
-
 export type ModelSubscriptionStringInput = {
   ne?: string | null;
   eq?: string | null;
@@ -800,6 +721,21 @@ export type ModelSubscriptionStringInput = {
   beginsWith?: string | null;
   in?: Array<string | null> | null;
   notIn?: Array<string | null> | null;
+};
+
+export type ModelSubscriptionAnsweredQuestionFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  question?: ModelSubscriptionStringInput | null;
+  answer?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionAnsweredQuestionFilterInput | null> | null;
+  or?: Array<ModelSubscriptionAnsweredQuestionFilterInput | null> | null;
+};
+
+export type ModelSubscriptionFormFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  name?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionFormFilterInput | null> | null;
+  or?: Array<ModelSubscriptionFormFilterInput | null> | null;
 };
 
 export type ModelSubscriptionJobFilterInput = {
@@ -849,6 +785,7 @@ export type ModelSubscriptionOptionFilterInput = {
 export type ModelSubscriptionCrewFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   userName?: ModelSubscriptionStringInput | null;
+  role?: ModelSubscriptionStringInput | null;
   companyName?: ModelSubscriptionStringInput | null;
   address?: ModelSubscriptionStringInput | null;
   phonenumber?: ModelSubscriptionStringInput | null;
@@ -857,30 +794,6 @@ export type ModelSubscriptionCrewFilterInput = {
   defaultJobId?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionCrewFilterInput | null> | null;
   or?: Array<ModelSubscriptionCrewFilterInput | null> | null;
-};
-
-export type ModelSubscriptionSceeningJobFilterInput = {
-  id?: ModelSubscriptionIDInput | null;
-  sceeningId?: ModelSubscriptionIDInput | null;
-  jobId?: ModelSubscriptionIDInput | null;
-  and?: Array<ModelSubscriptionSceeningJobFilterInput | null> | null;
-  or?: Array<ModelSubscriptionSceeningJobFilterInput | null> | null;
-};
-
-export type ModelSubscriptionSceeningCrewFilterInput = {
-  id?: ModelSubscriptionIDInput | null;
-  sceeningId?: ModelSubscriptionIDInput | null;
-  crewId?: ModelSubscriptionIDInput | null;
-  and?: Array<ModelSubscriptionSceeningCrewFilterInput | null> | null;
-  or?: Array<ModelSubscriptionSceeningCrewFilterInput | null> | null;
-};
-
-export type ModelSubscriptionSceeningOptionFilterInput = {
-  id?: ModelSubscriptionIDInput | null;
-  sceeningId?: ModelSubscriptionIDInput | null;
-  optionId?: ModelSubscriptionIDInput | null;
-  and?: Array<ModelSubscriptionSceeningOptionFilterInput | null> | null;
-  or?: Array<ModelSubscriptionSceeningOptionFilterInput | null> | null;
 };
 
 export type ModelSubscriptionFormJobFilterInput = {
@@ -910,39 +823,36 @@ export type ModelSubscriptionQuestionOptionFilterInput = {
 export type CreateSceeningMutation = {
   __typename: "Sceening";
   id: string;
-  jobs?: {
-    __typename: "ModelSceeningJobConnection";
+  jobId?: string | null;
+  jobName?: string | null;
+  crewId?: string | null;
+  crewName?: string | null;
+  result?: string | null;
+  answeredQuestions?: {
+    __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
-      __typename: "SceeningJob";
+      __typename: "AnsweredQuestion";
       id: string;
-      sceeningId: string;
-      jobId: string;
+      question?: string | null;
+      answer?: string | null;
+      sceening?: {
+        __typename: "Sceening";
+        id: string;
+        jobId?: string | null;
+        jobName?: string | null;
+        crewId?: string | null;
+        crewName?: string | null;
+        result?: string | null;
+        answeredQuestions?: {
+          __typename: "ModelAnsweredQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  crews?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  options?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
-      createdAt: string;
-      updatedAt: string;
+      sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
   } | null;
@@ -953,39 +863,36 @@ export type CreateSceeningMutation = {
 export type UpdateSceeningMutation = {
   __typename: "Sceening";
   id: string;
-  jobs?: {
-    __typename: "ModelSceeningJobConnection";
+  jobId?: string | null;
+  jobName?: string | null;
+  crewId?: string | null;
+  crewName?: string | null;
+  result?: string | null;
+  answeredQuestions?: {
+    __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
-      __typename: "SceeningJob";
+      __typename: "AnsweredQuestion";
       id: string;
-      sceeningId: string;
-      jobId: string;
+      question?: string | null;
+      answer?: string | null;
+      sceening?: {
+        __typename: "Sceening";
+        id: string;
+        jobId?: string | null;
+        jobName?: string | null;
+        crewId?: string | null;
+        crewName?: string | null;
+        result?: string | null;
+        answeredQuestions?: {
+          __typename: "ModelAnsweredQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  crews?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  options?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
-      createdAt: string;
-      updatedAt: string;
+      sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
   } | null;
@@ -996,44 +903,176 @@ export type UpdateSceeningMutation = {
 export type DeleteSceeningMutation = {
   __typename: "Sceening";
   id: string;
-  jobs?: {
-    __typename: "ModelSceeningJobConnection";
+  jobId?: string | null;
+  jobName?: string | null;
+  crewId?: string | null;
+  crewName?: string | null;
+  result?: string | null;
+  answeredQuestions?: {
+    __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
-      __typename: "SceeningJob";
+      __typename: "AnsweredQuestion";
       id: string;
-      sceeningId: string;
-      jobId: string;
+      question?: string | null;
+      answer?: string | null;
+      sceening?: {
+        __typename: "Sceening";
+        id: string;
+        jobId?: string | null;
+        jobName?: string | null;
+        crewId?: string | null;
+        crewName?: string | null;
+        result?: string | null;
+        answeredQuestions?: {
+          __typename: "ModelAnsweredQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  crews?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  options?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
-      createdAt: string;
-      updatedAt: string;
+      sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+};
+
+export type CreateAnsweredQuestionMutation = {
+  __typename: "AnsweredQuestion";
+  id: string;
+  question?: string | null;
+  answer?: string | null;
+  sceening?: {
+    __typename: "Sceening";
+    id: string;
+    jobId?: string | null;
+    jobName?: string | null;
+    crewId?: string | null;
+    crewName?: string | null;
+    result?: string | null;
+    answeredQuestions?: {
+      __typename: "ModelAnsweredQuestionConnection";
+      items: Array<{
+        __typename: "AnsweredQuestion";
+        id: string;
+        question?: string | null;
+        answer?: string | null;
+        sceening?: {
+          __typename: "Sceening";
+          id: string;
+          jobId?: string | null;
+          jobName?: string | null;
+          crewId?: string | null;
+          crewName?: string | null;
+          result?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+        sceeningAnsweredQuestionsId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  sceeningAnsweredQuestionsId?: string | null;
+};
+
+export type UpdateAnsweredQuestionMutation = {
+  __typename: "AnsweredQuestion";
+  id: string;
+  question?: string | null;
+  answer?: string | null;
+  sceening?: {
+    __typename: "Sceening";
+    id: string;
+    jobId?: string | null;
+    jobName?: string | null;
+    crewId?: string | null;
+    crewName?: string | null;
+    result?: string | null;
+    answeredQuestions?: {
+      __typename: "ModelAnsweredQuestionConnection";
+      items: Array<{
+        __typename: "AnsweredQuestion";
+        id: string;
+        question?: string | null;
+        answer?: string | null;
+        sceening?: {
+          __typename: "Sceening";
+          id: string;
+          jobId?: string | null;
+          jobName?: string | null;
+          crewId?: string | null;
+          crewName?: string | null;
+          result?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+        sceeningAnsweredQuestionsId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  sceeningAnsweredQuestionsId?: string | null;
+};
+
+export type DeleteAnsweredQuestionMutation = {
+  __typename: "AnsweredQuestion";
+  id: string;
+  question?: string | null;
+  answer?: string | null;
+  sceening?: {
+    __typename: "Sceening";
+    id: string;
+    jobId?: string | null;
+    jobName?: string | null;
+    crewId?: string | null;
+    crewName?: string | null;
+    result?: string | null;
+    answeredQuestions?: {
+      __typename: "ModelAnsweredQuestionConnection";
+      items: Array<{
+        __typename: "AnsweredQuestion";
+        id: string;
+        question?: string | null;
+        answer?: string | null;
+        sceening?: {
+          __typename: "Sceening";
+          id: string;
+          jobId?: string | null;
+          jobName?: string | null;
+          crewId?: string | null;
+          crewName?: string | null;
+          result?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+        sceeningAnsweredQuestionsId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  sceeningAnsweredQuestionsId?: string | null;
 };
 
 export type CreateFormMutation = {
@@ -1046,6 +1085,33 @@ export type CreateFormMutation = {
       __typename: "Question";
       id: string;
       title?: string | null;
+      options?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      form?: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
@@ -1061,6 +1127,38 @@ export type CreateFormMutation = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1080,6 +1178,33 @@ export type UpdateFormMutation = {
       __typename: "Question";
       id: string;
       title?: string | null;
+      options?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      form?: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
@@ -1095,6 +1220,38 @@ export type UpdateFormMutation = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1114,6 +1271,33 @@ export type DeleteFormMutation = {
       __typename: "Question";
       id: string;
       title?: string | null;
+      options?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      form?: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
@@ -1129,6 +1313,38 @@ export type DeleteFormMutation = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1144,18 +1360,6 @@ export type CreateJobMutation = {
   code?: string | null;
   startDate?: string | null;
   endDate?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningJobConnection";
-    items: Array<{
-      __typename: "SceeningJob";
-      id: string;
-      sceeningId: string;
-      jobId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   forms?: {
     __typename: "ModelFormJobConnection";
     items: Array<{
@@ -1163,6 +1367,38 @@ export type CreateJobMutation = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1175,6 +1411,41 @@ export type CreateJobMutation = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1190,18 +1461,6 @@ export type UpdateJobMutation = {
   code?: string | null;
   startDate?: string | null;
   endDate?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningJobConnection";
-    items: Array<{
-      __typename: "SceeningJob";
-      id: string;
-      sceeningId: string;
-      jobId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   forms?: {
     __typename: "ModelFormJobConnection";
     items: Array<{
@@ -1209,6 +1468,38 @@ export type UpdateJobMutation = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1221,6 +1512,41 @@ export type UpdateJobMutation = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1236,18 +1562,6 @@ export type DeleteJobMutation = {
   code?: string | null;
   startDate?: string | null;
   endDate?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningJobConnection";
-    items: Array<{
-      __typename: "SceeningJob";
-      id: string;
-      sceeningId: string;
-      jobId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   forms?: {
     __typename: "ModelFormJobConnection";
     items: Array<{
@@ -1255,6 +1569,38 @@ export type DeleteJobMutation = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1267,6 +1613,41 @@ export type DeleteJobMutation = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1287,6 +1668,40 @@ export type CreateQuestionMutation = {
       id: string;
       questionId: string;
       optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1298,10 +1713,55 @@ export type CreateQuestionMutation = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -1325,6 +1785,40 @@ export type UpdateQuestionMutation = {
       id: string;
       questionId: string;
       optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1336,10 +1830,55 @@ export type UpdateQuestionMutation = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -1363,6 +1902,40 @@ export type DeleteQuestionMutation = {
       id: string;
       questionId: string;
       optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1374,10 +1947,55 @@ export type DeleteQuestionMutation = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -1402,18 +2020,40 @@ export type CreateOptionMutation = {
       id: string;
       questionId: string;
       optionId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  sceenings?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1436,18 +2076,40 @@ export type UpdateOptionMutation = {
       id: string;
       questionId: string;
       optionId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  sceenings?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1470,18 +2132,40 @@ export type DeleteOptionMutation = {
       id: string;
       questionId: string;
       optionId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  sceenings?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1496,24 +2180,13 @@ export type CreateCrewMutation = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  role?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
   name?: string | null;
   email?: string | null;
   defaultJobId?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   jobs?: {
     __typename: "ModelCrewJobConnection";
     items: Array<{
@@ -1521,6 +2194,41 @@ export type CreateCrewMutation = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1534,24 +2242,13 @@ export type UpdateCrewMutation = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  role?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
   name?: string | null;
   email?: string | null;
   defaultJobId?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   jobs?: {
     __typename: "ModelCrewJobConnection";
     items: Array<{
@@ -1559,6 +2256,41 @@ export type UpdateCrewMutation = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -1572,24 +2304,13 @@ export type DeleteCrewMutation = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  role?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
   name?: string | null;
   email?: string | null;
   defaultJobId?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   jobs?: {
     __typename: "ModelCrewJobConnection";
     items: Array<{
@@ -1597,431 +2318,46 @@ export type DeleteCrewMutation = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
     nextToken?: string | null;
   } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type CreateSceeningJobMutation = {
-  __typename: "SceeningJob";
-  id: string;
-  sceeningId: string;
-  jobId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  job: {
-    __typename: "Job";
-    id: string;
-    code?: string | null;
-    startDate?: string | null;
-    endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    forms?: {
-      __typename: "ModelFormJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateSceeningJobMutation = {
-  __typename: "SceeningJob";
-  id: string;
-  sceeningId: string;
-  jobId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  job: {
-    __typename: "Job";
-    id: string;
-    code?: string | null;
-    startDate?: string | null;
-    endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    forms?: {
-      __typename: "ModelFormJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteSceeningJobMutation = {
-  __typename: "SceeningJob";
-  id: string;
-  sceeningId: string;
-  jobId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  job: {
-    __typename: "Job";
-    id: string;
-    code?: string | null;
-    startDate?: string | null;
-    endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    forms?: {
-      __typename: "ModelFormJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type CreateSceeningCrewMutation = {
-  __typename: "SceeningCrew";
-  id: string;
-  sceeningId: string;
-  crewId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  crew: {
-    __typename: "Crew";
-    id: string;
-    userName?: string | null;
-    companyName?: string | null;
-    address?: string | null;
-    phonenumber?: string | null;
-    name?: string | null;
-    email?: string | null;
-    defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    jobs?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateSceeningCrewMutation = {
-  __typename: "SceeningCrew";
-  id: string;
-  sceeningId: string;
-  crewId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  crew: {
-    __typename: "Crew";
-    id: string;
-    userName?: string | null;
-    companyName?: string | null;
-    address?: string | null;
-    phonenumber?: string | null;
-    name?: string | null;
-    email?: string | null;
-    defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    jobs?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteSceeningCrewMutation = {
-  __typename: "SceeningCrew";
-  id: string;
-  sceeningId: string;
-  crewId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  crew: {
-    __typename: "Crew";
-    id: string;
-    userName?: string | null;
-    companyName?: string | null;
-    address?: string | null;
-    phonenumber?: string | null;
-    name?: string | null;
-    email?: string | null;
-    defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    jobs?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type CreateSceeningOptionMutation = {
-  __typename: "SceeningOption";
-  id: string;
-  sceeningId: string;
-  optionId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  option: {
-    __typename: "Option";
-    id: string;
-    label?: string | null;
-    value?: string | null;
-    questions?: {
-      __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    order?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateSceeningOptionMutation = {
-  __typename: "SceeningOption";
-  id: string;
-  sceeningId: string;
-  optionId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  option: {
-    __typename: "Option";
-    id: string;
-    label?: string | null;
-    value?: string | null;
-    questions?: {
-      __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    order?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteSceeningOptionMutation = {
-  __typename: "SceeningOption";
-  id: string;
-  sceeningId: string;
-  optionId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  option: {
-    __typename: "Option";
-    id: string;
-    label?: string | null;
-    value?: string | null;
-    questions?: {
-      __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    order?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  };
   createdAt: string;
   updatedAt: string;
 };
@@ -2037,10 +2373,55 @@ export type CreateFormJobMutation = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2052,16 +2433,67 @@ export type CreateFormJobMutation = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2082,10 +2514,55 @@ export type UpdateFormJobMutation = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2097,16 +2574,67 @@ export type UpdateFormJobMutation = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2127,10 +2655,55 @@ export type DeleteFormJobMutation = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2142,16 +2715,67 @@ export type DeleteFormJobMutation = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2172,16 +2796,67 @@ export type CreateCrewJobMutation = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2191,18 +2866,46 @@ export type CreateCrewJobMutation = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    role?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
     name?: string | null;
     email?: string | null;
     defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
     jobs?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2223,16 +2926,67 @@ export type UpdateCrewJobMutation = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2242,18 +2996,46 @@ export type UpdateCrewJobMutation = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    role?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
     name?: string | null;
     email?: string | null;
     defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
     jobs?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2274,16 +3056,67 @@ export type DeleteCrewJobMutation = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2293,18 +3126,46 @@ export type DeleteCrewJobMutation = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    role?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
     name?: string | null;
     email?: string | null;
     defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
     jobs?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2325,12 +3186,65 @@ export type CreateQuestionOptionMutation = {
     title?: string | null;
     options?: {
       __typename: "ModelQuestionOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     form?: {
       __typename: "Form";
       id: string;
       name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2347,10 +3261,33 @@ export type CreateQuestionOptionMutation = {
     value?: string | null;
     questions?: {
       __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     order?: number | null;
@@ -2372,12 +3309,65 @@ export type UpdateQuestionOptionMutation = {
     title?: string | null;
     options?: {
       __typename: "ModelQuestionOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     form?: {
       __typename: "Form";
       id: string;
       name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2394,10 +3384,33 @@ export type UpdateQuestionOptionMutation = {
     value?: string | null;
     questions?: {
       __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     order?: number | null;
@@ -2419,12 +3432,65 @@ export type DeleteQuestionOptionMutation = {
     title?: string | null;
     options?: {
       __typename: "ModelQuestionOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     form?: {
       __typename: "Form";
       id: string;
       name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2441,10 +3507,33 @@ export type DeleteQuestionOptionMutation = {
     value?: string | null;
     questions?: {
       __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     order?: number | null;
@@ -2458,39 +3547,36 @@ export type DeleteQuestionOptionMutation = {
 export type GetSceeningQuery = {
   __typename: "Sceening";
   id: string;
-  jobs?: {
-    __typename: "ModelSceeningJobConnection";
+  jobId?: string | null;
+  jobName?: string | null;
+  crewId?: string | null;
+  crewName?: string | null;
+  result?: string | null;
+  answeredQuestions?: {
+    __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
-      __typename: "SceeningJob";
+      __typename: "AnsweredQuestion";
       id: string;
-      sceeningId: string;
-      jobId: string;
+      question?: string | null;
+      answer?: string | null;
+      sceening?: {
+        __typename: "Sceening";
+        id: string;
+        jobId?: string | null;
+        jobName?: string | null;
+        crewId?: string | null;
+        crewName?: string | null;
+        result?: string | null;
+        answeredQuestions?: {
+          __typename: "ModelAnsweredQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  crews?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  options?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
-      createdAt: string;
-      updatedAt: string;
+      sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
   } | null;
@@ -2503,20 +3589,120 @@ export type ListSceeningsQuery = {
   items: Array<{
     __typename: "Sceening";
     id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
+    jobId?: string | null;
+    jobName?: string | null;
+    crewId?: string | null;
+    crewName?: string | null;
+    result?: string | null;
+    answeredQuestions?: {
+      __typename: "ModelAnsweredQuestionConnection";
+      items: Array<{
+        __typename: "AnsweredQuestion";
+        id: string;
+        question?: string | null;
+        answer?: string | null;
+        sceening?: {
+          __typename: "Sceening";
+          id: string;
+          jobId?: string | null;
+          jobName?: string | null;
+          crewId?: string | null;
+          crewName?: string | null;
+          result?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+        sceeningAnsweredQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetAnsweredQuestionQuery = {
+  __typename: "AnsweredQuestion";
+  id: string;
+  question?: string | null;
+  answer?: string | null;
+  sceening?: {
+    __typename: "Sceening";
+    id: string;
+    jobId?: string | null;
+    jobName?: string | null;
+    crewId?: string | null;
+    crewName?: string | null;
+    result?: string | null;
+    answeredQuestions?: {
+      __typename: "ModelAnsweredQuestionConnection";
+      items: Array<{
+        __typename: "AnsweredQuestion";
+        id: string;
+        question?: string | null;
+        answer?: string | null;
+        sceening?: {
+          __typename: "Sceening";
+          id: string;
+          jobId?: string | null;
+          jobName?: string | null;
+          crewId?: string | null;
+          crewName?: string | null;
+          result?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+        sceeningAnsweredQuestionsId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  sceeningAnsweredQuestionsId?: string | null;
+};
+
+export type ListAnsweredQuestionsQuery = {
+  __typename: "ModelAnsweredQuestionConnection";
+  items: Array<{
+    __typename: "AnsweredQuestion";
+    id: string;
+    question?: string | null;
+    answer?: string | null;
+    sceening?: {
+      __typename: "Sceening";
+      id: string;
+      jobId?: string | null;
+      jobName?: string | null;
+      crewId?: string | null;
+      crewName?: string | null;
+      result?: string | null;
+      answeredQuestions?: {
+        __typename: "ModelAnsweredQuestionConnection";
+        items: Array<{
+          __typename: "AnsweredQuestion";
+          id: string;
+          question?: string | null;
+          answer?: string | null;
+          createdAt: string;
+          updatedAt: string;
+          sceeningAnsweredQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+    sceeningAnsweredQuestionsId?: string | null;
   } | null>;
   nextToken?: string | null;
 };
@@ -2531,6 +3717,33 @@ export type GetFormQuery = {
       __typename: "Question";
       id: string;
       title?: string | null;
+      options?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      form?: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
@@ -2546,6 +3759,38 @@ export type GetFormQuery = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -2563,10 +3808,55 @@ export type ListFormsQuery = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2581,18 +3871,6 @@ export type GetJobQuery = {
   code?: string | null;
   startDate?: string | null;
   endDate?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningJobConnection";
-    items: Array<{
-      __typename: "SceeningJob";
-      id: string;
-      sceeningId: string;
-      jobId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   forms?: {
     __typename: "ModelFormJobConnection";
     items: Array<{
@@ -2600,6 +3878,38 @@ export type GetJobQuery = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -2612,6 +3922,41 @@ export type GetJobQuery = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -2629,16 +3974,67 @@ export type ListJobsQuery = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2658,6 +4054,40 @@ export type GetQuestionQuery = {
       id: string;
       questionId: string;
       optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -2669,10 +4099,55 @@ export type GetQuestionQuery = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -2693,12 +4168,65 @@ export type ListQuestionsQuery = {
     title?: string | null;
     options?: {
       __typename: "ModelQuestionOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     form?: {
       __typename: "Form";
       id: string;
       name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2723,18 +4251,40 @@ export type GetOptionQuery = {
       id: string;
       questionId: string;
       optionId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  sceenings?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -2754,10 +4304,33 @@ export type ListOptionsQuery = {
     value?: string | null;
     questions?: {
       __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     order?: number | null;
@@ -2771,24 +4344,13 @@ export type GetCrewQuery = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  role?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
   name?: string | null;
   email?: string | null;
   defaultJobId?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   jobs?: {
     __typename: "ModelCrewJobConnection";
     items: Array<{
@@ -2796,6 +4358,41 @@ export type GetCrewQuery = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -2811,248 +4408,48 @@ export type ListCrewsQuery = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    role?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
     name?: string | null;
     email?: string | null;
     defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
     jobs?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type GetSceeningJobQuery = {
-  __typename: "SceeningJob";
-  id: string;
-  sceeningId: string;
-  jobId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  job: {
-    __typename: "Job";
-    id: string;
-    code?: string | null;
-    startDate?: string | null;
-    endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    forms?: {
-      __typename: "ModelFormJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListSceeningJobsQuery = {
-  __typename: "ModelSceeningJobConnection";
-  items: Array<{
-    __typename: "SceeningJob";
-    id: string;
-    sceeningId: string;
-    jobId: string;
-    sceening: {
-      __typename: "Sceening";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    };
-    job: {
-      __typename: "Job";
-      id: string;
-      code?: string | null;
-      startDate?: string | null;
-      endDate?: string | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type GetSceeningCrewQuery = {
-  __typename: "SceeningCrew";
-  id: string;
-  sceeningId: string;
-  crewId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  crew: {
-    __typename: "Crew";
-    id: string;
-    userName?: string | null;
-    companyName?: string | null;
-    address?: string | null;
-    phonenumber?: string | null;
-    name?: string | null;
-    email?: string | null;
-    defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    jobs?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListSceeningCrewsQuery = {
-  __typename: "ModelSceeningCrewConnection";
-  items: Array<{
-    __typename: "SceeningCrew";
-    id: string;
-    sceeningId: string;
-    crewId: string;
-    sceening: {
-      __typename: "Sceening";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    };
-    crew: {
-      __typename: "Crew";
-      id: string;
-      userName?: string | null;
-      companyName?: string | null;
-      address?: string | null;
-      phonenumber?: string | null;
-      name?: string | null;
-      email?: string | null;
-      defaultJobId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type GetSceeningOptionQuery = {
-  __typename: "SceeningOption";
-  id: string;
-  sceeningId: string;
-  optionId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  option: {
-    __typename: "Option";
-    id: string;
-    label?: string | null;
-    value?: string | null;
-    questions?: {
-      __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    order?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListSceeningOptionsQuery = {
-  __typename: "ModelSceeningOptionConnection";
-  items: Array<{
-    __typename: "SceeningOption";
-    id: string;
-    sceeningId: string;
-    optionId: string;
-    sceening: {
-      __typename: "Sceening";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    };
-    option: {
-      __typename: "Option";
-      id: string;
-      label?: string | null;
-      value?: string | null;
-      order?: number | null;
-      createdAt: string;
-      updatedAt: string;
-    };
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -3070,10 +4467,55 @@ export type GetFormJobQuery = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -3085,16 +4527,67 @@ export type GetFormJobQuery = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -3115,6 +4608,32 @@ export type ListFormJobsQuery = {
       __typename: "Form";
       id: string;
       name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3124,6 +4643,30 @@ export type ListFormJobsQuery = {
       code?: string | null;
       startDate?: string | null;
       endDate?: string | null;
+      forms?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      crews?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3144,16 +4687,67 @@ export type GetCrewJobQuery = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -3163,18 +4757,46 @@ export type GetCrewJobQuery = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    role?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
     name?: string | null;
     email?: string | null;
     defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
     jobs?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -3197,6 +4819,30 @@ export type ListCrewJobsQuery = {
       code?: string | null;
       startDate?: string | null;
       endDate?: string | null;
+      forms?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      crews?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3204,12 +4850,25 @@ export type ListCrewJobsQuery = {
       __typename: "Crew";
       id: string;
       userName?: string | null;
+      role?: string | null;
       companyName?: string | null;
       address?: string | null;
       phonenumber?: string | null;
       name?: string | null;
       email?: string | null;
       defaultJobId?: string | null;
+      jobs?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3230,12 +4889,65 @@ export type GetQuestionOptionQuery = {
     title?: string | null;
     options?: {
       __typename: "ModelQuestionOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     form?: {
       __typename: "Form";
       id: string;
       name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -3252,10 +4964,33 @@ export type GetQuestionOptionQuery = {
     value?: string | null;
     questions?: {
       __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     order?: number | null;
@@ -3277,6 +5012,33 @@ export type ListQuestionOptionsQuery = {
       __typename: "Question";
       id: string;
       title?: string | null;
+      options?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      form?: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
@@ -3288,6 +5050,18 @@ export type ListQuestionOptionsQuery = {
       id: string;
       label?: string | null;
       value?: string | null;
+      questions?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       order?: number | null;
       createdAt: string;
       updatedAt: string;
@@ -3306,12 +5080,65 @@ export type QuestionsByOrderQuery = {
     title?: string | null;
     options?: {
       __typename: "ModelQuestionOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     form?: {
       __typename: "Form";
       id: string;
       name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -3333,189 +5160,36 @@ export type OptionsByOrderQuery = {
     value?: string | null;
     questions?: {
       __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     order?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type SceeningJobsBySceeningIdQuery = {
-  __typename: "ModelSceeningJobConnection";
-  items: Array<{
-    __typename: "SceeningJob";
-    id: string;
-    sceeningId: string;
-    jobId: string;
-    sceening: {
-      __typename: "Sceening";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    };
-    job: {
-      __typename: "Job";
-      id: string;
-      code?: string | null;
-      startDate?: string | null;
-      endDate?: string | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type SceeningJobsByJobIdQuery = {
-  __typename: "ModelSceeningJobConnection";
-  items: Array<{
-    __typename: "SceeningJob";
-    id: string;
-    sceeningId: string;
-    jobId: string;
-    sceening: {
-      __typename: "Sceening";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    };
-    job: {
-      __typename: "Job";
-      id: string;
-      code?: string | null;
-      startDate?: string | null;
-      endDate?: string | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type SceeningCrewsBySceeningIdQuery = {
-  __typename: "ModelSceeningCrewConnection";
-  items: Array<{
-    __typename: "SceeningCrew";
-    id: string;
-    sceeningId: string;
-    crewId: string;
-    sceening: {
-      __typename: "Sceening";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    };
-    crew: {
-      __typename: "Crew";
-      id: string;
-      userName?: string | null;
-      companyName?: string | null;
-      address?: string | null;
-      phonenumber?: string | null;
-      name?: string | null;
-      email?: string | null;
-      defaultJobId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type SceeningCrewsByCrewIdQuery = {
-  __typename: "ModelSceeningCrewConnection";
-  items: Array<{
-    __typename: "SceeningCrew";
-    id: string;
-    sceeningId: string;
-    crewId: string;
-    sceening: {
-      __typename: "Sceening";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    };
-    crew: {
-      __typename: "Crew";
-      id: string;
-      userName?: string | null;
-      companyName?: string | null;
-      address?: string | null;
-      phonenumber?: string | null;
-      name?: string | null;
-      email?: string | null;
-      defaultJobId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type SceeningOptionsBySceeningIdQuery = {
-  __typename: "ModelSceeningOptionConnection";
-  items: Array<{
-    __typename: "SceeningOption";
-    id: string;
-    sceeningId: string;
-    optionId: string;
-    sceening: {
-      __typename: "Sceening";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    };
-    option: {
-      __typename: "Option";
-      id: string;
-      label?: string | null;
-      value?: string | null;
-      order?: number | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type SceeningOptionsByOptionIdQuery = {
-  __typename: "ModelSceeningOptionConnection";
-  items: Array<{
-    __typename: "SceeningOption";
-    id: string;
-    sceeningId: string;
-    optionId: string;
-    sceening: {
-      __typename: "Sceening";
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-    };
-    option: {
-      __typename: "Option";
-      id: string;
-      label?: string | null;
-      value?: string | null;
-      order?: number | null;
-      createdAt: string;
-      updatedAt: string;
-    };
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -3533,6 +5207,32 @@ export type FormJobsByFormIdQuery = {
       __typename: "Form";
       id: string;
       name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3542,6 +5242,30 @@ export type FormJobsByFormIdQuery = {
       code?: string | null;
       startDate?: string | null;
       endDate?: string | null;
+      forms?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      crews?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3562,6 +5286,32 @@ export type FormJobsByJobIdQuery = {
       __typename: "Form";
       id: string;
       name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3571,6 +5321,30 @@ export type FormJobsByJobIdQuery = {
       code?: string | null;
       startDate?: string | null;
       endDate?: string | null;
+      forms?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      crews?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3593,6 +5367,30 @@ export type CrewJobsByJobIdQuery = {
       code?: string | null;
       startDate?: string | null;
       endDate?: string | null;
+      forms?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      crews?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3600,12 +5398,25 @@ export type CrewJobsByJobIdQuery = {
       __typename: "Crew";
       id: string;
       userName?: string | null;
+      role?: string | null;
       companyName?: string | null;
       address?: string | null;
       phonenumber?: string | null;
       name?: string | null;
       email?: string | null;
       defaultJobId?: string | null;
+      jobs?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3628,6 +5439,30 @@ export type CrewJobsByCrewIdQuery = {
       code?: string | null;
       startDate?: string | null;
       endDate?: string | null;
+      forms?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      crews?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3635,12 +5470,25 @@ export type CrewJobsByCrewIdQuery = {
       __typename: "Crew";
       id: string;
       userName?: string | null;
+      role?: string | null;
       companyName?: string | null;
       address?: string | null;
       phonenumber?: string | null;
       name?: string | null;
       email?: string | null;
       defaultJobId?: string | null;
+      jobs?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     };
@@ -3661,6 +5509,33 @@ export type QuestionOptionsByQuestionIdQuery = {
       __typename: "Question";
       id: string;
       title?: string | null;
+      options?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      form?: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
@@ -3672,6 +5547,18 @@ export type QuestionOptionsByQuestionIdQuery = {
       id: string;
       label?: string | null;
       value?: string | null;
+      questions?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       order?: number | null;
       createdAt: string;
       updatedAt: string;
@@ -3693,6 +5580,33 @@ export type QuestionOptionsByOptionIdQuery = {
       __typename: "Question";
       id: string;
       title?: string | null;
+      options?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      form?: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
@@ -3704,6 +5618,18 @@ export type QuestionOptionsByOptionIdQuery = {
       id: string;
       label?: string | null;
       value?: string | null;
+      questions?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       order?: number | null;
       createdAt: string;
       updatedAt: string;
@@ -3717,39 +5643,36 @@ export type QuestionOptionsByOptionIdQuery = {
 export type OnCreateSceeningSubscription = {
   __typename: "Sceening";
   id: string;
-  jobs?: {
-    __typename: "ModelSceeningJobConnection";
+  jobId?: string | null;
+  jobName?: string | null;
+  crewId?: string | null;
+  crewName?: string | null;
+  result?: string | null;
+  answeredQuestions?: {
+    __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
-      __typename: "SceeningJob";
+      __typename: "AnsweredQuestion";
       id: string;
-      sceeningId: string;
-      jobId: string;
+      question?: string | null;
+      answer?: string | null;
+      sceening?: {
+        __typename: "Sceening";
+        id: string;
+        jobId?: string | null;
+        jobName?: string | null;
+        crewId?: string | null;
+        crewName?: string | null;
+        result?: string | null;
+        answeredQuestions?: {
+          __typename: "ModelAnsweredQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  crews?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  options?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
-      createdAt: string;
-      updatedAt: string;
+      sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
   } | null;
@@ -3760,39 +5683,36 @@ export type OnCreateSceeningSubscription = {
 export type OnUpdateSceeningSubscription = {
   __typename: "Sceening";
   id: string;
-  jobs?: {
-    __typename: "ModelSceeningJobConnection";
+  jobId?: string | null;
+  jobName?: string | null;
+  crewId?: string | null;
+  crewName?: string | null;
+  result?: string | null;
+  answeredQuestions?: {
+    __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
-      __typename: "SceeningJob";
+      __typename: "AnsweredQuestion";
       id: string;
-      sceeningId: string;
-      jobId: string;
+      question?: string | null;
+      answer?: string | null;
+      sceening?: {
+        __typename: "Sceening";
+        id: string;
+        jobId?: string | null;
+        jobName?: string | null;
+        crewId?: string | null;
+        crewName?: string | null;
+        result?: string | null;
+        answeredQuestions?: {
+          __typename: "ModelAnsweredQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  crews?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  options?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
-      createdAt: string;
-      updatedAt: string;
+      sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
   } | null;
@@ -3803,44 +5723,176 @@ export type OnUpdateSceeningSubscription = {
 export type OnDeleteSceeningSubscription = {
   __typename: "Sceening";
   id: string;
-  jobs?: {
-    __typename: "ModelSceeningJobConnection";
+  jobId?: string | null;
+  jobName?: string | null;
+  crewId?: string | null;
+  crewName?: string | null;
+  result?: string | null;
+  answeredQuestions?: {
+    __typename: "ModelAnsweredQuestionConnection";
     items: Array<{
-      __typename: "SceeningJob";
+      __typename: "AnsweredQuestion";
       id: string;
-      sceeningId: string;
-      jobId: string;
+      question?: string | null;
+      answer?: string | null;
+      sceening?: {
+        __typename: "Sceening";
+        id: string;
+        jobId?: string | null;
+        jobName?: string | null;
+        crewId?: string | null;
+        crewName?: string | null;
+        result?: string | null;
+        answeredQuestions?: {
+          __typename: "ModelAnsweredQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  crews?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  options?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
-      createdAt: string;
-      updatedAt: string;
+      sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+};
+
+export type OnCreateAnsweredQuestionSubscription = {
+  __typename: "AnsweredQuestion";
+  id: string;
+  question?: string | null;
+  answer?: string | null;
+  sceening?: {
+    __typename: "Sceening";
+    id: string;
+    jobId?: string | null;
+    jobName?: string | null;
+    crewId?: string | null;
+    crewName?: string | null;
+    result?: string | null;
+    answeredQuestions?: {
+      __typename: "ModelAnsweredQuestionConnection";
+      items: Array<{
+        __typename: "AnsweredQuestion";
+        id: string;
+        question?: string | null;
+        answer?: string | null;
+        sceening?: {
+          __typename: "Sceening";
+          id: string;
+          jobId?: string | null;
+          jobName?: string | null;
+          crewId?: string | null;
+          crewName?: string | null;
+          result?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+        sceeningAnsweredQuestionsId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  sceeningAnsweredQuestionsId?: string | null;
+};
+
+export type OnUpdateAnsweredQuestionSubscription = {
+  __typename: "AnsweredQuestion";
+  id: string;
+  question?: string | null;
+  answer?: string | null;
+  sceening?: {
+    __typename: "Sceening";
+    id: string;
+    jobId?: string | null;
+    jobName?: string | null;
+    crewId?: string | null;
+    crewName?: string | null;
+    result?: string | null;
+    answeredQuestions?: {
+      __typename: "ModelAnsweredQuestionConnection";
+      items: Array<{
+        __typename: "AnsweredQuestion";
+        id: string;
+        question?: string | null;
+        answer?: string | null;
+        sceening?: {
+          __typename: "Sceening";
+          id: string;
+          jobId?: string | null;
+          jobName?: string | null;
+          crewId?: string | null;
+          crewName?: string | null;
+          result?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+        sceeningAnsweredQuestionsId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  sceeningAnsweredQuestionsId?: string | null;
+};
+
+export type OnDeleteAnsweredQuestionSubscription = {
+  __typename: "AnsweredQuestion";
+  id: string;
+  question?: string | null;
+  answer?: string | null;
+  sceening?: {
+    __typename: "Sceening";
+    id: string;
+    jobId?: string | null;
+    jobName?: string | null;
+    crewId?: string | null;
+    crewName?: string | null;
+    result?: string | null;
+    answeredQuestions?: {
+      __typename: "ModelAnsweredQuestionConnection";
+      items: Array<{
+        __typename: "AnsweredQuestion";
+        id: string;
+        question?: string | null;
+        answer?: string | null;
+        sceening?: {
+          __typename: "Sceening";
+          id: string;
+          jobId?: string | null;
+          jobName?: string | null;
+          crewId?: string | null;
+          crewName?: string | null;
+          result?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+        sceeningAnsweredQuestionsId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  sceeningAnsweredQuestionsId?: string | null;
 };
 
 export type OnCreateFormSubscription = {
@@ -3853,6 +5905,33 @@ export type OnCreateFormSubscription = {
       __typename: "Question";
       id: string;
       title?: string | null;
+      options?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      form?: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
@@ -3868,6 +5947,38 @@ export type OnCreateFormSubscription = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -3887,6 +5998,33 @@ export type OnUpdateFormSubscription = {
       __typename: "Question";
       id: string;
       title?: string | null;
+      options?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      form?: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
@@ -3902,6 +6040,38 @@ export type OnUpdateFormSubscription = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -3921,6 +6091,33 @@ export type OnDeleteFormSubscription = {
       __typename: "Question";
       id: string;
       title?: string | null;
+      options?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      form?: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
@@ -3936,6 +6133,38 @@ export type OnDeleteFormSubscription = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -3951,18 +6180,6 @@ export type OnCreateJobSubscription = {
   code?: string | null;
   startDate?: string | null;
   endDate?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningJobConnection";
-    items: Array<{
-      __typename: "SceeningJob";
-      id: string;
-      sceeningId: string;
-      jobId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   forms?: {
     __typename: "ModelFormJobConnection";
     items: Array<{
@@ -3970,6 +6187,38 @@ export type OnCreateJobSubscription = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -3982,6 +6231,41 @@ export type OnCreateJobSubscription = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -3997,18 +6281,6 @@ export type OnUpdateJobSubscription = {
   code?: string | null;
   startDate?: string | null;
   endDate?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningJobConnection";
-    items: Array<{
-      __typename: "SceeningJob";
-      id: string;
-      sceeningId: string;
-      jobId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   forms?: {
     __typename: "ModelFormJobConnection";
     items: Array<{
@@ -4016,6 +6288,38 @@ export type OnUpdateJobSubscription = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -4028,6 +6332,41 @@ export type OnUpdateJobSubscription = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -4043,18 +6382,6 @@ export type OnDeleteJobSubscription = {
   code?: string | null;
   startDate?: string | null;
   endDate?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningJobConnection";
-    items: Array<{
-      __typename: "SceeningJob";
-      id: string;
-      sceeningId: string;
-      jobId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   forms?: {
     __typename: "ModelFormJobConnection";
     items: Array<{
@@ -4062,6 +6389,38 @@ export type OnDeleteJobSubscription = {
       id: string;
       formId: string;
       jobId: string;
+      form: {
+        __typename: "Form";
+        id: string;
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -4074,6 +6433,41 @@ export type OnDeleteJobSubscription = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -4094,6 +6488,40 @@ export type OnCreateQuestionSubscription = {
       id: string;
       questionId: string;
       optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -4105,10 +6533,55 @@ export type OnCreateQuestionSubscription = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -4132,6 +6605,40 @@ export type OnUpdateQuestionSubscription = {
       id: string;
       questionId: string;
       optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -4143,10 +6650,55 @@ export type OnUpdateQuestionSubscription = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -4170,6 +6722,40 @@ export type OnDeleteQuestionSubscription = {
       id: string;
       questionId: string;
       optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -4181,10 +6767,55 @@ export type OnDeleteQuestionSubscription = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -4209,18 +6840,40 @@ export type OnCreateOptionSubscription = {
       id: string;
       questionId: string;
       optionId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  sceenings?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -4243,18 +6896,40 @@ export type OnUpdateOptionSubscription = {
       id: string;
       questionId: string;
       optionId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  sceenings?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -4277,18 +6952,40 @@ export type OnDeleteOptionSubscription = {
       id: string;
       questionId: string;
       optionId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  sceenings?: {
-    __typename: "ModelSceeningOptionConnection";
-    items: Array<{
-      __typename: "SceeningOption";
-      id: string;
-      sceeningId: string;
-      optionId: string;
+      question: {
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      };
+      option: {
+        __typename: "Option";
+        id: string;
+        label?: string | null;
+        value?: string | null;
+        questions?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -4303,24 +7000,13 @@ export type OnCreateCrewSubscription = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  role?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
   name?: string | null;
   email?: string | null;
   defaultJobId?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   jobs?: {
     __typename: "ModelCrewJobConnection";
     items: Array<{
@@ -4328,6 +7014,41 @@ export type OnCreateCrewSubscription = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -4341,24 +7062,13 @@ export type OnUpdateCrewSubscription = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  role?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
   name?: string | null;
   email?: string | null;
   defaultJobId?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   jobs?: {
     __typename: "ModelCrewJobConnection";
     items: Array<{
@@ -4366,6 +7076,41 @@ export type OnUpdateCrewSubscription = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
@@ -4379,24 +7124,13 @@ export type OnDeleteCrewSubscription = {
   __typename: "Crew";
   id: string;
   userName?: string | null;
+  role?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
   name?: string | null;
   email?: string | null;
   defaultJobId?: string | null;
-  sceenings?: {
-    __typename: "ModelSceeningCrewConnection";
-    items: Array<{
-      __typename: "SceeningCrew";
-      id: string;
-      sceeningId: string;
-      crewId: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
   jobs?: {
     __typename: "ModelCrewJobConnection";
     items: Array<{
@@ -4404,431 +7138,46 @@ export type OnDeleteCrewSubscription = {
       id: string;
       jobId: string;
       crewId: string;
+      job: {
+        __typename: "Job";
+        id: string;
+        code?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        forms?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+        } | null;
+        crews?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
+      crew: {
+        __typename: "Crew";
+        id: string;
+        userName?: string | null;
+        role?: string | null;
+        companyName?: string | null;
+        address?: string | null;
+        phonenumber?: string | null;
+        name?: string | null;
+        email?: string | null;
+        defaultJobId?: string | null;
+        jobs?: {
+          __typename: "ModelCrewJobConnection";
+          nextToken?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     } | null>;
     nextToken?: string | null;
   } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnCreateSceeningJobSubscription = {
-  __typename: "SceeningJob";
-  id: string;
-  sceeningId: string;
-  jobId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  job: {
-    __typename: "Job";
-    id: string;
-    code?: string | null;
-    startDate?: string | null;
-    endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    forms?: {
-      __typename: "ModelFormJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdateSceeningJobSubscription = {
-  __typename: "SceeningJob";
-  id: string;
-  sceeningId: string;
-  jobId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  job: {
-    __typename: "Job";
-    id: string;
-    code?: string | null;
-    startDate?: string | null;
-    endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    forms?: {
-      __typename: "ModelFormJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteSceeningJobSubscription = {
-  __typename: "SceeningJob";
-  id: string;
-  sceeningId: string;
-  jobId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  job: {
-    __typename: "Job";
-    id: string;
-    code?: string | null;
-    startDate?: string | null;
-    endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    forms?: {
-      __typename: "ModelFormJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnCreateSceeningCrewSubscription = {
-  __typename: "SceeningCrew";
-  id: string;
-  sceeningId: string;
-  crewId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  crew: {
-    __typename: "Crew";
-    id: string;
-    userName?: string | null;
-    companyName?: string | null;
-    address?: string | null;
-    phonenumber?: string | null;
-    name?: string | null;
-    email?: string | null;
-    defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    jobs?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdateSceeningCrewSubscription = {
-  __typename: "SceeningCrew";
-  id: string;
-  sceeningId: string;
-  crewId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  crew: {
-    __typename: "Crew";
-    id: string;
-    userName?: string | null;
-    companyName?: string | null;
-    address?: string | null;
-    phonenumber?: string | null;
-    name?: string | null;
-    email?: string | null;
-    defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    jobs?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteSceeningCrewSubscription = {
-  __typename: "SceeningCrew";
-  id: string;
-  sceeningId: string;
-  crewId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  crew: {
-    __typename: "Crew";
-    id: string;
-    userName?: string | null;
-    companyName?: string | null;
-    address?: string | null;
-    phonenumber?: string | null;
-    name?: string | null;
-    email?: string | null;
-    defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    jobs?: {
-      __typename: "ModelCrewJobConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnCreateSceeningOptionSubscription = {
-  __typename: "SceeningOption";
-  id: string;
-  sceeningId: string;
-  optionId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  option: {
-    __typename: "Option";
-    id: string;
-    label?: string | null;
-    value?: string | null;
-    questions?: {
-      __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    order?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdateSceeningOptionSubscription = {
-  __typename: "SceeningOption";
-  id: string;
-  sceeningId: string;
-  optionId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  option: {
-    __typename: "Option";
-    id: string;
-    label?: string | null;
-    value?: string | null;
-    questions?: {
-      __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    order?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteSceeningOptionSubscription = {
-  __typename: "SceeningOption";
-  id: string;
-  sceeningId: string;
-  optionId: string;
-  sceening: {
-    __typename: "Sceening";
-    id: string;
-    jobs?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
-    crews?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
-    options?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  option: {
-    __typename: "Option";
-    id: string;
-    label?: string | null;
-    value?: string | null;
-    questions?: {
-      __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    order?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  };
   createdAt: string;
   updatedAt: string;
 };
@@ -4844,10 +7193,55 @@ export type OnCreateFormJobSubscription = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -4859,16 +7253,67 @@ export type OnCreateFormJobSubscription = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -4889,10 +7334,55 @@ export type OnUpdateFormJobSubscription = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -4904,16 +7394,67 @@ export type OnUpdateFormJobSubscription = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -4934,10 +7475,55 @@ export type OnDeleteFormJobSubscription = {
     name?: string | null;
     questions?: {
       __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        formQuestionsId?: string | null;
+      } | null>;
       nextToken?: string | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -4949,16 +7535,67 @@ export type OnDeleteFormJobSubscription = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -4979,16 +7616,67 @@ export type OnCreateCrewJobSubscription = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -4998,18 +7686,46 @@ export type OnCreateCrewJobSubscription = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    role?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
     name?: string | null;
     email?: string | null;
     defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
     jobs?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -5030,16 +7746,67 @@ export type OnUpdateCrewJobSubscription = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -5049,18 +7816,46 @@ export type OnUpdateCrewJobSubscription = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    role?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
     name?: string | null;
     email?: string | null;
     defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
     jobs?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -5081,16 +7876,67 @@ export type OnDeleteCrewJobSubscription = {
     code?: string | null;
     startDate?: string | null;
     endDate?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningJobConnection";
-      nextToken?: string | null;
-    } | null;
     forms?: {
       __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -5100,18 +7946,46 @@ export type OnDeleteCrewJobSubscription = {
     __typename: "Crew";
     id: string;
     userName?: string | null;
+    role?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
     name?: string | null;
     email?: string | null;
     defaultJobId?: string | null;
-    sceenings?: {
-      __typename: "ModelSceeningCrewConnection";
-      nextToken?: string | null;
-    } | null;
     jobs?: {
       __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     createdAt: string;
@@ -5132,12 +8006,65 @@ export type OnCreateQuestionOptionSubscription = {
     title?: string | null;
     options?: {
       __typename: "ModelQuestionOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     form?: {
       __typename: "Form";
       id: string;
       name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -5154,10 +8081,33 @@ export type OnCreateQuestionOptionSubscription = {
     value?: string | null;
     questions?: {
       __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     order?: number | null;
@@ -5179,12 +8129,65 @@ export type OnUpdateQuestionOptionSubscription = {
     title?: string | null;
     options?: {
       __typename: "ModelQuestionOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     form?: {
       __typename: "Form";
       id: string;
       name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -5201,10 +8204,33 @@ export type OnUpdateQuestionOptionSubscription = {
     value?: string | null;
     questions?: {
       __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     order?: number | null;
@@ -5226,12 +8252,65 @@ export type OnDeleteQuestionOptionSubscription = {
     title?: string | null;
     options?: {
       __typename: "ModelQuestionOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     form?: {
       __typename: "Form";
       id: string;
       name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -5248,10 +8327,33 @@ export type OnDeleteQuestionOptionSubscription = {
     value?: string | null;
     questions?: {
       __typename: "ModelQuestionOptionConnection";
-      nextToken?: string | null;
-    } | null;
-    sceenings?: {
-      __typename: "ModelSceeningOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+        };
+        createdAt: string;
+        updatedAt: string;
+      } | null>;
       nextToken?: string | null;
     } | null;
     order?: number | null;
@@ -5274,39 +8376,36 @@ export class APIService {
         createSceening(input: $input, condition: $condition) {
           __typename
           id
-          jobs {
+          jobId
+          jobName
+          crewId
+          crewName
+          result
+          answeredQuestions {
             __typename
             items {
               __typename
               id
-              sceeningId
-              jobId
+              question
+              answer
+              sceening {
+                __typename
+                id
+                jobId
+                jobName
+                crewId
+                crewName
+                result
+                answeredQuestions {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
-            }
-            nextToken
-          }
-          crews {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          options {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
-              createdAt
-              updatedAt
+              sceeningAnsweredQuestionsId
             }
             nextToken
           }
@@ -5333,39 +8432,36 @@ export class APIService {
         updateSceening(input: $input, condition: $condition) {
           __typename
           id
-          jobs {
+          jobId
+          jobName
+          crewId
+          crewName
+          result
+          answeredQuestions {
             __typename
             items {
               __typename
               id
-              sceeningId
-              jobId
+              question
+              answer
+              sceening {
+                __typename
+                id
+                jobId
+                jobName
+                crewId
+                crewName
+                result
+                answeredQuestions {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
-            }
-            nextToken
-          }
-          crews {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          options {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
-              createdAt
-              updatedAt
+              sceeningAnsweredQuestionsId
             }
             nextToken
           }
@@ -5392,39 +8488,36 @@ export class APIService {
         deleteSceening(input: $input, condition: $condition) {
           __typename
           id
-          jobs {
+          jobId
+          jobName
+          crewId
+          crewName
+          result
+          answeredQuestions {
             __typename
             items {
               __typename
               id
-              sceeningId
-              jobId
+              question
+              answer
+              sceening {
+                __typename
+                id
+                jobId
+                jobName
+                crewId
+                crewName
+                result
+                answeredQuestions {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
-            }
-            nextToken
-          }
-          crews {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          options {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
-              createdAt
-              updatedAt
+              sceeningAnsweredQuestionsId
             }
             nextToken
           }
@@ -5443,6 +8536,189 @@ export class APIService {
     )) as any;
     return <DeleteSceeningMutation>response.data.deleteSceening;
   }
+  async CreateAnsweredQuestion(
+    input: CreateAnsweredQuestionInput,
+    condition?: ModelAnsweredQuestionConditionInput
+  ): Promise<CreateAnsweredQuestionMutation> {
+    const statement = `mutation CreateAnsweredQuestion($input: CreateAnsweredQuestionInput!, $condition: ModelAnsweredQuestionConditionInput) {
+        createAnsweredQuestion(input: $input, condition: $condition) {
+          __typename
+          id
+          question
+          answer
+          sceening {
+            __typename
+            id
+            jobId
+            jobName
+            crewId
+            crewName
+            result
+            answeredQuestions {
+              __typename
+              items {
+                __typename
+                id
+                question
+                answer
+                sceening {
+                  __typename
+                  id
+                  jobId
+                  jobName
+                  crewId
+                  crewName
+                  result
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+                sceeningAnsweredQuestionsId
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          sceeningAnsweredQuestionsId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateAnsweredQuestionMutation>response.data.createAnsweredQuestion;
+  }
+  async UpdateAnsweredQuestion(
+    input: UpdateAnsweredQuestionInput,
+    condition?: ModelAnsweredQuestionConditionInput
+  ): Promise<UpdateAnsweredQuestionMutation> {
+    const statement = `mutation UpdateAnsweredQuestion($input: UpdateAnsweredQuestionInput!, $condition: ModelAnsweredQuestionConditionInput) {
+        updateAnsweredQuestion(input: $input, condition: $condition) {
+          __typename
+          id
+          question
+          answer
+          sceening {
+            __typename
+            id
+            jobId
+            jobName
+            crewId
+            crewName
+            result
+            answeredQuestions {
+              __typename
+              items {
+                __typename
+                id
+                question
+                answer
+                sceening {
+                  __typename
+                  id
+                  jobId
+                  jobName
+                  crewId
+                  crewName
+                  result
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+                sceeningAnsweredQuestionsId
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          sceeningAnsweredQuestionsId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateAnsweredQuestionMutation>response.data.updateAnsweredQuestion;
+  }
+  async DeleteAnsweredQuestion(
+    input: DeleteAnsweredQuestionInput,
+    condition?: ModelAnsweredQuestionConditionInput
+  ): Promise<DeleteAnsweredQuestionMutation> {
+    const statement = `mutation DeleteAnsweredQuestion($input: DeleteAnsweredQuestionInput!, $condition: ModelAnsweredQuestionConditionInput) {
+        deleteAnsweredQuestion(input: $input, condition: $condition) {
+          __typename
+          id
+          question
+          answer
+          sceening {
+            __typename
+            id
+            jobId
+            jobName
+            crewId
+            crewName
+            result
+            answeredQuestions {
+              __typename
+              items {
+                __typename
+                id
+                question
+                answer
+                sceening {
+                  __typename
+                  id
+                  jobId
+                  jobName
+                  crewId
+                  crewName
+                  result
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+                sceeningAnsweredQuestionsId
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          sceeningAnsweredQuestionsId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteAnsweredQuestionMutation>response.data.deleteAnsweredQuestion;
+  }
   async CreateForm(
     input: CreateFormInput,
     condition?: ModelFormConditionInput
@@ -5458,6 +8734,33 @@ export class APIService {
               __typename
               id
               title
+              options {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               order
               optionOrderDesc
               createdAt
@@ -5473,6 +8776,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -5508,6 +8843,33 @@ export class APIService {
               __typename
               id
               title
+              options {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               order
               optionOrderDesc
               createdAt
@@ -5523,6 +8885,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -5558,6 +8952,33 @@ export class APIService {
               __typename
               id
               title
+              options {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               order
               optionOrderDesc
               createdAt
@@ -5573,6 +8994,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -5604,18 +9057,6 @@ export class APIService {
           code
           startDate
           endDate
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              jobId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           forms {
             __typename
             items {
@@ -5623,6 +9064,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -5635,6 +9108,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -5666,18 +9174,6 @@ export class APIService {
           code
           startDate
           endDate
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              jobId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           forms {
             __typename
             items {
@@ -5685,6 +9181,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -5697,6 +9225,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -5728,18 +9291,6 @@ export class APIService {
           code
           startDate
           endDate
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              jobId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           forms {
             __typename
             items {
@@ -5747,6 +9298,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -5759,6 +9342,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -5795,6 +9413,40 @@ export class APIService {
               id
               questionId
               optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -5806,10 +9458,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -5849,6 +9546,40 @@ export class APIService {
               id
               questionId
               optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -5860,10 +9591,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -5903,6 +9679,40 @@ export class APIService {
               id
               questionId
               optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -5914,10 +9724,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -5958,18 +9813,40 @@ export class APIService {
               id
               questionId
               optionId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -6008,18 +9885,40 @@ export class APIService {
               id
               questionId
               optionId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -6058,18 +9957,40 @@ export class APIService {
               id
               questionId
               optionId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -6100,24 +10021,13 @@ export class APIService {
           __typename
           id
           userName
+          role
           companyName
           address
           phonenumber
           name
           email
           defaultJobId
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           jobs {
             __typename
             items {
@@ -6125,6 +10035,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -6154,24 +10099,13 @@ export class APIService {
           __typename
           id
           userName
+          role
           companyName
           address
           phonenumber
           name
           email
           defaultJobId
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           jobs {
             __typename
             items {
@@ -6179,6 +10113,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -6208,24 +10177,13 @@ export class APIService {
           __typename
           id
           userName
+          role
           companyName
           address
           phonenumber
           name
           email
           defaultJobId
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           jobs {
             __typename
             items {
@@ -6233,6 +10191,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -6253,570 +10246,6 @@ export class APIService {
     )) as any;
     return <DeleteCrewMutation>response.data.deleteCrew;
   }
-  async CreateSceeningJob(
-    input: CreateSceeningJobInput,
-    condition?: ModelSceeningJobConditionInput
-  ): Promise<CreateSceeningJobMutation> {
-    const statement = `mutation CreateSceeningJob($input: CreateSceeningJobInput!, $condition: ModelSceeningJobConditionInput) {
-        createSceeningJob(input: $input, condition: $condition) {
-          __typename
-          id
-          sceeningId
-          jobId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          job {
-            __typename
-            id
-            code
-            startDate
-            endDate
-            sceenings {
-              __typename
-              nextToken
-            }
-            forms {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateSceeningJobMutation>response.data.createSceeningJob;
-  }
-  async UpdateSceeningJob(
-    input: UpdateSceeningJobInput,
-    condition?: ModelSceeningJobConditionInput
-  ): Promise<UpdateSceeningJobMutation> {
-    const statement = `mutation UpdateSceeningJob($input: UpdateSceeningJobInput!, $condition: ModelSceeningJobConditionInput) {
-        updateSceeningJob(input: $input, condition: $condition) {
-          __typename
-          id
-          sceeningId
-          jobId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          job {
-            __typename
-            id
-            code
-            startDate
-            endDate
-            sceenings {
-              __typename
-              nextToken
-            }
-            forms {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateSceeningJobMutation>response.data.updateSceeningJob;
-  }
-  async DeleteSceeningJob(
-    input: DeleteSceeningJobInput,
-    condition?: ModelSceeningJobConditionInput
-  ): Promise<DeleteSceeningJobMutation> {
-    const statement = `mutation DeleteSceeningJob($input: DeleteSceeningJobInput!, $condition: ModelSceeningJobConditionInput) {
-        deleteSceeningJob(input: $input, condition: $condition) {
-          __typename
-          id
-          sceeningId
-          jobId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          job {
-            __typename
-            id
-            code
-            startDate
-            endDate
-            sceenings {
-              __typename
-              nextToken
-            }
-            forms {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteSceeningJobMutation>response.data.deleteSceeningJob;
-  }
-  async CreateSceeningCrew(
-    input: CreateSceeningCrewInput,
-    condition?: ModelSceeningCrewConditionInput
-  ): Promise<CreateSceeningCrewMutation> {
-    const statement = `mutation CreateSceeningCrew($input: CreateSceeningCrewInput!, $condition: ModelSceeningCrewConditionInput) {
-        createSceeningCrew(input: $input, condition: $condition) {
-          __typename
-          id
-          sceeningId
-          crewId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          crew {
-            __typename
-            id
-            userName
-            companyName
-            address
-            phonenumber
-            name
-            email
-            defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
-            jobs {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateSceeningCrewMutation>response.data.createSceeningCrew;
-  }
-  async UpdateSceeningCrew(
-    input: UpdateSceeningCrewInput,
-    condition?: ModelSceeningCrewConditionInput
-  ): Promise<UpdateSceeningCrewMutation> {
-    const statement = `mutation UpdateSceeningCrew($input: UpdateSceeningCrewInput!, $condition: ModelSceeningCrewConditionInput) {
-        updateSceeningCrew(input: $input, condition: $condition) {
-          __typename
-          id
-          sceeningId
-          crewId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          crew {
-            __typename
-            id
-            userName
-            companyName
-            address
-            phonenumber
-            name
-            email
-            defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
-            jobs {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateSceeningCrewMutation>response.data.updateSceeningCrew;
-  }
-  async DeleteSceeningCrew(
-    input: DeleteSceeningCrewInput,
-    condition?: ModelSceeningCrewConditionInput
-  ): Promise<DeleteSceeningCrewMutation> {
-    const statement = `mutation DeleteSceeningCrew($input: DeleteSceeningCrewInput!, $condition: ModelSceeningCrewConditionInput) {
-        deleteSceeningCrew(input: $input, condition: $condition) {
-          __typename
-          id
-          sceeningId
-          crewId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          crew {
-            __typename
-            id
-            userName
-            companyName
-            address
-            phonenumber
-            name
-            email
-            defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
-            jobs {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteSceeningCrewMutation>response.data.deleteSceeningCrew;
-  }
-  async CreateSceeningOption(
-    input: CreateSceeningOptionInput,
-    condition?: ModelSceeningOptionConditionInput
-  ): Promise<CreateSceeningOptionMutation> {
-    const statement = `mutation CreateSceeningOption($input: CreateSceeningOptionInput!, $condition: ModelSceeningOptionConditionInput) {
-        createSceeningOption(input: $input, condition: $condition) {
-          __typename
-          id
-          sceeningId
-          optionId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          option {
-            __typename
-            id
-            label
-            value
-            questions {
-              __typename
-              nextToken
-            }
-            sceenings {
-              __typename
-              nextToken
-            }
-            order
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateSceeningOptionMutation>response.data.createSceeningOption;
-  }
-  async UpdateSceeningOption(
-    input: UpdateSceeningOptionInput,
-    condition?: ModelSceeningOptionConditionInput
-  ): Promise<UpdateSceeningOptionMutation> {
-    const statement = `mutation UpdateSceeningOption($input: UpdateSceeningOptionInput!, $condition: ModelSceeningOptionConditionInput) {
-        updateSceeningOption(input: $input, condition: $condition) {
-          __typename
-          id
-          sceeningId
-          optionId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          option {
-            __typename
-            id
-            label
-            value
-            questions {
-              __typename
-              nextToken
-            }
-            sceenings {
-              __typename
-              nextToken
-            }
-            order
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateSceeningOptionMutation>response.data.updateSceeningOption;
-  }
-  async DeleteSceeningOption(
-    input: DeleteSceeningOptionInput,
-    condition?: ModelSceeningOptionConditionInput
-  ): Promise<DeleteSceeningOptionMutation> {
-    const statement = `mutation DeleteSceeningOption($input: DeleteSceeningOptionInput!, $condition: ModelSceeningOptionConditionInput) {
-        deleteSceeningOption(input: $input, condition: $condition) {
-          __typename
-          id
-          sceeningId
-          optionId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          option {
-            __typename
-            id
-            label
-            value
-            questions {
-              __typename
-              nextToken
-            }
-            sceenings {
-              __typename
-              nextToken
-            }
-            order
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteSceeningOptionMutation>response.data.deleteSceeningOption;
-  }
   async CreateFormJob(
     input: CreateFormJobInput,
     condition?: ModelFormJobConditionInput
@@ -6833,10 +10262,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -6848,16 +10322,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -6894,10 +10419,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -6909,16 +10479,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -6955,10 +10576,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -6970,16 +10636,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -7016,16 +10733,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -7035,18 +10803,46 @@ export class APIService {
             __typename
             id
             userName
+            role
             companyName
             address
             phonenumber
             name
             email
             defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -7083,16 +10879,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -7102,18 +10949,46 @@ export class APIService {
             __typename
             id
             userName
+            role
             companyName
             address
             phonenumber
             name
             email
             defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -7150,16 +11025,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -7169,18 +11095,46 @@ export class APIService {
             __typename
             id
             userName
+            role
             companyName
             address
             phonenumber
             name
             email
             defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -7217,12 +11171,65 @@ export class APIService {
             title
             options {
               __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             form {
               __typename
               id
               name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                nextToken
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -7239,10 +11246,33 @@ export class APIService {
             value
             questions {
               __typename
-              nextToken
-            }
-            sceenings {
-              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             order
@@ -7280,12 +11310,65 @@ export class APIService {
             title
             options {
               __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             form {
               __typename
               id
               name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                nextToken
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -7302,10 +11385,33 @@ export class APIService {
             value
             questions {
               __typename
-              nextToken
-            }
-            sceenings {
-              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             order
@@ -7343,12 +11449,65 @@ export class APIService {
             title
             options {
               __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             form {
               __typename
               id
               name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                nextToken
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -7365,10 +11524,33 @@ export class APIService {
             value
             questions {
               __typename
-              nextToken
-            }
-            sceenings {
-              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             order
@@ -7395,39 +11577,36 @@ export class APIService {
         getSceening(id: $id) {
           __typename
           id
-          jobs {
+          jobId
+          jobName
+          crewId
+          crewName
+          result
+          answeredQuestions {
             __typename
             items {
               __typename
               id
-              sceeningId
-              jobId
+              question
+              answer
+              sceening {
+                __typename
+                id
+                jobId
+                jobName
+                crewId
+                crewName
+                result
+                answeredQuestions {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
-            }
-            nextToken
-          }
-          crews {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          options {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
-              createdAt
-              updatedAt
+              sceeningAnsweredQuestionsId
             }
             nextToken
           }
@@ -7454,16 +11633,33 @@ export class APIService {
           items {
             __typename
             id
-            jobs {
+            jobId
+            jobName
+            crewId
+            crewName
+            result
+            answeredQuestions {
               __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
+              items {
+                __typename
+                id
+                question
+                answer
+                sceening {
+                  __typename
+                  id
+                  jobId
+                  jobName
+                  crewId
+                  crewName
+                  result
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+                sceeningAnsweredQuestionsId
+              }
               nextToken
             }
             createdAt
@@ -7487,6 +11683,120 @@ export class APIService {
     )) as any;
     return <ListSceeningsQuery>response.data.listSceenings;
   }
+  async GetAnsweredQuestion(id: string): Promise<GetAnsweredQuestionQuery> {
+    const statement = `query GetAnsweredQuestion($id: ID!) {
+        getAnsweredQuestion(id: $id) {
+          __typename
+          id
+          question
+          answer
+          sceening {
+            __typename
+            id
+            jobId
+            jobName
+            crewId
+            crewName
+            result
+            answeredQuestions {
+              __typename
+              items {
+                __typename
+                id
+                question
+                answer
+                sceening {
+                  __typename
+                  id
+                  jobId
+                  jobName
+                  crewId
+                  crewName
+                  result
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+                sceeningAnsweredQuestionsId
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          sceeningAnsweredQuestionsId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetAnsweredQuestionQuery>response.data.getAnsweredQuestion;
+  }
+  async ListAnsweredQuestions(
+    filter?: ModelAnsweredQuestionFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListAnsweredQuestionsQuery> {
+    const statement = `query ListAnsweredQuestions($filter: ModelAnsweredQuestionFilterInput, $limit: Int, $nextToken: String) {
+        listAnsweredQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            question
+            answer
+            sceening {
+              __typename
+              id
+              jobId
+              jobName
+              crewId
+              crewName
+              result
+              answeredQuestions {
+                __typename
+                items {
+                  __typename
+                  id
+                  question
+                  answer
+                  createdAt
+                  updatedAt
+                  sceeningAnsweredQuestionsId
+                }
+                nextToken
+              }
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+            sceeningAnsweredQuestionsId
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListAnsweredQuestionsQuery>response.data.listAnsweredQuestions;
+  }
   async GetForm(id: string): Promise<GetFormQuery> {
     const statement = `query GetForm($id: ID!) {
         getForm(id: $id) {
@@ -7499,6 +11809,33 @@ export class APIService {
               __typename
               id
               title
+              options {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               order
               optionOrderDesc
               createdAt
@@ -7514,6 +11851,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -7545,10 +11914,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -7580,18 +11994,6 @@ export class APIService {
           code
           startDate
           endDate
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              jobId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           forms {
             __typename
             items {
@@ -7599,6 +12001,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -7611,6 +12045,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -7642,16 +12111,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -7688,6 +12208,40 @@ export class APIService {
               id
               questionId
               optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -7699,10 +12253,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -7737,12 +12336,65 @@ export class APIService {
             title
             options {
               __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             form {
               __typename
               id
               name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                nextToken
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -7784,18 +12436,40 @@ export class APIService {
               id
               questionId
               optionId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -7829,10 +12503,33 @@ export class APIService {
             value
             questions {
               __typename
-              nextToken
-            }
-            sceenings {
-              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             order
@@ -7863,24 +12560,13 @@ export class APIService {
           __typename
           id
           userName
+          role
           companyName
           address
           phonenumber
           name
           email
           defaultJobId
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           jobs {
             __typename
             items {
@@ -7888,6 +12574,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -7917,18 +12638,46 @@ export class APIService {
             __typename
             id
             userName
+            role
             companyName
             address
             phonenumber
             name
             email
             defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -7952,327 +12701,6 @@ export class APIService {
     )) as any;
     return <ListCrewsQuery>response.data.listCrews;
   }
-  async GetSceeningJob(id: string): Promise<GetSceeningJobQuery> {
-    const statement = `query GetSceeningJob($id: ID!) {
-        getSceeningJob(id: $id) {
-          __typename
-          id
-          sceeningId
-          jobId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          job {
-            __typename
-            id
-            code
-            startDate
-            endDate
-            sceenings {
-              __typename
-              nextToken
-            }
-            forms {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetSceeningJobQuery>response.data.getSceeningJob;
-  }
-  async ListSceeningJobs(
-    filter?: ModelSceeningJobFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListSceeningJobsQuery> {
-    const statement = `query ListSceeningJobs($filter: ModelSceeningJobFilterInput, $limit: Int, $nextToken: String) {
-        listSceeningJobs(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            sceeningId
-            jobId
-            sceening {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            job {
-              __typename
-              id
-              code
-              startDate
-              endDate
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListSceeningJobsQuery>response.data.listSceeningJobs;
-  }
-  async GetSceeningCrew(id: string): Promise<GetSceeningCrewQuery> {
-    const statement = `query GetSceeningCrew($id: ID!) {
-        getSceeningCrew(id: $id) {
-          __typename
-          id
-          sceeningId
-          crewId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          crew {
-            __typename
-            id
-            userName
-            companyName
-            address
-            phonenumber
-            name
-            email
-            defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
-            jobs {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetSceeningCrewQuery>response.data.getSceeningCrew;
-  }
-  async ListSceeningCrews(
-    filter?: ModelSceeningCrewFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListSceeningCrewsQuery> {
-    const statement = `query ListSceeningCrews($filter: ModelSceeningCrewFilterInput, $limit: Int, $nextToken: String) {
-        listSceeningCrews(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            sceeningId
-            crewId
-            sceening {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            crew {
-              __typename
-              id
-              userName
-              companyName
-              address
-              phonenumber
-              name
-              email
-              defaultJobId
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListSceeningCrewsQuery>response.data.listSceeningCrews;
-  }
-  async GetSceeningOption(id: string): Promise<GetSceeningOptionQuery> {
-    const statement = `query GetSceeningOption($id: ID!) {
-        getSceeningOption(id: $id) {
-          __typename
-          id
-          sceeningId
-          optionId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          option {
-            __typename
-            id
-            label
-            value
-            questions {
-              __typename
-              nextToken
-            }
-            sceenings {
-              __typename
-              nextToken
-            }
-            order
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetSceeningOptionQuery>response.data.getSceeningOption;
-  }
-  async ListSceeningOptions(
-    filter?: ModelSceeningOptionFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListSceeningOptionsQuery> {
-    const statement = `query ListSceeningOptions($filter: ModelSceeningOptionFilterInput, $limit: Int, $nextToken: String) {
-        listSceeningOptions(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            sceeningId
-            optionId
-            sceening {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            option {
-              __typename
-              id
-              label
-              value
-              order
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListSceeningOptionsQuery>response.data.listSceeningOptions;
-  }
   async GetFormJob(id: string): Promise<GetFormJobQuery> {
     const statement = `query GetFormJob($id: ID!) {
         getFormJob(id: $id) {
@@ -8286,10 +12714,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -8301,16 +12774,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -8345,6 +12869,32 @@ export class APIService {
               __typename
               id
               name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                nextToken
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -8354,6 +12904,30 @@ export class APIService {
               code
               startDate
               endDate
+              forms {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              crews {
+                __typename
+                items {
+                  __typename
+                  id
+                  jobId
+                  crewId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -8391,16 +12965,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -8410,18 +13035,46 @@ export class APIService {
             __typename
             id
             userName
+            role
             companyName
             address
             phonenumber
             name
             email
             defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -8458,6 +13111,30 @@ export class APIService {
               code
               startDate
               endDate
+              forms {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              crews {
+                __typename
+                items {
+                  __typename
+                  id
+                  jobId
+                  crewId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -8465,12 +13142,25 @@ export class APIService {
               __typename
               id
               userName
+              role
               companyName
               address
               phonenumber
               name
               email
               defaultJobId
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  jobId
+                  crewId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -8508,12 +13198,65 @@ export class APIService {
             title
             options {
               __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             form {
               __typename
               id
               name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                nextToken
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -8530,10 +13273,33 @@ export class APIService {
             value
             questions {
               __typename
-              nextToken
-            }
-            sceenings {
-              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             order
@@ -8569,6 +13335,33 @@ export class APIService {
               __typename
               id
               title
+              options {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               order
               optionOrderDesc
               createdAt
@@ -8580,6 +13373,18 @@ export class APIService {
               id
               label
               value
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               order
               createdAt
               updatedAt
@@ -8621,12 +13426,65 @@ export class APIService {
             title
             options {
               __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             form {
               __typename
               id
               name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                nextToken
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -8676,10 +13534,33 @@ export class APIService {
             value
             questions {
               __typename
-              nextToken
-            }
-            sceenings {
-              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             order
@@ -8709,358 +13590,6 @@ export class APIService {
     )) as any;
     return <OptionsByOrderQuery>response.data.optionsByOrder;
   }
-  async SceeningJobsBySceeningId(
-    sceeningId: string,
-    sortDirection?: ModelSortDirection,
-    filter?: ModelSceeningJobFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<SceeningJobsBySceeningIdQuery> {
-    const statement = `query SceeningJobsBySceeningId($sceeningId: ID!, $sortDirection: ModelSortDirection, $filter: ModelSceeningJobFilterInput, $limit: Int, $nextToken: String) {
-        sceeningJobsBySceeningId(sceeningId: $sceeningId, sortDirection: $sortDirection, filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            sceeningId
-            jobId
-            sceening {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            job {
-              __typename
-              id
-              code
-              startDate
-              endDate
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      sceeningId
-    };
-    if (sortDirection) {
-      gqlAPIServiceArguments.sortDirection = sortDirection;
-    }
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SceeningJobsBySceeningIdQuery>(
-      response.data.sceeningJobsBySceeningId
-    );
-  }
-  async SceeningJobsByJobId(
-    jobId: string,
-    sortDirection?: ModelSortDirection,
-    filter?: ModelSceeningJobFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<SceeningJobsByJobIdQuery> {
-    const statement = `query SceeningJobsByJobId($jobId: ID!, $sortDirection: ModelSortDirection, $filter: ModelSceeningJobFilterInput, $limit: Int, $nextToken: String) {
-        sceeningJobsByJobId(jobId: $jobId, sortDirection: $sortDirection, filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            sceeningId
-            jobId
-            sceening {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            job {
-              __typename
-              id
-              code
-              startDate
-              endDate
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      jobId
-    };
-    if (sortDirection) {
-      gqlAPIServiceArguments.sortDirection = sortDirection;
-    }
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SceeningJobsByJobIdQuery>response.data.sceeningJobsByJobId;
-  }
-  async SceeningCrewsBySceeningId(
-    sceeningId: string,
-    sortDirection?: ModelSortDirection,
-    filter?: ModelSceeningCrewFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<SceeningCrewsBySceeningIdQuery> {
-    const statement = `query SceeningCrewsBySceeningId($sceeningId: ID!, $sortDirection: ModelSortDirection, $filter: ModelSceeningCrewFilterInput, $limit: Int, $nextToken: String) {
-        sceeningCrewsBySceeningId(sceeningId: $sceeningId, sortDirection: $sortDirection, filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            sceeningId
-            crewId
-            sceening {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            crew {
-              __typename
-              id
-              userName
-              companyName
-              address
-              phonenumber
-              name
-              email
-              defaultJobId
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      sceeningId
-    };
-    if (sortDirection) {
-      gqlAPIServiceArguments.sortDirection = sortDirection;
-    }
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SceeningCrewsBySceeningIdQuery>(
-      response.data.sceeningCrewsBySceeningId
-    );
-  }
-  async SceeningCrewsByCrewId(
-    crewId: string,
-    sortDirection?: ModelSortDirection,
-    filter?: ModelSceeningCrewFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<SceeningCrewsByCrewIdQuery> {
-    const statement = `query SceeningCrewsByCrewId($crewId: ID!, $sortDirection: ModelSortDirection, $filter: ModelSceeningCrewFilterInput, $limit: Int, $nextToken: String) {
-        sceeningCrewsByCrewId(crewId: $crewId, sortDirection: $sortDirection, filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            sceeningId
-            crewId
-            sceening {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            crew {
-              __typename
-              id
-              userName
-              companyName
-              address
-              phonenumber
-              name
-              email
-              defaultJobId
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      crewId
-    };
-    if (sortDirection) {
-      gqlAPIServiceArguments.sortDirection = sortDirection;
-    }
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SceeningCrewsByCrewIdQuery>response.data.sceeningCrewsByCrewId;
-  }
-  async SceeningOptionsBySceeningId(
-    sceeningId: string,
-    sortDirection?: ModelSortDirection,
-    filter?: ModelSceeningOptionFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<SceeningOptionsBySceeningIdQuery> {
-    const statement = `query SceeningOptionsBySceeningId($sceeningId: ID!, $sortDirection: ModelSortDirection, $filter: ModelSceeningOptionFilterInput, $limit: Int, $nextToken: String) {
-        sceeningOptionsBySceeningId(sceeningId: $sceeningId, sortDirection: $sortDirection, filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            sceeningId
-            optionId
-            sceening {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            option {
-              __typename
-              id
-              label
-              value
-              order
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      sceeningId
-    };
-    if (sortDirection) {
-      gqlAPIServiceArguments.sortDirection = sortDirection;
-    }
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SceeningOptionsBySceeningIdQuery>(
-      response.data.sceeningOptionsBySceeningId
-    );
-  }
-  async SceeningOptionsByOptionId(
-    optionId: string,
-    sortDirection?: ModelSortDirection,
-    filter?: ModelSceeningOptionFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<SceeningOptionsByOptionIdQuery> {
-    const statement = `query SceeningOptionsByOptionId($optionId: ID!, $sortDirection: ModelSortDirection, $filter: ModelSceeningOptionFilterInput, $limit: Int, $nextToken: String) {
-        sceeningOptionsByOptionId(optionId: $optionId, sortDirection: $sortDirection, filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            sceeningId
-            optionId
-            sceening {
-              __typename
-              id
-              createdAt
-              updatedAt
-            }
-            option {
-              __typename
-              id
-              label
-              value
-              order
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      optionId
-    };
-    if (sortDirection) {
-      gqlAPIServiceArguments.sortDirection = sortDirection;
-    }
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <SceeningOptionsByOptionIdQuery>(
-      response.data.sceeningOptionsByOptionId
-    );
-  }
   async FormJobsByFormId(
     formId: string,
     sortDirection?: ModelSortDirection,
@@ -9080,6 +13609,32 @@ export class APIService {
               __typename
               id
               name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                nextToken
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -9089,6 +13644,30 @@ export class APIService {
               code
               startDate
               endDate
+              forms {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              crews {
+                __typename
+                items {
+                  __typename
+                  id
+                  jobId
+                  crewId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -9137,6 +13716,32 @@ export class APIService {
               __typename
               id
               name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                nextToken
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -9146,6 +13751,30 @@ export class APIService {
               code
               startDate
               endDate
+              forms {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              crews {
+                __typename
+                items {
+                  __typename
+                  id
+                  jobId
+                  crewId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -9196,6 +13825,30 @@ export class APIService {
               code
               startDate
               endDate
+              forms {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              crews {
+                __typename
+                items {
+                  __typename
+                  id
+                  jobId
+                  crewId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -9203,12 +13856,25 @@ export class APIService {
               __typename
               id
               userName
+              role
               companyName
               address
               phonenumber
               name
               email
               defaultJobId
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  jobId
+                  crewId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -9259,6 +13925,30 @@ export class APIService {
               code
               startDate
               endDate
+              forms {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              crews {
+                __typename
+                items {
+                  __typename
+                  id
+                  jobId
+                  crewId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -9266,12 +13956,25 @@ export class APIService {
               __typename
               id
               userName
+              role
               companyName
               address
               phonenumber
               name
               email
               defaultJobId
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  jobId
+                  crewId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -9320,6 +14023,33 @@ export class APIService {
               __typename
               id
               title
+              options {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               order
               optionOrderDesc
               createdAt
@@ -9331,6 +14061,18 @@ export class APIService {
               id
               label
               value
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               order
               createdAt
               updatedAt
@@ -9382,6 +14124,33 @@ export class APIService {
               __typename
               id
               title
+              options {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               order
               optionOrderDesc
               createdAt
@@ -9393,6 +14162,18 @@ export class APIService {
               id
               label
               value
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               order
               createdAt
               updatedAt
@@ -9434,39 +14215,36 @@ export class APIService {
         onCreateSceening(filter: $filter) {
           __typename
           id
-          jobs {
+          jobId
+          jobName
+          crewId
+          crewName
+          result
+          answeredQuestions {
             __typename
             items {
               __typename
               id
-              sceeningId
-              jobId
+              question
+              answer
+              sceening {
+                __typename
+                id
+                jobId
+                jobName
+                crewId
+                crewName
+                result
+                answeredQuestions {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
-            }
-            nextToken
-          }
-          crews {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          options {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
-              createdAt
-              updatedAt
+              sceeningAnsweredQuestionsId
             }
             nextToken
           }
@@ -9494,39 +14272,36 @@ export class APIService {
         onUpdateSceening(filter: $filter) {
           __typename
           id
-          jobs {
+          jobId
+          jobName
+          crewId
+          crewName
+          result
+          answeredQuestions {
             __typename
             items {
               __typename
               id
-              sceeningId
-              jobId
+              question
+              answer
+              sceening {
+                __typename
+                id
+                jobId
+                jobName
+                crewId
+                crewName
+                result
+                answeredQuestions {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
-            }
-            nextToken
-          }
-          crews {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          options {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
-              createdAt
-              updatedAt
+              sceeningAnsweredQuestionsId
             }
             nextToken
           }
@@ -9554,39 +14329,36 @@ export class APIService {
         onDeleteSceening(filter: $filter) {
           __typename
           id
-          jobs {
+          jobId
+          jobName
+          crewId
+          crewName
+          result
+          answeredQuestions {
             __typename
             items {
               __typename
               id
-              sceeningId
-              jobId
+              question
+              answer
+              sceening {
+                __typename
+                id
+                jobId
+                jobName
+                crewId
+                crewName
+                result
+                answeredQuestions {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
-            }
-            nextToken
-          }
-          crews {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          options {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
-              createdAt
-              updatedAt
+              sceeningAnsweredQuestionsId
             }
             nextToken
           }
@@ -9602,6 +14374,204 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
       SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteSceening">>
+    >;
+  }
+
+  OnCreateAnsweredQuestionListener(
+    filter?: ModelSubscriptionAnsweredQuestionFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateAnsweredQuestion">
+    >
+  > {
+    const statement = `subscription OnCreateAnsweredQuestion($filter: ModelSubscriptionAnsweredQuestionFilterInput) {
+        onCreateAnsweredQuestion(filter: $filter) {
+          __typename
+          id
+          question
+          answer
+          sceening {
+            __typename
+            id
+            jobId
+            jobName
+            crewId
+            crewName
+            result
+            answeredQuestions {
+              __typename
+              items {
+                __typename
+                id
+                question
+                answer
+                sceening {
+                  __typename
+                  id
+                  jobId
+                  jobName
+                  crewId
+                  crewName
+                  result
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+                sceeningAnsweredQuestionsId
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          sceeningAnsweredQuestionsId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onCreateAnsweredQuestion">
+      >
+    >;
+  }
+
+  OnUpdateAnsweredQuestionListener(
+    filter?: ModelSubscriptionAnsweredQuestionFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateAnsweredQuestion">
+    >
+  > {
+    const statement = `subscription OnUpdateAnsweredQuestion($filter: ModelSubscriptionAnsweredQuestionFilterInput) {
+        onUpdateAnsweredQuestion(filter: $filter) {
+          __typename
+          id
+          question
+          answer
+          sceening {
+            __typename
+            id
+            jobId
+            jobName
+            crewId
+            crewName
+            result
+            answeredQuestions {
+              __typename
+              items {
+                __typename
+                id
+                question
+                answer
+                sceening {
+                  __typename
+                  id
+                  jobId
+                  jobName
+                  crewId
+                  crewName
+                  result
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+                sceeningAnsweredQuestionsId
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          sceeningAnsweredQuestionsId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onUpdateAnsweredQuestion">
+      >
+    >;
+  }
+
+  OnDeleteAnsweredQuestionListener(
+    filter?: ModelSubscriptionAnsweredQuestionFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteAnsweredQuestion">
+    >
+  > {
+    const statement = `subscription OnDeleteAnsweredQuestion($filter: ModelSubscriptionAnsweredQuestionFilterInput) {
+        onDeleteAnsweredQuestion(filter: $filter) {
+          __typename
+          id
+          question
+          answer
+          sceening {
+            __typename
+            id
+            jobId
+            jobName
+            crewId
+            crewName
+            result
+            answeredQuestions {
+              __typename
+              items {
+                __typename
+                id
+                question
+                answer
+                sceening {
+                  __typename
+                  id
+                  jobId
+                  jobName
+                  crewId
+                  crewName
+                  result
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+                sceeningAnsweredQuestionsId
+              }
+              nextToken
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+          sceeningAnsweredQuestionsId
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onDeleteAnsweredQuestion">
+      >
     >;
   }
 
@@ -9621,6 +14591,33 @@ export class APIService {
               __typename
               id
               title
+              options {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               order
               optionOrderDesc
               createdAt
@@ -9636,6 +14633,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -9672,6 +14701,33 @@ export class APIService {
               __typename
               id
               title
+              options {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               order
               optionOrderDesc
               createdAt
@@ -9687,6 +14743,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -9723,6 +14811,33 @@ export class APIService {
               __typename
               id
               title
+              options {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               order
               optionOrderDesc
               createdAt
@@ -9738,6 +14853,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -9770,18 +14917,6 @@ export class APIService {
           code
           startDate
           endDate
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              jobId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           forms {
             __typename
             items {
@@ -9789,6 +14924,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -9801,6 +14968,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -9833,18 +15035,6 @@ export class APIService {
           code
           startDate
           endDate
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              jobId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           forms {
             __typename
             items {
@@ -9852,6 +15042,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -9864,6 +15086,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -9896,18 +15153,6 @@ export class APIService {
           code
           startDate
           endDate
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              jobId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           forms {
             __typename
             items {
@@ -9915,6 +15160,38 @@ export class APIService {
               id
               formId
               jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                }
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -9927,6 +15204,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -9964,6 +15276,40 @@ export class APIService {
               id
               questionId
               optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -9975,10 +15321,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -10019,6 +15410,40 @@ export class APIService {
               id
               questionId
               optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -10030,10 +15455,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -10074,6 +15544,40 @@ export class APIService {
               id
               questionId
               optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -10085,10 +15589,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -10130,18 +15679,40 @@ export class APIService {
               id
               questionId
               optionId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -10181,18 +15752,40 @@ export class APIService {
               id
               questionId
               optionId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -10232,18 +15825,40 @@ export class APIService {
               id
               questionId
               optionId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              optionId
+              question {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
+              option {
+                __typename
+                id
+                label
+                value
+                questions {
+                  __typename
+                  nextToken
+                }
+                order
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -10275,24 +15890,13 @@ export class APIService {
           __typename
           id
           userName
+          role
           companyName
           address
           phonenumber
           name
           email
           defaultJobId
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           jobs {
             __typename
             items {
@@ -10300,6 +15904,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -10330,24 +15969,13 @@ export class APIService {
           __typename
           id
           userName
+          role
           companyName
           address
           phonenumber
           name
           email
           defaultJobId
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           jobs {
             __typename
             items {
@@ -10355,6 +15983,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -10385,24 +16048,13 @@ export class APIService {
           __typename
           id
           userName
+          role
           companyName
           address
           phonenumber
           name
           email
           defaultJobId
-          sceenings {
-            __typename
-            items {
-              __typename
-              id
-              sceeningId
-              crewId
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           jobs {
             __typename
             items {
@@ -10410,6 +16062,41 @@ export class APIService {
               id
               jobId
               crewId
+              job {
+                __typename
+                id
+                code
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                }
+                crews {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
+              crew {
+                __typename
+                id
+                userName
+                role
+                companyName
+                address
+                phonenumber
+                name
+                email
+                defaultJobId
+                jobs {
+                  __typename
+                  nextToken
+                }
+                createdAt
+                updatedAt
+              }
               createdAt
               updatedAt
             }
@@ -10430,597 +16117,6 @@ export class APIService {
     >;
   }
 
-  OnCreateSceeningJobListener(
-    filter?: ModelSubscriptionSceeningJobFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateSceeningJob">>
-  > {
-    const statement = `subscription OnCreateSceeningJob($filter: ModelSubscriptionSceeningJobFilterInput) {
-        onCreateSceeningJob(filter: $filter) {
-          __typename
-          id
-          sceeningId
-          jobId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          job {
-            __typename
-            id
-            code
-            startDate
-            endDate
-            sceenings {
-              __typename
-              nextToken
-            }
-            forms {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateSceeningJob">>
-    >;
-  }
-
-  OnUpdateSceeningJobListener(
-    filter?: ModelSubscriptionSceeningJobFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateSceeningJob">>
-  > {
-    const statement = `subscription OnUpdateSceeningJob($filter: ModelSubscriptionSceeningJobFilterInput) {
-        onUpdateSceeningJob(filter: $filter) {
-          __typename
-          id
-          sceeningId
-          jobId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          job {
-            __typename
-            id
-            code
-            startDate
-            endDate
-            sceenings {
-              __typename
-              nextToken
-            }
-            forms {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateSceeningJob">>
-    >;
-  }
-
-  OnDeleteSceeningJobListener(
-    filter?: ModelSubscriptionSceeningJobFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteSceeningJob">>
-  > {
-    const statement = `subscription OnDeleteSceeningJob($filter: ModelSubscriptionSceeningJobFilterInput) {
-        onDeleteSceeningJob(filter: $filter) {
-          __typename
-          id
-          sceeningId
-          jobId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          job {
-            __typename
-            id
-            code
-            startDate
-            endDate
-            sceenings {
-              __typename
-              nextToken
-            }
-            forms {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteSceeningJob">>
-    >;
-  }
-
-  OnCreateSceeningCrewListener(
-    filter?: ModelSubscriptionSceeningCrewFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateSceeningCrew">>
-  > {
-    const statement = `subscription OnCreateSceeningCrew($filter: ModelSubscriptionSceeningCrewFilterInput) {
-        onCreateSceeningCrew(filter: $filter) {
-          __typename
-          id
-          sceeningId
-          crewId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          crew {
-            __typename
-            id
-            userName
-            companyName
-            address
-            phonenumber
-            name
-            email
-            defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
-            jobs {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<
-        Pick<__SubscriptionContainer, "onCreateSceeningCrew">
-      >
-    >;
-  }
-
-  OnUpdateSceeningCrewListener(
-    filter?: ModelSubscriptionSceeningCrewFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateSceeningCrew">>
-  > {
-    const statement = `subscription OnUpdateSceeningCrew($filter: ModelSubscriptionSceeningCrewFilterInput) {
-        onUpdateSceeningCrew(filter: $filter) {
-          __typename
-          id
-          sceeningId
-          crewId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          crew {
-            __typename
-            id
-            userName
-            companyName
-            address
-            phonenumber
-            name
-            email
-            defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
-            jobs {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<
-        Pick<__SubscriptionContainer, "onUpdateSceeningCrew">
-      >
-    >;
-  }
-
-  OnDeleteSceeningCrewListener(
-    filter?: ModelSubscriptionSceeningCrewFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteSceeningCrew">>
-  > {
-    const statement = `subscription OnDeleteSceeningCrew($filter: ModelSubscriptionSceeningCrewFilterInput) {
-        onDeleteSceeningCrew(filter: $filter) {
-          __typename
-          id
-          sceeningId
-          crewId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          crew {
-            __typename
-            id
-            userName
-            companyName
-            address
-            phonenumber
-            name
-            email
-            defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
-            jobs {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<
-        Pick<__SubscriptionContainer, "onDeleteSceeningCrew">
-      >
-    >;
-  }
-
-  OnCreateSceeningOptionListener(
-    filter?: ModelSubscriptionSceeningOptionFilterInput
-  ): Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onCreateSceeningOption">
-    >
-  > {
-    const statement = `subscription OnCreateSceeningOption($filter: ModelSubscriptionSceeningOptionFilterInput) {
-        onCreateSceeningOption(filter: $filter) {
-          __typename
-          id
-          sceeningId
-          optionId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          option {
-            __typename
-            id
-            label
-            value
-            questions {
-              __typename
-              nextToken
-            }
-            sceenings {
-              __typename
-              nextToken
-            }
-            order
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<
-        Pick<__SubscriptionContainer, "onCreateSceeningOption">
-      >
-    >;
-  }
-
-  OnUpdateSceeningOptionListener(
-    filter?: ModelSubscriptionSceeningOptionFilterInput
-  ): Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onUpdateSceeningOption">
-    >
-  > {
-    const statement = `subscription OnUpdateSceeningOption($filter: ModelSubscriptionSceeningOptionFilterInput) {
-        onUpdateSceeningOption(filter: $filter) {
-          __typename
-          id
-          sceeningId
-          optionId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          option {
-            __typename
-            id
-            label
-            value
-            questions {
-              __typename
-              nextToken
-            }
-            sceenings {
-              __typename
-              nextToken
-            }
-            order
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<
-        Pick<__SubscriptionContainer, "onUpdateSceeningOption">
-      >
-    >;
-  }
-
-  OnDeleteSceeningOptionListener(
-    filter?: ModelSubscriptionSceeningOptionFilterInput
-  ): Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onDeleteSceeningOption">
-    >
-  > {
-    const statement = `subscription OnDeleteSceeningOption($filter: ModelSubscriptionSceeningOptionFilterInput) {
-        onDeleteSceeningOption(filter: $filter) {
-          __typename
-          id
-          sceeningId
-          optionId
-          sceening {
-            __typename
-            id
-            jobs {
-              __typename
-              nextToken
-            }
-            crews {
-              __typename
-              nextToken
-            }
-            options {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          option {
-            __typename
-            id
-            label
-            value
-            questions {
-              __typename
-              nextToken
-            }
-            sceenings {
-              __typename
-              nextToken
-            }
-            order
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<
-        Pick<__SubscriptionContainer, "onDeleteSceeningOption">
-      >
-    >;
-  }
-
   OnCreateFormJobListener(
     filter?: ModelSubscriptionFormJobFilterInput
   ): Observable<
@@ -11038,10 +16134,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -11053,16 +16194,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -11100,10 +16292,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -11115,16 +16352,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -11162,10 +16450,55 @@ export class APIService {
             name
             questions {
               __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                formQuestionsId
+              }
               nextToken
             }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -11177,16 +16510,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -11224,16 +16608,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -11243,18 +16678,46 @@ export class APIService {
             __typename
             id
             userName
+            role
             companyName
             address
             phonenumber
             name
             email
             defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -11292,16 +16755,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -11311,18 +16825,46 @@ export class APIService {
             __typename
             id
             userName
+            role
             companyName
             address
             phonenumber
             name
             email
             defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -11360,16 +16902,67 @@ export class APIService {
             code
             startDate
             endDate
-            sceenings {
-              __typename
-              nextToken
-            }
             forms {
               __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             crews {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -11379,18 +16972,46 @@ export class APIService {
             __typename
             id
             userName
+            role
             companyName
             address
             phonenumber
             name
             email
             defaultJobId
-            sceenings {
-              __typename
-              nextToken
-            }
             jobs {
               __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             createdAt
@@ -11430,12 +17051,65 @@ export class APIService {
             title
             options {
               __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             form {
               __typename
               id
               name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                nextToken
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -11452,10 +17126,33 @@ export class APIService {
             value
             questions {
               __typename
-              nextToken
-            }
-            sceenings {
-              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             order
@@ -11498,12 +17195,65 @@ export class APIService {
             title
             options {
               __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             form {
               __typename
               id
               name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                nextToken
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -11520,10 +17270,33 @@ export class APIService {
             value
             questions {
               __typename
-              nextToken
-            }
-            sceenings {
-              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             order
@@ -11566,12 +17339,65 @@ export class APIService {
             title
             options {
               __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             form {
               __typename
               id
               name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                nextToken
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                }
+                nextToken
+              }
               createdAt
               updatedAt
             }
@@ -11588,10 +17414,33 @@ export class APIService {
             value
             questions {
               __typename
-              nextToken
-            }
-            sceenings {
-              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
               nextToken
             }
             order

@@ -93,7 +93,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
         this.menuModel = [];
         this.menuModel.push(
           {
-            label: "Job",
+            label: "Project",
             icon: "fa fa-fw fa-tasks",
             routerLink: "profile",
           },
@@ -104,6 +104,10 @@ export class AppMainComponent implements OnInit, OnDestroy {
           }
         );
         this.router.navigate(["/main/profile"]);
+      }
+      if ("screening-topbar" === path) {
+        this.menuModel = [];
+        this.router.navigate(["/main/screening"]);
       }
     });
 
@@ -116,7 +120,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
         if (groups[0] === "Admin") {
           this.menuModel.push(
             {
-              label: "Jobs",
+              label: "Projects",
               icon: "fa fa-fw fa-tasks",
               routerLink: "admin/jobs",
             },
@@ -157,7 +161,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
         } else {
           this.menuModel.push(
             {
-              label: "Job",
+              label: "Project",
               icon: "fa fa-fw fa-tasks",
               routerLink: "profile",
             },

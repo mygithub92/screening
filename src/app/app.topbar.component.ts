@@ -65,6 +65,10 @@ import { AppMainComponent } from './app.main.component';
 
             <ul class="layout-menu fadeInDown">
               <li role="menuitem">
+                <a (click)="onScreeningClick()">
+                  <i class="fa fa-fw fa-user"></i>
+                  <span>Screening</span>
+                </a>
                 <a (click)="onProfileClick()">
                   <i class="fa fa-fw fa-user"></i>
                   <span>Settings</span>
@@ -112,6 +116,10 @@ export class AppTopBarComponent implements OnInit {
 
   onProfileClick() {
     this.router.navigate(["main", { path: "profile-topbar" }]);
+  }
+
+  onScreeningClick() {
+    this.router.navigate(["main", { path: "screening-topbar" }]);
   }
 
   private logout() {
