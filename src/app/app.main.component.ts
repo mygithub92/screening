@@ -87,32 +87,6 @@ export class AppMainComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    this.route.paramMap.subscribe((param) => {
-      const path = param.get("path");
-      let nav = [];
-      if ("profile-topbar" === path) {
-        this.menuModel = [];
-        this.menuModel.push(
-          {
-            label: "Project",
-            icon: "fa fa-fw fa-tasks",
-            routerLink: "profile",
-          },
-          {
-            label: "Profile",
-            icon: "fa fa-fw fa-newspaper-o",
-            routerLink: "profile/profile",
-          }
-        );
-        nav = ["/main/profile"];
-      }
-      if ("screening-topbar" === path) {
-        this.menuModel = [];
-        nav = ["/main/screening"];
-      }
-      this.router.navigate(nav);
-    });
-
     this.authService.getCurrentAuthenticatedUser().subscribe(async (user) => {
       console.log(user);
       let nav = [];
@@ -139,12 +113,12 @@ export class AppMainComponent implements OnInit, OnDestroy {
         if (groups[0] === "Staff") {
           this.menuModel.push(
             {
-              label: "Screenings",
+              label: "Projects",
               icon: "fa fa-fw fa-home",
               routerLink: "staff",
             },
             {
-              label: "Report",
+              label: "Reports",
               icon: "fa fa-fw fa-home",
               routerLink: "staff/report",
             },
@@ -162,17 +136,17 @@ export class AppMainComponent implements OnInit, OnDestroy {
         });
         this.menuModel.push(
           {
-            label: "Screening",
+            label: "My Projects",
             icon: "fa fa-fw fa-tasks",
             routerLink: "screening",
           },
           {
-            label: "Default Project",
+            label: "Search Projects",
             icon: "fa fa-fw fa-tasks",
             routerLink: "profile",
           },
           {
-            label: "Profile",
+            label: "My Profile",
             icon: "fa fa-fw fa-newspaper-o",
             routerLink: "profile/profile",
           }

@@ -45,12 +45,10 @@ export class ScreeningFormComponent implements OnInit {
       const crews = await this.api.ListCrews({ userName: { eq: userName } });
       this.crew = crews.items[0];
       this.selectedJob = this.crew.defaultJobId;
-      const jobCrews = await this.api.ListCrewJobs({
-        crewId: { eq: this.crew.id },
-      });
+      const jobObjs = await this.api.ListJobs();
       const jobs = [];
-      jobCrews.items.forEach((jobCrew) =>
-        jobs.push({ label: jobCrew.job.code, value: jobCrew.job.id })
+      jobObjs.items.forEach((jobObj) =>
+        jobs.push({ label: jobObj.code, value: jobObj.id })
       );
       this.jobs = jobs;
       this.form.patchValue({ selectedJob: this.selectedJob });
@@ -141,6 +139,7 @@ export class ScreeningFormComponent implements OnInit {
         const answeredQuestion = {
           question: question.title,
         } as any;
+
         if (rawValue.questionForm[questionIndex]) {
           if (noAnswer) {
             answeredQuestion.answer = rawValue.questionForm[questionIndex];
@@ -163,7 +162,12 @@ export class ScreeningFormComponent implements OnInit {
 
       const result = await Promise.all(answeredQuestionArray);
       console.log(result);
-      this.router.navigate(["result"], { relativeTo: this.route });
+      this.router.navigate(
+        ["result", { result: noAnswer ? "passed" : "failed" }],
+        {
+          relativeTo: this.route,
+        }
+      );
     }
   }
 

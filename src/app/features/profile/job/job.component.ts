@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'app/@core/services/auth.service';
 import { APIService } from 'app/API.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: "app-job",
@@ -23,7 +24,8 @@ export class JobComponent implements OnInit {
     private route: ActivatedRoute,
     private api: APIService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private messageService: MessageService
   ) {
     this.form = this.fb.group({
       jobCode: [null, Validators.required],
@@ -40,7 +42,6 @@ export class JobComponent implements OnInit {
       this.jobs = jobs.items;
       const currentDefaultJobId = crew.items[0].defaultJobId;
       this.setCurrentProjectName(currentDefaultJobId);
-      this.form.patchValue({ jobCode: currentDefaultJobId });
       this.loading = false;
     });
   }
@@ -63,13 +64,22 @@ export class JobComponent implements OnInit {
   }
 
   public async save() {
-    const values = this.form.getRawValue();
-    const result = await this.api.UpdateCrew({
-      id: this.crewId,
-      defaultJobId: values.jobCode.id,
-    });
-    this.setCurrentProjectName(values.jobCode.id);
-    console.log(result);
+    this.form.markAllAsTouched();
+    if (this.form.valid) {
+      const values = this.form.getRawValue();
+      const result = await this.api.UpdateCrew({
+        id: this.crewId,
+        defaultJobId: values.jobCode.id,
+      });
+      this.setCurrentProjectName(values.jobCode.id);
+      console.log(result);
+      this.messageService.add({
+        key: "tst",
+        severity: "success",
+        summary: "Success",
+        detail: "Default Project changed",
+      });
+    }
   }
 
   public filterJob(event) {

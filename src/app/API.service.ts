@@ -320,6 +320,7 @@ export type Job = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  location?: string | null;
   startDate?: string | null;
   endDate?: string | null;
   forms?: ModelFormJobConnection | null;
@@ -373,12 +374,14 @@ export type DeleteFormInput = {
 export type CreateJobInput = {
   id?: string | null;
   code?: string | null;
+  location?: string | null;
   startDate?: string | null;
   endDate?: string | null;
 };
 
 export type ModelJobConditionInput = {
   code?: ModelStringInput | null;
+  location?: ModelStringInput | null;
   startDate?: ModelStringInput | null;
   endDate?: ModelStringInput | null;
   and?: Array<ModelJobConditionInput | null> | null;
@@ -389,6 +392,7 @@ export type ModelJobConditionInput = {
 export type UpdateJobInput = {
   id: string;
   code?: string | null;
+  location?: string | null;
   startDate?: string | null;
   endDate?: string | null;
 };
@@ -619,6 +623,7 @@ export type ModelFormConnection = {
 export type ModelJobFilterInput = {
   id?: ModelIDInput | null;
   code?: ModelStringInput | null;
+  location?: ModelStringInput | null;
   startDate?: ModelStringInput | null;
   endDate?: ModelStringInput | null;
   and?: Array<ModelJobFilterInput | null> | null;
@@ -794,6 +799,7 @@ export type ModelSubscriptionFormFilterInput = {
 export type ModelSubscriptionJobFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   code?: ModelSubscriptionStringInput | null;
+  location?: ModelSubscriptionStringInput | null;
   startDate?: ModelSubscriptionStringInput | null;
   endDate?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionJobFilterInput | null> | null;
@@ -1251,6 +1257,7 @@ export type CreateFormMutation = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -1344,6 +1351,7 @@ export type UpdateFormMutation = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -1437,6 +1445,7 @@ export type DeleteFormMutation = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -1463,6 +1472,7 @@ export type CreateJobMutation = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  location?: string | null;
   startDate?: string | null;
   endDate?: string | null;
   forms?: {
@@ -1491,6 +1501,7 @@ export type CreateJobMutation = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -1520,6 +1531,7 @@ export type CreateJobMutation = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -1564,6 +1576,7 @@ export type UpdateJobMutation = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  location?: string | null;
   startDate?: string | null;
   endDate?: string | null;
   forms?: {
@@ -1592,6 +1605,7 @@ export type UpdateJobMutation = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -1621,6 +1635,7 @@ export type UpdateJobMutation = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -1665,6 +1680,7 @@ export type DeleteJobMutation = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  location?: string | null;
   startDate?: string | null;
   endDate?: string | null;
   forms?: {
@@ -1693,6 +1709,7 @@ export type DeleteJobMutation = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -1722,6 +1739,7 @@ export type DeleteJobMutation = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -1859,6 +1877,7 @@ export type CreateQuestionMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -1976,6 +1995,7 @@ export type UpdateQuestionMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -2093,6 +2113,7 @@ export type DeleteQuestionMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -2303,6 +2324,7 @@ export type CreateCrewMutation = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -2365,6 +2387,7 @@ export type UpdateCrewMutation = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -2427,6 +2450,7 @@ export type DeleteCrewMutation = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -2519,6 +2543,7 @@ export type CreateFormJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -2536,6 +2561,7 @@ export type CreateFormJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -2556,6 +2582,7 @@ export type CreateFormJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -2577,6 +2604,7 @@ export type CreateFormJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -2660,6 +2688,7 @@ export type UpdateFormJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -2677,6 +2706,7 @@ export type UpdateFormJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -2697,6 +2727,7 @@ export type UpdateFormJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -2718,6 +2749,7 @@ export type UpdateFormJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -2801,6 +2833,7 @@ export type DeleteFormJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -2818,6 +2851,7 @@ export type DeleteFormJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -2838,6 +2872,7 @@ export type DeleteFormJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -2859,6 +2894,7 @@ export type DeleteFormJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -2899,6 +2935,7 @@ export type CreateCrewJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -2919,6 +2956,7 @@ export type CreateCrewJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -2940,6 +2978,7 @@ export type CreateCrewJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -2989,6 +3028,7 @@ export type CreateCrewJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -3029,6 +3069,7 @@ export type UpdateCrewJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -3049,6 +3090,7 @@ export type UpdateCrewJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -3070,6 +3112,7 @@ export type UpdateCrewJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -3119,6 +3162,7 @@ export type UpdateCrewJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -3159,6 +3203,7 @@ export type DeleteCrewJobMutation = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -3179,6 +3224,7 @@ export type DeleteCrewJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -3200,6 +3246,7 @@ export type DeleteCrewJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -3249,6 +3296,7 @@ export type DeleteCrewJobMutation = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -3924,6 +3972,7 @@ export type GetFormQuery = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -3995,6 +4044,7 @@ export type ListFormsQuery = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -4015,6 +4065,7 @@ export type GetJobQuery = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  location?: string | null;
   startDate?: string | null;
   endDate?: string | null;
   forms?: {
@@ -4043,6 +4094,7 @@ export type GetJobQuery = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -4072,6 +4124,7 @@ export type GetJobQuery = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -4118,6 +4171,7 @@ export type ListJobsQuery = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -4138,6 +4192,7 @@ export type ListJobsQuery = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -4159,6 +4214,7 @@ export type ListJobsQuery = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -4286,6 +4342,7 @@ export type GetQuestionQuery = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -4508,6 +4565,7 @@ export type GetCrewQuery = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -4572,6 +4630,7 @@ export type ListCrewsQuery = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -4654,6 +4713,7 @@ export type GetFormJobQuery = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -4671,6 +4731,7 @@ export type GetFormJobQuery = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -4691,6 +4752,7 @@ export type GetFormJobQuery = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -4712,6 +4774,7 @@ export type GetFormJobQuery = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -4787,6 +4850,7 @@ export type ListFormJobsQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      location?: string | null;
       startDate?: string | null;
       endDate?: string | null;
       forms?: {
@@ -4831,6 +4895,7 @@ export type GetCrewJobQuery = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -4851,6 +4916,7 @@ export type GetCrewJobQuery = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -4872,6 +4938,7 @@ export type GetCrewJobQuery = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -4921,6 +4988,7 @@ export type GetCrewJobQuery = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -4963,6 +5031,7 @@ export type ListCrewJobsQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      location?: string | null;
       startDate?: string | null;
       endDate?: string | null;
       forms?: {
@@ -5386,6 +5455,7 @@ export type FormJobsByFormIdQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      location?: string | null;
       startDate?: string | null;
       endDate?: string | null;
       forms?: {
@@ -5465,6 +5535,7 @@ export type FormJobsByJobIdQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      location?: string | null;
       startDate?: string | null;
       endDate?: string | null;
       forms?: {
@@ -5511,6 +5582,7 @@ export type CrewJobsByJobIdQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      location?: string | null;
       startDate?: string | null;
       endDate?: string | null;
       forms?: {
@@ -5583,6 +5655,7 @@ export type CrewJobsByCrewIdQuery = {
       __typename: "Job";
       id: string;
       code?: string | null;
+      location?: string | null;
       startDate?: string | null;
       endDate?: string | null;
       forms?: {
@@ -6181,6 +6254,7 @@ export type OnCreateFormSubscription = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -6274,6 +6348,7 @@ export type OnUpdateFormSubscription = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -6367,6 +6442,7 @@ export type OnDeleteFormSubscription = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -6393,6 +6469,7 @@ export type OnCreateJobSubscription = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  location?: string | null;
   startDate?: string | null;
   endDate?: string | null;
   forms?: {
@@ -6421,6 +6498,7 @@ export type OnCreateJobSubscription = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -6450,6 +6528,7 @@ export type OnCreateJobSubscription = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -6494,6 +6573,7 @@ export type OnUpdateJobSubscription = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  location?: string | null;
   startDate?: string | null;
   endDate?: string | null;
   forms?: {
@@ -6522,6 +6602,7 @@ export type OnUpdateJobSubscription = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -6551,6 +6632,7 @@ export type OnUpdateJobSubscription = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -6595,6 +6677,7 @@ export type OnDeleteJobSubscription = {
   __typename: "Job";
   id: string;
   code?: string | null;
+  location?: string | null;
   startDate?: string | null;
   endDate?: string | null;
   forms?: {
@@ -6623,6 +6706,7 @@ export type OnDeleteJobSubscription = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -6652,6 +6736,7 @@ export type OnDeleteJobSubscription = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -6789,6 +6874,7 @@ export type OnCreateQuestionSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -6906,6 +6992,7 @@ export type OnUpdateQuestionSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7023,6 +7110,7 @@ export type OnDeleteQuestionSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7233,6 +7321,7 @@ export type OnCreateCrewSubscription = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -7295,6 +7384,7 @@ export type OnUpdateCrewSubscription = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -7357,6 +7447,7 @@ export type OnDeleteCrewSubscription = {
         __typename: "Job";
         id: string;
         code?: string | null;
+        location?: string | null;
         startDate?: string | null;
         endDate?: string | null;
         forms?: {
@@ -7449,6 +7540,7 @@ export type OnCreateFormJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7466,6 +7558,7 @@ export type OnCreateFormJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -7486,6 +7579,7 @@ export type OnCreateFormJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7507,6 +7601,7 @@ export type OnCreateFormJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7590,6 +7685,7 @@ export type OnUpdateFormJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7607,6 +7703,7 @@ export type OnUpdateFormJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -7627,6 +7724,7 @@ export type OnUpdateFormJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7648,6 +7746,7 @@ export type OnUpdateFormJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7731,6 +7830,7 @@ export type OnDeleteFormJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7748,6 +7848,7 @@ export type OnDeleteFormJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -7768,6 +7869,7 @@ export type OnDeleteFormJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7789,6 +7891,7 @@ export type OnDeleteFormJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7829,6 +7932,7 @@ export type OnCreateCrewJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -7849,6 +7953,7 @@ export type OnCreateCrewJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7870,6 +7975,7 @@ export type OnCreateCrewJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7919,6 +8025,7 @@ export type OnCreateCrewJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -7959,6 +8066,7 @@ export type OnUpdateCrewJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -7979,6 +8087,7 @@ export type OnUpdateCrewJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -8000,6 +8109,7 @@ export type OnUpdateCrewJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -8049,6 +8159,7 @@ export type OnUpdateCrewJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -8089,6 +8200,7 @@ export type OnDeleteCrewJobSubscription = {
     __typename: "Job";
     id: string;
     code?: string | null;
+    location?: string | null;
     startDate?: string | null;
     endDate?: string | null;
     forms?: {
@@ -8109,6 +8221,7 @@ export type OnDeleteCrewJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -8130,6 +8243,7 @@ export type OnDeleteCrewJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -8179,6 +8293,7 @@ export type OnDeleteCrewJobSubscription = {
           __typename: "Job";
           id: string;
           code?: string | null;
+          location?: string | null;
           startDate?: string | null;
           endDate?: string | null;
           createdAt: string;
@@ -9079,6 +9194,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -9188,6 +9304,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -9297,6 +9414,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -9339,6 +9457,7 @@ export class APIService {
           __typename
           id
           code
+          location
           startDate
           endDate
           forms {
@@ -9367,6 +9486,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -9396,6 +9516,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -9456,6 +9577,7 @@ export class APIService {
           __typename
           id
           code
+          location
           startDate
           endDate
           forms {
@@ -9484,6 +9606,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -9513,6 +9636,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -9573,6 +9697,7 @@ export class APIService {
           __typename
           id
           code
+          location
           startDate
           endDate
           forms {
@@ -9601,6 +9726,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -9630,6 +9756,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -9783,6 +9910,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -9916,6 +10044,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -10049,6 +10178,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -10323,6 +10453,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -10401,6 +10532,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -10479,6 +10611,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -10587,6 +10720,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -10604,6 +10738,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -10624,6 +10759,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -10645,6 +10781,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -10744,6 +10881,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -10761,6 +10899,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -10781,6 +10920,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -10802,6 +10942,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -10901,6 +11042,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -10918,6 +11060,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -10938,6 +11081,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -10959,6 +11103,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -11015,6 +11160,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -11035,6 +11181,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -11056,6 +11203,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -11105,6 +11253,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -11161,6 +11310,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -11181,6 +11331,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -11202,6 +11353,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -11251,6 +11403,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -11307,6 +11460,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -11327,6 +11481,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -11348,6 +11503,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -11397,6 +11553,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -12195,6 +12352,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -12280,6 +12438,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -12317,6 +12476,7 @@ export class APIService {
           __typename
           id
           code
+          location
           startDate
           endDate
           forms {
@@ -12345,6 +12505,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -12374,6 +12535,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -12434,6 +12596,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -12454,6 +12617,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -12475,6 +12639,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -12619,6 +12784,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -12903,6 +13069,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -12981,6 +13148,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -13080,6 +13248,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -13097,6 +13266,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -13117,6 +13287,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -13138,6 +13309,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -13227,6 +13399,7 @@ export class APIService {
               __typename
               id
               code
+              location
               startDate
               endDate
               forms {
@@ -13288,6 +13461,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -13308,6 +13482,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -13329,6 +13504,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -13378,6 +13554,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -13434,6 +13611,7 @@ export class APIService {
               __typename
               id
               code
+              location
               startDate
               endDate
               forms {
@@ -13967,6 +14145,7 @@ export class APIService {
               __typename
               id
               code
+              location
               startDate
               endDate
               forms {
@@ -14074,6 +14253,7 @@ export class APIService {
               __typename
               id
               code
+              location
               startDate
               endDate
               forms {
@@ -14148,6 +14328,7 @@ export class APIService {
               __typename
               id
               code
+              location
               startDate
               endDate
               forms {
@@ -14248,6 +14429,7 @@ export class APIService {
               __typename
               id
               code
+              location
               startDate
               endDate
               forms {
@@ -15046,6 +15228,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -15156,6 +15339,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -15266,6 +15450,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -15309,6 +15494,7 @@ export class APIService {
           __typename
           id
           code
+          location
           startDate
           endDate
           forms {
@@ -15337,6 +15523,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -15366,6 +15553,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -15427,6 +15615,7 @@ export class APIService {
           __typename
           id
           code
+          location
           startDate
           endDate
           forms {
@@ -15455,6 +15644,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -15484,6 +15674,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -15545,6 +15736,7 @@ export class APIService {
           __typename
           id
           code
+          location
           startDate
           endDate
           forms {
@@ -15573,6 +15765,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -15602,6 +15795,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -15756,6 +15950,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -15890,6 +16085,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -16024,6 +16220,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -16302,6 +16499,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -16381,6 +16579,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -16460,6 +16659,7 @@ export class APIService {
                 __typename
                 id
                 code
+                location
                 startDate
                 endDate
                 forms {
@@ -16569,6 +16769,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -16586,6 +16787,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -16606,6 +16808,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -16627,6 +16830,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -16727,6 +16931,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -16744,6 +16949,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -16764,6 +16970,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -16785,6 +16992,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -16885,6 +17093,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -16902,6 +17111,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -16922,6 +17132,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -16943,6 +17154,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -17000,6 +17212,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -17020,6 +17233,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -17041,6 +17255,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -17090,6 +17305,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -17147,6 +17363,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -17167,6 +17384,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -17188,6 +17406,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -17237,6 +17456,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -17294,6 +17514,7 @@ export class APIService {
             __typename
             id
             code
+            location
             startDate
             endDate
             forms {
@@ -17314,6 +17535,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -17335,6 +17557,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt
@@ -17384,6 +17607,7 @@ export class APIService {
                   __typename
                   id
                   code
+                  location
                   startDate
                   endDate
                   createdAt

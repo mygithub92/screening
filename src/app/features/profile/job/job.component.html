@@ -1,7 +1,8 @@
+<p-toast key="tst"></p-toast>
 <p-blockUI [blocked]="loading" [target]="dt"
-  ><p class="center-spinner"></p
-></p-blockUI>
-<p-panel header="Default Job" #dt>
+  ><p class="center-spinner">loading</p></p-blockUI
+>
+<p-panel header="Default Project" #dt>
   <ng-container *ngIf="!loading">
     <div [formGroup]="form">
       <div class="card card-w-title">
@@ -12,7 +13,9 @@
                 <label>Current default project name: </label>
               </div>
               <div class="ui-g-6">
-                <label>{{ currentDefaultJobName }}</label>
+                <label
+                  ><strong>{{ currentDefaultJobName }}</strong></label
+                >
               </div>
             </div>
           </div>
@@ -21,7 +24,9 @@
       <div class="card card-w-title">
         <div class="ui-g">
           <div class="ui-g-12">
-            <h1>Please select a project as default</h1>
+            <label>Please select a project as default</label>
+          </div>
+          <div class="ui-g-12">
             <p-autoComplete
               id="acSimple"
               formControlName="jobCode"
@@ -29,10 +34,17 @@
               (completeMethod)="filterJob($event)"
               field="code"
               [size]="30"
-              placeholder="Projects"
+              placeholder="Hint: start typing the project name"
               forceSelection="true"
               [minLength]="1"
             ></p-autoComplete>
+          </div>
+          <div class="ui-g-12">
+            <p-message
+              severity="error"
+              text="Field is required"
+              *ngIf="isInvalid('jobCode')"
+            ></p-message>
           </div>
           <div class="ui-g-12">
             <button
