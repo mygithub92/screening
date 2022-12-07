@@ -17,6 +17,7 @@ export class AddEditFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   formQuestions = [];
   formId: string;
+  header = "Edit Form";
   existingQuestions = [];
   loading = true;
   public cols = [{ field: "title", header: "Title" }];
@@ -40,6 +41,7 @@ export class AddEditFormComponent implements OnInit, OnDestroy {
         this.formId = params.id;
         if (params.id === "-1") {
           this.loading = false;
+          this.header = "Add Form";
         } else {
           this.getForm(params.id);
         }
@@ -102,6 +104,7 @@ export class AddEditFormComponent implements OnInit, OnDestroy {
   }
 
   async save() {
+    this.loading = true;
     let formId = this.formId;
     const request = [];
     const remainQuestionIds = [];
@@ -148,6 +151,7 @@ export class AddEditFormComponent implements OnInit, OnDestroy {
 
     const question = await Promise.all([...request]);
     console.log(question);
+    this.router.navigate(["../../forms"], { relativeTo: this.route });
   }
 
   public cancel() {

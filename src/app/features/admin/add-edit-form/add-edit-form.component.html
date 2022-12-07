@@ -1,7 +1,7 @@
 <p-blockUI [blocked]="loading" [target]="dt"
   ><p class="center-spinner"></p
 ></p-blockUI>
-<p-panel header="Add Form" #dt class="screening-panel">
+<p-panel header="{{ header }}" #dt class="screening-panel">
   <ng-container *ngIf="!loading">
     <div class="card card-w-title">
       <div [formGroup]="form">

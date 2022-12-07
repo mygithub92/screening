@@ -253,6 +253,7 @@ query GetForm($id: ID!) {
         job {
           id
           code
+          location
           startDate
           endDate
           forms {
@@ -317,6 +318,7 @@ query ListForms(
           job {
             id
             code
+            location
             startDate
             endDate
             createdAt
@@ -337,6 +339,7 @@ query GetJob($id: ID!) {
   getJob(id: $id) {
     id
     code
+    location
     startDate
     endDate
     forms {
@@ -359,6 +362,7 @@ query GetJob($id: ID!) {
         job {
           id
           code
+          location
           startDate
           endDate
           forms {
@@ -383,6 +387,7 @@ query GetJob($id: ID!) {
         job {
           id
           code
+          location
           startDate
           endDate
           forms {
@@ -424,6 +429,7 @@ query ListJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String) {
     items {
       id
       code
+      location
       startDate
       endDate
       forms {
@@ -440,6 +446,7 @@ query ListJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String) {
           job {
             id
             code
+            location
             startDate
             endDate
             createdAt
@@ -458,6 +465,7 @@ query ListJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String) {
           job {
             id
             code
+            location
             startDate
             endDate
             createdAt
@@ -568,6 +576,7 @@ query GetQuestion($id: ID!) {
           job {
             id
             code
+            location
             startDate
             endDate
             createdAt
@@ -773,6 +782,7 @@ query GetCrew($id: ID!) {
         job {
           id
           code
+          location
           startDate
           endDate
           forms {
@@ -833,6 +843,7 @@ query ListCrews(
           job {
             id
             code
+            location
             startDate
             endDate
             createdAt
@@ -905,6 +916,7 @@ query GetFormJob($id: ID!) {
           job {
             id
             code
+            location
             startDate
             endDate
             createdAt
@@ -921,6 +933,7 @@ query GetFormJob($id: ID!) {
     job {
       id
       code
+      location
       startDate
       endDate
       forms {
@@ -937,6 +950,7 @@ query GetFormJob($id: ID!) {
           job {
             id
             code
+            location
             startDate
             endDate
             createdAt
@@ -955,6 +969,7 @@ query GetFormJob($id: ID!) {
           job {
             id
             code
+            location
             startDate
             endDate
             createdAt
@@ -1026,6 +1041,7 @@ query ListFormJobs(
       job {
         id
         code
+        location
         startDate
         endDate
         forms {
@@ -1065,6 +1081,7 @@ query GetCrewJob($id: ID!) {
     job {
       id
       code
+      location
       startDate
       endDate
       forms {
@@ -1081,6 +1098,7 @@ query GetCrewJob($id: ID!) {
           job {
             id
             code
+            location
             startDate
             endDate
             createdAt
@@ -1099,6 +1117,7 @@ query GetCrewJob($id: ID!) {
           job {
             id
             code
+            location
             startDate
             endDate
             createdAt
@@ -1143,6 +1162,7 @@ query GetCrewJob($id: ID!) {
           job {
             id
             code
+            location
             startDate
             endDate
             createdAt
@@ -1186,6 +1206,7 @@ query ListCrewJobs(
       job {
         id
         code
+        location
         startDate
         endDate
         forms {
@@ -1595,6 +1616,7 @@ query FormJobsByFormId(
       job {
         id
         code
+        location
         startDate
         endDate
         forms {
@@ -1675,6 +1697,7 @@ query FormJobsByJobId(
       job {
         id
         code
+        location
         startDate
         endDate
         forms {
@@ -1727,6 +1750,7 @@ query CrewJobsByJobId(
       job {
         id
         code
+        location
         startDate
         endDate
         forms {
@@ -1802,6 +1826,7 @@ query CrewJobsByCrewId(
       job {
         id
         code
+        location
         startDate
         endDate
         forms {

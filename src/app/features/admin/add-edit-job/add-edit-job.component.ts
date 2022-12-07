@@ -18,6 +18,7 @@ export class AddEditJobComponent implements OnInit {
   questionForms = [];
   loading = true;
   jobId;
+  header = "Edit Project";
   formId;
   cols = [
     { field: "name", header: "Name" },
@@ -31,7 +32,6 @@ export class AddEditJobComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private datePipe: DatePipe,
-
     private api: APIService,
     private fb: FormBuilder
   ) {
@@ -52,7 +52,11 @@ export class AddEditJobComponent implements OnInit {
           this.questionForms.push({ label: f.name, value: f.id })
         );
         if (params.id === "-1") {
+          this.header = "Add Project";
           this.loading = false;
+          this.form.controls["questionForm"].setValue(
+            this.questionForms[0].value
+          );
         } else {
           this.getJob(params.id);
         }
@@ -74,7 +78,7 @@ export class AddEditJobComponent implements OnInit {
   async getJob(id) {
     const jobOjb = await this.api.GetJob(id);
     console.log(jobOjb);
-    this.formId = jobOjb.forms.items[0].formId;
+    this.formId = jobOjb.forms.items[0] && jobOjb.forms.items[0].formId;
 
     const formValues = {
       code: jobOjb.code,
@@ -98,7 +102,9 @@ export class AddEditJobComponent implements OnInit {
   }
 
   async save() {
+    this.loading = true;
     const values = this.form.getRawValue();
+    let detail;
     if (this.isAddition) {
       const job = await this.api.CreateJob({
         code: values.code,
@@ -112,6 +118,7 @@ export class AddEditJobComponent implements OnInit {
 
       console.log(job);
       console.log(jobForm);
+      detail = "Project added";
     } else {
       const formJob = await this.api.ListFormJobs({
         and: [{ jobId: { eq: this.jobId } }, { formId: { eq: this.formId } }],
@@ -130,7 +137,9 @@ export class AddEditJobComponent implements OnInit {
 
       console.log(job);
       console.log(jobForm);
+      detail = "Project updated";
     }
+    this.router.navigate(["../../jobs"], { relativeTo: this.route });
   }
 
   private getDateString(dateStr) {

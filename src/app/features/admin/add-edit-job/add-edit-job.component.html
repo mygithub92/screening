@@ -1,7 +1,8 @@
+<p-toast key="tst"></p-toast>
 <p-blockUI [blocked]="loading" [target]="dt"
   ><p class="center-spinner"></p
 ></p-blockUI>
-<p-panel header="Add Job" #d class="screening-panel">
+<p-panel header="{{ header }}" #d class="screening-panel">
   <ng-container *ngIf="!loading">
     <div class="card card-w-title">
       <div [formGroup]="form">
