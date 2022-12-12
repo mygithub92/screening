@@ -15,6 +15,9 @@ export class ScreeningReportComponent implements OnInit {
   form: FormGroup;
   loading = true;
   screenings;
+  filteredProjects = [];
+  projects;
+
   result = {
     value: "",
   };
@@ -43,6 +46,7 @@ export class ScreeningReportComponent implements OnInit {
     this.form = this.fb.group({
       startDate: [this.transformDate(yesterday), Validators.required],
       endDate: [this.transformDate(tomorrow), Validators.required],
+      project: [null],
     });
   }
 
@@ -52,6 +56,8 @@ export class ScreeningReportComponent implements OnInit {
       .subscribe(async (user: any) => {
         console.log(user);
         this.user = user;
+        this.projects = (await this.api.ListJobs()).items;
+
         this.fetch();
       });
   }
@@ -62,22 +68,30 @@ export class ScreeningReportComponent implements OnInit {
 
   public async fetch() {
     this.loading = true;
-    const { startDate, endDate } = this.form.getRawValue();
-    console.log(startDate);
-    console.log(endDate);
+    const { startDate, endDate, project } = this.form.getRawValue();
     const startDateObj = this.getDateString(startDate);
     const endDateObj = this.getDateString(endDate);
-    console.log(startDateObj);
-
-    console.log(endDateObj);
-
-    const screeningObjs = await this.api.ListSceenings({
-      processedAt: { between: [startDateObj, endDateObj] },
+    const search = {
+      submittedAt: { between: [startDateObj, endDateObj] },
       processed: { eq: true },
-    });
+    } as any;
+    if (project) {
+      search.jobId = { eq: project.id };
+    }
+    const screeningObjs = await this.api.ListSceenings(search);
     this.screenings = screeningObjs.items;
-    console.log(this.screenings);
     this.loading = false;
+  }
+
+  public filterProject(event) {
+    this.filteredProjects = [];
+    const query = event.query;
+    for (const item of this.projects) {
+      const job = item;
+      if (job.code.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+        this.filteredProjects.push(job);
+      }
+    }
   }
 
   private getDateString(dateStr) {
