@@ -6,7 +6,7 @@
     <div class="card card-w-title">
       <h4>Search by processed date</h4>
       <div class="ui-g ui-fluid" [formGroup]="form">
-        <div class="ui-g-12 ui-lg-4">
+        <div class="ui-g-12 ui-lg-2">
           <div class="ui-g form-group">
             <label class="ui-g-12" for="startDate">Start Date</label>
             <div class="ui-g-12">
@@ -20,7 +20,7 @@
             </div>
           </div>
         </div>
-        <div class="ui-g-12 ui-lg-4">
+        <div class="ui-g-12 ui-lg-2">
           <div class="ui-g form-group">
             <label class="ui-g-12" for="endDate">End Date</label>
             <div class="ui-g-12">
@@ -31,6 +31,24 @@
                 formControlName="endDate"
                 placeholder="End Date"
               />
+            </div>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-lg-3">
+          <div class="ui-g form-group">
+            <label class="ui-g-12" for="project">Project</label>
+            <div class="ui-g-12">
+              <p-autoComplete
+                id="acSimple"
+                formControlName="project"
+                [suggestions]="filteredProjects"
+                (completeMethod)="filterProject($event)"
+                field="code"
+                [size]="30"
+                placeholder="Hint: typing a project name"
+                forceSelection="true"
+                [minLength]="1"
+              ></p-autoComplete>
             </div>
           </div>
         </div>
