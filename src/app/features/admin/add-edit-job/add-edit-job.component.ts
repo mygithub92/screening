@@ -1,7 +1,7 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DateUtils } from 'app/@shared/utils/date-utils';
 import { APIService } from 'app/API.service';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
@@ -31,7 +31,6 @@ export class AddEditJobComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private datePipe: DatePipe,
     private api: APIService,
     private fb: FormBuilder
   ) {
@@ -83,8 +82,8 @@ export class AddEditJobComponent implements OnInit {
     const formValues = {
       code: jobOjb.code,
       questionForm: this.formId,
-      startDate: this.transformDate(jobOjb.startDate),
-      endDate: this.transformDate(jobOjb.endDate),
+      startDate: DateUtils.format(jobOjb.startDate),
+      endDate: DateUtils.format(jobOjb.endDate),
     };
     this.form.patchValue(formValues);
     this.loading = false;
@@ -95,10 +94,6 @@ export class AddEditJobComponent implements OnInit {
       (this.form.controls[controlName].dirty ||
         this.form.controls[controlName].touched)
     );
-  }
-
-  private transformDate(date) {
-    return this.datePipe.transform(date, "shortDate");
   }
 
   async save() {

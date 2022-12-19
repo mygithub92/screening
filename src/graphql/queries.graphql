@@ -7,9 +7,11 @@ query GetSceening($id: ID!) {
     crewId
     crewName
     result
+    method
     staffId
     staffName
     processed
+    location
     processedAt
     submittedAt
     answeredQuestions {
@@ -24,9 +26,11 @@ query GetSceening($id: ID!) {
           crewId
           crewName
           result
+          method
           staffId
           staffName
           processed
+          location
           processedAt
           submittedAt
           answeredQuestions {
@@ -59,9 +63,11 @@ query ListSceenings(
       crewId
       crewName
       result
+      method
       staffId
       staffName
       processed
+      location
       processedAt
       submittedAt
       answeredQuestions {
@@ -76,9 +82,11 @@ query ListSceenings(
             crewId
             crewName
             result
+            method
             staffId
             staffName
             processed
+            location
             processedAt
             submittedAt
             createdAt
@@ -109,9 +117,11 @@ query GetAnsweredQuestion($id: ID!) {
       crewId
       crewName
       result
+      method
       staffId
       staffName
       processed
+      location
       processedAt
       submittedAt
       answeredQuestions {
@@ -126,9 +136,11 @@ query GetAnsweredQuestion($id: ID!) {
             crewId
             crewName
             result
+            method
             staffId
             staffName
             processed
+            location
             processedAt
             submittedAt
             createdAt
@@ -167,9 +179,11 @@ query ListAnsweredQuestions(
         crewId
         crewName
         result
+        method
         staffId
         staffName
         processed
+        location
         processedAt
         submittedAt
         answeredQuestions {
@@ -403,6 +417,10 @@ query GetJob($id: ID!) {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -475,6 +493,10 @@ query ListJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String) {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -768,6 +790,10 @@ query GetCrew($id: ID!) {
     id
     userName
     role
+    DOB
+    healthCardNumber
+    vaxxStatus
+    userAgreement
     companyName
     address
     phonenumber
@@ -798,6 +824,10 @@ query GetCrew($id: ID!) {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -829,6 +859,10 @@ query ListCrews(
       id
       userName
       role
+      DOB
+      healthCardNumber
+      vaxxStatus
+      userAgreement
       companyName
       address
       phonenumber
@@ -853,6 +887,10 @@ query ListCrews(
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -979,6 +1017,10 @@ query GetFormJob($id: ID!) {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -1127,6 +1169,10 @@ query GetCrewJob($id: ID!) {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -1148,6 +1194,10 @@ query GetCrewJob($id: ID!) {
       id
       userName
       role
+      DOB
+      healthCardNumber
+      vaxxStatus
+      userAgreement
       companyName
       address
       phonenumber
@@ -1172,6 +1222,10 @@ query GetCrewJob($id: ID!) {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -1236,6 +1290,10 @@ query ListCrewJobs(
         id
         userName
         role
+        DOB
+        healthCardNumber
+        vaxxStatus
+        userAgreement
         companyName
         address
         phonenumber
@@ -1780,6 +1838,10 @@ query CrewJobsByJobId(
         id
         userName
         role
+        DOB
+        healthCardNumber
+        vaxxStatus
+        userAgreement
         companyName
         address
         phonenumber
@@ -1856,6 +1918,10 @@ query CrewJobsByCrewId(
         id
         userName
         role
+        DOB
+        healthCardNumber
+        vaxxStatus
+        userAgreement
         companyName
         address
         phonenumber

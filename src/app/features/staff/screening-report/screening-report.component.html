@@ -8,7 +8,9 @@
       <div class="ui-g ui-fluid" [formGroup]="form">
         <div class="ui-g-12 ui-lg-2">
           <div class="ui-g form-group">
-            <label class="ui-g-12" for="startDate">Start Date</label>
+            <label class="ui-g-12" for="startDate"
+              >Start Date (MM/DD/YYYY)</label
+            >
             <div class="ui-g-12">
               <input
                 type="text"
@@ -22,7 +24,7 @@
         </div>
         <div class="ui-g-12 ui-lg-2">
           <div class="ui-g form-group">
-            <label class="ui-g-12" for="endDate">End Date</label>
+            <label class="ui-g-12" for="endDate">End Date (MM/DD/YYYY)</label>
             <div class="ui-g-12">
               <input
                 type="text"
@@ -69,7 +71,74 @@
       </div>
     </div>
     <div class="card card-w-title">
-      <p-table [columns]="cols" #dt [value]="screenings" dataKey="id">
+      <div class="ui-g form-group" [formGroup]="filterForm">
+        <div class="ui-g-3">
+          <div class="ui-g">
+            <div class="ui-g-3">
+              <strong>Method: </strong>
+            </div>
+            <div class="ui-g-3" style="white-space: nowrap;">
+              <p-radioButton
+                name="method"
+                value="All"
+                label="All"
+                formControlName="method"
+              ></p-radioButton>
+            </div>
+            <div class="ui-g-3" style="white-space: nowrap;">
+              <p-radioButton
+                name="method"
+                value="Rapit Test"
+                label="Rapit Test"
+                formControlName="method"
+              ></p-radioButton>
+            </div>
+            <div class="ui-g-3" style="white-space: nowrap;">
+              <p-radioButton
+                name="method"
+                value="PCR"
+                label="PCR"
+                formControlName="method"
+              ></p-radioButton>
+            </div>
+          </div>
+        </div>
+        <div class="ui-g-3">
+          <div class="ui-g">
+            <div class="ui-g-3">
+              <strong>Result: </strong>
+            </div>
+            <div class="ui-g-3" style="white-space: nowrap;">
+              <p-radioButton
+                name="result"
+                value="All"
+                label="All"
+                formControlName="result"
+              ></p-radioButton>
+            </div>
+            <div class="ui-g-3" style="white-space: nowrap;">
+              <p-radioButton
+                name="result"
+                value="Positive"
+                label="Positive"
+                formControlName="result"
+              ></p-radioButton>
+            </div>
+            <div class="ui-g-3" style="white-space: nowrap;">
+              <p-radioButton
+                name="result"
+                value="Negative"
+                label="Negative"
+                formControlName="result"
+              ></p-radioButton>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p-table [columns]="cols" #dt [value]="filteredScreenings" dataKey="id">
+        <ng-template pTemplate="caption">
+          {{ report }}
+        </ng-template>
         <ng-template pTemplate="header" let-columns>
           <tr>
             <th style="width: 3em;"></th>

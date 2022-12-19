@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DateUtils } from 'app/@shared/utils/date-utils';
 import { APIService } from 'app/API.service';
 
 @Component({
@@ -13,14 +14,17 @@ export class CrewComponent implements OnInit {
     { field: "name", header: "Name" },
     { field: "phonenumber", header: "Phone number" },
     { field: "email", header: "Email" },
-    { field: "address", header: "Address" },
-    { field: "companyName", header: "Company name" },
+    { field: "DOB", header: "DOB" },
+    { field: "healthCardNumber", header: "Health Card Number" },
   ];
   constructor(private api: APIService) {}
 
   async ngOnInit() {
     const crewObjs = await this.api.ListCrews();
-    this.crews = crewObjs.items;
+    this.crews = crewObjs.items.map((i) => {
+      i.DOB = DateUtils.format(i.DOB);
+      return i;
+    });
     this.loading = false;
   }
 }

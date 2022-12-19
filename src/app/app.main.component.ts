@@ -139,27 +139,27 @@ export class AppMainComponent implements OnInit, OnDestroy {
         const crews = await this.api.ListCrews({
           userName: { eq: userName },
         });
-        this.menuModel.push(
-          {
-            label: "My Projects",
-            icon: "fa fa-fw fa-tasks",
-            routerLink: "screening",
-          },
-          {
-            label: "Search Projects",
-            icon: "fa fa-fw fa-tasks",
-            routerLink: "profile",
-          },
-          {
-            label: "My Profile",
-            icon: "fa fa-fw fa-newspaper-o",
-            routerLink: "profile/profile",
-          }
-        );
         if (crews && crews.items.length) {
+          this.menuModel.push(
+            {
+              label: "My Projects",
+              icon: "fa fa-fw fa-tasks",
+              routerLink: "screening",
+            },
+            {
+              label: "Search Projects",
+              icon: "fa fa-fw fa-tasks",
+              routerLink: "profile",
+            },
+            {
+              label: "My Profile",
+              icon: "fa fa-fw fa-newspaper-o",
+              routerLink: "profile/profile",
+            }
+          );
           nav = ["/main/screening"];
         } else {
-          nav = ["/main/profile/profile"];
+          nav = ["/main/profile/profile", { firstTime: true }];
         }
       }
       this.router.navigate(nav);

@@ -8,7 +8,9 @@
       <div class="ui-g ui-fluid" [formGroup]="form">
         <div class="ui-g-12 ui-lg-2">
           <div class="ui-g form-group">
-            <label class="ui-g-12" for="startDate">Start Date</label>
+            <label class="ui-g-12" for="startDate"
+              >Start Date (MM/DD/YYYY)</label
+            >
             <div class="ui-g-12">
               <input
                 type="text"
@@ -22,7 +24,7 @@
         </div>
         <div class="ui-g-12 ui-lg-2">
           <div class="ui-g form-group">
-            <label class="ui-g-12" for="endDate">End Date</label>
+            <label class="ui-g-12" for="endDate">End Date (MM/DD/YYYY)</label>
             <div class="ui-g-12">
               <input
                 type="text"
@@ -82,6 +84,7 @@
                 ariaLabelAsc="Activate to sort in ascending order"
               ></p-sortIcon>
             </th>
+            <th>Method</th>
             <th>Result</th>
           </tr>
         </ng-template>
@@ -107,20 +110,40 @@
             </td>
             <td>
               <div class="ui-g">
-                <div class="ui-g-4">
+                <div class="ui-g-6" style="white-space: nowrap;">
                   <p-radioButton
-                    name="screening{{ rowIndex + 1 }}"
-                    value="Positive"
-                    label="Positive"
-                    [formControlName]="rowData['id']"
+                    name="method{{ rowIndex + 1 }}"
+                    value="Rapit Test"
+                    label="Rapit Test"
+                    formControlName="method{{ rowData['id'] }}"
                   ></p-radioButton>
                 </div>
-                <div class="ui-g-4">
+                <div class="ui-g-6" style="white-space: nowrap;">
                   <p-radioButton
-                    name="screening{{ rowIndex + 1 }}"
+                    name="method{{ rowIndex + 1 }}"
+                    value="PCR"
+                    label="PCR"
+                    formControlName="method{{ rowData['id'] }}"
+                  ></p-radioButton>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="ui-g">
+                <div class="ui-g-6" style="white-space: nowrap;">
+                  <p-radioButton
+                    name="result{{ rowIndex + 1 }}"
+                    value="Positive"
+                    label="Positive"
+                    formControlName="result{{ rowData['id'] }}"
+                  ></p-radioButton>
+                </div>
+                <div class="ui-g-6" style="white-space: nowrap;">
+                  <p-radioButton
+                    name="result{{ rowIndex + 1 }}"
                     value="Negative"
                     label="Negative"
-                    [formControlName]="rowData['id']"
+                    formControlName="result{{ rowData['id'] }}"
                   ></p-radioButton>
                 </div>
               </div>

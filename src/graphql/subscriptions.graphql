@@ -7,9 +7,11 @@ subscription OnCreateSceening($filter: ModelSubscriptionSceeningFilterInput) {
     crewId
     crewName
     result
+    method
     staffId
     staffName
     processed
+    location
     processedAt
     submittedAt
     answeredQuestions {
@@ -24,9 +26,11 @@ subscription OnCreateSceening($filter: ModelSubscriptionSceeningFilterInput) {
           crewId
           crewName
           result
+          method
           staffId
           staffName
           processed
+          location
           processedAt
           submittedAt
           answeredQuestions {
@@ -54,9 +58,11 @@ subscription OnUpdateSceening($filter: ModelSubscriptionSceeningFilterInput) {
     crewId
     crewName
     result
+    method
     staffId
     staffName
     processed
+    location
     processedAt
     submittedAt
     answeredQuestions {
@@ -71,9 +77,11 @@ subscription OnUpdateSceening($filter: ModelSubscriptionSceeningFilterInput) {
           crewId
           crewName
           result
+          method
           staffId
           staffName
           processed
+          location
           processedAt
           submittedAt
           answeredQuestions {
@@ -101,9 +109,11 @@ subscription OnDeleteSceening($filter: ModelSubscriptionSceeningFilterInput) {
     crewId
     crewName
     result
+    method
     staffId
     staffName
     processed
+    location
     processedAt
     submittedAt
     answeredQuestions {
@@ -118,9 +128,11 @@ subscription OnDeleteSceening($filter: ModelSubscriptionSceeningFilterInput) {
           crewId
           crewName
           result
+          method
           staffId
           staffName
           processed
+          location
           processedAt
           submittedAt
           answeredQuestions {
@@ -154,9 +166,11 @@ subscription OnCreateAnsweredQuestion(
       crewId
       crewName
       result
+      method
       staffId
       staffName
       processed
+      location
       processedAt
       submittedAt
       answeredQuestions {
@@ -171,9 +185,11 @@ subscription OnCreateAnsweredQuestion(
             crewId
             crewName
             result
+            method
             staffId
             staffName
             processed
+            location
             processedAt
             submittedAt
             createdAt
@@ -209,9 +225,11 @@ subscription OnUpdateAnsweredQuestion(
       crewId
       crewName
       result
+      method
       staffId
       staffName
       processed
+      location
       processedAt
       submittedAt
       answeredQuestions {
@@ -226,9 +244,11 @@ subscription OnUpdateAnsweredQuestion(
             crewId
             crewName
             result
+            method
             staffId
             staffName
             processed
+            location
             processedAt
             submittedAt
             createdAt
@@ -264,9 +284,11 @@ subscription OnDeleteAnsweredQuestion(
       crewId
       crewName
       result
+      method
       staffId
       staffName
       processed
+      location
       processedAt
       submittedAt
       answeredQuestions {
@@ -281,9 +303,11 @@ subscription OnDeleteAnsweredQuestion(
             crewId
             crewName
             result
+            method
             staffId
             staffName
             processed
+            location
             processedAt
             submittedAt
             createdAt
@@ -610,6 +634,10 @@ subscription OnCreateJob($filter: ModelSubscriptionJobFilterInput) {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -699,6 +727,10 @@ subscription OnUpdateJob($filter: ModelSubscriptionJobFilterInput) {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -788,6 +820,10 @@ subscription OnDeleteJob($filter: ModelSubscriptionJobFilterInput) {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -1267,6 +1303,10 @@ subscription OnCreateCrew($filter: ModelSubscriptionCrewFilterInput) {
     id
     userName
     role
+    DOB
+    healthCardNumber
+    vaxxStatus
+    userAgreement
     companyName
     address
     phonenumber
@@ -1297,6 +1337,10 @@ subscription OnCreateCrew($filter: ModelSubscriptionCrewFilterInput) {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -1323,6 +1367,10 @@ subscription OnUpdateCrew($filter: ModelSubscriptionCrewFilterInput) {
     id
     userName
     role
+    DOB
+    healthCardNumber
+    vaxxStatus
+    userAgreement
     companyName
     address
     phonenumber
@@ -1353,6 +1401,10 @@ subscription OnUpdateCrew($filter: ModelSubscriptionCrewFilterInput) {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -1379,6 +1431,10 @@ subscription OnDeleteCrew($filter: ModelSubscriptionCrewFilterInput) {
     id
     userName
     role
+    DOB
+    healthCardNumber
+    vaxxStatus
+    userAgreement
     companyName
     address
     phonenumber
@@ -1409,6 +1465,10 @@ subscription OnDeleteCrew($filter: ModelSubscriptionCrewFilterInput) {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -1536,6 +1596,10 @@ subscription OnCreateFormJob($filter: ModelSubscriptionFormJobFilterInput) {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -1663,6 +1727,10 @@ subscription OnUpdateFormJob($filter: ModelSubscriptionFormJobFilterInput) {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -1790,6 +1858,10 @@ subscription OnDeleteFormJob($filter: ModelSubscriptionFormJobFilterInput) {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -1865,6 +1937,10 @@ subscription OnCreateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -1886,6 +1962,10 @@ subscription OnCreateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
       id
       userName
       role
+      DOB
+      healthCardNumber
+      vaxxStatus
+      userAgreement
       companyName
       address
       phonenumber
@@ -1910,6 +1990,10 @@ subscription OnCreateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -1985,6 +2069,10 @@ subscription OnUpdateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -2006,6 +2094,10 @@ subscription OnUpdateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
       id
       userName
       role
+      DOB
+      healthCardNumber
+      vaxxStatus
+      userAgreement
       companyName
       address
       phonenumber
@@ -2030,6 +2122,10 @@ subscription OnUpdateCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -2105,6 +2201,10 @@ subscription OnDeleteCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -2126,6 +2226,10 @@ subscription OnDeleteCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
       id
       userName
       role
+      DOB
+      healthCardNumber
+      vaxxStatus
+      userAgreement
       companyName
       address
       phonenumber
@@ -2150,6 +2254,10 @@ subscription OnDeleteCrewJob($filter: ModelSubscriptionCrewJobFilterInput) {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber

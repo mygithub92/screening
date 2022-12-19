@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+
 export class DateUtils {
   iso8601 = /^\d{4}-\d\d-\d\d \d\d:\d\d:\d\d(\.\d+)?(([+-]\d\d:\d\d)|Z)?$/;
 
@@ -26,5 +28,9 @@ export class DateUtils {
     }
 
     return this.iso8601.test(value);
+  }
+
+  static format(date) {
+    return moment(date).format("MM/DD/YYYY");
   }
 }
