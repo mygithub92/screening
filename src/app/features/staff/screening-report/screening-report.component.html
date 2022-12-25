@@ -6,9 +6,9 @@
     <div class="card card-w-title">
       <h4>Search by processed date</h4>
       <div class="ui-g ui-fluid" [formGroup]="form">
-        <div class="ui-g-12 ui-lg-2">
+        <div class="ui-g-12 ui-lg-3">
           <div class="ui-g form-group">
-            <label class="ui-g-12" for="startDate"
+            <label class="ui-g-12" for="startDate" style="white-space: nowrap;"
               >Start Date (MM/DD/YYYY)</label
             >
             <div class="ui-g-12">
@@ -22,9 +22,11 @@
             </div>
           </div>
         </div>
-        <div class="ui-g-12 ui-lg-2">
+        <div class="ui-g-12 ui-lg-3">
           <div class="ui-g form-group">
-            <label class="ui-g-12" for="endDate">End Date (MM/DD/YYYY)</label>
+            <label class="ui-g-12" for="endDate" style="white-space: nowrap;"
+              >End Date (MM/DD/YYYY)</label
+            >
             <div class="ui-g-12">
               <input
                 type="text"
@@ -72,7 +74,7 @@
     </div>
     <div class="card card-w-title">
       <div class="ui-g form-group" [formGroup]="filterForm">
-        <div class="ui-g-3">
+        <div class="ui-g-6">
           <div class="ui-g">
             <div class="ui-g-3">
               <strong>Method: </strong>
@@ -88,8 +90,8 @@
             <div class="ui-g-3" style="white-space: nowrap;">
               <p-radioButton
                 name="method"
-                value="Rapit Test"
-                label="Rapit Test"
+                value="Rapid Test"
+                label="Rapid Test"
                 formControlName="method"
               ></p-radioButton>
             </div>
@@ -103,7 +105,7 @@
             </div>
           </div>
         </div>
-        <div class="ui-g-3">
+        <div class="ui-g-6">
           <div class="ui-g">
             <div class="ui-g-3">
               <strong>Result: </strong>

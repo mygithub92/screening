@@ -6,6 +6,7 @@ query GetSceening($id: ID!) {
     jobName
     crewId
     crewName
+    crewPhoneNumber
     result
     method
     staffId
@@ -25,6 +26,7 @@ query GetSceening($id: ID!) {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -62,6 +64,7 @@ query ListSceenings(
       jobName
       crewId
       crewName
+      crewPhoneNumber
       result
       method
       staffId
@@ -81,6 +84,7 @@ query ListSceenings(
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -116,6 +120,7 @@ query GetAnsweredQuestion($id: ID!) {
       jobName
       crewId
       crewName
+      crewPhoneNumber
       result
       method
       staffId
@@ -135,6 +140,7 @@ query GetAnsweredQuestion($id: ID!) {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -178,6 +184,7 @@ query ListAnsweredQuestions(
         jobName
         crewId
         crewName
+        crewPhoneNumber
         result
         method
         staffId

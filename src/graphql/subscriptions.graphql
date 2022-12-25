@@ -6,6 +6,7 @@ subscription OnCreateSceening($filter: ModelSubscriptionSceeningFilterInput) {
     jobName
     crewId
     crewName
+    crewPhoneNumber
     result
     method
     staffId
@@ -25,6 +26,7 @@ subscription OnCreateSceening($filter: ModelSubscriptionSceeningFilterInput) {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -57,6 +59,7 @@ subscription OnUpdateSceening($filter: ModelSubscriptionSceeningFilterInput) {
     jobName
     crewId
     crewName
+    crewPhoneNumber
     result
     method
     staffId
@@ -76,6 +79,7 @@ subscription OnUpdateSceening($filter: ModelSubscriptionSceeningFilterInput) {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -108,6 +112,7 @@ subscription OnDeleteSceening($filter: ModelSubscriptionSceeningFilterInput) {
     jobName
     crewId
     crewName
+    crewPhoneNumber
     result
     method
     staffId
@@ -127,6 +132,7 @@ subscription OnDeleteSceening($filter: ModelSubscriptionSceeningFilterInput) {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -165,6 +171,7 @@ subscription OnCreateAnsweredQuestion(
       jobName
       crewId
       crewName
+      crewPhoneNumber
       result
       method
       staffId
@@ -184,6 +191,7 @@ subscription OnCreateAnsweredQuestion(
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -224,6 +232,7 @@ subscription OnUpdateAnsweredQuestion(
       jobName
       crewId
       crewName
+      crewPhoneNumber
       result
       method
       staffId
@@ -243,6 +252,7 @@ subscription OnUpdateAnsweredQuestion(
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -283,6 +293,7 @@ subscription OnDeleteAnsweredQuestion(
       jobName
       crewId
       crewName
+      crewPhoneNumber
       result
       method
       staffId
@@ -302,6 +313,7 @@ subscription OnDeleteAnsweredQuestion(
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId

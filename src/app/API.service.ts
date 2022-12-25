@@ -48,6 +48,7 @@ export type CreateSceeningInput = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
   method?: string | null;
   staffId?: string | null;
@@ -63,6 +64,7 @@ export type ModelSceeningConditionInput = {
   jobName?: ModelStringInput | null;
   crewId?: ModelStringInput | null;
   crewName?: ModelStringInput | null;
+  crewPhoneNumber?: ModelStringInput | null;
   result?: ModelStringInput | null;
   method?: ModelStringInput | null;
   staffId?: ModelStringInput | null;
@@ -129,6 +131,7 @@ export type Sceening = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
   method?: string | null;
   staffId?: string | null;
@@ -166,6 +169,7 @@ export type UpdateSceeningInput = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
   method?: string | null;
   staffId?: string | null;
@@ -602,6 +606,7 @@ export type ModelSceeningFilterInput = {
   jobName?: ModelStringInput | null;
   crewId?: ModelStringInput | null;
   crewName?: ModelStringInput | null;
+  crewPhoneNumber?: ModelStringInput | null;
   result?: ModelStringInput | null;
   method?: ModelStringInput | null;
   staffId?: ModelStringInput | null;
@@ -753,6 +758,7 @@ export type ModelSubscriptionSceeningFilterInput = {
   jobName?: ModelSubscriptionStringInput | null;
   crewId?: ModelSubscriptionStringInput | null;
   crewName?: ModelSubscriptionStringInput | null;
+  crewPhoneNumber?: ModelSubscriptionStringInput | null;
   result?: ModelSubscriptionStringInput | null;
   method?: ModelSubscriptionStringInput | null;
   staffId?: ModelSubscriptionStringInput | null;
@@ -905,6 +911,7 @@ export type CreateSceeningMutation = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
   method?: string | null;
   staffId?: string | null;
@@ -927,6 +934,7 @@ export type CreateSceeningMutation = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
         method?: string | null;
         staffId?: string | null;
@@ -960,6 +968,7 @@ export type UpdateSceeningMutation = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
   method?: string | null;
   staffId?: string | null;
@@ -982,6 +991,7 @@ export type UpdateSceeningMutation = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
         method?: string | null;
         staffId?: string | null;
@@ -1015,6 +1025,7 @@ export type DeleteSceeningMutation = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
   method?: string | null;
   staffId?: string | null;
@@ -1037,6 +1048,7 @@ export type DeleteSceeningMutation = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
         method?: string | null;
         staffId?: string | null;
@@ -1075,6 +1087,7 @@ export type CreateAnsweredQuestionMutation = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
     method?: string | null;
     staffId?: string | null;
@@ -1097,6 +1110,7 @@ export type CreateAnsweredQuestionMutation = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
           method?: string | null;
           staffId?: string | null;
@@ -1136,6 +1150,7 @@ export type UpdateAnsweredQuestionMutation = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
     method?: string | null;
     staffId?: string | null;
@@ -1158,6 +1173,7 @@ export type UpdateAnsweredQuestionMutation = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
           method?: string | null;
           staffId?: string | null;
@@ -1197,6 +1213,7 @@ export type DeleteAnsweredQuestionMutation = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
     method?: string | null;
     staffId?: string | null;
@@ -1219,6 +1236,7 @@ export type DeleteAnsweredQuestionMutation = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
           method?: string | null;
           staffId?: string | null;
@@ -3848,6 +3866,7 @@ export type GetSceeningQuery = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
   method?: string | null;
   staffId?: string | null;
@@ -3870,6 +3889,7 @@ export type GetSceeningQuery = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
         method?: string | null;
         staffId?: string | null;
@@ -3905,6 +3925,7 @@ export type ListSceeningsQuery = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
     method?: string | null;
     staffId?: string | null;
@@ -3927,6 +3948,7 @@ export type ListSceeningsQuery = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
           method?: string | null;
           staffId?: string | null;
@@ -3963,6 +3985,7 @@ export type GetAnsweredQuestionQuery = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
     method?: string | null;
     staffId?: string | null;
@@ -3985,6 +4008,7 @@ export type GetAnsweredQuestionQuery = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
           method?: string | null;
           staffId?: string | null;
@@ -4026,6 +4050,7 @@ export type ListAnsweredQuestionsQuery = {
       jobName?: string | null;
       crewId?: string | null;
       crewName?: string | null;
+      crewPhoneNumber?: string | null;
       result?: string | null;
       method?: string | null;
       staffId?: string | null;
@@ -6076,6 +6101,7 @@ export type OnCreateSceeningSubscription = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
   method?: string | null;
   staffId?: string | null;
@@ -6098,6 +6124,7 @@ export type OnCreateSceeningSubscription = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
         method?: string | null;
         staffId?: string | null;
@@ -6131,6 +6158,7 @@ export type OnUpdateSceeningSubscription = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
   method?: string | null;
   staffId?: string | null;
@@ -6153,6 +6181,7 @@ export type OnUpdateSceeningSubscription = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
         method?: string | null;
         staffId?: string | null;
@@ -6186,6 +6215,7 @@ export type OnDeleteSceeningSubscription = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
   method?: string | null;
   staffId?: string | null;
@@ -6208,6 +6238,7 @@ export type OnDeleteSceeningSubscription = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
         method?: string | null;
         staffId?: string | null;
@@ -6246,6 +6277,7 @@ export type OnCreateAnsweredQuestionSubscription = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
     method?: string | null;
     staffId?: string | null;
@@ -6268,6 +6300,7 @@ export type OnCreateAnsweredQuestionSubscription = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
           method?: string | null;
           staffId?: string | null;
@@ -6307,6 +6340,7 @@ export type OnUpdateAnsweredQuestionSubscription = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
     method?: string | null;
     staffId?: string | null;
@@ -6329,6 +6363,7 @@ export type OnUpdateAnsweredQuestionSubscription = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
           method?: string | null;
           staffId?: string | null;
@@ -6368,6 +6403,7 @@ export type OnDeleteAnsweredQuestionSubscription = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
     method?: string | null;
     staffId?: string | null;
@@ -6390,6 +6426,7 @@ export type OnDeleteAnsweredQuestionSubscription = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
           method?: string | null;
           staffId?: string | null;
@@ -9028,6 +9065,7 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -9050,6 +9088,7 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
                 method
                 staffId
@@ -9099,6 +9138,7 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -9121,6 +9161,7 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
                 method
                 staffId
@@ -9170,6 +9211,7 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -9192,6 +9234,7 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
                 method
                 staffId
@@ -9246,6 +9289,7 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -9268,6 +9312,7 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
                   method
                   staffId
@@ -9323,6 +9368,7 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -9345,6 +9391,7 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
                   method
                   staffId
@@ -9400,6 +9447,7 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -9422,6 +9470,7 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
                   method
                   staffId
@@ -12448,6 +12497,7 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -12470,6 +12520,7 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
                 method
                 staffId
@@ -12519,6 +12570,7 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -12541,6 +12593,7 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
                   method
                   staffId
@@ -12594,6 +12647,7 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -12616,6 +12670,7 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
                   method
                   staffId
@@ -12671,6 +12726,7 @@ export class APIService {
               jobName
               crewId
               crewName
+              crewPhoneNumber
               result
               method
               staffId
@@ -15218,6 +15274,7 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -15240,6 +15297,7 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
                 method
                 staffId
@@ -15290,6 +15348,7 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -15312,6 +15371,7 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
                 method
                 staffId
@@ -15362,6 +15422,7 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -15384,6 +15445,7 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
                 method
                 staffId
@@ -15441,6 +15503,7 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -15463,6 +15526,7 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
                   method
                   staffId
@@ -15523,6 +15587,7 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -15545,6 +15610,7 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
                   method
                   staffId
@@ -15605,6 +15671,7 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -15627,6 +15694,7 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
                   method
                   staffId

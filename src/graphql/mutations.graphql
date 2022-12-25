@@ -9,6 +9,7 @@ mutation CreateSceening(
     jobName
     crewId
     crewName
+    crewPhoneNumber
     result
     method
     staffId
@@ -28,6 +29,7 @@ mutation CreateSceening(
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -63,6 +65,7 @@ mutation UpdateSceening(
     jobName
     crewId
     crewName
+    crewPhoneNumber
     result
     method
     staffId
@@ -82,6 +85,7 @@ mutation UpdateSceening(
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -117,6 +121,7 @@ mutation DeleteSceening(
     jobName
     crewId
     crewName
+    crewPhoneNumber
     result
     method
     staffId
@@ -136,6 +141,7 @@ mutation DeleteSceening(
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
           method
           staffId
@@ -175,6 +181,7 @@ mutation CreateAnsweredQuestion(
       jobName
       crewId
       crewName
+      crewPhoneNumber
       result
       method
       staffId
@@ -194,6 +201,7 @@ mutation CreateAnsweredQuestion(
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -235,6 +243,7 @@ mutation UpdateAnsweredQuestion(
       jobName
       crewId
       crewName
+      crewPhoneNumber
       result
       method
       staffId
@@ -254,6 +263,7 @@ mutation UpdateAnsweredQuestion(
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId
@@ -295,6 +305,7 @@ mutation DeleteAnsweredQuestion(
       jobName
       crewId
       crewName
+      crewPhoneNumber
       result
       method
       staffId
@@ -314,6 +325,7 @@ mutation DeleteAnsweredQuestion(
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
             method
             staffId

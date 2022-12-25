@@ -140,6 +140,7 @@ export class ScreeningFormComponent implements OnInit {
         jobName: this.findJobName(rawValue.selectedJob),
         crewId: this.crew.id,
         crewName: this.crew.name,
+        crewPhoneNumber: this.crew.phonenumber,
         submittedAt: new Date().toISOString(),
         location: rawValue.selectedLocation,
       });
