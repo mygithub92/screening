@@ -4,10 +4,13 @@ type Sceening @model @auth(rules: [{ allow: public }]) {
   jobName: String
   crewId: String
   crewName: String
+  crewPhoneNumber: String
   result: String
+  method: String
   staffId: String
   staffName: String
   processed: Boolean
+  location: String
   processedAt: AWSDateTime
   submittedAt: AWSDateTime
   answeredQuestions: [AnsweredQuestion] @hasMany
@@ -59,6 +62,10 @@ type Crew @model @auth(rules: [{ allow: public }]) {
   id: ID!
   userName: String
   role: String
+  DOB: AWSDateTime
+  healthCardNumber: String
+  vaxxStatus: String
+  userAgreement: String
   companyName: String
   address: String
   phonenumber: String

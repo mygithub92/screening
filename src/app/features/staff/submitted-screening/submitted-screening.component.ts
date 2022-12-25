@@ -1,14 +1,17 @@
-import { DatePipe } from '@angular/common';
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'app/@core/services/auth.service';
+import { DateUtils } from 'app/@shared/utils/date-utils';
 import { APIService } from 'app/API.service';
 import * as moment from 'moment';
+
+import { TextMessageService } from '../text-message-service';
 
 @Component({
   selector: "app-submitted-screening",
   templateUrl: "./submitted-screening.component.html",
   styleUrls: ["./submitted-screening.component.scss"],
+  providers: [TextMessageService],
 })
 export class SubmittedScreeningComponent implements OnInit {
   user;
@@ -21,9 +24,11 @@ export class SubmittedScreeningComponent implements OnInit {
   result = {
     value: "",
   };
+  screeningCrewMap = {};
   cols = [
     { field: "crewName", header: "Crew Name" },
     { field: "jobName", header: "Project Name" },
+    { field: "location", header: "Location" },
     { field: "submittedAt", header: "Submitted" },
   ];
   subCols = [
@@ -34,16 +39,15 @@ export class SubmittedScreeningComponent implements OnInit {
     private api: APIService,
     private fb: FormBuilder,
     private authService: AuthService,
-    private datePipe: DatePipe,
-    @Inject(LOCALE_ID) public locale: string
+    private messageService: TextMessageService
   ) {
     const tomorrow = new Date();
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 2);
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.form = this.fb.group({
-      startDate: [this.transformDate(yesterday), Validators.required],
-      endDate: [this.transformDate(tomorrow), Validators.required],
+      startDate: [DateUtils.format(yesterday), Validators.required],
+      endDate: [DateUtils.format(tomorrow), Validators.required],
       project: [null],
     });
     this.resultForm = this.fb.group({});
@@ -60,12 +64,9 @@ export class SubmittedScreeningComponent implements OnInit {
       });
   }
 
-  private transformDate(date) {
-    return this.datePipe.transform(date, "shortDate", this.locale);
-  }
-
   public async fetch() {
     this.loading = true;
+    this.screeningCrewMap = {};
     this.resultForm.reset();
     const { startDate, endDate, project } = this.form.getRawValue();
     const startDateObj = this.getDateString(startDate);
@@ -81,8 +82,20 @@ export class SubmittedScreeningComponent implements OnInit {
     this.screenings = screeningObjs.items;
     console.log(this.screenings);
     this.screenings.forEach((screening, i) => {
+      this.screeningCrewMap[screening.id] = {
+        crewName: screening.crewName,
+        crewPhoneNumber: screening.crewPhoneNumber,
+      };
+      screening.submittedAt = DateUtils.format(screening.submittedAt);
       screening.answeredQuestions.items.sort((a, b) => a.order - b.order);
-      this.resultForm.addControl(screening.id, new FormControl(null));
+      this.resultForm.addControl(
+        `method${screening.id}`,
+        new FormControl(null)
+      );
+      this.resultForm.addControl(
+        `result${screening.id}`,
+        new FormControl(null)
+      );
     });
     this.loading = false;
   }
@@ -115,14 +128,29 @@ export class SubmittedScreeningComponent implements OnInit {
 
   public async submit() {
     const updateSceenings = [];
+    const SMSs = [];
     this.screenings.forEach((screening) => {
-      const result = this.resultForm.controls[screening.id].value;
+      const method = this.resultForm.controls[`method${screening.id}`].value;
+      const result = this.resultForm.controls[`result${screening.id}`].value;
       console.log(result);
-      if (result) {
+      if (method && result) {
+        const { crewName, crewPhoneNumber } = this.screeningCrewMap[
+          screening.id
+        ];
+        SMSs.push({
+          type: "result",
+          name: crewName,
+          phonne: crewPhoneNumber,
+          test: {
+            result,
+            method,
+          },
+        });
         updateSceenings.push(
           this.api.UpdateSceening({
             id: screening.id,
             result,
+            method,
             processed: true,
             processedAt: new Date().toISOString(),
             staffId: this.user.username,
@@ -132,7 +160,10 @@ export class SubmittedScreeningComponent implements OnInit {
       }
     });
     const temp = await Promise.all(updateSceenings);
-    this.fetch();
+    console.log(SMSs);
     console.log(temp);
+    const messages = this.messageService.sendMessage(SMSs);
+    console.log(messages);
+    this.fetch();
   }
 }

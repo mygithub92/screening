@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,16 +19,22 @@ export class ScreeningFormComponent implements OnInit {
   loading = true;
   totalNumberQuestion = 0;
   crew;
+  locations = [
+    { label: "Set", value: "Set" },
+    { label: "Basecamp", value: "Basecamp" },
+    { label: "Location", value: "Location" },
+  ];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private api: APIService,
     private fb: FormBuilder,
-    private authService: AuthService,
-    private datePipe: DatePipe
+    private authService: AuthService
   ) {
     this.form = this.fb.group({
       selectedJob: [null, Validators.required],
+      selectedLocation: [null, Validators.required],
+
       questionForm: this.fb.group({}),
     });
 
@@ -51,7 +56,10 @@ export class ScreeningFormComponent implements OnInit {
         jobs.push({ label: jobObj.code, value: jobObj.id })
       );
       this.jobs = jobs;
-      this.form.patchValue({ selectedJob: this.selectedJob });
+      this.form.patchValue({
+        selectedJob: this.selectedJob,
+        selectedLocation: this.locations[0].value,
+      });
     });
   }
 
@@ -132,8 +140,11 @@ export class ScreeningFormComponent implements OnInit {
         jobName: this.findJobName(rawValue.selectedJob),
         crewId: this.crew.id,
         crewName: this.crew.name,
+        crewPhoneNumber: this.crew.phonenumber,
         submittedAt: new Date().toISOString(),
+        location: rawValue.selectedLocation,
       });
+      console.log(sceeningObj);
       this.totalQuestions.forEach((question, i) => {
         const questionIndex = `question${i + 1}`;
         const answeredQuestion = {

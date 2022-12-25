@@ -48,10 +48,13 @@ export type CreateSceeningInput = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
+  method?: string | null;
   staffId?: string | null;
   staffName?: string | null;
   processed?: boolean | null;
+  location?: string | null;
   processedAt?: string | null;
   submittedAt?: string | null;
 };
@@ -61,10 +64,13 @@ export type ModelSceeningConditionInput = {
   jobName?: ModelStringInput | null;
   crewId?: ModelStringInput | null;
   crewName?: ModelStringInput | null;
+  crewPhoneNumber?: ModelStringInput | null;
   result?: ModelStringInput | null;
+  method?: ModelStringInput | null;
   staffId?: ModelStringInput | null;
   staffName?: ModelStringInput | null;
   processed?: ModelBooleanInput | null;
+  location?: ModelStringInput | null;
   processedAt?: ModelStringInput | null;
   submittedAt?: ModelStringInput | null;
   and?: Array<ModelSceeningConditionInput | null> | null;
@@ -125,10 +131,13 @@ export type Sceening = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
+  method?: string | null;
   staffId?: string | null;
   staffName?: string | null;
   processed?: boolean | null;
+  location?: string | null;
   processedAt?: string | null;
   submittedAt?: string | null;
   answeredQuestions?: ModelAnsweredQuestionConnection | null;
@@ -160,10 +169,13 @@ export type UpdateSceeningInput = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
+  method?: string | null;
   staffId?: string | null;
   staffName?: string | null;
   processed?: boolean | null;
+  location?: string | null;
   processedAt?: string | null;
   submittedAt?: string | null;
 };
@@ -351,6 +363,10 @@ export type Crew = {
   id: string;
   userName?: string | null;
   role?: string | null;
+  DOB?: string | null;
+  healthCardNumber?: string | null;
+  vaxxStatus?: string | null;
+  userAgreement?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
@@ -462,6 +478,10 @@ export type CreateCrewInput = {
   id?: string | null;
   userName?: string | null;
   role?: string | null;
+  DOB?: string | null;
+  healthCardNumber?: string | null;
+  vaxxStatus?: string | null;
+  userAgreement?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
@@ -473,6 +493,10 @@ export type CreateCrewInput = {
 export type ModelCrewConditionInput = {
   userName?: ModelStringInput | null;
   role?: ModelStringInput | null;
+  DOB?: ModelStringInput | null;
+  healthCardNumber?: ModelStringInput | null;
+  vaxxStatus?: ModelStringInput | null;
+  userAgreement?: ModelStringInput | null;
   companyName?: ModelStringInput | null;
   address?: ModelStringInput | null;
   phonenumber?: ModelStringInput | null;
@@ -488,6 +512,10 @@ export type UpdateCrewInput = {
   id: string;
   userName?: string | null;
   role?: string | null;
+  DOB?: string | null;
+  healthCardNumber?: string | null;
+  vaxxStatus?: string | null;
+  userAgreement?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
@@ -578,10 +606,13 @@ export type ModelSceeningFilterInput = {
   jobName?: ModelStringInput | null;
   crewId?: ModelStringInput | null;
   crewName?: ModelStringInput | null;
+  crewPhoneNumber?: ModelStringInput | null;
   result?: ModelStringInput | null;
+  method?: ModelStringInput | null;
   staffId?: ModelStringInput | null;
   staffName?: ModelStringInput | null;
   processed?: ModelBooleanInput | null;
+  location?: ModelStringInput | null;
   processedAt?: ModelStringInput | null;
   submittedAt?: ModelStringInput | null;
   and?: Array<ModelSceeningFilterInput | null> | null;
@@ -668,6 +699,10 @@ export type ModelCrewFilterInput = {
   id?: ModelIDInput | null;
   userName?: ModelStringInput | null;
   role?: ModelStringInput | null;
+  DOB?: ModelStringInput | null;
+  healthCardNumber?: ModelStringInput | null;
+  vaxxStatus?: ModelStringInput | null;
+  userAgreement?: ModelStringInput | null;
   companyName?: ModelStringInput | null;
   address?: ModelStringInput | null;
   phonenumber?: ModelStringInput | null;
@@ -723,10 +758,13 @@ export type ModelSubscriptionSceeningFilterInput = {
   jobName?: ModelSubscriptionStringInput | null;
   crewId?: ModelSubscriptionStringInput | null;
   crewName?: ModelSubscriptionStringInput | null;
+  crewPhoneNumber?: ModelSubscriptionStringInput | null;
   result?: ModelSubscriptionStringInput | null;
+  method?: ModelSubscriptionStringInput | null;
   staffId?: ModelSubscriptionStringInput | null;
   staffName?: ModelSubscriptionStringInput | null;
   processed?: ModelSubscriptionBooleanInput | null;
+  location?: ModelSubscriptionStringInput | null;
   processedAt?: ModelSubscriptionStringInput | null;
   submittedAt?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionSceeningFilterInput | null> | null;
@@ -828,6 +866,10 @@ export type ModelSubscriptionCrewFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   userName?: ModelSubscriptionStringInput | null;
   role?: ModelSubscriptionStringInput | null;
+  DOB?: ModelSubscriptionStringInput | null;
+  healthCardNumber?: ModelSubscriptionStringInput | null;
+  vaxxStatus?: ModelSubscriptionStringInput | null;
+  userAgreement?: ModelSubscriptionStringInput | null;
   companyName?: ModelSubscriptionStringInput | null;
   address?: ModelSubscriptionStringInput | null;
   phonenumber?: ModelSubscriptionStringInput | null;
@@ -869,10 +911,13 @@ export type CreateSceeningMutation = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
+  method?: string | null;
   staffId?: string | null;
   staffName?: string | null;
   processed?: boolean | null;
+  location?: string | null;
   processedAt?: string | null;
   submittedAt?: string | null;
   answeredQuestions?: {
@@ -889,10 +934,13 @@ export type CreateSceeningMutation = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
+        method?: string | null;
         staffId?: string | null;
         staffName?: string | null;
         processed?: boolean | null;
+        location?: string | null;
         processedAt?: string | null;
         submittedAt?: string | null;
         answeredQuestions?: {
@@ -920,10 +968,13 @@ export type UpdateSceeningMutation = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
+  method?: string | null;
   staffId?: string | null;
   staffName?: string | null;
   processed?: boolean | null;
+  location?: string | null;
   processedAt?: string | null;
   submittedAt?: string | null;
   answeredQuestions?: {
@@ -940,10 +991,13 @@ export type UpdateSceeningMutation = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
+        method?: string | null;
         staffId?: string | null;
         staffName?: string | null;
         processed?: boolean | null;
+        location?: string | null;
         processedAt?: string | null;
         submittedAt?: string | null;
         answeredQuestions?: {
@@ -971,10 +1025,13 @@ export type DeleteSceeningMutation = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
+  method?: string | null;
   staffId?: string | null;
   staffName?: string | null;
   processed?: boolean | null;
+  location?: string | null;
   processedAt?: string | null;
   submittedAt?: string | null;
   answeredQuestions?: {
@@ -991,10 +1048,13 @@ export type DeleteSceeningMutation = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
+        method?: string | null;
         staffId?: string | null;
         staffName?: string | null;
         processed?: boolean | null;
+        location?: string | null;
         processedAt?: string | null;
         submittedAt?: string | null;
         answeredQuestions?: {
@@ -1027,10 +1087,13 @@ export type CreateAnsweredQuestionMutation = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
+    method?: string | null;
     staffId?: string | null;
     staffName?: string | null;
     processed?: boolean | null;
+    location?: string | null;
     processedAt?: string | null;
     submittedAt?: string | null;
     answeredQuestions?: {
@@ -1047,10 +1110,13 @@ export type CreateAnsweredQuestionMutation = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
+          method?: string | null;
           staffId?: string | null;
           staffName?: string | null;
           processed?: boolean | null;
+          location?: string | null;
           processedAt?: string | null;
           submittedAt?: string | null;
           createdAt: string;
@@ -1084,10 +1150,13 @@ export type UpdateAnsweredQuestionMutation = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
+    method?: string | null;
     staffId?: string | null;
     staffName?: string | null;
     processed?: boolean | null;
+    location?: string | null;
     processedAt?: string | null;
     submittedAt?: string | null;
     answeredQuestions?: {
@@ -1104,10 +1173,13 @@ export type UpdateAnsweredQuestionMutation = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
+          method?: string | null;
           staffId?: string | null;
           staffName?: string | null;
           processed?: boolean | null;
+          location?: string | null;
           processedAt?: string | null;
           submittedAt?: string | null;
           createdAt: string;
@@ -1141,10 +1213,13 @@ export type DeleteAnsweredQuestionMutation = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
+    method?: string | null;
     staffId?: string | null;
     staffName?: string | null;
     processed?: boolean | null;
+    location?: string | null;
     processedAt?: string | null;
     submittedAt?: string | null;
     answeredQuestions?: {
@@ -1161,10 +1236,13 @@ export type DeleteAnsweredQuestionMutation = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
+          method?: string | null;
           staffId?: string | null;
           staffName?: string | null;
           processed?: boolean | null;
+          location?: string | null;
           processedAt?: string | null;
           submittedAt?: string | null;
           createdAt: string;
@@ -1550,6 +1628,10 @@ export type CreateJobMutation = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -1654,6 +1736,10 @@ export type UpdateJobMutation = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -1758,6 +1844,10 @@ export type DeleteJobMutation = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -2307,6 +2397,10 @@ export type CreateCrewMutation = {
   id: string;
   userName?: string | null;
   role?: string | null;
+  DOB?: string | null;
+  healthCardNumber?: string | null;
+  vaxxStatus?: string | null;
+  userAgreement?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
@@ -2343,6 +2437,10 @@ export type CreateCrewMutation = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -2370,6 +2468,10 @@ export type UpdateCrewMutation = {
   id: string;
   userName?: string | null;
   role?: string | null;
+  DOB?: string | null;
+  healthCardNumber?: string | null;
+  vaxxStatus?: string | null;
+  userAgreement?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
@@ -2406,6 +2508,10 @@ export type UpdateCrewMutation = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -2433,6 +2539,10 @@ export type DeleteCrewMutation = {
   id: string;
   userName?: string | null;
   role?: string | null;
+  DOB?: string | null;
+  healthCardNumber?: string | null;
+  vaxxStatus?: string | null;
+  userAgreement?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
@@ -2469,6 +2579,10 @@ export type DeleteCrewMutation = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -2615,6 +2729,10 @@ export type CreateFormJobMutation = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -2760,6 +2878,10 @@ export type UpdateFormJobMutation = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -2905,6 +3027,10 @@ export type DeleteFormJobMutation = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -2989,6 +3115,10 @@ export type CreateCrewJobMutation = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -3011,6 +3141,10 @@ export type CreateCrewJobMutation = {
     id: string;
     userName?: string | null;
     role?: string | null;
+    DOB?: string | null;
+    healthCardNumber?: string | null;
+    vaxxStatus?: string | null;
+    userAgreement?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
@@ -3039,6 +3173,10 @@ export type CreateCrewJobMutation = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -3123,6 +3261,10 @@ export type UpdateCrewJobMutation = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -3145,6 +3287,10 @@ export type UpdateCrewJobMutation = {
     id: string;
     userName?: string | null;
     role?: string | null;
+    DOB?: string | null;
+    healthCardNumber?: string | null;
+    vaxxStatus?: string | null;
+    userAgreement?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
@@ -3173,6 +3319,10 @@ export type UpdateCrewJobMutation = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -3257,6 +3407,10 @@ export type DeleteCrewJobMutation = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -3279,6 +3433,10 @@ export type DeleteCrewJobMutation = {
     id: string;
     userName?: string | null;
     role?: string | null;
+    DOB?: string | null;
+    healthCardNumber?: string | null;
+    vaxxStatus?: string | null;
+    userAgreement?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
@@ -3307,6 +3465,10 @@ export type DeleteCrewJobMutation = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -3704,10 +3866,13 @@ export type GetSceeningQuery = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
+  method?: string | null;
   staffId?: string | null;
   staffName?: string | null;
   processed?: boolean | null;
+  location?: string | null;
   processedAt?: string | null;
   submittedAt?: string | null;
   answeredQuestions?: {
@@ -3724,10 +3889,13 @@ export type GetSceeningQuery = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
+        method?: string | null;
         staffId?: string | null;
         staffName?: string | null;
         processed?: boolean | null;
+        location?: string | null;
         processedAt?: string | null;
         submittedAt?: string | null;
         answeredQuestions?: {
@@ -3757,10 +3925,13 @@ export type ListSceeningsQuery = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
+    method?: string | null;
     staffId?: string | null;
     staffName?: string | null;
     processed?: boolean | null;
+    location?: string | null;
     processedAt?: string | null;
     submittedAt?: string | null;
     answeredQuestions?: {
@@ -3777,10 +3948,13 @@ export type ListSceeningsQuery = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
+          method?: string | null;
           staffId?: string | null;
           staffName?: string | null;
           processed?: boolean | null;
+          location?: string | null;
           processedAt?: string | null;
           submittedAt?: string | null;
           createdAt: string;
@@ -3811,10 +3985,13 @@ export type GetAnsweredQuestionQuery = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
+    method?: string | null;
     staffId?: string | null;
     staffName?: string | null;
     processed?: boolean | null;
+    location?: string | null;
     processedAt?: string | null;
     submittedAt?: string | null;
     answeredQuestions?: {
@@ -3831,10 +4008,13 @@ export type GetAnsweredQuestionQuery = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
+          method?: string | null;
           staffId?: string | null;
           staffName?: string | null;
           processed?: boolean | null;
+          location?: string | null;
           processedAt?: string | null;
           submittedAt?: string | null;
           createdAt: string;
@@ -3870,10 +4050,13 @@ export type ListAnsweredQuestionsQuery = {
       jobName?: string | null;
       crewId?: string | null;
       crewName?: string | null;
+      crewPhoneNumber?: string | null;
       result?: string | null;
+      method?: string | null;
       staffId?: string | null;
       staffName?: string | null;
       processed?: boolean | null;
+      location?: string | null;
       processedAt?: string | null;
       submittedAt?: string | null;
       answeredQuestions?: {
@@ -4143,6 +4326,10 @@ export type GetJobQuery = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -4225,6 +4412,10 @@ export type ListJobsQuery = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -4548,6 +4739,10 @@ export type GetCrewQuery = {
   id: string;
   userName?: string | null;
   role?: string | null;
+  DOB?: string | null;
+  healthCardNumber?: string | null;
+  vaxxStatus?: string | null;
+  userAgreement?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
@@ -4584,6 +4779,10 @@ export type GetCrewQuery = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -4613,6 +4812,10 @@ export type ListCrewsQuery = {
     id: string;
     userName?: string | null;
     role?: string | null;
+    DOB?: string | null;
+    healthCardNumber?: string | null;
+    vaxxStatus?: string | null;
+    userAgreement?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
@@ -4641,6 +4844,10 @@ export type ListCrewsQuery = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -4785,6 +4992,10 @@ export type GetFormJobQuery = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -4949,6 +5160,10 @@ export type GetCrewJobQuery = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -4971,6 +5186,10 @@ export type GetCrewJobQuery = {
     id: string;
     userName?: string | null;
     role?: string | null;
+    DOB?: string | null;
+    healthCardNumber?: string | null;
+    vaxxStatus?: string | null;
+    userAgreement?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
@@ -4999,6 +5218,10 @@ export type GetCrewJobQuery = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -5066,6 +5289,10 @@ export type ListCrewJobsQuery = {
       id: string;
       userName?: string | null;
       role?: string | null;
+      DOB?: string | null;
+      healthCardNumber?: string | null;
+      vaxxStatus?: string | null;
+      userAgreement?: string | null;
       companyName?: string | null;
       address?: string | null;
       phonenumber?: string | null;
@@ -5617,6 +5844,10 @@ export type CrewJobsByJobIdQuery = {
       id: string;
       userName?: string | null;
       role?: string | null;
+      DOB?: string | null;
+      healthCardNumber?: string | null;
+      vaxxStatus?: string | null;
+      userAgreement?: string | null;
       companyName?: string | null;
       address?: string | null;
       phonenumber?: string | null;
@@ -5690,6 +5921,10 @@ export type CrewJobsByCrewIdQuery = {
       id: string;
       userName?: string | null;
       role?: string | null;
+      DOB?: string | null;
+      healthCardNumber?: string | null;
+      vaxxStatus?: string | null;
+      userAgreement?: string | null;
       companyName?: string | null;
       address?: string | null;
       phonenumber?: string | null;
@@ -5866,10 +6101,13 @@ export type OnCreateSceeningSubscription = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
+  method?: string | null;
   staffId?: string | null;
   staffName?: string | null;
   processed?: boolean | null;
+  location?: string | null;
   processedAt?: string | null;
   submittedAt?: string | null;
   answeredQuestions?: {
@@ -5886,10 +6124,13 @@ export type OnCreateSceeningSubscription = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
+        method?: string | null;
         staffId?: string | null;
         staffName?: string | null;
         processed?: boolean | null;
+        location?: string | null;
         processedAt?: string | null;
         submittedAt?: string | null;
         answeredQuestions?: {
@@ -5917,10 +6158,13 @@ export type OnUpdateSceeningSubscription = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
+  method?: string | null;
   staffId?: string | null;
   staffName?: string | null;
   processed?: boolean | null;
+  location?: string | null;
   processedAt?: string | null;
   submittedAt?: string | null;
   answeredQuestions?: {
@@ -5937,10 +6181,13 @@ export type OnUpdateSceeningSubscription = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
+        method?: string | null;
         staffId?: string | null;
         staffName?: string | null;
         processed?: boolean | null;
+        location?: string | null;
         processedAt?: string | null;
         submittedAt?: string | null;
         answeredQuestions?: {
@@ -5968,10 +6215,13 @@ export type OnDeleteSceeningSubscription = {
   jobName?: string | null;
   crewId?: string | null;
   crewName?: string | null;
+  crewPhoneNumber?: string | null;
   result?: string | null;
+  method?: string | null;
   staffId?: string | null;
   staffName?: string | null;
   processed?: boolean | null;
+  location?: string | null;
   processedAt?: string | null;
   submittedAt?: string | null;
   answeredQuestions?: {
@@ -5988,10 +6238,13 @@ export type OnDeleteSceeningSubscription = {
         jobName?: string | null;
         crewId?: string | null;
         crewName?: string | null;
+        crewPhoneNumber?: string | null;
         result?: string | null;
+        method?: string | null;
         staffId?: string | null;
         staffName?: string | null;
         processed?: boolean | null;
+        location?: string | null;
         processedAt?: string | null;
         submittedAt?: string | null;
         answeredQuestions?: {
@@ -6024,10 +6277,13 @@ export type OnCreateAnsweredQuestionSubscription = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
+    method?: string | null;
     staffId?: string | null;
     staffName?: string | null;
     processed?: boolean | null;
+    location?: string | null;
     processedAt?: string | null;
     submittedAt?: string | null;
     answeredQuestions?: {
@@ -6044,10 +6300,13 @@ export type OnCreateAnsweredQuestionSubscription = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
+          method?: string | null;
           staffId?: string | null;
           staffName?: string | null;
           processed?: boolean | null;
+          location?: string | null;
           processedAt?: string | null;
           submittedAt?: string | null;
           createdAt: string;
@@ -6081,10 +6340,13 @@ export type OnUpdateAnsweredQuestionSubscription = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
+    method?: string | null;
     staffId?: string | null;
     staffName?: string | null;
     processed?: boolean | null;
+    location?: string | null;
     processedAt?: string | null;
     submittedAt?: string | null;
     answeredQuestions?: {
@@ -6101,10 +6363,13 @@ export type OnUpdateAnsweredQuestionSubscription = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
+          method?: string | null;
           staffId?: string | null;
           staffName?: string | null;
           processed?: boolean | null;
+          location?: string | null;
           processedAt?: string | null;
           submittedAt?: string | null;
           createdAt: string;
@@ -6138,10 +6403,13 @@ export type OnDeleteAnsweredQuestionSubscription = {
     jobName?: string | null;
     crewId?: string | null;
     crewName?: string | null;
+    crewPhoneNumber?: string | null;
     result?: string | null;
+    method?: string | null;
     staffId?: string | null;
     staffName?: string | null;
     processed?: boolean | null;
+    location?: string | null;
     processedAt?: string | null;
     submittedAt?: string | null;
     answeredQuestions?: {
@@ -6158,10 +6426,13 @@ export type OnDeleteAnsweredQuestionSubscription = {
           jobName?: string | null;
           crewId?: string | null;
           crewName?: string | null;
+          crewPhoneNumber?: string | null;
           result?: string | null;
+          method?: string | null;
           staffId?: string | null;
           staffName?: string | null;
           processed?: boolean | null;
+          location?: string | null;
           processedAt?: string | null;
           submittedAt?: string | null;
           createdAt: string;
@@ -6547,6 +6818,10 @@ export type OnCreateJobSubscription = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -6651,6 +6926,10 @@ export type OnUpdateJobSubscription = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -6755,6 +7034,10 @@ export type OnDeleteJobSubscription = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -7304,6 +7587,10 @@ export type OnCreateCrewSubscription = {
   id: string;
   userName?: string | null;
   role?: string | null;
+  DOB?: string | null;
+  healthCardNumber?: string | null;
+  vaxxStatus?: string | null;
+  userAgreement?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
@@ -7340,6 +7627,10 @@ export type OnCreateCrewSubscription = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -7367,6 +7658,10 @@ export type OnUpdateCrewSubscription = {
   id: string;
   userName?: string | null;
   role?: string | null;
+  DOB?: string | null;
+  healthCardNumber?: string | null;
+  vaxxStatus?: string | null;
+  userAgreement?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
@@ -7403,6 +7698,10 @@ export type OnUpdateCrewSubscription = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -7430,6 +7729,10 @@ export type OnDeleteCrewSubscription = {
   id: string;
   userName?: string | null;
   role?: string | null;
+  DOB?: string | null;
+  healthCardNumber?: string | null;
+  vaxxStatus?: string | null;
+  userAgreement?: string | null;
   companyName?: string | null;
   address?: string | null;
   phonenumber?: string | null;
@@ -7466,6 +7769,10 @@ export type OnDeleteCrewSubscription = {
         id: string;
         userName?: string | null;
         role?: string | null;
+        DOB?: string | null;
+        healthCardNumber?: string | null;
+        vaxxStatus?: string | null;
+        userAgreement?: string | null;
         companyName?: string | null;
         address?: string | null;
         phonenumber?: string | null;
@@ -7612,6 +7919,10 @@ export type OnCreateFormJobSubscription = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -7757,6 +8068,10 @@ export type OnUpdateFormJobSubscription = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -7902,6 +8217,10 @@ export type OnDeleteFormJobSubscription = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -7986,6 +8305,10 @@ export type OnCreateCrewJobSubscription = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -8008,6 +8331,10 @@ export type OnCreateCrewJobSubscription = {
     id: string;
     userName?: string | null;
     role?: string | null;
+    DOB?: string | null;
+    healthCardNumber?: string | null;
+    vaxxStatus?: string | null;
+    userAgreement?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
@@ -8036,6 +8363,10 @@ export type OnCreateCrewJobSubscription = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -8120,6 +8451,10 @@ export type OnUpdateCrewJobSubscription = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -8142,6 +8477,10 @@ export type OnUpdateCrewJobSubscription = {
     id: string;
     userName?: string | null;
     role?: string | null;
+    DOB?: string | null;
+    healthCardNumber?: string | null;
+    vaxxStatus?: string | null;
+    userAgreement?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
@@ -8170,6 +8509,10 @@ export type OnUpdateCrewJobSubscription = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -8254,6 +8597,10 @@ export type OnDeleteCrewJobSubscription = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -8276,6 +8623,10 @@ export type OnDeleteCrewJobSubscription = {
     id: string;
     userName?: string | null;
     role?: string | null;
+    DOB?: string | null;
+    healthCardNumber?: string | null;
+    vaxxStatus?: string | null;
+    userAgreement?: string | null;
     companyName?: string | null;
     address?: string | null;
     phonenumber?: string | null;
@@ -8304,6 +8655,10 @@ export type OnDeleteCrewJobSubscription = {
           id: string;
           userName?: string | null;
           role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
           companyName?: string | null;
           address?: string | null;
           phonenumber?: string | null;
@@ -8710,10 +9065,13 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
+          method
           staffId
           staffName
           processed
+          location
           processedAt
           submittedAt
           answeredQuestions {
@@ -8730,10 +9088,13 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
+                method
                 staffId
                 staffName
                 processed
+                location
                 processedAt
                 submittedAt
                 answeredQuestions {
@@ -8777,10 +9138,13 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
+          method
           staffId
           staffName
           processed
+          location
           processedAt
           submittedAt
           answeredQuestions {
@@ -8797,10 +9161,13 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
+                method
                 staffId
                 staffName
                 processed
+                location
                 processedAt
                 submittedAt
                 answeredQuestions {
@@ -8844,10 +9211,13 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
+          method
           staffId
           staffName
           processed
+          location
           processedAt
           submittedAt
           answeredQuestions {
@@ -8864,10 +9234,13 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
+                method
                 staffId
                 staffName
                 processed
+                location
                 processedAt
                 submittedAt
                 answeredQuestions {
@@ -8916,10 +9289,13 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
+            method
             staffId
             staffName
             processed
+            location
             processedAt
             submittedAt
             answeredQuestions {
@@ -8936,10 +9312,13 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
+                  method
                   staffId
                   staffName
                   processed
+                  location
                   processedAt
                   submittedAt
                   createdAt
@@ -8989,10 +9368,13 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
+            method
             staffId
             staffName
             processed
+            location
             processedAt
             submittedAt
             answeredQuestions {
@@ -9009,10 +9391,13 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
+                  method
                   staffId
                   staffName
                   processed
+                  location
                   processedAt
                   submittedAt
                   createdAt
@@ -9062,10 +9447,13 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
+            method
             staffId
             staffName
             processed
+            location
             processedAt
             submittedAt
             answeredQuestions {
@@ -9082,10 +9470,13 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
+                  method
                   staffId
                   staffName
                   processed
+                  location
                   processedAt
                   submittedAt
                   createdAt
@@ -9535,6 +9926,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -9655,6 +10050,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -9775,6 +10174,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -10436,6 +10839,10 @@ export class APIService {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -10472,6 +10879,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -10515,6 +10926,10 @@ export class APIService {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -10551,6 +10966,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -10594,6 +11013,10 @@ export class APIService {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -10630,6 +11053,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -10792,6 +11219,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -10953,6 +11384,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -11114,6 +11549,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -11214,6 +11653,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -11236,6 +11679,10 @@ export class APIService {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -11264,6 +11711,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -11364,6 +11815,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -11386,6 +11841,10 @@ export class APIService {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -11414,6 +11873,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -11514,6 +11977,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -11536,6 +12003,10 @@ export class APIService {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -11564,6 +12035,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -12022,10 +12497,13 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
+          method
           staffId
           staffName
           processed
+          location
           processedAt
           submittedAt
           answeredQuestions {
@@ -12042,10 +12520,13 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
+                method
                 staffId
                 staffName
                 processed
+                location
                 processedAt
                 submittedAt
                 answeredQuestions {
@@ -12089,10 +12570,13 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
+            method
             staffId
             staffName
             processed
+            location
             processedAt
             submittedAt
             answeredQuestions {
@@ -12109,10 +12593,13 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
+                  method
                   staffId
                   staffName
                   processed
+                  location
                   processedAt
                   submittedAt
                   createdAt
@@ -12160,10 +12647,13 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
+            method
             staffId
             staffName
             processed
+            location
             processedAt
             submittedAt
             answeredQuestions {
@@ -12180,10 +12670,13 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
+                  method
                   staffId
                   staffName
                   processed
+                  location
                   processedAt
                   submittedAt
                   createdAt
@@ -12233,10 +12726,13 @@ export class APIService {
               jobName
               crewId
               crewName
+              crewPhoneNumber
               result
+              method
               staffId
               staffName
               processed
+              location
               processedAt
               submittedAt
               answeredQuestions {
@@ -12554,6 +13050,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -12650,6 +13150,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -13052,6 +13556,10 @@ export class APIService {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -13088,6 +13596,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -13131,6 +13643,10 @@ export class APIService {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -13159,6 +13675,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -13320,6 +13840,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -13515,6 +14039,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -13537,6 +14065,10 @@ export class APIService {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -13565,6 +14097,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -13646,6 +14182,10 @@ export class APIService {
               id
               userName
               role
+              DOB
+              healthCardNumber
+              vaxxStatus
+              userAgreement
               companyName
               address
               phonenumber
@@ -14363,6 +14903,10 @@ export class APIService {
               id
               userName
               role
+              DOB
+              healthCardNumber
+              vaxxStatus
+              userAgreement
               companyName
               address
               phonenumber
@@ -14464,6 +15008,10 @@ export class APIService {
               id
               userName
               role
+              DOB
+              healthCardNumber
+              vaxxStatus
+              userAgreement
               companyName
               address
               phonenumber
@@ -14726,10 +15274,13 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
+          method
           staffId
           staffName
           processed
+          location
           processedAt
           submittedAt
           answeredQuestions {
@@ -14746,10 +15297,13 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
+                method
                 staffId
                 staffName
                 processed
+                location
                 processedAt
                 submittedAt
                 answeredQuestions {
@@ -14794,10 +15348,13 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
+          method
           staffId
           staffName
           processed
+          location
           processedAt
           submittedAt
           answeredQuestions {
@@ -14814,10 +15371,13 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
+                method
                 staffId
                 staffName
                 processed
+                location
                 processedAt
                 submittedAt
                 answeredQuestions {
@@ -14862,10 +15422,13 @@ export class APIService {
           jobName
           crewId
           crewName
+          crewPhoneNumber
           result
+          method
           staffId
           staffName
           processed
+          location
           processedAt
           submittedAt
           answeredQuestions {
@@ -14882,10 +15445,13 @@ export class APIService {
                 jobName
                 crewId
                 crewName
+                crewPhoneNumber
                 result
+                method
                 staffId
                 staffName
                 processed
+                location
                 processedAt
                 submittedAt
                 answeredQuestions {
@@ -14937,10 +15503,13 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
+            method
             staffId
             staffName
             processed
+            location
             processedAt
             submittedAt
             answeredQuestions {
@@ -14957,10 +15526,13 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
+                  method
                   staffId
                   staffName
                   processed
+                  location
                   processedAt
                   submittedAt
                   createdAt
@@ -15015,10 +15587,13 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
+            method
             staffId
             staffName
             processed
+            location
             processedAt
             submittedAt
             answeredQuestions {
@@ -15035,10 +15610,13 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
+                  method
                   staffId
                   staffName
                   processed
+                  location
                   processedAt
                   submittedAt
                   createdAt
@@ -15093,10 +15671,13 @@ export class APIService {
             jobName
             crewId
             crewName
+            crewPhoneNumber
             result
+            method
             staffId
             staffName
             processed
+            location
             processedAt
             submittedAt
             answeredQuestions {
@@ -15113,10 +15694,13 @@ export class APIService {
                   jobName
                   crewId
                   crewName
+                  crewPhoneNumber
                   result
+                  method
                   staffId
                   staffName
                   processed
+                  location
                   processedAt
                   submittedAt
                   createdAt
@@ -15572,6 +16156,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -15693,6 +16281,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -15814,6 +16406,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -16482,6 +17078,10 @@ export class APIService {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -16518,6 +17118,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -16562,6 +17166,10 @@ export class APIService {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -16598,6 +17206,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -16642,6 +17254,10 @@ export class APIService {
           id
           userName
           role
+          DOB
+          healthCardNumber
+          vaxxStatus
+          userAgreement
           companyName
           address
           phonenumber
@@ -16678,6 +17294,10 @@ export class APIService {
                 id
                 userName
                 role
+                DOB
+                healthCardNumber
+                vaxxStatus
+                userAgreement
                 companyName
                 address
                 phonenumber
@@ -16841,6 +17461,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -17003,6 +17627,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -17165,6 +17793,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -17266,6 +17898,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -17288,6 +17924,10 @@ export class APIService {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -17316,6 +17956,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -17417,6 +18061,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -17439,6 +18087,10 @@ export class APIService {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -17467,6 +18119,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -17568,6 +18224,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber
@@ -17590,6 +18250,10 @@ export class APIService {
             id
             userName
             role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
             companyName
             address
             phonenumber
@@ -17618,6 +18282,10 @@ export class APIService {
                   id
                   userName
                   role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
                   companyName
                   address
                   phonenumber

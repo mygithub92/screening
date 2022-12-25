@@ -8,57 +8,145 @@
     <div [formGroup]="form">
       <div class="card card-w-title">
         <div class="ui-g form-group">
-          <div class="ui-g-12">
-            <label for="phone-number" class="account-label">Phone number</label>
+          <div class="ui-g-12 ui-lg-6">
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-12">
+                <label for="name" class="account-label">Name</label>
+              </div>
+              <div class="ui-g-12">
+                <input
+                  type="text"
+                  pInputText
+                  readonly
+                  formControlName="name"
+                  id="name"
+                />
+              </div>
+            </div>
           </div>
-          <div class="ui-g-12">
-            <input
-              type="text"
-              pInputText
-              formControlName="phonenumber"
-              id="phone-number"
-              placeholder="Phone number"
-            />
-            <p-message
-              severity="error"
-              text="Field is required"
-              *ngIf="isInvalid('phonenumber')"
-            ></p-message>
+          <div class="ui-g-12 ui-lg-6">
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-12">
+                <label for="email" class="account-label">Email</label>
+              </div>
+              <div class="ui-g-12">
+                <input
+                  type="text"
+                  pInputText
+                  readonly
+                  formControlName="email"
+                  id="email"
+                />
+              </div>
+            </div>
           </div>
-          <div class="ui-g-12">
-            <label for="address" class="account-label">Address</label>
+        </div>
+      </div>
+      <div class="card card-w-title">
+        <div class="ui-g form-group">
+          <div class="ui-g-12 ui-lg-6">
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-12">
+                <label for="phone-number" class="account-label"
+                  >Phone number</label
+                >
+              </div>
+              <div class="ui-g-12">
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="phonenumber"
+                  id="phone-number"
+                  placeholder="Phone number"
+                />
+                <p-message
+                  severity="error"
+                  text="Field is required"
+                  *ngIf="isInvalid('phonenumber')"
+                ></p-message>
+              </div>
+              <div class="ui-g-12">
+                <label for="healthCardNumber" class="account-label"
+                  >Health card number</label
+                >
+              </div>
+              <div class="ui-g-12">
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="healthCardNumber"
+                  id="healthCardNumber"
+                  placeholder="Health card number"
+                />
+                <p-message
+                  severity="error"
+                  text="Field is required"
+                  *ngIf="isInvalid('healthCardNumber')"
+                ></p-message>
+              </div>
+            </div>
           </div>
-          <div class="ui-g-12">
-            <input
-              type="text"
-              pInputText
-              formControlName="address"
-              id="address"
-              placeholder="Address"
-            />
-            <p-message
-              severity="error"
-              text="Field is required"
-              *ngIf="isInvalid('address')"
-            ></p-message>
+          <div class="ui-g-12 ui-lg-6">
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-12">
+                <label for="dob" class="account-label"
+                  >Date of birth (MM/DD/YYYY)</label
+                >
+              </div>
+              <div class="ui-g-12">
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="DOB"
+                  id="dob"
+                  placeholder="Date of birth (MM/DD/YYYY)"
+                />
+                <p-message
+                  severity="error"
+                  text="Field is required"
+                  *ngIf="isInvalid('DOB')"
+                ></p-message>
+              </div>
+
+              <div class="ui-g-12">
+                <label for="vaxxStatus" class="account-label">Vax</label>
+              </div>
+              <div class="ui-g-12">
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="vaxxStatus"
+                  id="vaxxStatus"
+                  placeholder="Vax"
+                />
+                <p-message
+                  severity="error"
+                  text="Field is required"
+                  *ngIf="isInvalid('vaxxStatus')"
+                ></p-message>
+              </div>
+            </div>
           </div>
-          <div class="ui-g-12">
-            <label for="companyName" class="account-label">Company Name</label>
-          </div>
-          <div class="ui-g-12">
-            <input
-              type="text"
-              pInputText
-              formControlName="companyName"
-              id="companyName"
-              placeholder="Company Name"
-            />
-            <p-message
-              severity="error"
-              text="Field is required"
-              *ngIf="isInvalid('companyName')"
-            ></p-message>
-          </div>
+          <ng-container *ngIf="firstTime">
+            <div class="ui-g-12">
+              <input
+                type="checkbox"
+                id="agreement"
+                formControlName="userAgreement"
+              />
+              <label
+                >Agreement to terms and conditions/waiver release
+                questions</label
+              >
+            </div>
+            <div class="ui-g-12">
+              <p-message
+                severity="error"
+                text="Field is required"
+                *ngIf="isInvalid('userAgreement')"
+              ></p-message>
+            </div>
+          </ng-container>
           <div class="ui-g-12">
             <button
               pButton

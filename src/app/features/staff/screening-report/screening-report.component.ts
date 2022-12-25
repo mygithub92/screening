@@ -1,7 +1,7 @@
-import { DatePipe } from '@angular/common';
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'app/@core/services/auth.service';
+import { DateUtils } from 'app/@shared/utils/date-utils';
 import { APIService } from 'app/API.service';
 import * as moment from 'moment';
 
@@ -13,18 +13,24 @@ import * as moment from 'moment';
 export class ScreeningReportComponent implements OnInit {
   user;
   form: FormGroup;
+  filterForm: FormGroup;
   loading = true;
   screenings;
+  filteredScreenings;
   filteredProjects = [];
   projects;
+  positiveNum = 0;
+  negativeNum = 0;
 
   result = {
     value: "",
   };
   cols = [
+    { field: "method", header: "Method" },
     { field: "result", header: "Result" },
     { field: "crewName", header: "Crew Name" },
     { field: "jobName", header: "Project Name" },
+    { field: "location", header: "Location" },
     { field: "processedAt", header: "Processed" },
     { field: "submittedAt", header: "Submitted" },
   ];
@@ -35,18 +41,24 @@ export class ScreeningReportComponent implements OnInit {
   constructor(
     private api: APIService,
     private fb: FormBuilder,
-    private authService: AuthService,
-    private datePipe: DatePipe,
-    @Inject(LOCALE_ID) public locale: string
+    private authService: AuthService
   ) {
     const tomorrow = new Date();
     const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 2);
+    yesterday.setDate(yesterday.getDate() - 7);
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.form = this.fb.group({
-      startDate: [this.transformDate(yesterday), Validators.required],
-      endDate: [this.transformDate(tomorrow), Validators.required],
+      startDate: [DateUtils.format(yesterday), Validators.required],
+      endDate: [DateUtils.format(tomorrow), Validators.required],
       project: [null],
+    });
+    this.filterForm = this.fb.group({
+      method: ["All"],
+      result: ["All"],
+    });
+    this.filterForm.valueChanges.subscribe((value) => {
+      console.log(value);
+      this.filterScreening(value["method"], value["result"]);
     });
   }
 
@@ -62,10 +74,6 @@ export class ScreeningReportComponent implements OnInit {
       });
   }
 
-  private transformDate(date) {
-    return this.datePipe.transform(date, "shortDate", this.locale);
-  }
-
   public async fetch() {
     this.loading = true;
     const { startDate, endDate, project } = this.form.getRawValue();
@@ -79,8 +87,24 @@ export class ScreeningReportComponent implements OnInit {
       search.jobId = { eq: project.id };
     }
     const screeningObjs = await this.api.ListSceenings(search);
-    this.screenings = screeningObjs.items;
+    this.screenings = screeningObjs.items.map((i) => {
+      i.processedAt = DateUtils.format(i.processedAt);
+      i.submittedAt = DateUtils.format(i.submittedAt);
+      if (i.result === "Positive") {
+        this.positiveNum++;
+      }
+      if (i.result === "Negative") {
+        this.negativeNum++;
+      }
+      return i;
+    });
+    this.filteredScreenings = [...this.screenings];
     this.loading = false;
+  }
+
+  public get report() {
+    const total = this.screenings.length;
+    return `Postive: ${this.positiveNum}/${total}; Negative: ${this.negativeNum}/${total}`;
   }
 
   public filterProject(event) {
@@ -94,9 +118,27 @@ export class ScreeningReportComponent implements OnInit {
     }
   }
 
+  public filterScreening(methodValue, resultValue) {
+    this.filteredScreenings = [];
+    if (methodValue === "All" && resultValue === "All") {
+      this.filteredScreenings = [...this.screenings];
+    } else {
+      this.filteredScreenings = this.screenings.filter(
+        (s) =>
+          (methodValue === "All" || methodValue === s["method"]) &&
+          (resultValue === "All" || resultValue === s["result"])
+      );
+    }
+  }
+
   private getDateString(dateStr) {
     const date = new Date(dateStr);
     const moment1 = moment(date);
     return moment1.toISOString();
+  }
+
+  public filter(column, value) {
+    console.log(column);
+    console.log(value);
   }
 }
