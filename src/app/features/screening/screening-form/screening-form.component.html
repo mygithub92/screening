@@ -21,6 +21,13 @@
                       formControlName="selectedJob"
                     ></p-dropdown>
                   </div>
+                  <div class="ui-g-12" *ngIf="isExpired">
+                    <p-message
+                      severity="warn"
+                      [text]="expiredMessage"
+                      [style]="{ marginLeft: 0 }"
+                    ></p-message>
+                  </div>
                 </div>
               </div>
               <div class="ui-g-12 ui-lg-6">

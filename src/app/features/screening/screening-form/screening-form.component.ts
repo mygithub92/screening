@@ -1,8 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'app/@core/services/auth.service';
-import { APIService } from 'app/API.service';
+import { Component, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from "app/@core/services/auth.service";
+import { DateUtils } from "app/@shared/utils/date-utils";
+import { APIService } from "app/API.service";
+import * as moment from "moment";
 
 @Component({
   selector: "app-screening-form",
@@ -18,7 +25,10 @@ export class ScreeningFormComponent implements OnInit {
   formId;
   loading = true;
   totalNumberQuestion = 0;
+  expiredMessage;
+  isExpired = false;
   crew;
+  jobIdMap = {};
   locations = [
     { label: "Set", value: "Set" },
     { label: "Basecamp", value: "Basecamp" },
@@ -51,10 +61,12 @@ export class ScreeningFormComponent implements OnInit {
       this.crew = crews.items[0];
       this.selectedJob = this.crew.defaultJobId;
       const jobObjs = await this.api.ListJobs();
+      console.log(jobObjs);
       const jobs = [];
-      jobObjs.items.forEach((jobObj) =>
-        jobs.push({ label: jobObj.code, value: jobObj.id })
-      );
+      jobObjs.items.forEach((jobObj) => {
+        this.jobIdMap[jobObj.id] = jobObj;
+        jobs.push({ label: jobObj.code, value: jobObj.id });
+      });
       this.jobs = jobs;
       this.form.patchValue({
         selectedJob: this.selectedJob,
@@ -64,7 +76,20 @@ export class ScreeningFormComponent implements OnInit {
   }
 
   private async getJobForm(jobId) {
+    this.expiredMessage = null;
+    this.isExpired = false;
     const forms = await this.api.ListFormJobs({ jobId: { eq: jobId } });
+    const selectedJobObj = this.jobIdMap[jobId];
+    const jobEndDateAws = selectedJobObj.endDate;
+    if (jobEndDateAws) {
+      const jobEndDate = new Date(jobEndDateAws);
+      if (moment(new Date()).isAfter(jobEndDate)) {
+        this.isExpired = true;
+        this.expiredMessage = `The selected Project has expired on: ${DateUtils.format(
+          jobEndDate
+        )}`;
+      }
+    }
     const jobFormId = forms.items[0].form.id;
     if (this.formId !== jobFormId) {
       this.loading = true;
