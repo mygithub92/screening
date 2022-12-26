@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { APIService } from 'app/API.service';
-import { MessageService } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { APIService } from "app/API.service";
+import { MessageService } from "primeng/api";
+import { DialogService } from "primeng/dynamicdialog";
 
 @Component({
   selector: "app-question-form",
@@ -14,7 +14,7 @@ export class QuestionFormComponent implements OnInit {
   public forms;
   public cols = [
     { field: "name", header: "Name" },
-    { field: "createdAt", header: "Created Date" },
+    { field: "createdAt", header: "Date Created" },
   ];
 
   constructor(
