@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { UserActions } from 'app/@state/actions';
-import * as fromUser from 'app/@state/reducers';
-import { ConfirmationService } from 'primeng/api';
+import { Component, Input, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { UserActions } from "app/@state/actions";
+import * as fromUser from "app/@state/reducers";
+import { ConfirmationService } from "primeng/api";
 
-import { AuthService } from './@core/services/auth.service';
-import { AppMainComponent } from './app.main.component';
+import { AuthService } from "./@core/services/auth.service";
+import { AppMainComponent } from "./app.main.component";
 
 @Component({
   selector: "tt-topbar",
@@ -19,7 +19,7 @@ import { AppMainComponent } from './app.main.component';
       <div class="topbar-left">
         <a routerLink="/">
           <img
-            src="assets/layout/images/logo.png"
+            src="assets/images/regulatorsto-logo-medical-testing-services-toronto-svg.png"
             class="topbar-logo"
             routerLink="/"
           />
@@ -55,10 +55,7 @@ import { AppMainComponent } from './app.main.component';
             [ngClass]="{ 'active-top-menu': app.activeTopbarItem === profile }"
           >
             <a href="#" (click)="app.onTopbarItemClick($event, profile)">
-              <img
-                class="profile-image"
-                src="assets/layout/images/avatar.png"
-              />
+              <img class="profile-image" src="assets/images/avatar.png" />
               <span class="topbar-item-name">{{ user?.attributes?.name }}</span>
               <span class="topbar-item-role">{{ role }}</span>
             </a>

@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'tt-footer',
+  selector: "tt-footer",
   template: `
     <div class="layout-footer">
-      <span class="footer-text-left">
-        <img src="assets/layout/images/logo-dark.png" />
+      <span
+        class="footer-text-left"
+        style="background-color: #146fd7; border-radius: 2px"
+      >
+        <img
+          src="assets/images/regulatorsto-logo-medical-testing-services-toronto-svg.png"
+        />
       </span>
       <span class="footer-text-right">
         <a href="#"><i class="fa fa-facebook"></i></a>
