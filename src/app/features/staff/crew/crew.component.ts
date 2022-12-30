@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { DateUtils } from 'app/@shared/utils/date-utils';
-import { APIService } from 'app/API.service';
-import { MessageService } from 'primeng/api';
+import { Component, OnInit } from "@angular/core";
+import { DateUtils } from "app/@shared/utils/date-utils";
+import { APIService } from "app/API.service";
+import { MessageService } from "primeng/api";
 
-import { TextMessageService } from '../text-message-service';
+import { TextMessageService } from "../text-message-service";
 
 @Component({
   selector: "app-crew",
@@ -19,6 +19,7 @@ export class CrewComponent implements OnInit {
     { field: "phonenumber", header: "Phone number" },
     { field: "email", header: "Email" },
     { field: "DOB", header: "DOB" },
+    { field: "vaxxStatus", header: "Vax Status" },
     { field: "healthCardNumber", header: "Health Card Number" },
   ];
   constructor(
