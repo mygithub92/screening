@@ -112,13 +112,11 @@
                 <label for="vaxxStatus" class="account-label">Vax</label>
               </div>
               <div class="ui-g-12">
-                <input
-                  type="text"
-                  pInputText
+                <p-dropdown
+                  [options]="statuses"
                   formControlName="vaxxStatus"
                   id="vaxxStatus"
-                  placeholder="Vax"
-                />
+                ></p-dropdown>
                 <p-message
                   severity="error"
                   text="Field is required"
