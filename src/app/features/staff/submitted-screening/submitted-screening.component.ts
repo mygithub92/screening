@@ -4,6 +4,7 @@ import { AuthService } from 'app/@core/services/auth.service';
 import { DateUtils } from 'app/@shared/utils/date-utils';
 import { APIService } from 'app/API.service';
 import * as moment from 'moment';
+import { MessageService } from 'primeng/api';
 
 import { TextMessageService } from '../text-message-service';
 
@@ -39,7 +40,8 @@ export class SubmittedScreeningComponent implements OnInit {
     private api: APIService,
     private fb: FormBuilder,
     private authService: AuthService,
-    private messageService: TextMessageService
+    private textMessageService: TextMessageService,
+    private messagetService: MessageService
   ) {
     const tomorrow = new Date();
     const yesterday = new Date();
@@ -86,7 +88,7 @@ export class SubmittedScreeningComponent implements OnInit {
         crewName: screening.crewName,
         crewPhoneNumber: screening.crewPhoneNumber,
       };
-      screening.submittedAt = DateUtils.format(screening.submittedAt);
+      screening.submittedAt = DateUtils.formatDateTime(screening.submittedAt);
       screening.answeredQuestions.items.sort((a, b) => a.order - b.order);
       this.resultForm.addControl(
         `method${screening.id}`,
@@ -126,6 +128,26 @@ export class SubmittedScreeningComponent implements OnInit {
     }
   }
 
+  async remind(rawData) {
+    console.log(rawData);
+    const { crewName, crewPhoneNumber } = this.screeningCrewMap[rawData.id];
+    const message = [
+      {
+        type: "reminder",
+        name: crewName,
+        phonne: crewPhoneNumber,
+      },
+    ];
+    const result = await this.textMessageService.sendMessage(message);
+    console.log(result);
+    this.messagetService.add({
+      key: "tst",
+      severity: "success",
+      summary: "Success",
+      detail: "Reminder sent.",
+    });
+  }
+
   public async submit() {
     const updateSceenings = [];
     const SMSs = [];
@@ -162,7 +184,7 @@ export class SubmittedScreeningComponent implements OnInit {
     const temp = await Promise.all(updateSceenings);
     console.log(SMSs);
     console.log(temp);
-    const messages = this.messageService.sendMessage(SMSs);
+    const messages = this.textMessageService.sendMessage(SMSs);
     console.log(messages);
     this.fetch();
   }

@@ -8,12 +8,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ScreeningResultComponent implements OnInit {
   message = "Proceed to testing";
+  className = "healthy";
   constructor(private router: Router, private route: ActivatedRoute) {
     this.route.paramMap.subscribe((param) => {
       const result = param.get("result");
       if ("failed" === result) {
         this.message =
           "Do not go into work, contact department head and covid coordinator";
+        this.className = "unhealthy";
       }
     });
   }

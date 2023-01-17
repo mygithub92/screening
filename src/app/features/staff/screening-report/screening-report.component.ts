@@ -88,8 +88,10 @@ export class ScreeningReportComponent implements OnInit {
     }
     const screeningObjs = await this.api.ListSceenings(search);
     this.screenings = screeningObjs.items.map((i) => {
-      i.processedAt = DateUtils.format(i.processedAt);
-      i.submittedAt = DateUtils.format(i.submittedAt);
+      i.processedAt = DateUtils.formatDateTime(i.processedAt);
+      i.submittedAt = DateUtils.formatDateTime(i.submittedAt);
+      i.answeredQuestions.items.sort((a, b) => a.order - b.order);
+
       if (i.result === "Positive") {
         this.positiveNum++;
       }

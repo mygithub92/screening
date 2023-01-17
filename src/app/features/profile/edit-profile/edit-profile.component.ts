@@ -19,7 +19,11 @@ export class EditProfileComponent implements OnInit {
   group;
   loading = true;
   firstTime = false;
-
+  statuses = [
+    { label: "Yes", value: "Yes" },
+    { label: "No", value: "No" },
+    { label: "Decline", value: "Decline" },
+  ];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
