@@ -152,7 +152,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
               routerLink: "screening",
             },
             {
-              label: "Search Projects",
+              label: "Project Code",
               icon: "fa fa-fw fa-tasks",
               routerLink: "profile",
             },

@@ -10,14 +10,28 @@
           <div class="ui-g-6">
             <div class="ui-g">
               <div class="ui-g-12">
-                <label for="job-code" class="account-label">Project Name</label>
+                <label for="job-code" class="account-label"
+                  >Project Code (Readonly)</label
+                >
+              </div>
+              <div class="ui-g-12">
+                <input
+                  type="text"
+                  pInputText
+                  readonly
+                  formControlName="location"
+                  id="job-code"
+                />
+              </div>
+              <div class="ui-g-12">
+                <label for="job-name" class="account-label">Project Name</label>
               </div>
               <div class="ui-g-12">
                 <input
                   type="text"
                   pInputText
                   formControlName="code"
-                  id="job-code"
+                  id="job-name"
                   placeholder="Project Name"
                 />
                 <p-message
@@ -79,7 +93,7 @@
                 <p-message
                   severity="error"
                   text="Field is required"
-                  *ngIf="isInvalid('questionForm')"
+                  *ngIf="isInvalid('endDate')"
                 ></p-message>
               </div>
             </div>

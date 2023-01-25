@@ -53,19 +53,20 @@
       </div>
       <div class="ui-g-12 ui-lg-2">
         <div class="ui-g form-group">
-          <label class="ui-g-12" for="project">Project</label>
+          <label class="ui-g-12" for="project">Project code</label>
           <div class="ui-g-12">
-            <p-autoComplete
-              id="acSimple"
-              formControlName="project"
-              [suggestions]="filteredProjects"
-              (completeMethod)="filterProject($event)"
-              field="code"
-              [size]="30"
-              placeholder="Hint: typing a project name"
-              forceSelection="true"
-              [minLength]="1"
-            ></p-autoComplete>
+            <input
+              type="text"
+              id="projectCode"
+              pInputText
+              formControlName="projectCode"
+              placeholder="Project Code"
+            />
+            <p-message
+              severity="error"
+              text="Field is required"
+              *ngIf="isProjectFormInvalid('projectCode')"
+            ></p-message>
           </div>
         </div>
       </div>

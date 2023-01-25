@@ -23,6 +23,9 @@
           <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr [pSelectableRow]="rowData">
               <td>
+                {{ rowData["location"] }}
+              </td>
+              <td>
                 {{ rowData["code"] }}
               </td>
               <td>

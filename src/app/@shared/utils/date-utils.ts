@@ -41,4 +41,16 @@ export class DateUtils {
   static formatDateTime(date) {
     return moment(date).format("MM/DD/YYYY HH:mm:ss");
   }
+
+  static generateProjectCode(length = 6) {
+    var result = "";
+    var characters = `${new Date().getTime()}ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`;
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
+  static replacer = (key, value) => (value === null ? "" : value);
 }

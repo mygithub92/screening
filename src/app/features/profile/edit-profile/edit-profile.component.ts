@@ -73,7 +73,7 @@ export class EditProfileComponent implements OnInit {
           } = crew.items[0];
           this.form.patchValue({
             phonenumber,
-            DOB: DateUtils.format(DOB),
+            DOB: DateUtils.formatDOB(DOB),
             healthCardNumber,
             userAgreement,
             vaxxStatus,

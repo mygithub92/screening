@@ -39,7 +39,7 @@ export class CrewComponent implements OnInit, OnDestroy {
           { field: "DOB", header: "DOB(DD/MM/YYYY)" },
           { field: "vaxxStatus", header: "Vax Status" },
         ];
-        if (group === "Admin") {
+        if (group && group.indexOf("Admin") > -1) {
           this.cols.push({
             field: "healthCardNumber",
             header: "Health Card Number",
