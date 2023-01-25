@@ -2,46 +2,74 @@
   ><p class="center-spinner"></p
 ></p-blockUI>
 <p-panel header="Screening" #dt class="screening-panel">
-  <ng-container *ngIf="!loading">
+  <div class="card card-w-title">
+    <div [formGroup]="projectForm">
+      <div class="ui-g form-group ui-fluid">
+        <div class="ui-g-12">
+          <label for="projectCode" class="account-label">Project Code</label>
+        </div>
+        <div class="ui-g-3">
+          <input
+            type="text"
+            id="projectCode"
+            pInputText
+            formControlName="projectCode"
+            placeholder="Project Code"
+          />
+          <p-message
+            severity="error"
+            text="Field is required"
+            *ngIf="isProjectFormInvalid('projectCode')"
+          ></p-message>
+          <p-message
+            severity="error"
+            text="Can't find any Project"
+            *ngIf="noProject"
+          ></p-message>
+        </div>
+        <div class="ui-g-2">
+          <button
+            pButton
+            type="button"
+            label="Find"
+            icon="fa fa-save"
+            (click)="findJob()"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="!loading && projectFetched">
     <div class="card card-w-title">
       <div [formGroup]="form">
         <div class="ui-g form-group">
-          <div class="ui-g-12">
-            <div class="ui-g form-group ui-fluid">
-              <div class="ui-g-12 ui-lg-6">
-                <div class="ui-g">
-                  <div class="ui-g-12">
-                    <label for="job-code" class="account-label"
-                      >Project Name</label
-                    >
-                  </div>
-                  <div class="ui-g-12">
-                    <p-dropdown
-                      [options]="jobs"
-                      formControlName="selectedJob"
-                    ></p-dropdown>
-                  </div>
-                  <div class="ui-g-12" *ngIf="isExpired">
-                    <p-message
-                      severity="warn"
-                      [text]="expiredMessage"
-                      [style]="{ marginLeft: 0 }"
-                    ></p-message>
-                  </div>
-                </div>
+          <div class="ui-g-12 ui-lg-6">
+            <div class="ui-g">
+              <div class="ui-g-12">
+                <label for="job-code" class="account-label">Project Name</label>
               </div>
-              <div class="ui-g-12 ui-lg-6">
-                <div class="ui-g">
-                  <div class="ui-g-12">
-                    <label for="job-code" class="account-label">Location</label>
-                  </div>
-                  <div class="ui-g-12">
-                    <p-dropdown
-                      [options]="locations"
-                      formControlName="selectedLocation"
-                    ></p-dropdown>
-                  </div>
-                </div>
+              <div class="ui-g-12">
+                <strong>{{ foundJob.code }}</strong>
+              </div>
+              <div class="ui-g-12" *ngIf="isExpired">
+                <p-message
+                  severity="warn"
+                  [text]="expiredMessage"
+                  [style]="{ marginLeft: 0 }"
+                ></p-message>
+              </div>
+            </div>
+          </div>
+          <div class="ui-g-12 ui-lg-6">
+            <div class="ui-g">
+              <div class="ui-g-12">
+                <label for="job-code" class="account-label">Location</label>
+              </div>
+              <div class="ui-g-12">
+                <p-dropdown
+                  [options]="locations"
+                  formControlName="selectedLocation"
+                ></p-dropdown>
               </div>
             </div>
           </div>

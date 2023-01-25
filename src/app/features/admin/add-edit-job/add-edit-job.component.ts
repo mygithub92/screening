@@ -19,6 +19,7 @@ export class AddEditJobComponent implements OnInit {
   loading = true;
   jobId;
   header = "Edit Project";
+  jobCode;
   formId;
   cols = [
     { field: "name", header: "Name" },
@@ -35,11 +36,13 @@ export class AddEditJobComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.form = this.fb.group({
+      location: [null, Validators.required],
       code: [null, Validators.required],
       questionForm: [null, Validators.required],
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
     });
+
     this.actionsSubscription = route.params
       .pipe(take(1))
       .subscribe(async (params) => {
@@ -52,6 +55,8 @@ export class AddEditJobComponent implements OnInit {
         );
         if (params.id === "-1") {
           this.header = "Add Project";
+          this.jobCode = params.projectCode;
+          this.form.controls["location"].setValue(this.jobCode);
           this.loading = false;
           this.form.controls["questionForm"].setValue(
             this.questionForms[0].value
@@ -80,6 +85,7 @@ export class AddEditJobComponent implements OnInit {
     this.formId = jobOjb.forms.items[0] && jobOjb.forms.items[0].formId;
 
     const formValues = {
+      location: jobOjb.location,
       code: jobOjb.code,
       questionForm: this.formId,
       startDate: DateUtils.format(jobOjb.startDate),
@@ -99,10 +105,10 @@ export class AddEditJobComponent implements OnInit {
   async save() {
     this.loading = true;
     const values = this.form.getRawValue();
-    let detail;
     if (this.isAddition) {
       const job = await this.api.CreateJob({
         code: values.code,
+        location: values.location,
         startDate: this.getDateString(values.startDate),
         endDate: this.getDateString(values.endDate),
       });
@@ -113,7 +119,6 @@ export class AddEditJobComponent implements OnInit {
 
       console.log(job);
       console.log(jobForm);
-      detail = "Project added";
     } else {
       const formJob = await this.api.ListFormJobs({
         and: [{ jobId: { eq: this.jobId } }, { formId: { eq: this.formId } }],
@@ -132,7 +137,6 @@ export class AddEditJobComponent implements OnInit {
 
       console.log(job);
       console.log(jobForm);
-      detail = "Project updated";
     }
     this.router.navigate(["../../jobs"], { relativeTo: this.route });
   }

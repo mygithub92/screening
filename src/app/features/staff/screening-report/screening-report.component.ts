@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'app/@core/services/auth.service';
 import { DateUtils } from 'app/@shared/utils/date-utils';
 import { APIService } from 'app/API.service';
+import { saveAs } from 'file-saver';
 import * as moment from 'moment';
 
 @Component({
@@ -14,14 +15,14 @@ export class ScreeningReportComponent implements OnInit {
   user;
   form: FormGroup;
   filterForm: FormGroup;
-  loading = true;
+  loading = false;
   screenings;
   filteredScreenings;
-  filteredProjects = [];
+  projectCodeIdMap = {};
   projects;
   positiveNum = 0;
   negativeNum = 0;
-
+  projectCode;
   result = {
     value: "",
   };
@@ -30,7 +31,6 @@ export class ScreeningReportComponent implements OnInit {
     { field: "result", header: "Result" },
     { field: "crewName", header: "Crew Name" },
     { field: "jobName", header: "Project Name" },
-    { field: "location", header: "Location" },
     { field: "processedAt", header: "Processed" },
     { field: "submittedAt", header: "Submitted" },
   ];
@@ -50,7 +50,9 @@ export class ScreeningReportComponent implements OnInit {
     this.form = this.fb.group({
       startDate: [DateUtils.format(yesterday), Validators.required],
       endDate: [DateUtils.format(tomorrow), Validators.required],
-      project: [null],
+      crewName: [null],
+
+      projectCode: [null, Validators.required],
     });
     this.filterForm = this.fb.group({
       method: ["All"],
@@ -69,57 +71,70 @@ export class ScreeningReportComponent implements OnInit {
         console.log(user);
         this.user = user;
         this.projects = (await this.api.ListJobs()).items;
-
-        this.fetch();
+        this.projectCodeIdMap = this.projects.reduce((a, c) => {
+          a[c.location] = c.id;
+          return a;
+        }, {});
+        console.log(this.projectCodeIdMap);
       });
   }
 
   public async fetch() {
-    this.loading = true;
-    const { startDate, endDate, project } = this.form.getRawValue();
-    const startDateObj = this.getDateString(startDate);
-    const endDateObj = this.getDateString(endDate);
-    const search = {
-      submittedAt: { between: [startDateObj, endDateObj] },
-      processed: { eq: true },
-    } as any;
-    if (project) {
-      search.jobId = { eq: project.id };
-    }
-    const screeningObjs = await this.api.ListSceenings(search);
-    this.screenings = screeningObjs.items.map((i) => {
-      i.processedAt = DateUtils.formatDateTime(i.processedAt);
-      i.submittedAt = DateUtils.formatDateTime(i.submittedAt);
-      i.answeredQuestions.items.sort((a, b) => a.order - b.order);
+    this.form.markAllAsTouched();
+    if (this.form.valid) {
+      this.positiveNum = 0;
+      this.negativeNum = 0;
+      this.loading = true;
+      const {
+        startDate,
+        endDate,
+        projectCode,
+        crewName,
+      } = this.form.getRawValue();
+      this.projectCode = projectCode;
+      const startDateObj = this.getDateString(startDate);
+      const endDateObj = this.getDateString(endDate);
+      const search = {
+        processedAt: { between: [startDateObj, endDateObj] },
+        processed: { eq: true },
+      } as any;
+      if (crewName) {
+        search.crewName = { eq: crewName };
+      }
+      search.jobId = { eq: this.projectCodeIdMap[projectCode] };
+      const screeningObjs = await this.api.ListSceenings(search);
+      this.screenings = screeningObjs.items.map((i) => {
+        i.processedAt = DateUtils.formatDateTime(i.processedAt);
+        i.submittedAt = DateUtils.formatDateTime(i.submittedAt);
+        i.answeredQuestions.items.sort((a, b) => a.order - b.order);
 
-      if (i.result === "Positive") {
-        this.positiveNum++;
-      }
-      if (i.result === "Negative") {
-        this.negativeNum++;
-      }
-      return i;
-    });
-    this.filteredScreenings = [...this.screenings];
-    this.loading = false;
+        if (i.result === "Positive") {
+          this.positiveNum++;
+        }
+        if (i.result === "Negative") {
+          this.negativeNum++;
+        }
+        return i;
+      });
+      this.filteredScreenings = [...this.screenings];
+      this.loading = false;
+    }
   }
 
   public get report() {
-    const total = this.screenings.length;
-    return `Postive: ${this.positiveNum}/${total}; Negative: ${this.negativeNum}/${total}`;
-  }
-
-  public filterProject(event) {
-    this.filteredProjects = [];
-    const query = event.query;
-    for (const item of this.projects) {
-      const job = item;
-      if (job.code.toLowerCase().indexOf(query.toLowerCase()) === 0) {
-        this.filteredProjects.push(job);
-      }
+    if (this.screenings) {
+      const total = this.screenings.length;
+      return `Postive: ${this.positiveNum}/${total}; Negative: ${this.negativeNum}/${total}`;
     }
   }
 
+  public isProjectFormInvalid(controlName: string) {
+    return (
+      this.form.controls[controlName].invalid &&
+      (this.form.controls[controlName].dirty ||
+        this.form.controls[controlName].touched)
+    );
+  }
   public filterScreening(methodValue, resultValue) {
     this.filteredScreenings = [];
     if (methodValue === "All" && resultValue === "All") {
@@ -142,5 +157,19 @@ export class ScreeningReportComponent implements OnInit {
   public filter(column, value) {
     console.log(column);
     console.log(value);
+  }
+
+  public export() {
+    const header = this.cols.map((c) => c.header);
+    let csv = this.filteredScreenings.map((row) =>
+      this.cols
+        .map((c) => JSON.stringify(row[c.field], DateUtils.replacer))
+        .join(",")
+    );
+    csv.unshift(header.join(","));
+    let csvArray = csv.join("\r\n");
+
+    var blob = new Blob([csvArray], { type: "text/csv" });
+    saveAs(blob, `report-${this.projectCode}.csv`);
   }
 }

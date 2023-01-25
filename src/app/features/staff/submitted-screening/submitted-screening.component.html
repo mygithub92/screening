@@ -2,78 +2,111 @@
   ><p class="center-spinner"></p
 ></p-blockUI>
 <p-panel header="Screening" #dt class="screening-panel">
-  <ng-container *ngIf="!loading">
-    <div class="card card-w-title">
-      <h4>Search by submission date</h4>
-      <div class="ui-g ui-fluid" [formGroup]="form">
-        <div class="ui-g-12 ui-lg-3">
-          <div class="ui-g form-group">
-            <label class="ui-g-12" for="startDate" style="white-space: nowrap;"
-              >Start Date (MM/DD/YYYY)</label
-            >
-            <div class="ui-g-12">
-              <input
-                type="text"
-                id="startDate"
-                pInputText
-                formControlName="startDate"
-                placeholder="Start Date"
-              />
-            </div>
+  <div class="card card-w-title">
+    <h4>Search by submission date</h4>
+    <div class="ui-g ui-fluid" [formGroup]="form">
+      <div class="ui-g-12 ui-lg-2">
+        <div class="ui-g form-group">
+          <label class="ui-g-12" for="startDate" style="white-space: nowrap;"
+            >Start Date (MM/DD/YYYY)</label
+          >
+          <div class="ui-g-12">
+            <input
+              type="text"
+              id="startDate"
+              pInputText
+              formControlName="startDate"
+              placeholder="Start Date"
+            />
+            <p-message
+              severity="error"
+              text="Field is required"
+              *ngIf="isProjectFormInvalid('startDate')"
+            ></p-message>
           </div>
         </div>
-        <div class="ui-g-12 ui-lg-3">
-          <div class="ui-g form-group">
-            <label class="ui-g-12" for="endDate" style="white-space: nowrap;"
-              >End Date (MM/DD/YYYY)</label
-            >
-            <div class="ui-g-12">
-              <input
-                type="text"
-                id="endDate"
-                pInputText
-                formControlName="endDate"
-                placeholder="End Date"
-              />
-            </div>
+      </div>
+      <div class="ui-g-12 ui-lg-2">
+        <div class="ui-g form-group">
+          <label class="ui-g-12" for="endDate" style="white-space: nowrap;"
+            >End Date (MM/DD/YYYY)</label
+          >
+          <div class="ui-g-12">
+            <input
+              type="text"
+              id="endDate"
+              pInputText
+              formControlName="endDate"
+              placeholder="End Date"
+            />
+            <p-message
+              severity="error"
+              text="Field is required"
+              *ngIf="isProjectFormInvalid('endDate')"
+            ></p-message>
           </div>
         </div>
-        <div class="ui-g-12 ui-lg-3">
-          <div class="ui-g form-group">
-            <label class="ui-g-12" for="project">Project</label>
-            <div class="ui-g-12">
-              <p-autoComplete
-                id="acSimple"
-                formControlName="project"
-                [suggestions]="filteredProjects"
-                (completeMethod)="filterProject($event)"
-                field="code"
-                [size]="30"
-                placeholder="Hint: typing a project name"
-                forceSelection="true"
-                [minLength]="1"
-              ></p-autoComplete>
-            </div>
+      </div>
+
+      <div class="ui-g-12 ui-lg-2">
+        <div class="ui-g form-group">
+          <label class="ui-g-12" for="projectCode">Project Code</label>
+          <div class="ui-g-12">
+            <input
+              type="text"
+              id="projectCode"
+              pInputText
+              formControlName="projectCode"
+              placeholder="Project Code"
+            />
+            <p-message
+              severity="error"
+              text="Field is required"
+              *ngIf="isProjectFormInvalid('projectCode')"
+            ></p-message>
           </div>
         </div>
-        <div class="ui-g-12 ui-lg-2">
-          <div class="ui-g form-group">
-            <label class="ui-g-12">&nbsp;</label>
-            <div class="ui-g-12">
-              <button
-                pButton
-                type="button"
-                label="Fetch"
-                icon="fa fa-save"
-                (click)="fetch()"
-              ></button>
-            </div>
+      </div>
+      <div class="ui-g-12 ui-lg-2">
+        <div class="ui-g form-group">
+          <label class="ui-g-12" for="crewName">Crew Name</label>
+          <div class="ui-g-12">
+            <input
+              type="text"
+              id="crewName"
+              pInputText
+              formControlName="crewName"
+              placeholder="Crew Name"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="ui-g-12 ui-lg-2">
+        <div class="ui-g form-group">
+          <label class="ui-g-12">&nbsp;</label>
+          <div class="ui-g-12">
+            <button
+              pButton
+              type="button"
+              label="Fetch"
+              icon="fa fa-save"
+              (click)="fetch()"
+            ></button>
           </div>
         </div>
       </div>
     </div>
-    <div class="card card-w-title" [formGroup]="resultForm">
-      <p-table [columns]="cols" #dt [value]="screenings" dataKey="id">
+  </div>
+  <div class="card card-w-title" [formGroup]="resultForm">
+    <ng-container *ngIf="!loading">
+      <p-table
+        [columns]="cols"
+        #dt
+        [value]="screenings"
+        dataKey="id"
+        [autoLayout]="true"
+        emptyMessage="No record found"
+      >
         <ng-template pTemplate="header" let-columns>
           <tr>
             <th style="width: 3em;"></th>
@@ -133,7 +166,7 @@
             </td>
             <td>
               <div class="ui-g">
-                <div class="ui-g-6" style="white-space: nowrap;">
+                <div class="ui-g-4" style="white-space: nowrap;">
                   <p-radioButton
                     name="result{{ rowIndex + 1 }}"
                     value="Positive"
@@ -141,11 +174,19 @@
                     formControlName="result{{ rowData['id'] }}"
                   ></p-radioButton>
                 </div>
-                <div class="ui-g-6" style="white-space: nowrap;">
+                <div class="ui-g-4" style="white-space: nowrap;">
                   <p-radioButton
                     name="result{{ rowIndex + 1 }}"
                     value="Negative"
                     label="Negative"
+                    formControlName="result{{ rowData['id'] }}"
+                  ></p-radioButton>
+                </div>
+                <div class="ui-g-4" style="white-space: nowrap;">
+                  <p-radioButton
+                    name="result{{ rowIndex + 1 }}"
+                    value="Not Tested"
+                    label="Not Tested"
                     formControlName="result{{ rowData['id'] }}"
                   ></p-radioButton>
                 </div>
@@ -201,6 +242,6 @@
           (click)="submit()"
         ></button>
       </div>
-    </div>
-  </ng-container>
+    </ng-container>
+  </div>
 </p-panel>

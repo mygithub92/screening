@@ -1,5 +1,9 @@
-<p-panel header="Screening Result" #dt class="screening-panel">
-  <div class="card card-w-title" style="min-height: 400px; text-align: center;">
-    <h1 [ngClass]="className">{{ message }}</h1>
+<p-panel header="Screening Result" #dt>
+  <div
+    class="card card-w-title"
+    style="min-height: 400px; text-align: center;"
+    [ngClass]="className"
+  >
+    <h1 style="font-size: 36px;">{{ message }}</h1>
   </div>
 </p-panel>

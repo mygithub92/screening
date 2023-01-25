@@ -12,9 +12,8 @@ import { MessageService } from 'primeng/api';
 })
 export class JobComponent implements OnInit {
   form: FormGroup;
-  jobs;
   crewId;
-  currentDefaultJobName;
+  jobCode;
 
   filteredJobs = [];
   loading = true;
@@ -37,22 +36,9 @@ export class JobComponent implements OnInit {
       const userName = user.signInUserSession.accessToken.payload["username"];
       const crew = await this.api.ListCrews({ userName: { eq: userName } });
       this.crewId = crew.items[0].id;
-      const jobs = await this.api.ListJobs();
-      console.log(jobs);
-      this.jobs = jobs.items;
-      const currentDefaultJobId = crew.items[0].defaultJobId;
-      this.setCurrentProjectName(currentDefaultJobId);
+      this.jobCode = crew.items[0].defaultJobId;
       this.loading = false;
     });
-  }
-
-  private setCurrentProjectName(currentDefaultJobId) {
-    const currentDefaultJob = this.jobs.find(
-      (job) => job.id === currentDefaultJobId
-    );
-    if (currentDefaultJob) {
-      this.currentDefaultJobName = currentDefaultJob.code;
-    }
   }
 
   public isInvalid(controlName: string) {
@@ -69,9 +55,8 @@ export class JobComponent implements OnInit {
       const values = this.form.getRawValue();
       const result = await this.api.UpdateCrew({
         id: this.crewId,
-        defaultJobId: values.jobCode.id,
+        defaultJobId: values.jobCode,
       });
-      this.setCurrentProjectName(values.jobCode.id);
       console.log(result);
       this.messageService.add({
         key: "tst",
@@ -79,17 +64,6 @@ export class JobComponent implements OnInit {
         summary: "Success",
         detail: "Default Project changed",
       });
-    }
-  }
-
-  public filterJob(event) {
-    this.filteredJobs = [];
-    const query = event.query;
-    for (const item of this.jobs) {
-      const job = item;
-      if (job.code.toLowerCase().indexOf(query.toLowerCase()) === 0) {
-        this.filteredJobs.push(job);
-      }
     }
   }
 }
