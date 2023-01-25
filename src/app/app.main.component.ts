@@ -103,14 +103,19 @@ export class AppMainComponent implements OnInit, OnDestroy {
               routerLink: "admin/jobs",
             },
             {
-              label: "Reports",
-              icon: "fa fa-fw fa-home",
-              routerLink: "staff/report",
-            },
-            {
               label: "Forms",
               icon: "fa fa-fw fa-newspaper-o",
               routerLink: "admin/forms",
+            },
+            {
+              label: "Crew",
+              icon: "fa fa-fw fa-home",
+              routerLink: "staff/crew",
+            },
+            {
+              label: "Reports",
+              icon: "fa fa-fw fa-home",
+              routerLink: "staff/report",
             }
           );
           nav = ["/main/admin"];

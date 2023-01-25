@@ -34,6 +34,10 @@ export class DateUtils {
     return moment(date).format("MM/DD/YYYY");
   }
 
+  static formatDOB(date) {
+    return moment(date).format("DD/MM/YYYY");
+  }
+
   static formatDateTime(date) {
     return moment(date).format("MM/DD/YYYY HH:mm:ss");
   }

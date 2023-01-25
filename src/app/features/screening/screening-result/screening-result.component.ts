@@ -17,6 +17,11 @@ export class ScreeningResultComponent implements OnInit {
           "Do not go into work, contact department head and covid coordinator";
         this.className = "unhealthy";
       }
+      if ("caution" === result) {
+        this.message =
+          "Call your covid coordinator to discuss BEFORE ENTERING the workplace";
+        this.className = "caution";
+      }
     });
   }
 

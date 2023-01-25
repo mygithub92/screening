@@ -50,6 +50,8 @@ export class ScreeningReportComponent implements OnInit {
     this.form = this.fb.group({
       startDate: [DateUtils.format(yesterday), Validators.required],
       endDate: [DateUtils.format(tomorrow), Validators.required],
+      crewName: [null],
+
       project: [null],
     });
     this.filterForm = this.fb.group({
@@ -76,13 +78,16 @@ export class ScreeningReportComponent implements OnInit {
 
   public async fetch() {
     this.loading = true;
-    const { startDate, endDate, project } = this.form.getRawValue();
+    const { startDate, endDate, project, crewName } = this.form.getRawValue();
     const startDateObj = this.getDateString(startDate);
     const endDateObj = this.getDateString(endDate);
     const search = {
-      submittedAt: { between: [startDateObj, endDateObj] },
+      processedAt: { between: [startDateObj, endDateObj] },
       processed: { eq: true },
     } as any;
+    if (crewName) {
+      search.crewName = { eq: crewName };
+    }
     if (project) {
       search.jobId = { eq: project.id };
     }
@@ -143,4 +148,6 @@ export class ScreeningReportComponent implements OnInit {
     console.log(column);
     console.log(value);
   }
+
+  public export() {}
 }

@@ -1,6 +1,9 @@
-.unhealthy {
-    color: red;
-}
 .healthy {
-    color: green;
+    background-color: #9EE09E;
+}
+.unhealthy {
+    background-color: #FF6663;
+}
+.caution {
+    background-color: #FDFD97;
 }

@@ -45,11 +45,12 @@ export class SubmittedScreeningComponent implements OnInit {
   ) {
     const tomorrow = new Date();
     const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 2);
+    yesterday.setDate(yesterday.getDate() - 200);
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.form = this.fb.group({
       startDate: [DateUtils.format(yesterday), Validators.required],
       endDate: [DateUtils.format(tomorrow), Validators.required],
+      crewName: [null],
       project: [null],
     });
     this.resultForm = this.fb.group({});
@@ -70,7 +71,7 @@ export class SubmittedScreeningComponent implements OnInit {
     this.loading = true;
     this.screeningCrewMap = {};
     this.resultForm.reset();
-    const { startDate, endDate, project } = this.form.getRawValue();
+    const { startDate, endDate, project, crewName } = this.form.getRawValue();
     const startDateObj = this.getDateString(startDate);
     const endDateObj = this.getDateString(endDate);
     const search = {
@@ -79,6 +80,9 @@ export class SubmittedScreeningComponent implements OnInit {
     } as any;
     if (project) {
       search.jobId = { eq: project.id };
+    }
+    if (crewName) {
+      search.crewName = { eq: crewName };
     }
     const screeningObjs = await this.api.ListSceenings(search);
     this.screenings = screeningObjs.items;
@@ -155,19 +159,23 @@ export class SubmittedScreeningComponent implements OnInit {
       const method = this.resultForm.controls[`method${screening.id}`].value;
       const result = this.resultForm.controls[`result${screening.id}`].value;
       console.log(result);
-      if (method && result) {
+      const noTest = result === "Not Tested";
+      if ((method && result) || noTest) {
         const { crewName, crewPhoneNumber } = this.screeningCrewMap[
           screening.id
         ];
-        SMSs.push({
-          type: "result",
-          name: crewName,
-          phonne: crewPhoneNumber,
-          test: {
-            result,
-            method,
-          },
-        });
+        if (!noTest) {
+          SMSs.push({
+            type: "result",
+            name: crewName,
+            phonne: crewPhoneNumber,
+            test: {
+              result,
+              method,
+            },
+          });
+        }
+
         updateSceenings.push(
           this.api.UpdateSceening({
             id: screening.id,

@@ -1,22 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService } from "app/@core/services/auth.service";
-import { DateUtils } from "app/@shared/utils/date-utils";
-import { APIService } from "app/API.service";
-import * as moment from "moment";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'app/@core/services/auth.service';
+import { DateUtils } from 'app/@shared/utils/date-utils';
+import { APIService } from 'app/API.service';
+import * as moment from 'moment';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: "app-screening-form",
   templateUrl: "./screening-form.component.html",
   styleUrls: ["./screening-form.component.scss"],
 })
-export class ScreeningFormComponent implements OnInit {
+export class ScreeningFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   jobs = [];
   selectedJob;
@@ -34,6 +30,7 @@ export class ScreeningFormComponent implements OnInit {
     { label: "Basecamp", value: "Basecamp" },
     { label: "Location", value: "Location" },
   ];
+  subscriptions: Subscription[] = [];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -55,24 +52,33 @@ export class ScreeningFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.getCurrentAuthenticatedUser().subscribe(async (user) => {
-      const userName = user.signInUserSession.accessToken.payload["username"];
-      const crews = await this.api.ListCrews({ userName: { eq: userName } });
-      this.crew = crews.items[0];
-      this.selectedJob = this.crew.defaultJobId;
-      const jobObjs = await this.api.ListJobs();
-      console.log(jobObjs);
-      const jobs = [];
-      jobObjs.items.forEach((jobObj) => {
-        this.jobIdMap[jobObj.id] = jobObj;
-        jobs.push({ label: jobObj.code, value: jobObj.id });
-      });
-      this.jobs = jobs;
-      this.form.patchValue({
-        selectedJob: this.selectedJob,
-        selectedLocation: this.locations[0].value,
-      });
-    });
+    this.subscriptions.push(
+      this.authService.getCurrentAuthenticatedUser().subscribe(async (user) => {
+        const userName = user.signInUserSession.accessToken.payload["username"];
+        const crews = await this.api.ListCrews({ userName: { eq: userName } });
+        this.crew = crews.items[0];
+        this.selectedJob = this.crew.defaultJobId;
+        const jobObjs = await this.api.ListJobs();
+        console.log(jobObjs);
+        const jobs = [];
+        jobObjs.items.forEach((jobObj) => {
+          this.jobIdMap[jobObj.id] = jobObj;
+          jobs.push({ label: jobObj.code, value: jobObj.id });
+        });
+        this.jobs = jobs;
+        this.form.patchValue({
+          selectedJob: this.selectedJob,
+          selectedLocation: this.locations[0].value,
+        });
+      })
+    );
+  }
+
+  private getResultForIndex(index: number) {
+    if (index < 3) {
+      return "failed";
+    }
+    return "caution";
   }
 
   private async getJobForm(jobId) {
@@ -102,6 +108,7 @@ export class ScreeningFormComponent implements OnInit {
         return {
           ...q,
           options: options.items,
+          resultForYes: this.getResultForIndex(i),
         };
       });
       const questionForm: FormGroup = this.form.controls[
@@ -170,19 +177,23 @@ export class ScreeningFormComponent implements OnInit {
         location: rawValue.selectedLocation,
       });
       console.log(sceeningObj);
+      let result;
       this.totalQuestions.forEach((question, i) => {
         const questionIndex = `question${i + 1}`;
         const answeredQuestion = {
           question: question.title,
         } as any;
-
-        if (rawValue.questionForm[questionIndex]) {
+        const questionAswer = rawValue.questionForm[questionIndex];
+        if (questionAswer) {
           if (noAnswer) {
-            answeredQuestion.answer = rawValue.questionForm[questionIndex];
+            answeredQuestion.answer = questionAswer;
           } else {
             answeredQuestion.answer = null;
           }
-          noAnswer = noAnswer && rawValue.questionForm[questionIndex] === "No";
+          if (answeredQuestion.answer === "Yes") {
+            result = question.resultForYes;
+          }
+          noAnswer = noAnswer && questionAswer === "No";
         } else {
           answeredQuestion.answer = null;
         }
@@ -196,14 +207,11 @@ export class ScreeningFormComponent implements OnInit {
         );
       });
 
-      const result = await Promise.all(answeredQuestionArray);
-      console.log(result);
-      this.router.navigate(
-        ["result", { result: noAnswer ? "passed" : "failed" }],
-        {
-          relativeTo: this.route,
-        }
-      );
+      const response = await Promise.all(answeredQuestionArray);
+      console.log(response);
+      this.router.navigate(["result", { result }], {
+        relativeTo: this.route,
+      });
     }
   }
 
@@ -214,5 +222,9 @@ export class ScreeningFormComponent implements OnInit {
       questionForm[controlName].invalid &&
       (questionForm[controlName].dirty || questionForm[controlName].touched)
     );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subsription) => subsription.unsubscribe());
   }
 }

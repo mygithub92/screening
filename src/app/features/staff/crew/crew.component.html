@@ -1,10 +1,10 @@
 <p-toast key="tst"></p-toast>
 
-<p-blockUI [blocked]="loading" [target]="dt"
+<p-blockUI [blocked]="loading" [target]="mainPanel"
   ><p class="center-spinner"></p
 ></p-blockUI>
 
-<p-panel header="Crew" #dt class="screening-panel">
+<p-panel header="Crew" #mainPanel class="screening-panel">
   <div class="card card-w-title">
     <div class="ui-g ui-fluid">
       <div class="ui-g-12">
@@ -12,8 +12,22 @@
           [columns]="cols"
           [value]="crews"
           dataKey="id"
+          #dt
+          [autoLayout]="true"
           emptyMessage="No record found"
         >
+          <ng-template pTemplate="caption">
+            <div class="ui-table-globalfilter-container">
+              <input
+                type="search"
+                pInputText
+                size="50"
+                placeholder="Global Filter"
+                (input)="dt.filterGlobal($event.target.value, 'contains')"
+                style="width: 250px;"
+              />
+            </div>
+          </ng-template>
           <ng-template pTemplate="header" let-columns>
             <tr>
               <th *ngFor="let col of columns" [pSortableColumn]="col.field">
