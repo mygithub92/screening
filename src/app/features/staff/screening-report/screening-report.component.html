@@ -1,3 +1,5 @@
+<p-toast key="tst"></p-toast>
+
 <p-blockUI [blocked]="loading" [target]="dt"
   ><p class="center-spinner"></p
 ></p-blockUI>
@@ -183,6 +185,7 @@
                 ariaLabelAsc="Activate to sort in ascending order"
               ></p-sortIcon>
             </th>
+            <th>Action</th>
           </tr>
         </ng-template>
         <ng-template
@@ -205,11 +208,20 @@
             <td *ngFor="let col of columns">
               {{ rowData[col.field] }}
             </td>
+            <td>
+              <button
+                pButton
+                type="button"
+                label="Duplicate"
+                icon="fa fa-save"
+                (click)="duplicate(rowData)"
+              ></button>
+            </td>
           </tr>
         </ng-template>
         <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
           <tr>
-            <td [attr.colspan]="columns.length + 1">
+            <td [attr.colspan]="columns.length + 2">
               <p-table
                 [columns]="subCols"
                 [value]="rowData['answeredQuestions']['items']"

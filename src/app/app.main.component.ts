@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ActivatedRoute, ActivationStart, Router, RouterOutlet } from '@angular/router';
 import { User } from 'app/@shared/api-interfaces';
 import { Subscription } from 'rxjs';
 
@@ -66,8 +66,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
   configClick: boolean;
   showSidebar = true;
 
-  adminUserName = "cf5cede4-f7e1-430e-b90c-61d24f2fff0a";
-
+  @ViewChild(RouterOutlet) outlet: RouterOutlet;
   user: User;
 
   menuModel = [];
@@ -87,6 +86,9 @@ export class AppMainComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
+    this.router.events.subscribe((e) => {
+      if (e instanceof ActivationStart) this.outlet.deactivate();
+    });
     this.authService.getCurrentAuthenticatedUser().subscribe(async (user) => {
       console.log(user);
       let nav = [];

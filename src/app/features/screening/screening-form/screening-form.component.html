@@ -8,7 +8,7 @@
         <div class="ui-g-12">
           <label for="projectCode" class="account-label">Project Code</label>
         </div>
-        <div class="ui-g-3">
+        <div class="ui-g-6 ui-lg-3">
           <input
             type="text"
             id="projectCode"
@@ -27,7 +27,7 @@
             *ngIf="noProject"
           ></p-message>
         </div>
-        <div class="ui-g-2">
+        <div class="ui-g-6 ui-lg-2">
           <button
             pButton
             type="button"
@@ -88,11 +88,9 @@
                   class="ui-g-6 ui-md-3 ui-lg-1"
                 >
                   <p-radioButton
-                    id="question{{ i + 1 }}"
                     name="question{{ i + 1 }}"
                     [value]="option.value"
                     [label]="option.label"
-                    [inputId]="option.value"
                     formControlName="question{{ i + 1 }}"
                   ></p-radioButton>
                   <p-message

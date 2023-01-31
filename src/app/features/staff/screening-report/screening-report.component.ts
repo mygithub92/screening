@@ -5,6 +5,7 @@ import { DateUtils } from 'app/@shared/utils/date-utils';
 import { APIService } from 'app/API.service';
 import { saveAs } from 'file-saver';
 import * as moment from 'moment';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: "app-screening-report",
@@ -41,7 +42,8 @@ export class ScreeningReportComponent implements OnInit {
   constructor(
     private api: APIService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private messageService: MessageService
   ) {
     const tomorrow = new Date();
     const yesterday = new Date();
@@ -103,6 +105,7 @@ export class ScreeningReportComponent implements OnInit {
       }
       search.jobId = { eq: this.projectCodeIdMap[projectCode] };
       const screeningObjs = await this.api.ListSceenings(search);
+      console.log(screeningObjs);
       this.screenings = screeningObjs.items.map((i) => {
         i.processedAt = DateUtils.formatDateTime(i.processedAt);
         i.submittedAt = DateUtils.formatDateTime(i.submittedAt);
@@ -157,6 +160,37 @@ export class ScreeningReportComponent implements OnInit {
   public filter(column, value) {
     console.log(column);
     console.log(value);
+  }
+
+  public async duplicate(rowData) {
+    const sceeningObj = await this.api.CreateSceening({
+      jobId: rowData.jobId,
+      jobName: rowData.jobName,
+      crewId: rowData.crewId,
+      crewName: rowData.crewName,
+      crewPhoneNumber: rowData.crewPhoneNumber,
+      submittedAt: moment(rowData.submittedAt, "MM/DD/YYYY HH:mm:ss")
+        .toDate()
+        .toISOString(),
+      location: rowData.location,
+    });
+
+    const answeredQuestionArray = rowData.answeredQuestions.items.map((aq) =>
+      this.api.CreateAnsweredQuestion({
+        sceeningAnsweredQuestionsId: sceeningObj.id,
+        question: aq.question,
+        answer: aq.answer,
+        order: aq.order,
+      })
+    );
+    const response = await Promise.all(answeredQuestionArray);
+    console.log(response);
+    this.messageService.add({
+      key: "tst",
+      severity: "success",
+      summary: "Success",
+      detail: "The record has been duplicated.",
+    });
   }
 
   public export() {
