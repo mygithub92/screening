@@ -24,7 +24,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     const questionObj = await this.api.ListQuestions();
     this.questions = questionObj.items;
-    console.log(this.questions);
     this.loading = false;
   }
   ref: DynamicDialogRef;

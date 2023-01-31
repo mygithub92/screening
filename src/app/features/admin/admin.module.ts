@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { CoreModule } from 'app/@core/@core.module';
 import { PipesModule } from 'app/@shared/pipes';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
@@ -53,6 +54,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    CoreModule,
     ReactiveFormsModule,
     NgPrimeModule,
     PipesModule,

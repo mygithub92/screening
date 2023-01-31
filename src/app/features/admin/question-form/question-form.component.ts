@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { APIService } from "app/API.service";
-import { MessageService } from "primeng/api";
-import { DialogService } from "primeng/dynamicdialog";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { APIService } from 'app/API.service';
+import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
   selector: "app-question-form",
@@ -27,7 +27,6 @@ export class QuestionFormComponent implements OnInit {
 
   async ngOnInit() {
     const formObj = await this.api.ListForms();
-    console.log(formObj);
     this.forms = formObj.items;
     this.loading = false;
   }

@@ -75,10 +75,9 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
       const jobs = await this.api.ListJobs({
         location: { eq: projectCode.toUpperCase() },
       });
-      this.projectFetched = true;
       if (jobs && jobs.items.length > 0) {
+        this.projectFetched = true;
         this.foundJob = jobs.items[0];
-        console.log(this.foundJob);
         this.checkExpired();
         const currentFormId = this.foundJob.forms.items[0].formId;
 
@@ -142,7 +141,6 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
     );
     this.questionFormSub = questionForm.valueChanges.subscribe(
       (formControl) => {
-        console.log(formControl);
         Object.keys(formControl).forEach((key, i) => {
           if (key.startsWith("question")) {
             const value = formControl[key];
@@ -168,8 +166,6 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
       }
     );
     this.loading = false;
-    console.log(this.questions);
-    console.log(form);
   }
 
   public get questionForm() {
@@ -181,7 +177,6 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       this.loading = true;
       const rawValue = this.form.getRawValue();
-      console.log(rawValue);
       let noAnswer = true;
       const answeredQuestionArray = [];
       const sceeningObj = await this.api.CreateSceening({
@@ -193,7 +188,6 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
         submittedAt: new Date().toISOString(),
         location: rawValue.selectedLocation,
       });
-      console.log(sceeningObj);
       let result;
       this.totalQuestions.forEach((question, i) => {
         const questionIndex = `question${i + 1}`;
@@ -225,7 +219,6 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
       });
 
       const response = await Promise.all(answeredQuestionArray);
-      console.log(response);
       this.router.navigate(["result", { result }], {
         relativeTo: this.route,
       });

@@ -6,7 +6,9 @@
     <div [formGroup]="projectForm">
       <div class="ui-g form-group ui-fluid">
         <div class="ui-g-12">
-          <label for="projectCode" class="account-label">Project Code</label>
+          <label for="projectCode" class="account-label"
+            >Project Code<span style="color: red;">&nbsp;*</span></label
+          >
         </div>
         <div class="ui-g-6 ui-lg-3">
           <input
@@ -23,7 +25,7 @@
           ></p-message>
           <p-message
             severity="error"
-            text="Can't find any Project"
+            text="Can't find any Project whit this code"
             *ngIf="noProject"
           ></p-message>
         </div>

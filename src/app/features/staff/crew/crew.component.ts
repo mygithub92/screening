@@ -29,7 +29,6 @@ export class CrewComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.subscriptions.push(
       this.authService.getCurrentAuthenticatedUser().subscribe(async (user) => {
-        console.log(user);
         const group =
           user.signInUserSession.accessToken.payload["cognito:groups"];
         this.cols = [
@@ -56,7 +55,6 @@ export class CrewComponent implements OnInit, OnDestroy {
   }
 
   async remind(crew) {
-    console.log(crew);
     const message = [
       {
         type: "reminder",
@@ -65,7 +63,6 @@ export class CrewComponent implements OnInit, OnDestroy {
       },
     ];
     const result = await this.textMessageService.sendMessage(message);
-    console.log(result);
     this.messagetService.add({
       key: "tst",
       severity: "success",

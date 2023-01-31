@@ -1,9 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
-import { Injectable } from "@angular/core";
-import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
-import { Observable } from "zen-observable-ts";
+import { Injectable } from '@angular/core';
+import API, { graphqlOperation, GraphQLResult } from '@aws-amplify/api-graphql';
+import { Observable } from 'zen-observable-ts';
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -104,7 +104,7 @@ export enum ModelAttributeTypes {
   numberSet = "numberSet",
   string = "string",
   stringSet = "stringSet",
-  _null = "_null"
+  _null = "_null",
 }
 
 export type ModelSizeInput = {
@@ -749,7 +749,7 @@ export type ModelQuestionOptionFilterInput = {
 
 export enum ModelSortDirection {
   ASC = "ASC",
-  DESC = "DESC"
+  DESC = "DESC",
 }
 
 export type ModelSubscriptionSceeningFilterInput = {
@@ -9050,7 +9050,7 @@ export type OnDeleteQuestionOptionSubscription = {
 };
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class APIService {
   async CreateSceening(
@@ -9116,7 +9116,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -9189,7 +9189,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -9262,7 +9262,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -9341,7 +9341,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -9420,7 +9420,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -9499,7 +9499,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -9609,7 +9609,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -9719,7 +9719,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -9829,7 +9829,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -9953,7 +9953,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -10077,7 +10077,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -10201,7 +10201,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -10335,7 +10335,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -10469,7 +10469,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -10603,7 +10603,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -10675,7 +10675,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -10747,7 +10747,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -10819,7 +10819,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -10906,7 +10906,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -10993,7 +10993,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -11080,7 +11080,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -11245,7 +11245,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -11410,7 +11410,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -11575,7 +11575,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -11737,7 +11737,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -11899,7 +11899,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -12061,7 +12061,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -12200,7 +12200,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -12339,7 +12339,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -12478,7 +12478,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -12548,7 +12548,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -12699,7 +12699,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -12787,33 +12787,6 @@ export class APIService {
               __typename
               id
               title
-              options {
-                __typename
-                items {
-                  __typename
-                  id
-                  questionId
-                  optionId
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              form {
-                __typename
-                id
-                name
-                questions {
-                  __typename
-                  nextToken
-                }
-                jobs {
-                  __typename
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
               order
               optionOrderDesc
               createdAt
@@ -12822,57 +12795,12 @@ export class APIService {
             }
             nextToken
           }
-          jobs {
-            __typename
-            items {
-              __typename
-              id
-              formId
-              jobId
-              form {
-                __typename
-                id
-                name
-                questions {
-                  __typename
-                  nextToken
-                }
-                jobs {
-                  __typename
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              job {
-                __typename
-                id
-                code
-                location
-                startDate
-                endDate
-                forms {
-                  __typename
-                  nextToken
-                }
-                crews {
-                  __typename
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           createdAt
           updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -12897,51 +12825,11 @@ export class APIService {
                 __typename
                 id
                 title
-                options {
-                  __typename
-                  nextToken
-                }
-                form {
-                  __typename
-                  id
-                  name
-                  createdAt
-                  updatedAt
-                }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
                 formQuestionsId
-              }
-              nextToken
-            }
-            jobs {
-              __typename
-              items {
-                __typename
-                id
-                formId
-                jobId
-                form {
-                  __typename
-                  id
-                  name
-                  createdAt
-                  updatedAt
-                }
-                job {
-                  __typename
-                  id
-                  code
-                  location
-                  startDate
-                  endDate
-                  createdAt
-                  updatedAt
-                }
-                createdAt
-                updatedAt
               }
               nextToken
             }
@@ -13077,7 +12965,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -13310,7 +13198,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -13476,7 +13364,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -13496,37 +13384,6 @@ export class APIService {
             id
             label
             value
-            questions {
-              __typename
-              items {
-                __typename
-                id
-                questionId
-                optionId
-                question {
-                  __typename
-                  id
-                  title
-                  order
-                  optionOrderDesc
-                  createdAt
-                  updatedAt
-                  formQuestionsId
-                }
-                option {
-                  __typename
-                  id
-                  label
-                  value
-                  order
-                  createdAt
-                  updatedAt
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
             order
             createdAt
             updatedAt
@@ -13623,7 +13480,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -13866,7 +13723,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -14123,7 +13980,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -14354,7 +14211,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -14541,7 +14398,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      order
+      order,
     };
     if (sortDirection) {
       gqlAPIServiceArguments.sortDirection = sortDirection;
@@ -14614,7 +14471,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      order
+      order,
     };
     if (sortDirection) {
       gqlAPIServiceArguments.sortDirection = sortDirection;
@@ -14722,7 +14579,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      formId
+      formId,
     };
     if (sortDirection) {
       gqlAPIServiceArguments.sortDirection = sortDirection;
@@ -14830,7 +14687,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      jobId
+      jobId,
     };
     if (sortDirection) {
       gqlAPIServiceArguments.sortDirection = sortDirection;
@@ -14935,7 +14792,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      jobId
+      jobId,
     };
     if (sortDirection) {
       gqlAPIServiceArguments.sortDirection = sortDirection;
@@ -15040,7 +14897,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      crewId
+      crewId,
     };
     if (sortDirection) {
       gqlAPIServiceArguments.sortDirection = sortDirection;
@@ -15139,7 +14996,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      questionId
+      questionId,
     };
     if (sortDirection) {
       gqlAPIServiceArguments.sortDirection = sortDirection;
@@ -15240,7 +15097,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      optionId
+      optionId,
     };
     if (sortDirection) {
       gqlAPIServiceArguments.sortDirection = sortDirection;

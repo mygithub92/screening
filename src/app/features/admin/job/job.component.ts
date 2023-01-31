@@ -31,10 +31,8 @@ export class JobComponent implements OnInit {
 
   async ngOnInit() {
     const jobsObj = await this.api.ListJobs();
-    console.log(jobsObj);
     this.jobs = jobsObj.items;
     this.projectCodes = this.jobs.map((job) => job.location);
-    console.log(this.projectCodes);
     this.loading = false;
   }
 

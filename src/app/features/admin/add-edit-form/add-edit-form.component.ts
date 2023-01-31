@@ -37,7 +37,6 @@ export class AddEditFormComponent implements OnInit, OnDestroy {
     this.actionsSubscription = route.params
       .pipe(take(1))
       .subscribe((params) => {
-        console.log(params);
         this.formId = params.id;
         if (params.id === "-1") {
           this.loading = false;
@@ -76,7 +75,6 @@ export class AddEditFormComponent implements OnInit, OnDestroy {
   async getForm(id) {
     this.questionForm = await this.api.GetForm(id);
     this.loading = false;
-    console.log(this.questionForm);
     this.form.patchValue({ name: this.questionForm.name });
     this.form.setControl(
       "questions",
@@ -150,7 +148,6 @@ export class AddEditFormComponent implements OnInit, OnDestroy {
     }
 
     const question = await Promise.all([...request]);
-    console.log(question);
     this.router.navigate(["../../forms"], { relativeTo: this.route });
   }
 

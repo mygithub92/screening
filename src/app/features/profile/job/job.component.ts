@@ -57,7 +57,6 @@ export class JobComponent implements OnInit {
         id: this.crewId,
         defaultJobId: values.jobCode,
       });
-      console.log(result);
       this.messageService.add({
         key: "tst",
         severity: "success",
