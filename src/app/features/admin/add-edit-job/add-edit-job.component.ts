@@ -47,7 +47,6 @@ export class AddEditJobComponent implements OnInit {
       .pipe(take(1))
       .subscribe(async (params) => {
         this.reset();
-        console.log(params);
         this.jobId = params.id;
         const forms = await this.api.ListForms();
         forms.items.forEach((f) =>
@@ -81,7 +80,6 @@ export class AddEditJobComponent implements OnInit {
 
   async getJob(id) {
     const jobOjb = await this.api.GetJob(id);
-    console.log(jobOjb);
     this.formId = jobOjb.forms.items[0] && jobOjb.forms.items[0].formId;
 
     const formValues = {
@@ -116,9 +114,6 @@ export class AddEditJobComponent implements OnInit {
         formId: values.questionForm,
         jobId: job.id,
       });
-
-      console.log(job);
-      console.log(jobForm);
     } else {
       const formJob = await this.api.ListFormJobs({
         and: [{ jobId: { eq: this.jobId } }, { formId: { eq: this.formId } }],
@@ -134,9 +129,6 @@ export class AddEditJobComponent implements OnInit {
         formId: values.questionForm,
         jobId: job.id,
       });
-
-      console.log(job);
-      console.log(jobForm);
     }
     this.router.navigate(["../../jobs"], { relativeTo: this.route });
   }

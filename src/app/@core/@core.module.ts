@@ -1,10 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+
+import { MarkAsteriskDirective } from './directive/mark-asterisk.directive';
 import { AuthService } from './services/auth.service';
 
 @NgModule({
-  declarations: [],
+  declarations: [MarkAsteriskDirective],
   imports: [CommonModule],
-  providers: [AuthService]
+  exports: [MarkAsteriskDirective],
+  providers: [AuthService],
 })
 export class CoreModule {}

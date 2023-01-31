@@ -58,18 +58,17 @@ export class SubmittedScreeningComponent implements OnInit {
     this.authService
       .getCurrentAuthenticatedUser()
       .subscribe(async (user: any) => {
-        console.log(user);
         this.user = user;
         this.projects = (await this.api.ListJobs()).items;
         this.projectCodeIdMap = this.projects.reduce((a, c) => {
           a[c.location] = c.id;
           return a;
         }, {});
-        console.log(this.projectCodeIdMap);
       });
   }
 
   public async fetch() {
+    this.screenings = [];
     this.form.markAllAsTouched();
     if (this.form.valid) {
       this.loading = true;
@@ -95,7 +94,6 @@ export class SubmittedScreeningComponent implements OnInit {
       }
       const screeningObjs = await this.api.ListSceenings(search);
       this.screenings = screeningObjs.items;
-      console.log(this.screenings);
       this.screenings.forEach((screening, i) => {
         this.screeningCrewMap[screening.id] = {
           crewName: screening.crewName,
@@ -132,7 +130,6 @@ export class SubmittedScreeningComponent implements OnInit {
   }
 
   async remind(rawData) {
-    console.log(rawData);
     const { crewName, crewPhoneNumber } = this.screeningCrewMap[rawData.id];
     const message = [
       {
@@ -142,7 +139,6 @@ export class SubmittedScreeningComponent implements OnInit {
       },
     ];
     const result = await this.textMessageService.sendMessage(message);
-    console.log(result);
     this.messagetService.add({
       key: "tst",
       severity: "success",
@@ -160,10 +156,10 @@ export class SubmittedScreeningComponent implements OnInit {
   public async submit() {
     const updateSceenings = [];
     const SMSs = [];
+    this.loading = true;
     this.screenings.forEach((screening) => {
       const method = this.resultForm.controls[`method${screening.id}`].value;
       const result = this.resultForm.controls[`result${screening.id}`].value;
-      console.log(result);
       const noTest = result === "Not Tested";
       if ((method && result) || noTest) {
         const { crewName, crewPhoneNumber } = this.screeningCrewMap[
@@ -194,11 +190,9 @@ export class SubmittedScreeningComponent implements OnInit {
         );
       }
     });
-    const temp = await Promise.all(updateSceenings);
-    console.log(SMSs);
-    console.log(temp);
-    const messages = this.textMessageService.sendMessage(SMSs);
-    console.log(messages);
-    this.fetch();
+    await Promise.all(updateSceenings);
+    await this.textMessageService.sendMessage(SMSs);
+    await this.fetch();
+    this.loading = false;
   }
 }

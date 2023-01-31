@@ -56,7 +56,6 @@ export class EditProfileComponent implements OnInit {
     this.authService
       .getCurrentAuthenticatedUser()
       .subscribe(async (user: any) => {
-        console.log(user);
         this.user = user;
         const crew = await this.api.ListCrews({
           userName: { eq: this.user.username },

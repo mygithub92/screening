@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'app/@core/services/auth.service';
 import { DateUtils } from 'app/@shared/utils/date-utils';
@@ -6,16 +6,18 @@ import { APIService } from 'app/API.service';
 import { saveAs } from 'file-saver';
 import * as moment from 'moment';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: "app-screening-report",
   templateUrl: "./screening-report.component.html",
   styleUrls: ["./screening-report.component.scss"],
 })
-export class ScreeningReportComponent implements OnInit {
+export class ScreeningReportComponent implements OnInit, OnDestroy {
   user;
   form: FormGroup;
   filterForm: FormGroup;
+  subscriptions: Subscription[] = [];
   loading = false;
   screenings;
   filteredScreenings;
@@ -56,34 +58,39 @@ export class ScreeningReportComponent implements OnInit {
 
       projectCode: [null, Validators.required],
     });
+    this.initFilterForm();
+  }
+
+  private initFilterForm() {
     this.filterForm = this.fb.group({
       method: ["All"],
       result: ["All"],
     });
-    this.filterForm.valueChanges.subscribe((value) => {
-      console.log(value);
-      this.filterScreening(value["method"], value["result"]);
-    });
+
+    this.subscriptions.push(
+      this.filterForm.valueChanges.subscribe((value) => {
+        this.filterScreening(value["method"], value["result"]);
+      })
+    );
   }
 
   async ngOnInit() {
     this.authService
       .getCurrentAuthenticatedUser()
       .subscribe(async (user: any) => {
-        console.log(user);
         this.user = user;
         this.projects = (await this.api.ListJobs()).items;
         this.projectCodeIdMap = this.projects.reduce((a, c) => {
           a[c.location] = c.id;
           return a;
         }, {});
-        console.log(this.projectCodeIdMap);
       });
   }
 
   public async fetch() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
+      this.initFilterForm();
       this.positiveNum = 0;
       this.negativeNum = 0;
       this.loading = true;
@@ -105,7 +112,6 @@ export class ScreeningReportComponent implements OnInit {
       }
       search.jobId = { eq: this.projectCodeIdMap[projectCode] };
       const screeningObjs = await this.api.ListSceenings(search);
-      console.log(screeningObjs);
       this.screenings = screeningObjs.items.map((i) => {
         i.processedAt = DateUtils.formatDateTime(i.processedAt);
         i.submittedAt = DateUtils.formatDateTime(i.submittedAt);
@@ -139,15 +145,17 @@ export class ScreeningReportComponent implements OnInit {
     );
   }
   public filterScreening(methodValue, resultValue) {
-    this.filteredScreenings = [];
-    if (methodValue === "All" && resultValue === "All") {
-      this.filteredScreenings = [...this.screenings];
-    } else {
-      this.filteredScreenings = this.screenings.filter(
-        (s) =>
-          (methodValue === "All" || methodValue === s["method"]) &&
-          (resultValue === "All" || resultValue === s["result"])
-      );
+    if (this.screenings) {
+      this.filteredScreenings = [];
+      if (methodValue === "All" && resultValue === "All") {
+        this.filteredScreenings = [...this.screenings];
+      } else {
+        this.filteredScreenings = this.screenings.filter(
+          (s) =>
+            (methodValue === "All" || methodValue === s["method"]) &&
+            (resultValue === "All" || resultValue === s["result"])
+        );
+      }
     }
   }
 
@@ -155,11 +163,6 @@ export class ScreeningReportComponent implements OnInit {
     const date = new Date(dateStr);
     const moment1 = moment(date);
     return moment1.toISOString();
-  }
-
-  public filter(column, value) {
-    console.log(column);
-    console.log(value);
   }
 
   public async duplicate(rowData) {
@@ -183,8 +186,7 @@ export class ScreeningReportComponent implements OnInit {
         order: aq.order,
       })
     );
-    const response = await Promise.all(answeredQuestionArray);
-    console.log(response);
+    await Promise.all(answeredQuestionArray);
     this.messageService.add({
       key: "tst",
       severity: "success",
@@ -205,5 +207,9 @@ export class ScreeningReportComponent implements OnInit {
 
     var blob = new Blob([csvArray], { type: "text/csv" });
     saveAs(blob, `report-${this.projectCode}.csv`);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((s) => s.unsubscribe());
   }
 }

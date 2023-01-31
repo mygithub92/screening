@@ -90,7 +90,6 @@ export class AppMainComponent implements OnInit, OnDestroy {
       if (e instanceof ActivationStart) this.outlet.deactivate();
     });
     this.authService.getCurrentAuthenticatedUser().subscribe(async (user) => {
-      console.log(user);
       let nav = [];
 
       const groups =
@@ -146,6 +145,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
         const crews = await this.api.ListCrews({
           userName: { eq: userName },
         });
+
         if (crews && crews.items.length) {
           this.menuModel.push(
             {
