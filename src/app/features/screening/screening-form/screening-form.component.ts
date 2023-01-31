@@ -75,8 +75,8 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
       const jobs = await this.api.ListJobs({
         location: { eq: projectCode.toUpperCase() },
       });
-      this.projectFetched = true;
       if (jobs && jobs.items.length > 0) {
+        this.projectFetched = true;
         this.foundJob = jobs.items[0];
         this.checkExpired();
         const currentFormId = this.foundJob.forms.items[0].formId;
