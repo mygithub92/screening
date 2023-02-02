@@ -25,6 +25,7 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
   projects;
   positiveNum = 0;
   negativeNum = 0;
+  notTestedNum = 0;
   projectCode;
   result = {
     value: "",
@@ -40,6 +41,17 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
   subCols = [
     { field: "answer", header: "Answer" },
     { field: "question", header: "Question" },
+  ];
+  methods = [
+    { label: "All", value: "All" },
+    { label: "PCR", value: "PCR" },
+    { label: "RAT", value: "RAT" },
+  ];
+  results = [
+    { label: "All", value: "All" },
+    { label: "Positive", value: "Positive" },
+    { label: "Negative", value: "Negative" },
+    { label: "Not Tested", value: "Not Tested" },
   ];
   constructor(
     private api: APIService,
@@ -93,6 +105,7 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
       this.initFilterForm();
       this.positiveNum = 0;
       this.negativeNum = 0;
+      this.notTestedNum = 0;
       this.loading = true;
       const {
         startDate,
@@ -123,6 +136,9 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
         if (i.result === "Negative") {
           this.negativeNum++;
         }
+        if (i.result === "Not Tested") {
+          this.notTestedNum++;
+        }
         return i;
       });
       this.filteredScreenings = [...this.screenings];
@@ -130,11 +146,12 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
     }
   }
 
-  public get report() {
-    if (this.screenings) {
-      const total = this.screenings.length;
-      return `Postive: ${this.positiveNum}/${total}; Negative: ${this.negativeNum}/${total}`;
-    }
+  public get hasRecord() {
+    return !!this.screenings;
+  }
+
+  public get total() {
+    return this.hasRecord ? this.screenings.length : 0;
   }
 
   public isProjectFormInvalid(controlName: string) {

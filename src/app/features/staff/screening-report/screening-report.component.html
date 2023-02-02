@@ -106,73 +106,21 @@
     <ng-container *ngIf="!loading">
       <div class="ui-g form-group" [formGroup]="filterForm">
         <div class="ui-g-4">
-          <div class="ui-g">
-            <div class="ui-g-3">
-              <strong>Method: </strong>
-            </div>
-            <div class="ui-g-3" style="white-space: nowrap;">
-              <p-radioButton
-                name="method"
-                value="All"
-                label="All"
-                formControlName="method"
-              ></p-radioButton>
-            </div>
-            <div class="ui-g-3" style="white-space: nowrap;">
-              <p-radioButton
-                name="method"
-                value="RAT"
-                label="RAT"
-                formControlName="method"
-              ></p-radioButton>
-            </div>
-            <div class="ui-g-3" style="white-space: nowrap;">
-              <p-radioButton
-                name="method"
-                value="PCR"
-                label="PCR"
-                formControlName="method"
-              ></p-radioButton>
-            </div>
+          <div class="ui-g-12 ui-md-12">
+            <strong>Method: </strong
+            ><p-selectButton
+              [options]="methods"
+              formControlName="method"
+            ></p-selectButton>
           </div>
         </div>
-        <div class="ui-g-8">
-          <div class="ui-g">
-            <div class="ui-g-3">
-              <strong>Result: </strong>
-            </div>
-            <div class="ui-g-2" style="white-space: nowrap;">
-              <p-radioButton
-                name="result"
-                value="All"
-                label="All"
-                formControlName="result"
-              ></p-radioButton>
-            </div>
-            <div class="ui-g-2" style="white-space: nowrap;">
-              <p-radioButton
-                name="result"
-                value="Positive"
-                label="Positive"
-                formControlName="result"
-              ></p-radioButton>
-            </div>
-            <div class="ui-g-2" style="white-space: nowrap;">
-              <p-radioButton
-                name="result"
-                value="Negative"
-                label="Negative"
-                formControlName="result"
-              ></p-radioButton>
-            </div>
-            <div class="ui-g-2" style="white-space: nowrap;">
-              <p-radioButton
-                name="result"
-                value="Not Tested"
-                label="Not Tested"
-                formControlName="result"
-              ></p-radioButton>
-            </div>
+        <div class="ui-g-6">
+          <div class="ui-g-12 ui-md-12">
+            <strong>Result: </strong
+            ><p-selectButton
+              [options]="results"
+              formControlName="result"
+            ></p-selectButton>
           </div>
         </div>
       </div>
@@ -184,8 +132,9 @@
         [autoLayout]="true"
         emptyMessage="No record found"
       >
-        <ng-template pTemplate="caption">
-          {{ report }}
+        <ng-template pTemplate="caption" *ngIf="hasRecord">
+          Total: {{ total }} &nbsp;Positive: {{ positiveNum }} &nbsp;Negative:
+          {{ negativeNum }}&nbsp;Not Tested: {{ notTestedNum }}
         </ng-template>
         <ng-template pTemplate="header" let-columns>
           <tr>
