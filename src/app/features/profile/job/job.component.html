@@ -2,14 +2,14 @@
 <p-blockUI [blocked]="loading" [target]="dt"
   ><p class="center-spinner">loading</p></p-blockUI
 >
-<p-panel header="Default Project" #dt>
+<p-panel header="Project Code" #dt>
   <ng-container *ngIf="!loading">
     <div [formGroup]="form">
       <div class="card card-w-title">
         <div class="ui-g">
           <div class="ui-g-12">
             <div class="ui-g">
-              <div class="ui-g-2">
+              <div class="ui-g-3">
                 <label>Current default project code: </label>
               </div>
               <div class="ui-g-6">
@@ -51,7 +51,6 @@
               pButton
               type="button"
               label="Save"
-              icon="fa fa-save"
               (click)="save()"
             ></button>
           </div>

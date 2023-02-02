@@ -3,7 +3,7 @@
 <p-blockUI [blocked]="loading" [target]="dt"
   ><p class="center-spinner"></p
 ></p-blockUI>
-<p-panel header="Profile" #dt class="screening-panel">
+<p-panel header="My Profile" #dt class="screening-panel">
   <ng-container *ngIf="!loading">
     <div [formGroup]="form">
       <div class="card card-w-title">
@@ -158,7 +158,6 @@
               pButton
               type="button"
               label="Save"
-              icon="fa fa-save"
               (click)="save()"
             ></button>
           </div>
