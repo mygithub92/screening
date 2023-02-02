@@ -100,22 +100,18 @@ export class AppMainComponent implements OnInit, OnDestroy {
           this.menuModel.push(
             {
               label: "Projects",
-              icon: "fa fa-fw fa-tasks",
               routerLink: "admin/jobs",
             },
             {
               label: "Forms",
-              icon: "fa fa-fw fa-newspaper-o",
               routerLink: "admin/forms",
             },
             {
               label: "Crew",
-              icon: "fa fa-fw fa-home",
               routerLink: "staff/crew",
             },
             {
               label: "Reports",
-              icon: "fa fa-fw fa-home",
               routerLink: "staff/report",
             }
           );
@@ -125,17 +121,14 @@ export class AppMainComponent implements OnInit, OnDestroy {
           this.menuModel.push(
             {
               label: "Projects",
-              icon: "fa fa-fw fa-home",
               routerLink: "staff",
             },
             {
               label: "Reports",
-              icon: "fa fa-fw fa-home",
               routerLink: "staff/report",
             },
             {
               label: "Crew",
-              icon: "fa fa-fw fa-home",
               routerLink: "staff/crew",
             }
           );
@@ -150,17 +143,14 @@ export class AppMainComponent implements OnInit, OnDestroy {
           this.menuModel.push(
             {
               label: "My Projects",
-              icon: "fa fa-fw fa-tasks",
               routerLink: "screening",
             },
             {
               label: "Project Code",
-              icon: "fa fa-fw fa-tasks",
               routerLink: "profile",
             },
             {
               label: "My Profile",
-              icon: "fa fa-fw fa-newspaper-o",
               routerLink: "profile/profile",
             }
           );

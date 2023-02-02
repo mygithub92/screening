@@ -1,11 +1,10 @@
 <p-blockUI [blocked]="loading" [target]="dt"
   ><p class="center-spinner"></p
 ></p-blockUI>
-<p-panel header="Screening" #dt class="screening-panel">
-  <div class="card card-w-title">
-    <h4>Search by submission date</h4>
+<p-panel header="Search by submission date" #dt class="screening-panel">
+  <div class="card no-margin">
     <div class="ui-g ui-fluid" [formGroup]="form">
-      <div class="ui-g-12 ui-lg-2">
+      <div class="ui-g-12 ui-lg-3">
         <div class="ui-g form-group">
           <label class="ui-g-12" for="startDate" style="white-space: nowrap;"
             >Start Date (MM/DD/YYYY)<span style="color: red;"
@@ -28,7 +27,7 @@
           </div>
         </div>
       </div>
-      <div class="ui-g-12 ui-lg-2">
+      <div class="ui-g-12 ui-lg-3">
         <div class="ui-g form-group">
           <label class="ui-g-12" for="endDate" style="white-space: nowrap;"
             >End Date (MM/DD/YYYY)<span style="color: red;"
@@ -95,7 +94,6 @@
               pButton
               type="button"
               label="Fetch"
-              icon="fa fa-save"
               (click)="fetch()"
             ></button>
           </div>
@@ -203,7 +201,6 @@
                 pButton
                 type="button"
                 label="Remind"
-                icon="fa fa-save"
                 (click)="remind(rowData)"
               ></button>
             </td>
@@ -244,7 +241,6 @@
           pButton
           type="button"
           label="Submit"
-          icon="fa fa-save"
           (click)="submit()"
         ></button>
       </div>

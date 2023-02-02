@@ -1,7 +1,7 @@
 <p-blockUI [blocked]="loading" [target]="dt"
   ><p class="center-spinner"></p
 ></p-blockUI>
-<p-panel header="Screening" #dt class="screening-panel">
+<p-panel header="My projects" #dt class="screening-panel">
   <div class="card card-w-title">
     <div [formGroup]="projectForm">
       <div class="ui-g form-group ui-fluid">
@@ -34,7 +34,6 @@
             pButton
             type="button"
             label="Find"
-            icon="fa fa-save"
             (click)="findJob()"
           ></button>
         </div>
@@ -109,7 +108,6 @@
               pButton
               type="button"
               label="Submit"
-              icon="fa fa-save"
               (click)="submit()"
             ></button>
           </div>
