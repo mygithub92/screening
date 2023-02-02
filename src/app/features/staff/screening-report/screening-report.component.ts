@@ -59,13 +59,11 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private messageService: MessageService
   ) {
-    const tomorrow = new Date();
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 7);
-    tomorrow.setDate(tomorrow.getDate() + 1);
+    let lastWeek = moment().add(-7, "day").startOf("day");
+    const today = moment().endOf("day");
     this.form = this.fb.group({
-      startDate: [DateUtils.format(yesterday), Validators.required],
-      endDate: [DateUtils.format(tomorrow), Validators.required],
+      startDate: [DateUtils.format(lastWeek), Validators.required],
+      endDate: [DateUtils.format(today), Validators.required],
       crewName: [null],
 
       projectCode: [null, Validators.required],
