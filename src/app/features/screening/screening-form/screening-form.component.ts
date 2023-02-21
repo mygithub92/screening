@@ -29,6 +29,7 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
   crew;
   noProject;
   locations = [
+    { label: "Please select...", value: null },
     { label: "Set", value: "Set" },
     { label: "Basecamp", value: "Basecamp" },
     { label: "Location", value: "Location" },
@@ -46,7 +47,7 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
     });
 
     this.form = this.fb.group({
-      selectedLocation: [this.locations[0].value, Validators.required],
+      selectedLocation: [null, Validators.required],
       questionForm: this.fb.group({}),
     });
   }
@@ -225,7 +226,15 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  public isInvalid(index: number) {
+  public isInvalid(controlName: string) {
+    return (
+      this.form.controls[controlName].invalid &&
+      (this.form.controls[controlName].dirty ||
+        this.form.controls[controlName].touched)
+    );
+  }
+
+  public isQuestionInvalid(index: number) {
     const questionForm = this.questionForm.controls;
     const controlName = `question${index + 1}`;
     return (

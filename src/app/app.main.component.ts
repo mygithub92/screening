@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/cor
 import { ActivatedRoute, ActivationStart, Router, RouterOutlet } from '@angular/router';
 import { User } from 'app/@shared/api-interfaces';
 import { Subscription } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
 
 import { AuthService } from './@core/services/auth.service';
 import { APIService } from './API.service';
@@ -156,6 +157,27 @@ export class AppMainComponent implements OnInit, OnDestroy {
           );
           nav = ["/main/screening"];
         } else {
+          this.menuService.menuSource$
+            .pipe(
+              filter((key) => !!key),
+              take(1)
+            )
+            .subscribe(() =>
+              this.menuModel.push(
+                {
+                  label: "My Projects",
+                  routerLink: "screening",
+                },
+                {
+                  label: "Project Code",
+                  routerLink: "profile",
+                },
+                {
+                  label: "My Profile",
+                  routerLink: "profile/profile",
+                }
+              )
+            );
           nav = ["/main/profile/profile", { firstTime: true }];
         }
       }

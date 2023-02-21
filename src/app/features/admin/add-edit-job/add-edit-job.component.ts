@@ -28,6 +28,7 @@ export class AddEditJobComponent implements OnInit {
     { field: "address", header: "Address" },
     { field: "companyName", header: "Company name" },
   ];
+  projectCodes = [];
 
   constructor(
     private router: Router,
@@ -72,7 +73,11 @@ export class AddEditJobComponent implements OnInit {
     this.formId = null;
   }
 
-  async ngOnInit() {}
+  async ngOnInit() {
+    const jobsObj = await this.api.ListJobs();
+    const jobs = jobsObj.items;
+    this.projectCodes = jobs.map((job) => job.location);
+  }
 
   public get isAddition() {
     return this.jobId === "-1";
@@ -92,6 +97,12 @@ export class AddEditJobComponent implements OnInit {
     this.form.patchValue(formValues);
     this.loading = false;
   }
+
+  public isDuplicated() {
+    const projectCode = this.form.controls["code"].value;
+    return this.projectCodes.includes(projectCode);
+  }
+
   public isInvalid(controlName: string) {
     return (
       this.form.controls[controlName].invalid &&
@@ -130,6 +141,10 @@ export class AddEditJobComponent implements OnInit {
         jobId: job.id,
       });
     }
+    this.router.navigate(["../../jobs"], { relativeTo: this.route });
+  }
+
+  public cancel() {
     this.router.navigate(["../../jobs"], { relativeTo: this.route });
   }
 

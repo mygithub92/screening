@@ -42,7 +42,7 @@ export class DateUtils {
     return moment(date).format("MM/DD/YYYY HH:mm:ss");
   }
 
-  static generateProjectCode(length = 6) {
+  static generateProjectCode(length = 4) {
     var result = "";
     var characters = `${new Date().getTime()}ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`;
     var charactersLength = characters.length;

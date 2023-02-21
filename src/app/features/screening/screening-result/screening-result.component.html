@@ -4,6 +4,18 @@
     style="min-height: 400px; text-align: center;"
     [ngClass]="className"
   >
-    <h1 style="font-size: 36px;">{{ message }}</h1>
+    <h1 style="font-size: 36px;" [ngSwitch]="className">
+      <div *ngSwitchCase="'healthy'">
+        Proceed to Testing or Directly to Work if testing is not required.
+      </div>
+      <div *ngSwitchCase="'unhealthy'">
+        Isolate immediately. <br />Do not proceed to work. <br />Contact your
+        Health & Safety Coordinator first, then HOD/Production manager.
+      </div>
+      <div *ngSwitchCase="'caution'">
+        Please contact your Health & Safety Coordinator or Production Manager.
+        <br />Do not proceed to work until speaking with them.
+      </div>
+    </h1>
   </div>
 </p-panel>
