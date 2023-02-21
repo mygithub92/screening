@@ -71,6 +71,11 @@
                   [options]="locations"
                   formControlName="selectedLocation"
                 ></p-dropdown>
+                <p-message
+                  severity="error"
+                  text="Field is required"
+                  *ngIf="isInvalid('selectedLocation')"
+                ></p-message>
               </div>
             </div>
           </div>
@@ -97,7 +102,7 @@
                   <p-message
                     severity="error"
                     text="Field is required"
-                    *ngIf="isInvalid(i)"
+                    *ngIf="isQuestionInvalid(i)"
                   ></p-message>
                 </div>
               </div>

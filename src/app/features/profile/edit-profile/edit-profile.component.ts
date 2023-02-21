@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'app/@core/services/auth.service';
 import { DateUtils } from 'app/@shared/utils/date-utils';
 import { APIService } from 'app/API.service';
+import { MenuService } from 'app/app.menu.service';
 import * as moment from 'moment';
 import { MessageService } from 'primeng/api';
 
@@ -20,6 +21,7 @@ export class EditProfileComponent implements OnInit {
   loading = true;
   firstTime = false;
   statuses = [
+    { label: "Please select...", value: null },
     { label: "Yes", value: "Yes" },
     { label: "No", value: "No" },
     { label: "Decline", value: "Decline" },
@@ -29,6 +31,7 @@ export class EditProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private api: APIService,
     private fb: FormBuilder,
+    private menuService: MenuService,
 
     private authService: AuthService,
     private messageService: MessageService
@@ -38,7 +41,7 @@ export class EditProfileComponent implements OnInit {
       email: [null, Validators.required],
       phonenumber: [null, Validators.required],
       DOB: [null, Validators.required],
-      healthCardNumber: [null, Validators.required],
+      healthCardNumber: null,
       vaxxStatus: [null, Validators.required],
     });
   }
@@ -57,11 +60,16 @@ export class EditProfileComponent implements OnInit {
       .getCurrentAuthenticatedUser()
       .subscribe(async (user: any) => {
         this.user = user;
+        console.log(this.user);
         const crew = await this.api.ListCrews({
           userName: { eq: this.user.username },
         });
         const name = user.attributes.name;
         const email = user.attributes.email;
+        this.form.patchValue({
+          name,
+          email,
+        });
         if (crew && crew.items.length) {
           const {
             phonenumber,
@@ -128,6 +136,7 @@ export class EditProfileComponent implements OnInit {
         crew["email"] = this.user.attributes["email"];
         crew["userName"] = userName;
         await this.api.CreateCrew(crew);
+        this.menuService.onMenuStateChange("complete");
       }
       this.messageService.add({
         key: "tst",

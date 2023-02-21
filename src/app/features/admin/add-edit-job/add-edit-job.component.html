@@ -70,13 +70,7 @@
                 >
               </div>
               <div class="ui-g-12">
-                <input
-                  type="text"
-                  pInputText
-                  formControlName="startDate"
-                  id="startDate"
-                  placeholder="Start Date"
-                />
+                <p-calendar formControlName="startDate"></p-calendar>
                 <p-message
                   severity="error"
                   text="Field is required"
@@ -91,13 +85,7 @@
                 >
               </div>
               <div class="ui-g-12">
-                <input
-                  type="text"
-                  pInputText
-                  formControlName="endDate"
-                  id="endDate"
-                  placeholder="End Date"
-                />
+                <p-calendar formControlName="endDate"></p-calendar>
                 <p-message
                   severity="error"
                   text="Field is required"
@@ -112,7 +100,19 @@
       </div>
       <div class="ui-g form-group">
         <div class="ui-g-12">
-          <button pButton type="button" label="Save" (click)="save()"></button>
+          <button
+            pButton
+            type="button"
+            label="Save"
+            (click)="save()"
+            style="margin-right: 5px;"
+          ></button>
+          <button
+            pButton
+            type="button"
+            label="Cancel"
+            (click)="cancel()"
+          ></button>
         </div>
       </div>
     </div>
