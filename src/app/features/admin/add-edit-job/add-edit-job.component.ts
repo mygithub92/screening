@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DateUtils } from 'app/@shared/utils/date-utils';
@@ -12,14 +12,14 @@ import { take } from 'rxjs/operators';
   templateUrl: "./add-edit-job.component.html",
   styleUrls: ["./add-edit-job.component.scss"],
 })
-export class AddEditJobComponent implements OnInit {
-  actionsSubscription: Subscription;
+export class AddEditJobComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
   form: FormGroup;
   questionForms = [];
+  jobCodeDuplicated = false;
   loading = true;
   jobId;
   header = "Edit Project";
-  jobCode;
   formId;
   cols = [
     { field: "name", header: "Name" },
@@ -28,7 +28,6 @@ export class AddEditJobComponent implements OnInit {
     { field: "address", header: "Address" },
     { field: "companyName", header: "Company name" },
   ];
-  projectCodes = [];
 
   constructor(
     private router: Router,
@@ -37,16 +36,19 @@ export class AddEditJobComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.form = this.fb.group({
-      location: [null, Validators.required],
-      code: [null, Validators.required],
+      location: [null, Validators.required], //location is project code
+      code: [null, Validators.required], //code is project name
       questionForm: [null, Validators.required],
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
     });
-
-    this.actionsSubscription = route.params
-      .pipe(take(1))
-      .subscribe(async (params) => {
+    this.subscriptions.push(
+      this.form.controls["location"].valueChanges.subscribe(
+        () => (this.jobCodeDuplicated = false)
+      )
+    );
+    this.subscriptions.push(
+      route.params.pipe(take(1)).subscribe(async (params) => {
         this.reset();
         this.jobId = params.id;
         const forms = await this.api.ListForms();
@@ -55,8 +57,6 @@ export class AddEditJobComponent implements OnInit {
         );
         if (params.id === "-1") {
           this.header = "Add Project";
-          this.jobCode = params.projectCode;
-          this.form.controls["location"].setValue(this.jobCode);
           this.loading = false;
           this.form.controls["questionForm"].setValue(
             this.questionForms[0].value
@@ -64,7 +64,11 @@ export class AddEditJobComponent implements OnInit {
         } else {
           this.getJob(params.id);
         }
-      });
+      })
+    );
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   private reset() {
@@ -73,11 +77,7 @@ export class AddEditJobComponent implements OnInit {
     this.formId = null;
   }
 
-  async ngOnInit() {
-    const jobsObj = await this.api.ListJobs();
-    const jobs = jobsObj.items;
-    this.projectCodes = jobs.map((job) => job.location);
-  }
+  async ngOnInit() {}
 
   public get isAddition() {
     return this.jobId === "-1";
@@ -98,50 +98,77 @@ export class AddEditJobComponent implements OnInit {
     this.loading = false;
   }
 
-  public isDuplicated() {
-    const projectCode = this.form.controls["code"].value;
-    return this.projectCodes.includes(projectCode);
-  }
-
   public isInvalid(controlName: string) {
     return (
       this.form.controls[controlName].invalid &&
+      this.form.controls[controlName].errors?.["required"] &&
       (this.form.controls[controlName].dirty ||
         this.form.controls[controlName].touched)
     );
   }
 
-  async save() {
-    this.loading = true;
-    const values = this.form.getRawValue();
-    if (this.isAddition) {
-      const job = await this.api.CreateJob({
-        code: values.code,
-        location: values.location,
-        startDate: this.getDateString(values.startDate),
-        endDate: this.getDateString(values.endDate),
-      });
-      const jobForm = await this.api.CreateFormJob({
-        formId: values.questionForm,
-        jobId: job.id,
-      });
-    } else {
-      const formJob = await this.api.ListFormJobs({
-        and: [{ jobId: { eq: this.jobId } }, { formId: { eq: this.formId } }],
-      });
-      const job = await this.api.UpdateJob({
-        id: this.jobId,
-        code: values.code,
-        startDate: this.getDateString(values.startDate),
-        endDate: this.getDateString(values.endDate),
-      });
-      const jobForm = await this.api.UpdateFormJob({
-        id: formJob.items[0].id,
-        formId: values.questionForm,
-        jobId: job.id,
-      });
+  public get not4() {
+    if (!this.isAddition) {
+      return false;
     }
-    this.router.navigate(["../../jobs"], { relativeTo: this.route });
+    const projectCodeFormControl = this.form.controls["location"];
+    return (
+      projectCodeFormControl.invalid &&
+      (projectCodeFormControl.errors?.["minlength"] ||
+        projectCodeFormControl.errors?.["maxlength"]) &&
+      (projectCodeFormControl.dirty || projectCodeFormControl.touched)
+    );
+  }
+
+  private async checkDuplicate(jobCode: string) {
+    const jobsObj = await this.api.ListJobs();
+    const projectCodes = jobsObj.items.map((job) => job.location);
+    this.jobCodeDuplicated = projectCodes.includes(jobCode);
+  }
+
+  async save() {
+    this.form.markAllAsTouched();
+    if (this.form.valid) {
+      const values = this.form.getRawValue();
+
+      this.loading = true;
+      if (this.isAddition) {
+        await this.checkDuplicate(values.location);
+        if (!this.jobCodeDuplicated) {
+          const job = await this.api.CreateJob({
+            code: values.code,
+            location: values.location.toUpperCase(),
+            startDate: this.getDateString(values.startDate),
+            endDate: this.getDateString(values.endDate),
+          });
+          await this.api.CreateFormJob({
+            formId: values.questionForm,
+            jobId: job.id,
+          });
+          this.router.navigate(["../../jobs"], {
+            relativeTo: this.route,
+          });
+        }
+      } else {
+        const formJob = await this.api.ListFormJobs({
+          and: [{ jobId: { eq: this.jobId } }, { formId: { eq: this.formId } }],
+        });
+        const job = await this.api.UpdateJob({
+          id: this.jobId,
+          code: values.code,
+          startDate: this.getDateString(values.startDate),
+          endDate: this.getDateString(values.endDate),
+        });
+        await this.api.UpdateFormJob({
+          id: formJob.items[0].id,
+          formId: values.questionForm,
+          jobId: job.id,
+        });
+        this.router.navigate(["../../jobs"], {
+          relativeTo: this.route,
+        });
+      }
+    }
   }
 
   public cancel() {

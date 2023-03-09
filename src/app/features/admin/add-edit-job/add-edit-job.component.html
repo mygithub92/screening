@@ -11,17 +11,38 @@
             <div class="ui-g">
               <div class="ui-g-12">
                 <label for="job-code" class="account-label"
-                  >Project Code (Readonly)</label
+                  >Project Code<span *ngIf="!isAddition"> (Readonly)</span
+                  ><span *ngIf="isAddition" style="color: red;"
+                    >&nbsp;*</span
+                  ></label
                 >
               </div>
               <div class="ui-g-12">
                 <input
                   type="text"
                   pInputText
-                  readonly
+                  [readonly]="!isAddition"
                   formControlName="location"
+                  class="input-upper"
+                  maxlength="4"
+                  minlength="4"
                   id="job-code"
                 />
+                <p-message
+                  severity="error"
+                  text="Field is required"
+                  *ngIf="isInvalid('location')"
+                ></p-message>
+                <p-message
+                  severity="error"
+                  text="The code alreay existed"
+                  *ngIf="jobCodeDuplicated"
+                ></p-message>
+                <p-message
+                  severity="error"
+                  text="The code must 4 characters"
+                  *ngIf="not4"
+                ></p-message>
               </div>
               <div class="ui-g-12">
                 <label for="job-name" class="account-label"

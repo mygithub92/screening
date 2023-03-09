@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DateUtils } from 'app/@shared/utils/date-utils';
 import { APIService } from 'app/API.service';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -36,16 +35,9 @@ export class JobComponent implements OnInit {
     this.loading = false;
   }
 
-  public addEdit(form: any) {
-    const id = form ? form.id : -1;
-    let projectCode;
-    if (id === -1) {
-      projectCode = DateUtils.generateProjectCode();
-      while (this.projectCodes.includes(projectCode)) {
-        projectCode = DateUtils.generateProjectCode();
-      }
-    }
-    this.router.navigate(["../add-edit-job", id, { projectCode }], {
+  public addEdit(selectedJob: any) {
+    const id = selectedJob ? selectedJob.id : -1;
+    this.router.navigate(["../add-edit-job", id], {
       relativeTo: this.route,
     });
   }

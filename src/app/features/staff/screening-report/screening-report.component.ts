@@ -112,8 +112,8 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
         crewName,
       } = this.form.getRawValue();
       this.projectCode = projectCode;
-      const startDateObj = this.getDateString(startDate);
-      const endDateObj = this.getDateString(endDate);
+      const startDateObj = this.getDateMoment(startDate).startOf("day");
+      const endDateObj = this.getDateMoment(endDate).endOf("day").add(6, "h");
       const search = {
         processedAt: { between: [startDateObj, endDateObj] },
         processed: { eq: true },
@@ -174,10 +174,10 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getDateString(dateStr) {
+  private getDateMoment(dateStr) {
     const date = new Date(dateStr);
     const moment1 = moment(date);
-    return moment1.toISOString();
+    return moment1;
   }
 
   public async duplicate(rowData) {
