@@ -81,7 +81,7 @@ export class SubmittedScreeningComponent implements OnInit {
         crewName,
       } = this.form.getRawValue();
       const startDateObj = this.getDateMoment(startDate).startOf("day");
-      const endDateObj = this.getDateMoment(endDate).endOf("day");
+      const endDateObj = this.getDateMoment(endDate).endOf("day").add(6, "h");
       const search = {
         submittedAt: {
           between: [startDateObj, endDateObj],

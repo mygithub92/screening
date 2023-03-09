@@ -143,7 +143,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
         if (crews && crews.items.length) {
           this.menuModel.push(
             {
-              label: "My Projects",
+              label: "Project Screeners",
               routerLink: "screening",
             },
             {
@@ -165,7 +165,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
             .subscribe(() =>
               this.menuModel.push(
                 {
-                  label: "My Projects",
+                  label: "Project Screeners",
                   routerLink: "screening",
                 },
                 {
