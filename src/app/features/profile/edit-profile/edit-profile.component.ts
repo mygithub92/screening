@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'app/@core/services/auth.service';
-import { DateUtils } from 'app/@shared/utils/date-utils';
-import { APIService } from 'app/API.service';
-import { MenuService } from 'app/app.menu.service';
-import * as moment from 'moment';
-import { MessageService } from 'primeng/api';
+import { Component, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from "app/@core/services/auth.service";
+import { DateUtils } from "app/@shared/utils/date-utils";
+import { APIService } from "app/API.service";
+import { MenuService } from "app/app.menu.service";
+import * as moment from "moment";
+import { MessageService } from "primeng/api";
 
 @Component({
   selector: "app-edit-profile",
