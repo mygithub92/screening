@@ -14,7 +14,7 @@ export class JobComponent implements OnInit {
   form: FormGroup;
   crewId;
   jobCode;
-
+  crew;
   filteredJobs = [];
   loading = true;
 
@@ -34,9 +34,9 @@ export class JobComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getCurrentAuthenticatedUser().subscribe(async (user) => {
       const userName = user.signInUserSession.accessToken.payload["username"];
-      const crew = await this.api.ListCrews({ userName: { eq: userName } });
-      this.crewId = crew.items[0].id;
-      this.jobCode = crew.items[0].defaultJobId;
+      this.crew = await this.api.ListCrews({ userName: { eq: userName } });
+      this.crewId = this.crew.items[0].id;
+      this.jobCode = this.crew.items[0].defaultJobId;
       this.loading = false;
     });
   }
@@ -55,6 +55,7 @@ export class JobComponent implements OnInit {
       const values = this.form.getRawValue();
       const result = await this.api.UpdateCrew({
         id: this.crewId,
+        _version: this.crew._version,
         defaultJobId: values.jobCode,
       });
       this.jobCode = values.jobCode;

@@ -46,7 +46,7 @@ type Question @model @auth(rules: [{ allow: public }]) {
   title: String
   options: [Option] @manyToMany(relationName: "QuestionOption")
   form: Form @belongsTo
-  order: Int @index
+  order: Int
   optionOrderDesc: Boolean
 }
 
@@ -55,7 +55,7 @@ type Option @model @auth(rules: [{ allow: public }]) {
   label: String
   value: String
   questions: [Question] @manyToMany(relationName: "QuestionOption")
-  order: Int @index
+  order: Int
 }
 
 type Crew @model @auth(rules: [{ allow: public }]) {

@@ -76,12 +76,16 @@ export class AddEditFormComponent implements OnInit, OnDestroy {
     this.questionForm = await this.api.GetForm(id);
     this.loading = false;
     this.form.patchValue({ name: this.questionForm.name });
+    const undeletedQuestions = this.questionForm.questions.items.filter(
+      (question) => !question._deleted
+    );
     this.form.setControl(
       "questions",
       this.fb.array(
-        this.questionForm.questions.items.map((q) =>
+        undeletedQuestions.map((q) =>
           this.fb.group({
             id: [q.id],
+            _version: q._version,
             title: [q.title, Validators.required],
           })
         )
@@ -105,6 +109,7 @@ export class AddEditFormComponent implements OnInit, OnDestroy {
     this.loading = true;
     let formId = this.formId;
     const request = [];
+    const deleteRequests = [];
     const remainQuestionIds = [];
     if (this.isAddition) {
       const form = await this.api.CreateForm({
@@ -114,6 +119,7 @@ export class AddEditFormComponent implements OnInit, OnDestroy {
     } else {
       await this.api.UpdateForm({
         id: this.formId,
+        _version: this.questionForm._version,
         name: this.form.getRawValue().name,
       });
     }
@@ -124,6 +130,7 @@ export class AddEditFormComponent implements OnInit, OnDestroy {
         request.push(
           this.api.UpdateQuestion({
             id: rawValue.id,
+            _version: rawValue._version,
             title: rawValue.title,
             order: i + 1,
             formQuestionsId: formId,
@@ -142,12 +149,15 @@ export class AddEditFormComponent implements OnInit, OnDestroy {
     if (!this.isAddition) {
       this.questionForm.questions.items.forEach((x) => {
         if (!remainQuestionIds.includes(x.id)) {
-          request.push(this.api.DeleteQuestion({ id: x.id }));
+          deleteRequests.push(
+            this.api.DeleteQuestion({ id: x.id, _version: x._version })
+          );
         }
       });
     }
 
-    const question = await Promise.all([...request]);
+    await Promise.all(request);
+    await Promise.all(deleteRequests);
     this.router.navigate(["../../forms"], { relativeTo: this.route });
   }
 

@@ -4,21 +4,17 @@ import { schema } from './schema';
 
 
 
-const { Sceening, Job, Form, Question, Option, Crew, SceeningJob, SceeningCrew, SceeningQuestion, SceeningOption, FormJob, CrewJob, FormQuestion, QuestionOption } = initSchema(schema);
+const { Sceening, AnsweredQuestion, Form, Question, Option, Job, Crew, FormJob, QuestionOption, CrewJob } = initSchema(schema);
 
 export {
   Sceening,
-  Job,
+  AnsweredQuestion,
   Form,
   Question,
   Option,
+  Job,
   Crew,
-  SceeningJob,
-  SceeningCrew,
-  SceeningQuestion,
-  SceeningOption,
   FormJob,
-  CrewJob,
-  FormQuestion,
-  QuestionOption
+  QuestionOption,
+  CrewJob
 };

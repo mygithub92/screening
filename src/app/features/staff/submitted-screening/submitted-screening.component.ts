@@ -180,6 +180,7 @@ export class SubmittedScreeningComponent implements OnInit {
         updateSceenings.push(
           this.api.UpdateSceening({
             id: screening.id,
+            _version: screening._version,
             result,
             method,
             processed: true,

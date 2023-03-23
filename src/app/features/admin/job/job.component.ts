@@ -16,6 +16,7 @@ export class JobComponent implements OnInit {
   public cols = [
     { field: "location", header: "Code" },
     { field: "code", header: "Name" },
+    { field: "formName", header: "Form Name" },
     { field: "startDate", header: "Start Date" },
     { field: "endDate", header: "End Date" },
     { field: "createdAt", header: "Date Created" },
@@ -30,7 +31,9 @@ export class JobComponent implements OnInit {
 
   async ngOnInit() {
     const jobsObj = await this.api.ListJobs();
-    this.jobs = jobsObj.items;
+    this.jobs = jobsObj.items.map((job) => {
+      return { ...job, formName: job.forms.items[0].form.name };
+    });
     this.projectCodes = this.jobs.map((job) => job.location);
     this.loading = false;
   }

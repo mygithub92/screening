@@ -130,6 +130,7 @@ export class EditProfileComponent implements OnInit {
       } as any;
       if (crews && crews.items.length) {
         crew.id = crews.items[0].id;
+        crew._version = crews.items[0]._version;
         await this.api.UpdateCrew(crew);
       } else {
         crew["name"] = this.user.attributes["name"];

@@ -57,6 +57,7 @@ export type CreateSceeningInput = {
   location?: string | null;
   processedAt?: string | null;
   submittedAt?: string | null;
+  _version?: number | null;
 };
 
 export type ModelSceeningConditionInput = {
@@ -143,12 +144,16 @@ export type Sceening = {
   answeredQuestions?: ModelAnsweredQuestionConnection | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type ModelAnsweredQuestionConnection = {
   __typename: "ModelAnsweredQuestionConnection";
   items: Array<AnsweredQuestion | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type AnsweredQuestion = {
@@ -160,6 +165,9 @@ export type AnsweredQuestion = {
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   sceeningAnsweredQuestionsId?: string | null;
 };
 
@@ -178,10 +186,12 @@ export type UpdateSceeningInput = {
   location?: string | null;
   processedAt?: string | null;
   submittedAt?: string | null;
+  _version?: number | null;
 };
 
 export type DeleteSceeningInput = {
   id: string;
+  _version?: number | null;
 };
 
 export type CreateAnsweredQuestionInput = {
@@ -189,6 +199,7 @@ export type CreateAnsweredQuestionInput = {
   question?: string | null;
   answer?: string | null;
   order?: number | null;
+  _version?: number | null;
   sceeningAnsweredQuestionsId?: string | null;
 };
 
@@ -235,16 +246,19 @@ export type UpdateAnsweredQuestionInput = {
   question?: string | null;
   answer?: string | null;
   order?: number | null;
+  _version?: number | null;
   sceeningAnsweredQuestionsId?: string | null;
 };
 
 export type DeleteAnsweredQuestionInput = {
   id: string;
+  _version?: number | null;
 };
 
 export type CreateFormInput = {
   id?: string | null;
   name?: string | null;
+  _version?: number | null;
 };
 
 export type ModelFormConditionInput = {
@@ -262,12 +276,16 @@ export type Form = {
   jobs?: ModelFormJobConnection | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type ModelQuestionConnection = {
   __typename: "ModelQuestionConnection";
   items: Array<Question | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type Question = {
@@ -280,6 +298,9 @@ export type Question = {
   optionOrderDesc?: boolean | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   formQuestionsId?: string | null;
 };
 
@@ -287,6 +308,7 @@ export type ModelQuestionOptionConnection = {
   __typename: "ModelQuestionOptionConnection";
   items: Array<QuestionOption | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type QuestionOption = {
@@ -298,6 +320,9 @@ export type QuestionOption = {
   option: Option;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type Option = {
@@ -309,12 +334,16 @@ export type Option = {
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type ModelFormJobConnection = {
   __typename: "ModelFormJobConnection";
   items: Array<FormJob | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type FormJob = {
@@ -326,6 +355,9 @@ export type FormJob = {
   job: Job;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type Job = {
@@ -339,12 +371,16 @@ export type Job = {
   crews?: ModelCrewJobConnection | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type ModelCrewJobConnection = {
   __typename: "ModelCrewJobConnection";
   items: Array<CrewJob | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type CrewJob = {
@@ -356,6 +392,9 @@ export type CrewJob = {
   crew: Crew;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type Crew = {
@@ -376,15 +415,20 @@ export type Crew = {
   jobs?: ModelCrewJobConnection | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type UpdateFormInput = {
   id: string;
   name?: string | null;
+  _version?: number | null;
 };
 
 export type DeleteFormInput = {
   id: string;
+  _version?: number | null;
 };
 
 export type CreateJobInput = {
@@ -393,6 +437,7 @@ export type CreateJobInput = {
   location?: string | null;
   startDate?: string | null;
   endDate?: string | null;
+  _version?: number | null;
 };
 
 export type ModelJobConditionInput = {
@@ -411,10 +456,12 @@ export type UpdateJobInput = {
   location?: string | null;
   startDate?: string | null;
   endDate?: string | null;
+  _version?: number | null;
 };
 
 export type DeleteJobInput = {
   id: string;
+  _version?: number | null;
 };
 
 export type CreateQuestionInput = {
@@ -422,6 +469,7 @@ export type CreateQuestionInput = {
   title?: string | null;
   order?: number | null;
   optionOrderDesc?: boolean | null;
+  _version?: number | null;
   formQuestionsId?: string | null;
 };
 
@@ -440,11 +488,13 @@ export type UpdateQuestionInput = {
   title?: string | null;
   order?: number | null;
   optionOrderDesc?: boolean | null;
+  _version?: number | null;
   formQuestionsId?: string | null;
 };
 
 export type DeleteQuestionInput = {
   id: string;
+  _version?: number | null;
 };
 
 export type CreateOptionInput = {
@@ -452,6 +502,7 @@ export type CreateOptionInput = {
   label?: string | null;
   value?: string | null;
   order?: number | null;
+  _version?: number | null;
 };
 
 export type ModelOptionConditionInput = {
@@ -468,10 +519,12 @@ export type UpdateOptionInput = {
   label?: string | null;
   value?: string | null;
   order?: number | null;
+  _version?: number | null;
 };
 
 export type DeleteOptionInput = {
   id: string;
+  _version?: number | null;
 };
 
 export type CreateCrewInput = {
@@ -488,6 +541,7 @@ export type CreateCrewInput = {
   name?: string | null;
   email?: string | null;
   defaultJobId?: string | null;
+  _version?: number | null;
 };
 
 export type ModelCrewConditionInput = {
@@ -522,16 +576,19 @@ export type UpdateCrewInput = {
   name?: string | null;
   email?: string | null;
   defaultJobId?: string | null;
+  _version?: number | null;
 };
 
 export type DeleteCrewInput = {
   id: string;
+  _version?: number | null;
 };
 
 export type CreateFormJobInput = {
   id?: string | null;
   formId: string;
   jobId: string;
+  _version?: number | null;
 };
 
 export type ModelFormJobConditionInput = {
@@ -546,16 +603,19 @@ export type UpdateFormJobInput = {
   id: string;
   formId?: string | null;
   jobId?: string | null;
+  _version?: number | null;
 };
 
 export type DeleteFormJobInput = {
   id: string;
+  _version?: number | null;
 };
 
 export type CreateCrewJobInput = {
   id?: string | null;
   jobId: string;
   crewId: string;
+  _version?: number | null;
 };
 
 export type ModelCrewJobConditionInput = {
@@ -570,16 +630,19 @@ export type UpdateCrewJobInput = {
   id: string;
   jobId?: string | null;
   crewId?: string | null;
+  _version?: number | null;
 };
 
 export type DeleteCrewJobInput = {
   id: string;
+  _version?: number | null;
 };
 
 export type CreateQuestionOptionInput = {
   id?: string | null;
   questionId: string;
   optionId: string;
+  _version?: number | null;
 };
 
 export type ModelQuestionOptionConditionInput = {
@@ -594,10 +657,12 @@ export type UpdateQuestionOptionInput = {
   id: string;
   questionId?: string | null;
   optionId?: string | null;
+  _version?: number | null;
 };
 
 export type DeleteQuestionOptionInput = {
   id: string;
+  _version?: number | null;
 };
 
 export type ModelSceeningFilterInput = {
@@ -624,6 +689,7 @@ export type ModelSceeningConnection = {
   __typename: "ModelSceeningConnection";
   items: Array<Sceening | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type ModelAnsweredQuestionFilterInput = {
@@ -649,6 +715,7 @@ export type ModelFormConnection = {
   __typename: "ModelFormConnection";
   items: Array<Form | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type ModelJobFilterInput = {
@@ -666,6 +733,7 @@ export type ModelJobConnection = {
   __typename: "ModelJobConnection";
   items: Array<Job | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type ModelQuestionFilterInput = {
@@ -693,6 +761,7 @@ export type ModelOptionConnection = {
   __typename: "ModelOptionConnection";
   items: Array<Option | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type ModelCrewFilterInput = {
@@ -718,6 +787,7 @@ export type ModelCrewConnection = {
   __typename: "ModelCrewConnection";
   items: Array<Crew | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type ModelFormJobFilterInput = {
@@ -728,6 +798,11 @@ export type ModelFormJobFilterInput = {
   or?: Array<ModelFormJobFilterInput | null> | null;
   not?: ModelFormJobFilterInput | null;
 };
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
 
 export type ModelCrewJobFilterInput = {
   id?: ModelIDInput | null;
@@ -746,11 +821,6 @@ export type ModelQuestionOptionFilterInput = {
   or?: Array<ModelQuestionOptionFilterInput | null> | null;
   not?: ModelQuestionOptionFilterInput | null;
 };
-
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
 
 export type ModelSubscriptionSceeningFilterInput = {
   id?: ModelSubscriptionIDInput | null;
@@ -946,19 +1016,30 @@ export type CreateSceeningMutation = {
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type UpdateSceeningMutation = {
@@ -1003,19 +1084,30 @@ export type UpdateSceeningMutation = {
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type DeleteSceeningMutation = {
@@ -1060,19 +1152,30 @@ export type DeleteSceeningMutation = {
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type CreateAnsweredQuestionMutation = {
@@ -1121,20 +1224,33 @@ export type CreateAnsweredQuestionMutation = {
           submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         sceeningAnsweredQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   sceeningAnsweredQuestionsId?: string | null;
 };
 
@@ -1184,20 +1300,33 @@ export type UpdateAnsweredQuestionMutation = {
           submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         sceeningAnsweredQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   sceeningAnsweredQuestionsId?: string | null;
 };
 
@@ -1247,20 +1376,33 @@ export type DeleteAnsweredQuestionMutation = {
           submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         sceeningAnsweredQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   sceeningAnsweredQuestionsId?: string | null;
 };
 
@@ -1283,8 +1425,12 @@ export type CreateFormMutation = {
           optionId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       form?: {
         __typename: "Form";
@@ -1293,21 +1439,30 @@ export type CreateFormMutation = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       formQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   jobs?: {
     __typename: "ModelFormJobConnection";
@@ -1323,13 +1478,18 @@ export type CreateFormMutation = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -1341,21 +1501,33 @@ export type CreateFormMutation = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type UpdateFormMutation = {
@@ -1377,8 +1549,12 @@ export type UpdateFormMutation = {
           optionId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       form?: {
         __typename: "Form";
@@ -1387,21 +1563,30 @@ export type UpdateFormMutation = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       formQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   jobs?: {
     __typename: "ModelFormJobConnection";
@@ -1417,13 +1602,18 @@ export type UpdateFormMutation = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -1435,21 +1625,33 @@ export type UpdateFormMutation = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type DeleteFormMutation = {
@@ -1471,8 +1673,12 @@ export type DeleteFormMutation = {
           optionId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       form?: {
         __typename: "Form";
@@ -1481,21 +1687,30 @@ export type DeleteFormMutation = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       formQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   jobs?: {
     __typename: "ModelFormJobConnection";
@@ -1511,13 +1726,18 @@ export type DeleteFormMutation = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -1529,21 +1749,33 @@ export type DeleteFormMutation = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type CreateJobMutation = {
@@ -1567,13 +1799,18 @@ export type CreateJobMutation = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -1585,18 +1822,27 @@ export type CreateJobMutation = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   crews?: {
     __typename: "ModelCrewJobConnection";
@@ -1615,13 +1861,18 @@ export type CreateJobMutation = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -1641,17 +1892,28 @@ export type CreateJobMutation = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type UpdateJobMutation = {
@@ -1675,13 +1937,18 @@ export type UpdateJobMutation = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -1693,18 +1960,27 @@ export type UpdateJobMutation = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   crews?: {
     __typename: "ModelCrewJobConnection";
@@ -1723,13 +1999,18 @@ export type UpdateJobMutation = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -1749,17 +2030,28 @@ export type UpdateJobMutation = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type DeleteJobMutation = {
@@ -1783,13 +2075,18 @@ export type DeleteJobMutation = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -1801,18 +2098,27 @@ export type DeleteJobMutation = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   crews?: {
     __typename: "ModelCrewJobConnection";
@@ -1831,13 +2137,18 @@ export type DeleteJobMutation = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -1857,17 +2168,28 @@ export type DeleteJobMutation = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type CreateQuestionMutation = {
@@ -1888,6 +2210,7 @@ export type CreateQuestionMutation = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -1895,11 +2218,17 @@ export type CreateQuestionMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -1910,15 +2239,23 @@ export type CreateQuestionMutation = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   form?: {
     __typename: "Form";
@@ -1933,6 +2270,7 @@ export type CreateQuestionMutation = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -1940,14 +2278,21 @@ export type CreateQuestionMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -1962,6 +2307,9 @@ export type CreateQuestionMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -1972,19 +2320,32 @@ export type CreateQuestionMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   optionOrderDesc?: boolean | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   formQuestionsId?: string | null;
 };
 
@@ -2006,6 +2367,7 @@ export type UpdateQuestionMutation = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -2013,11 +2375,17 @@ export type UpdateQuestionMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -2028,15 +2396,23 @@ export type UpdateQuestionMutation = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   form?: {
     __typename: "Form";
@@ -2051,6 +2427,7 @@ export type UpdateQuestionMutation = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -2058,14 +2435,21 @@ export type UpdateQuestionMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -2080,6 +2464,9 @@ export type UpdateQuestionMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -2090,19 +2477,32 @@ export type UpdateQuestionMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   optionOrderDesc?: boolean | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   formQuestionsId?: string | null;
 };
 
@@ -2124,6 +2524,7 @@ export type DeleteQuestionMutation = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -2131,11 +2532,17 @@ export type DeleteQuestionMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -2146,15 +2553,23 @@ export type DeleteQuestionMutation = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   form?: {
     __typename: "Form";
@@ -2169,6 +2584,7 @@ export type DeleteQuestionMutation = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -2176,14 +2592,21 @@ export type DeleteQuestionMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -2198,6 +2621,9 @@ export type DeleteQuestionMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -2208,19 +2634,32 @@ export type DeleteQuestionMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   optionOrderDesc?: boolean | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   formQuestionsId?: string | null;
 };
 
@@ -2243,6 +2682,7 @@ export type CreateOptionMutation = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -2250,11 +2690,17 @@ export type CreateOptionMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -2265,19 +2711,30 @@ export type CreateOptionMutation = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type UpdateOptionMutation = {
@@ -2299,6 +2756,7 @@ export type UpdateOptionMutation = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -2306,11 +2764,17 @@ export type UpdateOptionMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -2321,19 +2785,30 @@ export type UpdateOptionMutation = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type DeleteOptionMutation = {
@@ -2355,6 +2830,7 @@ export type DeleteOptionMutation = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -2362,11 +2838,17 @@ export type DeleteOptionMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -2377,19 +2859,30 @@ export type DeleteOptionMutation = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type CreateCrewMutation = {
@@ -2424,13 +2917,18 @@ export type CreateCrewMutation = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -2450,17 +2948,28 @@ export type CreateCrewMutation = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type UpdateCrewMutation = {
@@ -2495,13 +3004,18 @@ export type UpdateCrewMutation = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -2521,17 +3035,28 @@ export type UpdateCrewMutation = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type DeleteCrewMutation = {
@@ -2566,13 +3091,18 @@ export type DeleteCrewMutation = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -2592,17 +3122,28 @@ export type DeleteCrewMutation = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type CreateFormJobMutation = {
@@ -2623,6 +3164,7 @@ export type CreateFormJobMutation = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -2630,14 +3172,21 @@ export type CreateFormJobMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -2652,6 +3201,9 @@ export type CreateFormJobMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -2662,14 +3214,24 @@ export type CreateFormJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   job: {
     __typename: "Job";
@@ -2691,6 +3253,9 @@ export type CreateFormJobMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -2701,11 +3266,18 @@ export type CreateFormJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -2723,6 +3295,9 @@ export type CreateFormJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -2741,17 +3316,30 @@ export type CreateFormJobMutation = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type UpdateFormJobMutation = {
@@ -2772,6 +3360,7 @@ export type UpdateFormJobMutation = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -2779,14 +3368,21 @@ export type UpdateFormJobMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -2801,6 +3397,9 @@ export type UpdateFormJobMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -2811,14 +3410,24 @@ export type UpdateFormJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   job: {
     __typename: "Job";
@@ -2840,6 +3449,9 @@ export type UpdateFormJobMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -2850,11 +3462,18 @@ export type UpdateFormJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -2872,6 +3491,9 @@ export type UpdateFormJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -2890,17 +3512,30 @@ export type UpdateFormJobMutation = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type DeleteFormJobMutation = {
@@ -2921,6 +3556,7 @@ export type DeleteFormJobMutation = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -2928,14 +3564,21 @@ export type DeleteFormJobMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -2950,6 +3593,9 @@ export type DeleteFormJobMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -2960,14 +3606,24 @@ export type DeleteFormJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   job: {
     __typename: "Job";
@@ -2989,6 +3645,9 @@ export type DeleteFormJobMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -2999,11 +3658,18 @@ export type DeleteFormJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -3021,6 +3687,9 @@ export type DeleteFormJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -3039,17 +3708,30 @@ export type DeleteFormJobMutation = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type CreateCrewJobMutation = {
@@ -3077,6 +3759,9 @@ export type CreateCrewJobMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -3087,11 +3772,18 @@ export type CreateCrewJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -3109,6 +3801,9 @@ export type CreateCrewJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -3127,14 +3822,24 @@ export type CreateCrewJobMutation = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   crew: {
     __typename: "Crew";
@@ -3167,6 +3872,9 @@ export type CreateCrewJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -3185,17 +3893,30 @@ export type CreateCrewJobMutation = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type UpdateCrewJobMutation = {
@@ -3223,6 +3944,9 @@ export type UpdateCrewJobMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -3233,11 +3957,18 @@ export type UpdateCrewJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -3255,6 +3986,9 @@ export type UpdateCrewJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -3273,14 +4007,24 @@ export type UpdateCrewJobMutation = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   crew: {
     __typename: "Crew";
@@ -3313,6 +4057,9 @@ export type UpdateCrewJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -3331,17 +4078,30 @@ export type UpdateCrewJobMutation = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type DeleteCrewJobMutation = {
@@ -3369,6 +4129,9 @@ export type DeleteCrewJobMutation = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -3379,11 +4142,18 @@ export type DeleteCrewJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -3401,6 +4171,9 @@ export type DeleteCrewJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -3419,14 +4192,24 @@ export type DeleteCrewJobMutation = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   crew: {
     __typename: "Crew";
@@ -3459,6 +4242,9 @@ export type DeleteCrewJobMutation = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -3477,17 +4263,30 @@ export type DeleteCrewJobMutation = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type CreateQuestionOptionMutation = {
@@ -3514,6 +4313,9 @@ export type CreateQuestionOptionMutation = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -3524,11 +4326,18 @@ export type CreateQuestionOptionMutation = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     form?: {
       __typename: "Form";
@@ -3544,9 +4353,13 @@ export type CreateQuestionOptionMutation = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       jobs?: {
         __typename: "ModelFormJobConnection";
@@ -3557,16 +4370,26 @@ export type CreateQuestionOptionMutation = {
           jobId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null;
     order?: number | null;
     optionOrderDesc?: boolean | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
     formQuestionsId?: string | null;
   };
   option: {
@@ -3589,6 +4412,9 @@ export type CreateQuestionOptionMutation = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -3599,18 +4425,31 @@ export type CreateQuestionOptionMutation = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     order?: number | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type UpdateQuestionOptionMutation = {
@@ -3637,6 +4476,9 @@ export type UpdateQuestionOptionMutation = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -3647,11 +4489,18 @@ export type UpdateQuestionOptionMutation = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     form?: {
       __typename: "Form";
@@ -3667,9 +4516,13 @@ export type UpdateQuestionOptionMutation = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       jobs?: {
         __typename: "ModelFormJobConnection";
@@ -3680,16 +4533,26 @@ export type UpdateQuestionOptionMutation = {
           jobId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null;
     order?: number | null;
     optionOrderDesc?: boolean | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
     formQuestionsId?: string | null;
   };
   option: {
@@ -3712,6 +4575,9 @@ export type UpdateQuestionOptionMutation = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -3722,18 +4588,31 @@ export type UpdateQuestionOptionMutation = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     order?: number | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type DeleteQuestionOptionMutation = {
@@ -3760,6 +4639,9 @@ export type DeleteQuestionOptionMutation = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -3770,11 +4652,18 @@ export type DeleteQuestionOptionMutation = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     form?: {
       __typename: "Form";
@@ -3790,9 +4679,13 @@ export type DeleteQuestionOptionMutation = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       jobs?: {
         __typename: "ModelFormJobConnection";
@@ -3803,16 +4696,26 @@ export type DeleteQuestionOptionMutation = {
           jobId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null;
     order?: number | null;
     optionOrderDesc?: boolean | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
     formQuestionsId?: string | null;
   };
   option: {
@@ -3835,6 +4738,9 @@ export type DeleteQuestionOptionMutation = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -3845,18 +4751,31 @@ export type DeleteQuestionOptionMutation = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     order?: number | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type GetSceeningQuery = {
@@ -3901,19 +4820,30 @@ export type GetSceeningQuery = {
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type ListSceeningsQuery = {
@@ -3959,18 +4889,97 @@ export type ListSceeningsQuery = {
           submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         sceeningAnsweredQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type SyncSceeningsQuery = {
+  __typename: "ModelSceeningConnection";
+  items: Array<{
+    __typename: "Sceening";
+    id: string;
+    jobId?: string | null;
+    jobName?: string | null;
+    crewId?: string | null;
+    crewName?: string | null;
+    crewPhoneNumber?: string | null;
+    result?: string | null;
+    method?: string | null;
+    staffId?: string | null;
+    staffName?: string | null;
+    processed?: boolean | null;
+    location?: string | null;
+    processedAt?: string | null;
+    submittedAt?: string | null;
+    answeredQuestions?: {
+      __typename: "ModelAnsweredQuestionConnection";
+      items: Array<{
+        __typename: "AnsweredQuestion";
+        id: string;
+        question?: string | null;
+        answer?: string | null;
+        sceening?: {
+          __typename: "Sceening";
+          id: string;
+          jobId?: string | null;
+          jobName?: string | null;
+          crewId?: string | null;
+          crewName?: string | null;
+          crewPhoneNumber?: string | null;
+          result?: string | null;
+          method?: string | null;
+          staffId?: string | null;
+          staffName?: string | null;
+          processed?: boolean | null;
+          location?: string | null;
+          processedAt?: string | null;
+          submittedAt?: string | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null;
+        order?: number | null;
+        createdAt: string;
+        updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
+        sceeningAnsweredQuestionsId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+      startedAt?: number | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type GetAnsweredQuestionQuery = {
@@ -4019,20 +5028,33 @@ export type GetAnsweredQuestionQuery = {
           submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         sceeningAnsweredQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   sceeningAnsweredQuestionsId?: string | null;
 };
 
@@ -4069,19 +5091,89 @@ export type ListAnsweredQuestionsQuery = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           sceeningAnsweredQuestionsId?: string | null;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null;
     order?: number | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
     sceeningAnsweredQuestionsId?: string | null;
   } | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type SyncAnsweredQuestionsQuery = {
+  __typename: "ModelAnsweredQuestionConnection";
+  items: Array<{
+    __typename: "AnsweredQuestion";
+    id: string;
+    question?: string | null;
+    answer?: string | null;
+    sceening?: {
+      __typename: "Sceening";
+      id: string;
+      jobId?: string | null;
+      jobName?: string | null;
+      crewId?: string | null;
+      crewName?: string | null;
+      crewPhoneNumber?: string | null;
+      result?: string | null;
+      method?: string | null;
+      staffId?: string | null;
+      staffName?: string | null;
+      processed?: boolean | null;
+      location?: string | null;
+      processedAt?: string | null;
+      submittedAt?: string | null;
+      answeredQuestions?: {
+        __typename: "ModelAnsweredQuestionConnection";
+        items: Array<{
+          __typename: "AnsweredQuestion";
+          id: string;
+          question?: string | null;
+          answer?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+          sceeningAnsweredQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    } | null;
+    order?: number | null;
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+    sceeningAnsweredQuestionsId?: string | null;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type GetFormQuery = {
@@ -4103,8 +5195,12 @@ export type GetFormQuery = {
           optionId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       form?: {
         __typename: "Form";
@@ -4113,21 +5209,30 @@ export type GetFormQuery = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       formQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   jobs?: {
     __typename: "ModelFormJobConnection";
@@ -4143,13 +5248,18 @@ export type GetFormQuery = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -4161,21 +5271,33 @@ export type GetFormQuery = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type ListFormsQuery = {
@@ -4193,6 +5315,7 @@ export type ListFormsQuery = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -4200,14 +5323,21 @@ export type ListFormsQuery = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -4222,6 +5352,9 @@ export type ListFormsQuery = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -4232,16 +5365,115 @@ export type ListFormsQuery = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type SyncFormsQuery = {
+  __typename: "ModelFormConnection";
+  items: Array<{
+    __typename: "Form";
+    id: string;
+    name?: string | null;
+    questions?: {
+      __typename: "ModelQuestionConnection";
+      items: Array<{
+        __typename: "Question";
+        id: string;
+        title?: string | null;
+        options?: {
+          __typename: "ModelQuestionOptionConnection";
+          nextToken?: string | null;
+          startedAt?: number | null;
+        } | null;
+        form?: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null;
+        order?: number | null;
+        optionOrderDesc?: boolean | null;
+        createdAt: string;
+        updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
+        formQuestionsId?: string | null;
+      } | null>;
+      nextToken?: string | null;
+      startedAt?: number | null;
+    } | null;
+    jobs?: {
+      __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          location?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        };
+        createdAt: string;
+        updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
+      } | null>;
+      nextToken?: string | null;
+      startedAt?: number | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type GetJobQuery = {
@@ -4265,13 +5497,18 @@ export type GetJobQuery = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -4283,18 +5520,27 @@ export type GetJobQuery = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   crews?: {
     __typename: "ModelCrewJobConnection";
@@ -4313,13 +5559,18 @@ export type GetJobQuery = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -4339,17 +5590,28 @@ export type GetJobQuery = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type ListJobsQuery = {
@@ -4374,6 +5636,9 @@ export type ListJobsQuery = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -4384,11 +5649,18 @@ export type ListJobsQuery = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -4406,6 +5678,9 @@ export type ListJobsQuery = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -4424,16 +5699,135 @@ export type ListJobsQuery = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type SyncJobsQuery = {
+  __typename: "ModelJobConnection";
+  items: Array<{
+    __typename: "Job";
+    id: string;
+    code?: string | null;
+    location?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
+    forms?: {
+      __typename: "ModelFormJobConnection";
+      items: Array<{
+        __typename: "FormJob";
+        id: string;
+        formId: string;
+        jobId: string;
+        form: {
+          __typename: "Form";
+          id: string;
+          name?: string | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        };
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          location?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        };
+        createdAt: string;
+        updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
+      } | null>;
+      nextToken?: string | null;
+      startedAt?: number | null;
+    } | null;
+    crews?: {
+      __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          location?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        };
+        createdAt: string;
+        updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
+      } | null>;
+      nextToken?: string | null;
+      startedAt?: number | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type GetQuestionQuery = {
@@ -4454,6 +5848,7 @@ export type GetQuestionQuery = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -4461,11 +5856,17 @@ export type GetQuestionQuery = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -4476,15 +5877,23 @@ export type GetQuestionQuery = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   form?: {
     __typename: "Form";
@@ -4499,6 +5908,7 @@ export type GetQuestionQuery = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -4506,14 +5916,21 @@ export type GetQuestionQuery = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -4528,6 +5945,9 @@ export type GetQuestionQuery = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -4538,19 +5958,32 @@ export type GetQuestionQuery = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   optionOrderDesc?: boolean | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   formQuestionsId?: string | null;
 };
 
@@ -4575,6 +6008,9 @@ export type ListQuestionsQuery = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -4585,11 +6021,18 @@ export type ListQuestionsQuery = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     form?: {
       __typename: "Form";
@@ -4605,9 +6048,13 @@ export type ListQuestionsQuery = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       jobs?: {
         __typename: "ModelFormJobConnection";
@@ -4618,19 +6065,134 @@ export type ListQuestionsQuery = {
           jobId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null;
     order?: number | null;
     optionOrderDesc?: boolean | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
     formQuestionsId?: string | null;
   } | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type SyncQuestionsQuery = {
+  __typename: "ModelQuestionConnection";
+  items: Array<{
+    __typename: "Question";
+    id: string;
+    title?: string | null;
+    options?: {
+      __typename: "ModelQuestionOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        };
+        createdAt: string;
+        updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
+      } | null>;
+      nextToken?: string | null;
+      startedAt?: number | null;
+    } | null;
+    form?: {
+      __typename: "Form";
+      id: string;
+      name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    } | null;
+    order?: number | null;
+    optionOrderDesc?: boolean | null;
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+    formQuestionsId?: string | null;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type GetOptionQuery = {
@@ -4652,6 +6214,7 @@ export type GetOptionQuery = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -4659,11 +6222,17 @@ export type GetOptionQuery = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -4674,19 +6243,30 @@ export type GetOptionQuery = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type ListOptionsQuery = {
@@ -4711,6 +6291,9 @@ export type ListOptionsQuery = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -4721,17 +6304,87 @@ export type ListOptionsQuery = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     order?: number | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type SyncOptionsQuery = {
+  __typename: "ModelOptionConnection";
+  items: Array<{
+    __typename: "Option";
+    id: string;
+    label?: string | null;
+    value?: string | null;
+    questions?: {
+      __typename: "ModelQuestionOptionConnection";
+      items: Array<{
+        __typename: "QuestionOption";
+        id: string;
+        questionId: string;
+        optionId: string;
+        question: {
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+          formQuestionsId?: string | null;
+        };
+        option: {
+          __typename: "Option";
+          id: string;
+          label?: string | null;
+          value?: string | null;
+          order?: number | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        };
+        createdAt: string;
+        updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
+      } | null>;
+      nextToken?: string | null;
+      startedAt?: number | null;
+    } | null;
+    order?: number | null;
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type GetCrewQuery = {
@@ -4766,13 +6419,18 @@ export type GetCrewQuery = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -4792,17 +6450,28 @@ export type GetCrewQuery = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type ListCrewsQuery = {
@@ -4838,6 +6507,9 @@ export type ListCrewsQuery = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -4856,16 +6528,104 @@ export type ListCrewsQuery = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type SyncCrewsQuery = {
+  __typename: "ModelCrewConnection";
+  items: Array<{
+    __typename: "Crew";
+    id: string;
+    userName?: string | null;
+    role?: string | null;
+    DOB?: string | null;
+    healthCardNumber?: string | null;
+    vaxxStatus?: string | null;
+    userAgreement?: string | null;
+    companyName?: string | null;
+    address?: string | null;
+    phonenumber?: string | null;
+    name?: string | null;
+    email?: string | null;
+    defaultJobId?: string | null;
+    jobs?: {
+      __typename: "ModelCrewJobConnection";
+      items: Array<{
+        __typename: "CrewJob";
+        id: string;
+        jobId: string;
+        crewId: string;
+        job: {
+          __typename: "Job";
+          id: string;
+          code?: string | null;
+          location?: string | null;
+          startDate?: string | null;
+          endDate?: string | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        };
+        crew: {
+          __typename: "Crew";
+          id: string;
+          userName?: string | null;
+          role?: string | null;
+          DOB?: string | null;
+          healthCardNumber?: string | null;
+          vaxxStatus?: string | null;
+          userAgreement?: string | null;
+          companyName?: string | null;
+          address?: string | null;
+          phonenumber?: string | null;
+          name?: string | null;
+          email?: string | null;
+          defaultJobId?: string | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        };
+        createdAt: string;
+        updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
+      } | null>;
+      nextToken?: string | null;
+      startedAt?: number | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type GetFormJobQuery = {
@@ -4886,6 +6646,7 @@ export type GetFormJobQuery = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -4893,14 +6654,21 @@ export type GetFormJobQuery = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -4915,6 +6683,9 @@ export type GetFormJobQuery = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -4925,14 +6696,24 @@ export type GetFormJobQuery = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   job: {
     __typename: "Job";
@@ -4954,6 +6735,9 @@ export type GetFormJobQuery = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -4964,11 +6748,18 @@ export type GetFormJobQuery = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -4986,6 +6777,9 @@ export type GetFormJobQuery = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -5004,17 +6798,30 @@ export type GetFormJobQuery = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type ListFormJobsQuery = {
@@ -5038,9 +6845,13 @@ export type ListFormJobsQuery = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       jobs?: {
         __typename: "ModelFormJobConnection";
@@ -5051,11 +6862,18 @@ export type ListFormJobsQuery = {
           jobId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     };
     job: {
       __typename: "Job";
@@ -5073,8 +6891,12 @@ export type ListFormJobsQuery = {
           jobId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       crews?: {
         __typename: "ModelCrewJobConnection";
@@ -5085,16 +6907,345 @@ export type ListFormJobsQuery = {
           crewId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     };
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type SyncFormJobsQuery = {
+  __typename: "ModelFormJobConnection";
+  items: Array<{
+    __typename: "FormJob";
+    id: string;
+    formId: string;
+    jobId: string;
+    form: {
+      __typename: "Form";
+      id: string;
+      name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    };
+    job: {
+      __typename: "Job";
+      id: string;
+      code?: string | null;
+      location?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
+      forms?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      crews?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    };
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type FormJobsByFormIdQuery = {
+  __typename: "ModelFormJobConnection";
+  items: Array<{
+    __typename: "FormJob";
+    id: string;
+    formId: string;
+    jobId: string;
+    form: {
+      __typename: "Form";
+      id: string;
+      name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    };
+    job: {
+      __typename: "Job";
+      id: string;
+      code?: string | null;
+      location?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
+      forms?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      crews?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    };
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type FormJobsByJobIdQuery = {
+  __typename: "ModelFormJobConnection";
+  items: Array<{
+    __typename: "FormJob";
+    id: string;
+    formId: string;
+    jobId: string;
+    form: {
+      __typename: "Form";
+      id: string;
+      name?: string | null;
+      questions?: {
+        __typename: "ModelQuestionConnection";
+        items: Array<{
+          __typename: "Question";
+          id: string;
+          title?: string | null;
+          order?: number | null;
+          optionOrderDesc?: boolean | null;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+          formQuestionsId?: string | null;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      jobs?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    };
+    job: {
+      __typename: "Job";
+      id: string;
+      code?: string | null;
+      location?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
+      forms?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      crews?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    };
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type GetCrewJobQuery = {
@@ -5122,6 +7273,9 @@ export type GetCrewJobQuery = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -5132,11 +7286,18 @@ export type GetCrewJobQuery = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -5154,6 +7315,9 @@ export type GetCrewJobQuery = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -5172,14 +7336,24 @@ export type GetCrewJobQuery = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   crew: {
     __typename: "Crew";
@@ -5212,6 +7386,9 @@ export type GetCrewJobQuery = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -5230,17 +7407,30 @@ export type GetCrewJobQuery = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type ListCrewJobsQuery = {
@@ -5266,8 +7456,12 @@ export type ListCrewJobsQuery = {
           jobId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       crews?: {
         __typename: "ModelCrewJobConnection";
@@ -5278,11 +7472,18 @@ export type ListCrewJobsQuery = {
           crewId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     };
     crew: {
       __typename: "Crew";
@@ -5308,16 +7509,324 @@ export type ListCrewJobsQuery = {
           crewId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     };
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type SyncCrewJobsQuery = {
+  __typename: "ModelCrewJobConnection";
+  items: Array<{
+    __typename: "CrewJob";
+    id: string;
+    jobId: string;
+    crewId: string;
+    job: {
+      __typename: "Job";
+      id: string;
+      code?: string | null;
+      location?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
+      forms?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      crews?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    };
+    crew: {
+      __typename: "Crew";
+      id: string;
+      userName?: string | null;
+      role?: string | null;
+      DOB?: string | null;
+      healthCardNumber?: string | null;
+      vaxxStatus?: string | null;
+      userAgreement?: string | null;
+      companyName?: string | null;
+      address?: string | null;
+      phonenumber?: string | null;
+      name?: string | null;
+      email?: string | null;
+      defaultJobId?: string | null;
+      jobs?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    };
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type CrewJobsByJobIdQuery = {
+  __typename: "ModelCrewJobConnection";
+  items: Array<{
+    __typename: "CrewJob";
+    id: string;
+    jobId: string;
+    crewId: string;
+    job: {
+      __typename: "Job";
+      id: string;
+      code?: string | null;
+      location?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
+      forms?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      crews?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    };
+    crew: {
+      __typename: "Crew";
+      id: string;
+      userName?: string | null;
+      role?: string | null;
+      DOB?: string | null;
+      healthCardNumber?: string | null;
+      vaxxStatus?: string | null;
+      userAgreement?: string | null;
+      companyName?: string | null;
+      address?: string | null;
+      phonenumber?: string | null;
+      name?: string | null;
+      email?: string | null;
+      defaultJobId?: string | null;
+      jobs?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    };
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type CrewJobsByCrewIdQuery = {
+  __typename: "ModelCrewJobConnection";
+  items: Array<{
+    __typename: "CrewJob";
+    id: string;
+    jobId: string;
+    crewId: string;
+    job: {
+      __typename: "Job";
+      id: string;
+      code?: string | null;
+      location?: string | null;
+      startDate?: string | null;
+      endDate?: string | null;
+      forms?: {
+        __typename: "ModelFormJobConnection";
+        items: Array<{
+          __typename: "FormJob";
+          id: string;
+          formId: string;
+          jobId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      crews?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    };
+    crew: {
+      __typename: "Crew";
+      id: string;
+      userName?: string | null;
+      role?: string | null;
+      DOB?: string | null;
+      healthCardNumber?: string | null;
+      vaxxStatus?: string | null;
+      userAgreement?: string | null;
+      companyName?: string | null;
+      address?: string | null;
+      phonenumber?: string | null;
+      name?: string | null;
+      email?: string | null;
+      defaultJobId?: string | null;
+      jobs?: {
+        __typename: "ModelCrewJobConnection";
+        items: Array<{
+          __typename: "CrewJob";
+          id: string;
+          jobId: string;
+          crewId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    };
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type GetQuestionOptionQuery = {
@@ -5344,6 +7853,9 @@ export type GetQuestionOptionQuery = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -5354,11 +7866,18 @@ export type GetQuestionOptionQuery = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     form?: {
       __typename: "Form";
@@ -5374,9 +7893,13 @@ export type GetQuestionOptionQuery = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       jobs?: {
         __typename: "ModelFormJobConnection";
@@ -5387,16 +7910,26 @@ export type GetQuestionOptionQuery = {
           jobId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null;
     order?: number | null;
     optionOrderDesc?: boolean | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
     formQuestionsId?: string | null;
   };
   option: {
@@ -5419,6 +7952,9 @@ export type GetQuestionOptionQuery = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -5429,18 +7965,31 @@ export type GetQuestionOptionQuery = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     order?: number | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type ListQuestionOptionsQuery = {
@@ -5463,8 +8012,12 @@ export type ListQuestionOptionsQuery = {
           optionId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       form?: {
         __typename: "Form";
@@ -5473,18 +8026,26 @@ export type ListQuestionOptionsQuery = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       formQuestionsId?: string | null;
     };
     option: {
@@ -5501,455 +8062,122 @@ export type ListQuestionOptionsQuery = {
           optionId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       order?: number | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     };
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
-export type QuestionsByOrderQuery = {
-  __typename: "ModelQuestionConnection";
+export type SyncQuestionOptionsQuery = {
+  __typename: "ModelQuestionOptionConnection";
   items: Array<{
-    __typename: "Question";
+    __typename: "QuestionOption";
     id: string;
-    title?: string | null;
-    options?: {
-      __typename: "ModelQuestionOptionConnection";
-      items: Array<{
-        __typename: "QuestionOption";
+    questionId: string;
+    optionId: string;
+    question: {
+      __typename: "Question";
+      id: string;
+      title?: string | null;
+      options?: {
+        __typename: "ModelQuestionOptionConnection";
+        items: Array<{
+          __typename: "QuestionOption";
+          id: string;
+          questionId: string;
+          optionId: string;
+          createdAt: string;
+          updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
+        } | null>;
+        nextToken?: string | null;
+        startedAt?: number | null;
+      } | null;
+      form?: {
+        __typename: "Form";
         id: string;
-        questionId: string;
-        optionId: string;
-        question: {
-          __typename: "Question";
-          id: string;
-          title?: string | null;
-          order?: number | null;
-          optionOrderDesc?: boolean | null;
-          createdAt: string;
-          updatedAt: string;
-          formQuestionsId?: string | null;
-        };
-        option: {
-          __typename: "Option";
-          id: string;
-          label?: string | null;
-          value?: string | null;
-          order?: number | null;
-          createdAt: string;
-          updatedAt: string;
-        };
+        name?: string | null;
+        questions?: {
+          __typename: "ModelQuestionConnection";
+          nextToken?: string | null;
+          startedAt?: number | null;
+        } | null;
+        jobs?: {
+          __typename: "ModelFormJobConnection";
+          nextToken?: string | null;
+          startedAt?: number | null;
+        } | null;
         createdAt: string;
         updatedAt: string;
-      } | null>;
-      nextToken?: string | null;
-    } | null;
-    form?: {
-      __typename: "Form";
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
+      } | null;
+      order?: number | null;
+      optionOrderDesc?: boolean | null;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+      formQuestionsId?: string | null;
+    };
+    option: {
+      __typename: "Option";
       id: string;
-      name?: string | null;
+      label?: string | null;
+      value?: string | null;
       questions?: {
-        __typename: "ModelQuestionConnection";
+        __typename: "ModelQuestionOptionConnection";
         items: Array<{
-          __typename: "Question";
+          __typename: "QuestionOption";
           id: string;
-          title?: string | null;
-          order?: number | null;
-          optionOrderDesc?: boolean | null;
+          questionId: string;
+          optionId: string;
           createdAt: string;
           updatedAt: string;
-          formQuestionsId?: string | null;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
-      jobs?: {
-        __typename: "ModelFormJobConnection";
-        items: Array<{
-          __typename: "FormJob";
-          id: string;
-          formId: string;
-          jobId: string;
-          createdAt: string;
-          updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
+      order?: number | null;
       createdAt: string;
       updatedAt: string;
-    } | null;
-    order?: number | null;
-    optionOrderDesc?: boolean | null;
-    createdAt: string;
-    updatedAt: string;
-    formQuestionsId?: string | null;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type OptionsByOrderQuery = {
-  __typename: "ModelOptionConnection";
-  items: Array<{
-    __typename: "Option";
-    id: string;
-    label?: string | null;
-    value?: string | null;
-    questions?: {
-      __typename: "ModelQuestionOptionConnection";
-      items: Array<{
-        __typename: "QuestionOption";
-        id: string;
-        questionId: string;
-        optionId: string;
-        question: {
-          __typename: "Question";
-          id: string;
-          title?: string | null;
-          order?: number | null;
-          optionOrderDesc?: boolean | null;
-          createdAt: string;
-          updatedAt: string;
-          formQuestionsId?: string | null;
-        };
-        option: {
-          __typename: "Option";
-          id: string;
-          label?: string | null;
-          value?: string | null;
-          order?: number | null;
-          createdAt: string;
-          updatedAt: string;
-        };
-        createdAt: string;
-        updatedAt: string;
-      } | null>;
-      nextToken?: string | null;
-    } | null;
-    order?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type FormJobsByFormIdQuery = {
-  __typename: "ModelFormJobConnection";
-  items: Array<{
-    __typename: "FormJob";
-    id: string;
-    formId: string;
-    jobId: string;
-    form: {
-      __typename: "Form";
-      id: string;
-      name?: string | null;
-      questions?: {
-        __typename: "ModelQuestionConnection";
-        items: Array<{
-          __typename: "Question";
-          id: string;
-          title?: string | null;
-          order?: number | null;
-          optionOrderDesc?: boolean | null;
-          createdAt: string;
-          updatedAt: string;
-          formQuestionsId?: string | null;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      jobs?: {
-        __typename: "ModelFormJobConnection";
-        items: Array<{
-          __typename: "FormJob";
-          id: string;
-          formId: string;
-          jobId: string;
-          createdAt: string;
-          updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    job: {
-      __typename: "Job";
-      id: string;
-      code?: string | null;
-      location?: string | null;
-      startDate?: string | null;
-      endDate?: string | null;
-      forms?: {
-        __typename: "ModelFormJobConnection";
-        items: Array<{
-          __typename: "FormJob";
-          id: string;
-          formId: string;
-          jobId: string;
-          createdAt: string;
-          updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      crews?: {
-        __typename: "ModelCrewJobConnection";
-        items: Array<{
-          __typename: "CrewJob";
-          id: string;
-          jobId: string;
-          crewId: string;
-          createdAt: string;
-          updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     };
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
-};
-
-export type FormJobsByJobIdQuery = {
-  __typename: "ModelFormJobConnection";
-  items: Array<{
-    __typename: "FormJob";
-    id: string;
-    formId: string;
-    jobId: string;
-    form: {
-      __typename: "Form";
-      id: string;
-      name?: string | null;
-      questions?: {
-        __typename: "ModelQuestionConnection";
-        items: Array<{
-          __typename: "Question";
-          id: string;
-          title?: string | null;
-          order?: number | null;
-          optionOrderDesc?: boolean | null;
-          createdAt: string;
-          updatedAt: string;
-          formQuestionsId?: string | null;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      jobs?: {
-        __typename: "ModelFormJobConnection";
-        items: Array<{
-          __typename: "FormJob";
-          id: string;
-          formId: string;
-          jobId: string;
-          createdAt: string;
-          updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    job: {
-      __typename: "Job";
-      id: string;
-      code?: string | null;
-      location?: string | null;
-      startDate?: string | null;
-      endDate?: string | null;
-      forms?: {
-        __typename: "ModelFormJobConnection";
-        items: Array<{
-          __typename: "FormJob";
-          id: string;
-          formId: string;
-          jobId: string;
-          createdAt: string;
-          updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      crews?: {
-        __typename: "ModelCrewJobConnection";
-        items: Array<{
-          __typename: "CrewJob";
-          id: string;
-          jobId: string;
-          crewId: string;
-          createdAt: string;
-          updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type CrewJobsByJobIdQuery = {
-  __typename: "ModelCrewJobConnection";
-  items: Array<{
-    __typename: "CrewJob";
-    id: string;
-    jobId: string;
-    crewId: string;
-    job: {
-      __typename: "Job";
-      id: string;
-      code?: string | null;
-      location?: string | null;
-      startDate?: string | null;
-      endDate?: string | null;
-      forms?: {
-        __typename: "ModelFormJobConnection";
-        items: Array<{
-          __typename: "FormJob";
-          id: string;
-          formId: string;
-          jobId: string;
-          createdAt: string;
-          updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      crews?: {
-        __typename: "ModelCrewJobConnection";
-        items: Array<{
-          __typename: "CrewJob";
-          id: string;
-          jobId: string;
-          crewId: string;
-          createdAt: string;
-          updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    crew: {
-      __typename: "Crew";
-      id: string;
-      userName?: string | null;
-      role?: string | null;
-      DOB?: string | null;
-      healthCardNumber?: string | null;
-      vaxxStatus?: string | null;
-      userAgreement?: string | null;
-      companyName?: string | null;
-      address?: string | null;
-      phonenumber?: string | null;
-      name?: string | null;
-      email?: string | null;
-      defaultJobId?: string | null;
-      jobs?: {
-        __typename: "ModelCrewJobConnection";
-        items: Array<{
-          __typename: "CrewJob";
-          id: string;
-          jobId: string;
-          crewId: string;
-          createdAt: string;
-          updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type CrewJobsByCrewIdQuery = {
-  __typename: "ModelCrewJobConnection";
-  items: Array<{
-    __typename: "CrewJob";
-    id: string;
-    jobId: string;
-    crewId: string;
-    job: {
-      __typename: "Job";
-      id: string;
-      code?: string | null;
-      location?: string | null;
-      startDate?: string | null;
-      endDate?: string | null;
-      forms?: {
-        __typename: "ModelFormJobConnection";
-        items: Array<{
-          __typename: "FormJob";
-          id: string;
-          formId: string;
-          jobId: string;
-          createdAt: string;
-          updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      crews?: {
-        __typename: "ModelCrewJobConnection";
-        items: Array<{
-          __typename: "CrewJob";
-          id: string;
-          jobId: string;
-          crewId: string;
-          createdAt: string;
-          updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    crew: {
-      __typename: "Crew";
-      id: string;
-      userName?: string | null;
-      role?: string | null;
-      DOB?: string | null;
-      healthCardNumber?: string | null;
-      vaxxStatus?: string | null;
-      userAgreement?: string | null;
-      companyName?: string | null;
-      address?: string | null;
-      phonenumber?: string | null;
-      name?: string | null;
-      email?: string | null;
-      defaultJobId?: string | null;
-      jobs?: {
-        __typename: "ModelCrewJobConnection";
-        items: Array<{
-          __typename: "CrewJob";
-          id: string;
-          jobId: string;
-          crewId: string;
-          createdAt: string;
-          updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-    };
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type QuestionOptionsByQuestionIdQuery = {
@@ -5972,8 +8200,12 @@ export type QuestionOptionsByQuestionIdQuery = {
           optionId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       form?: {
         __typename: "Form";
@@ -5982,18 +8214,26 @@ export type QuestionOptionsByQuestionIdQuery = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       formQuestionsId?: string | null;
     };
     option: {
@@ -6010,17 +8250,28 @@ export type QuestionOptionsByQuestionIdQuery = {
           optionId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       order?: number | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     };
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type QuestionOptionsByOptionIdQuery = {
@@ -6043,8 +8294,12 @@ export type QuestionOptionsByOptionIdQuery = {
           optionId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       form?: {
         __typename: "Form";
@@ -6053,18 +8308,26 @@ export type QuestionOptionsByOptionIdQuery = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       formQuestionsId?: string | null;
     };
     option: {
@@ -6081,17 +8344,28 @@ export type QuestionOptionsByOptionIdQuery = {
           optionId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       order?: number | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     };
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null>;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type OnCreateSceeningSubscription = {
@@ -6136,19 +8410,30 @@ export type OnCreateSceeningSubscription = {
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnUpdateSceeningSubscription = {
@@ -6193,19 +8478,30 @@ export type OnUpdateSceeningSubscription = {
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnDeleteSceeningSubscription = {
@@ -6250,19 +8546,30 @@ export type OnDeleteSceeningSubscription = {
         answeredQuestions?: {
           __typename: "ModelAnsweredQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       sceeningAnsweredQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnCreateAnsweredQuestionSubscription = {
@@ -6311,20 +8618,33 @@ export type OnCreateAnsweredQuestionSubscription = {
           submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         sceeningAnsweredQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   sceeningAnsweredQuestionsId?: string | null;
 };
 
@@ -6374,20 +8694,33 @@ export type OnUpdateAnsweredQuestionSubscription = {
           submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         sceeningAnsweredQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   sceeningAnsweredQuestionsId?: string | null;
 };
 
@@ -6437,20 +8770,33 @@ export type OnDeleteAnsweredQuestionSubscription = {
           submittedAt?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         sceeningAnsweredQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   sceeningAnsweredQuestionsId?: string | null;
 };
 
@@ -6473,8 +8819,12 @@ export type OnCreateFormSubscription = {
           optionId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       form?: {
         __typename: "Form";
@@ -6483,21 +8833,30 @@ export type OnCreateFormSubscription = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       formQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   jobs?: {
     __typename: "ModelFormJobConnection";
@@ -6513,13 +8872,18 @@ export type OnCreateFormSubscription = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -6531,21 +8895,33 @@ export type OnCreateFormSubscription = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnUpdateFormSubscription = {
@@ -6567,8 +8943,12 @@ export type OnUpdateFormSubscription = {
           optionId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       form?: {
         __typename: "Form";
@@ -6577,21 +8957,30 @@ export type OnUpdateFormSubscription = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       formQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   jobs?: {
     __typename: "ModelFormJobConnection";
@@ -6607,13 +8996,18 @@ export type OnUpdateFormSubscription = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -6625,21 +9019,33 @@ export type OnUpdateFormSubscription = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnDeleteFormSubscription = {
@@ -6661,8 +9067,12 @@ export type OnDeleteFormSubscription = {
           optionId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       form?: {
         __typename: "Form";
@@ -6671,21 +9081,30 @@ export type OnDeleteFormSubscription = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null;
       order?: number | null;
       optionOrderDesc?: boolean | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       formQuestionsId?: string | null;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   jobs?: {
     __typename: "ModelFormJobConnection";
@@ -6701,13 +9120,18 @@ export type OnDeleteFormSubscription = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -6719,21 +9143,33 @@ export type OnDeleteFormSubscription = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnCreateJobSubscription = {
@@ -6757,13 +9193,18 @@ export type OnCreateJobSubscription = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -6775,18 +9216,27 @@ export type OnCreateJobSubscription = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   crews?: {
     __typename: "ModelCrewJobConnection";
@@ -6805,13 +9255,18 @@ export type OnCreateJobSubscription = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -6831,17 +9286,28 @@ export type OnCreateJobSubscription = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnUpdateJobSubscription = {
@@ -6865,13 +9331,18 @@ export type OnUpdateJobSubscription = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -6883,18 +9354,27 @@ export type OnUpdateJobSubscription = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   crews?: {
     __typename: "ModelCrewJobConnection";
@@ -6913,13 +9393,18 @@ export type OnUpdateJobSubscription = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -6939,17 +9424,28 @@ export type OnUpdateJobSubscription = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnDeleteJobSubscription = {
@@ -6973,13 +9469,18 @@ export type OnDeleteJobSubscription = {
         questions?: {
           __typename: "ModelQuestionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         jobs?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       job: {
         __typename: "Job";
@@ -6991,18 +9492,27 @@ export type OnDeleteJobSubscription = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   crews?: {
     __typename: "ModelCrewJobConnection";
@@ -7021,13 +9531,18 @@ export type OnDeleteJobSubscription = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -7047,17 +9562,28 @@ export type OnDeleteJobSubscription = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnCreateQuestionSubscription = {
@@ -7078,6 +9604,7 @@ export type OnCreateQuestionSubscription = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -7085,11 +9612,17 @@ export type OnCreateQuestionSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -7100,15 +9633,23 @@ export type OnCreateQuestionSubscription = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   form?: {
     __typename: "Form";
@@ -7123,6 +9664,7 @@ export type OnCreateQuestionSubscription = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -7130,14 +9672,21 @@ export type OnCreateQuestionSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -7152,6 +9701,9 @@ export type OnCreateQuestionSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -7162,19 +9714,32 @@ export type OnCreateQuestionSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   optionOrderDesc?: boolean | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   formQuestionsId?: string | null;
 };
 
@@ -7196,6 +9761,7 @@ export type OnUpdateQuestionSubscription = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -7203,11 +9769,17 @@ export type OnUpdateQuestionSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -7218,15 +9790,23 @@ export type OnUpdateQuestionSubscription = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   form?: {
     __typename: "Form";
@@ -7241,6 +9821,7 @@ export type OnUpdateQuestionSubscription = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -7248,14 +9829,21 @@ export type OnUpdateQuestionSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -7270,6 +9858,9 @@ export type OnUpdateQuestionSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -7280,19 +9871,32 @@ export type OnUpdateQuestionSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   optionOrderDesc?: boolean | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   formQuestionsId?: string | null;
 };
 
@@ -7314,6 +9918,7 @@ export type OnDeleteQuestionSubscription = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -7321,11 +9926,17 @@ export type OnDeleteQuestionSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -7336,15 +9947,23 @@ export type OnDeleteQuestionSubscription = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   form?: {
     __typename: "Form";
@@ -7359,6 +9978,7 @@ export type OnDeleteQuestionSubscription = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -7366,14 +9986,21 @@ export type OnDeleteQuestionSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -7388,6 +10015,9 @@ export type OnDeleteQuestionSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -7398,19 +10028,32 @@ export type OnDeleteQuestionSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   } | null;
   order?: number | null;
   optionOrderDesc?: boolean | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
   formQuestionsId?: string | null;
 };
 
@@ -7433,6 +10076,7 @@ export type OnCreateOptionSubscription = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -7440,11 +10084,17 @@ export type OnCreateOptionSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -7455,19 +10105,30 @@ export type OnCreateOptionSubscription = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnUpdateOptionSubscription = {
@@ -7489,6 +10150,7 @@ export type OnUpdateOptionSubscription = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -7496,11 +10158,17 @@ export type OnUpdateOptionSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -7511,19 +10179,30 @@ export type OnUpdateOptionSubscription = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnDeleteOptionSubscription = {
@@ -7545,6 +10224,7 @@ export type OnDeleteOptionSubscription = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -7552,11 +10232,17 @@ export type OnDeleteOptionSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       };
       option: {
@@ -7567,19 +10253,30 @@ export type OnDeleteOptionSubscription = {
         questions?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         order?: number | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   order?: number | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnCreateCrewSubscription = {
@@ -7614,13 +10311,18 @@ export type OnCreateCrewSubscription = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -7640,17 +10342,28 @@ export type OnCreateCrewSubscription = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnUpdateCrewSubscription = {
@@ -7685,13 +10398,18 @@ export type OnUpdateCrewSubscription = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -7711,17 +10429,28 @@ export type OnUpdateCrewSubscription = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnDeleteCrewSubscription = {
@@ -7756,13 +10485,18 @@ export type OnDeleteCrewSubscription = {
         forms?: {
           __typename: "ModelFormJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         crews?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       crew: {
         __typename: "Crew";
@@ -7782,17 +10516,28 @@ export type OnDeleteCrewSubscription = {
         jobs?: {
           __typename: "ModelCrewJobConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       };
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null>;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnCreateFormJobSubscription = {
@@ -7813,6 +10558,7 @@ export type OnCreateFormJobSubscription = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -7820,14 +10566,21 @@ export type OnCreateFormJobSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -7842,6 +10595,9 @@ export type OnCreateFormJobSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -7852,14 +10608,24 @@ export type OnCreateFormJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   job: {
     __typename: "Job";
@@ -7881,6 +10647,9 @@ export type OnCreateFormJobSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -7891,11 +10660,18 @@ export type OnCreateFormJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -7913,6 +10689,9 @@ export type OnCreateFormJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -7931,17 +10710,30 @@ export type OnCreateFormJobSubscription = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnUpdateFormJobSubscription = {
@@ -7962,6 +10754,7 @@ export type OnUpdateFormJobSubscription = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -7969,14 +10762,21 @@ export type OnUpdateFormJobSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -7991,6 +10791,9 @@ export type OnUpdateFormJobSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -8001,14 +10804,24 @@ export type OnUpdateFormJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   job: {
     __typename: "Job";
@@ -8030,6 +10843,9 @@ export type OnUpdateFormJobSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -8040,11 +10856,18 @@ export type OnUpdateFormJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -8062,6 +10885,9 @@ export type OnUpdateFormJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -8080,17 +10906,30 @@ export type OnUpdateFormJobSubscription = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnDeleteFormJobSubscription = {
@@ -8111,6 +10950,7 @@ export type OnDeleteFormJobSubscription = {
         options?: {
           __typename: "ModelQuestionOptionConnection";
           nextToken?: string | null;
+          startedAt?: number | null;
         } | null;
         form?: {
           __typename: "Form";
@@ -8118,14 +10958,21 @@ export type OnDeleteFormJobSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null;
         order?: number | null;
         optionOrderDesc?: boolean | null;
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
         formQuestionsId?: string | null;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     jobs?: {
       __typename: "ModelFormJobConnection";
@@ -8140,6 +10987,9 @@ export type OnDeleteFormJobSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -8150,14 +11000,24 @@ export type OnDeleteFormJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   job: {
     __typename: "Job";
@@ -8179,6 +11039,9 @@ export type OnDeleteFormJobSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -8189,11 +11052,18 @@ export type OnDeleteFormJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -8211,6 +11081,9 @@ export type OnDeleteFormJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -8229,17 +11102,30 @@ export type OnDeleteFormJobSubscription = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnCreateCrewJobSubscription = {
@@ -8267,6 +11153,9 @@ export type OnCreateCrewJobSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -8277,11 +11166,18 @@ export type OnCreateCrewJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -8299,6 +11195,9 @@ export type OnCreateCrewJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -8317,14 +11216,24 @@ export type OnCreateCrewJobSubscription = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   crew: {
     __typename: "Crew";
@@ -8357,6 +11266,9 @@ export type OnCreateCrewJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -8375,17 +11287,30 @@ export type OnCreateCrewJobSubscription = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnUpdateCrewJobSubscription = {
@@ -8413,6 +11338,9 @@ export type OnUpdateCrewJobSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -8423,11 +11351,18 @@ export type OnUpdateCrewJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -8445,6 +11380,9 @@ export type OnUpdateCrewJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -8463,14 +11401,24 @@ export type OnUpdateCrewJobSubscription = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   crew: {
     __typename: "Crew";
@@ -8503,6 +11451,9 @@ export type OnUpdateCrewJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -8521,17 +11472,30 @@ export type OnUpdateCrewJobSubscription = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnDeleteCrewJobSubscription = {
@@ -8559,6 +11523,9 @@ export type OnDeleteCrewJobSubscription = {
           name?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         job: {
           __typename: "Job";
@@ -8569,11 +11536,18 @@ export type OnDeleteCrewJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     crews?: {
       __typename: "ModelCrewJobConnection";
@@ -8591,6 +11565,9 @@ export type OnDeleteCrewJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -8609,14 +11586,24 @@ export type OnDeleteCrewJobSubscription = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   crew: {
     __typename: "Crew";
@@ -8649,6 +11636,9 @@ export type OnDeleteCrewJobSubscription = {
           endDate?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         crew: {
           __typename: "Crew";
@@ -8667,17 +11657,30 @@ export type OnDeleteCrewJobSubscription = {
           defaultJobId?: string | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnCreateQuestionOptionSubscription = {
@@ -8704,6 +11707,9 @@ export type OnCreateQuestionOptionSubscription = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -8714,11 +11720,18 @@ export type OnCreateQuestionOptionSubscription = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     form?: {
       __typename: "Form";
@@ -8734,9 +11747,13 @@ export type OnCreateQuestionOptionSubscription = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       jobs?: {
         __typename: "ModelFormJobConnection";
@@ -8747,16 +11764,26 @@ export type OnCreateQuestionOptionSubscription = {
           jobId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null;
     order?: number | null;
     optionOrderDesc?: boolean | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
     formQuestionsId?: string | null;
   };
   option: {
@@ -8779,6 +11806,9 @@ export type OnCreateQuestionOptionSubscription = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -8789,18 +11819,31 @@ export type OnCreateQuestionOptionSubscription = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     order?: number | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnUpdateQuestionOptionSubscription = {
@@ -8827,6 +11870,9 @@ export type OnUpdateQuestionOptionSubscription = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -8837,11 +11883,18 @@ export type OnUpdateQuestionOptionSubscription = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     form?: {
       __typename: "Form";
@@ -8857,9 +11910,13 @@ export type OnUpdateQuestionOptionSubscription = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       jobs?: {
         __typename: "ModelFormJobConnection";
@@ -8870,16 +11927,26 @@ export type OnUpdateQuestionOptionSubscription = {
           jobId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null;
     order?: number | null;
     optionOrderDesc?: boolean | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
     formQuestionsId?: string | null;
   };
   option: {
@@ -8902,6 +11969,9 @@ export type OnUpdateQuestionOptionSubscription = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -8912,18 +11982,31 @@ export type OnUpdateQuestionOptionSubscription = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     order?: number | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 export type OnDeleteQuestionOptionSubscription = {
@@ -8950,6 +12033,9 @@ export type OnDeleteQuestionOptionSubscription = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -8960,11 +12046,18 @@ export type OnDeleteQuestionOptionSubscription = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     form?: {
       __typename: "Form";
@@ -8980,9 +12073,13 @@ export type OnDeleteQuestionOptionSubscription = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       jobs?: {
         __typename: "ModelFormJobConnection";
@@ -8993,16 +12090,26 @@ export type OnDeleteQuestionOptionSubscription = {
           jobId: string;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         } | null>;
         nextToken?: string | null;
+        startedAt?: number | null;
       } | null;
       createdAt: string;
       updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
     } | null;
     order?: number | null;
     optionOrderDesc?: boolean | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
     formQuestionsId?: string | null;
   };
   option: {
@@ -9025,6 +12132,9 @@ export type OnDeleteQuestionOptionSubscription = {
           optionOrderDesc?: boolean | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
           formQuestionsId?: string | null;
         };
         option: {
@@ -9035,18 +12145,31 @@ export type OnDeleteQuestionOptionSubscription = {
           order?: number | null;
           createdAt: string;
           updatedAt: string;
+          _version: number;
+          _deleted?: boolean | null;
+          _lastChangedAt: number;
         };
         createdAt: string;
         updatedAt: string;
+        _version: number;
+        _deleted?: boolean | null;
+        _lastChangedAt: number;
       } | null>;
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     order?: number | null;
     createdAt: string;
     updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
   };
   createdAt: string;
   updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
 };
 
 @Injectable({
@@ -9100,19 +12223,30 @@ export class APIService {
                 answeredQuestions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               sceeningAnsweredQuestionsId
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -9173,19 +12307,30 @@ export class APIService {
                 answeredQuestions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               sceeningAnsweredQuestionsId
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -9246,19 +12391,30 @@ export class APIService {
                 answeredQuestions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               sceeningAnsweredQuestionsId
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -9323,20 +12479,33 @@ export class APIService {
                   submittedAt
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 sceeningAnsweredQuestionsId
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           sceeningAnsweredQuestionsId
         }
       }`;
@@ -9402,20 +12571,33 @@ export class APIService {
                   submittedAt
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 sceeningAnsweredQuestionsId
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           sceeningAnsweredQuestionsId
         }
       }`;
@@ -9481,20 +12663,33 @@ export class APIService {
                   submittedAt
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 sceeningAnsweredQuestionsId
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           sceeningAnsweredQuestionsId
         }
       }`;
@@ -9533,8 +12728,12 @@ export class APIService {
                   optionId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               form {
                 __typename
@@ -9543,21 +12742,30 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               optionOrderDesc
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               formQuestionsId
             }
             nextToken
+            startedAt
           }
           jobs {
             __typename
@@ -9573,13 +12781,18 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               job {
                 __typename
@@ -9591,21 +12804,33 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -9643,8 +12868,12 @@ export class APIService {
                   optionId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               form {
                 __typename
@@ -9653,21 +12882,30 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               optionOrderDesc
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               formQuestionsId
             }
             nextToken
+            startedAt
           }
           jobs {
             __typename
@@ -9683,13 +12921,18 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               job {
                 __typename
@@ -9701,21 +12944,33 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -9753,8 +13008,12 @@ export class APIService {
                   optionId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               form {
                 __typename
@@ -9763,21 +13022,30 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               optionOrderDesc
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               formQuestionsId
             }
             nextToken
+            startedAt
           }
           jobs {
             __typename
@@ -9793,13 +13061,18 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               job {
                 __typename
@@ -9811,21 +13084,33 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -9865,13 +13150,18 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               job {
                 __typename
@@ -9883,18 +13173,27 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           crews {
             __typename
@@ -9913,13 +13212,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -9939,17 +13243,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -9989,13 +13304,18 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               job {
                 __typename
@@ -10007,18 +13327,27 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           crews {
             __typename
@@ -10037,13 +13366,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -10063,17 +13397,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -10113,13 +13458,18 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               job {
                 __typename
@@ -10131,18 +13481,27 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           crews {
             __typename
@@ -10161,13 +13520,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -10187,17 +13551,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -10234,6 +13609,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -10241,11 +13617,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -10256,15 +13638,23 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           form {
             __typename
@@ -10279,6 +13669,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -10286,14 +13677,21 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
             }
             jobs {
               __typename
@@ -10308,6 +13706,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -10318,19 +13719,32 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           optionOrderDesc
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           formQuestionsId
         }
       }`;
@@ -10368,6 +13782,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -10375,11 +13790,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -10390,15 +13811,23 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           form {
             __typename
@@ -10413,6 +13842,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -10420,14 +13850,21 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
             }
             jobs {
               __typename
@@ -10442,6 +13879,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -10452,19 +13892,32 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           optionOrderDesc
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           formQuestionsId
         }
       }`;
@@ -10502,6 +13955,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -10509,11 +13963,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -10524,15 +13984,23 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           form {
             __typename
@@ -10547,6 +14015,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -10554,14 +14023,21 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
             }
             jobs {
               __typename
@@ -10576,6 +14052,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -10586,19 +14065,32 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           optionOrderDesc
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           formQuestionsId
         }
       }`;
@@ -10637,6 +14129,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -10644,11 +14137,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -10659,19 +14158,30 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -10709,6 +14219,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -10716,11 +14227,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -10731,19 +14248,30 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -10781,6 +14309,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -10788,11 +14317,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -10803,19 +14338,30 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -10866,13 +14412,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -10892,17 +14443,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -10953,13 +14515,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -10979,17 +14546,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -11040,13 +14618,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -11066,17 +14649,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -11113,6 +14707,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -11120,14 +14715,21 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
             }
             jobs {
               __typename
@@ -11142,6 +14744,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -11152,14 +14757,24 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           job {
             __typename
@@ -11181,6 +14796,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -11191,11 +14809,18 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             crews {
               __typename
@@ -11213,6 +14838,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -11231,17 +14859,30 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -11265,148 +14906,11 @@ export class APIService {
           id
           formId
           jobId
-          form {
-            __typename
-            id
-            name
-            questions {
-              __typename
-              items {
-                __typename
-                id
-                title
-                options {
-                  __typename
-                  nextToken
-                }
-                form {
-                  __typename
-                  id
-                  name
-                  createdAt
-                  updatedAt
-                }
-                order
-                optionOrderDesc
-                createdAt
-                updatedAt
-                formQuestionsId
-              }
-              nextToken
-            }
-            jobs {
-              __typename
-              items {
-                __typename
-                id
-                formId
-                jobId
-                form {
-                  __typename
-                  id
-                  name
-                  createdAt
-                  updatedAt
-                }
-                job {
-                  __typename
-                  id
-                  code
-                  location
-                  startDate
-                  endDate
-                  createdAt
-                  updatedAt
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          job {
-            __typename
-            id
-            code
-            location
-            startDate
-            endDate
-            forms {
-              __typename
-              items {
-                __typename
-                id
-                formId
-                jobId
-                form {
-                  __typename
-                  id
-                  name
-                  createdAt
-                  updatedAt
-                }
-                job {
-                  __typename
-                  id
-                  code
-                  location
-                  startDate
-                  endDate
-                  createdAt
-                  updatedAt
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            crews {
-              __typename
-              items {
-                __typename
-                id
-                jobId
-                crewId
-                job {
-                  __typename
-                  id
-                  code
-                  location
-                  startDate
-                  endDate
-                  createdAt
-                  updatedAt
-                }
-                crew {
-                  __typename
-                  id
-                  userName
-                  role
-                  DOB
-                  healthCardNumber
-                  vaxxStatus
-                  userAgreement
-                  companyName
-                  address
-                  phonenumber
-                  name
-                  email
-                  defaultJobId
-                  createdAt
-                  updatedAt
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -11443,6 +14947,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -11450,14 +14955,21 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
             }
             jobs {
               __typename
@@ -11472,6 +14984,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -11482,14 +14997,24 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           job {
             __typename
@@ -11511,6 +15036,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -11521,11 +15049,18 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             crews {
               __typename
@@ -11543,6 +15078,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -11561,17 +15099,30 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -11615,6 +15166,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -11625,11 +15179,18 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             crews {
               __typename
@@ -11647,6 +15208,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -11665,14 +15229,24 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           crew {
             __typename
@@ -11705,6 +15279,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -11723,17 +15300,30 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -11777,6 +15367,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -11787,11 +15380,18 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             crews {
               __typename
@@ -11809,6 +15409,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -11827,14 +15430,24 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           crew {
             __typename
@@ -11867,6 +15480,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -11885,17 +15501,30 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -11939,6 +15568,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -11949,11 +15581,18 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             crews {
               __typename
@@ -11971,6 +15610,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -11989,14 +15631,24 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           crew {
             __typename
@@ -12029,6 +15681,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -12047,17 +15702,30 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -12100,6 +15768,9 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 option {
@@ -12110,11 +15781,18 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             form {
               __typename
@@ -12130,9 +15808,13 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 nextToken
+                startedAt
               }
               jobs {
                 __typename
@@ -12143,16 +15825,26 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             order
             optionOrderDesc
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
             formQuestionsId
           }
           option {
@@ -12175,6 +15867,9 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 option {
@@ -12185,18 +15880,31 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             order
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -12239,6 +15947,9 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 option {
@@ -12249,11 +15960,18 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             form {
               __typename
@@ -12269,9 +15987,13 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 nextToken
+                startedAt
               }
               jobs {
                 __typename
@@ -12282,16 +16004,26 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             order
             optionOrderDesc
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
             formQuestionsId
           }
           option {
@@ -12314,6 +16046,9 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 option {
@@ -12324,18 +16059,31 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             order
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -12378,6 +16126,9 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 option {
@@ -12388,11 +16139,18 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             form {
               __typename
@@ -12408,9 +16166,13 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 nextToken
+                startedAt
               }
               jobs {
                 __typename
@@ -12421,16 +16183,26 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             order
             optionOrderDesc
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
             formQuestionsId
           }
           option {
@@ -12453,6 +16225,9 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 option {
@@ -12463,18 +16238,31 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             order
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -12532,19 +16320,30 @@ export class APIService {
                 answeredQuestions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               sceeningAnsweredQuestionsId
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -12604,18 +16403,29 @@ export class APIService {
                   submittedAt
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 sceeningAnsweredQuestionsId
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -12632,6 +16442,99 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListSceeningsQuery>response.data.listSceenings;
+  }
+  async SyncSceenings(
+    filter?: ModelSceeningFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncSceeningsQuery> {
+    const statement = `query SyncSceenings($filter: ModelSceeningFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncSceenings(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            jobId
+            jobName
+            crewId
+            crewName
+            crewPhoneNumber
+            result
+            method
+            staffId
+            staffName
+            processed
+            location
+            processedAt
+            submittedAt
+            answeredQuestions {
+              __typename
+              items {
+                __typename
+                id
+                question
+                answer
+                sceening {
+                  __typename
+                  id
+                  jobId
+                  jobName
+                  crewId
+                  crewName
+                  crewPhoneNumber
+                  result
+                  method
+                  staffId
+                  staffName
+                  processed
+                  location
+                  processedAt
+                  submittedAt
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                order
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                sceeningAnsweredQuestionsId
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SyncSceeningsQuery>response.data.syncSceenings;
   }
   async GetAnsweredQuestion(id: string): Promise<GetAnsweredQuestionQuery> {
     const statement = `query GetAnsweredQuestion($id: ID!) {
@@ -12681,20 +16584,33 @@ export class APIService {
                   submittedAt
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 sceeningAnsweredQuestionsId
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           sceeningAnsweredQuestionsId
         }
       }`;
@@ -12745,19 +16661,30 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   sceeningAnsweredQuestionsId
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             order
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
             sceeningAnsweredQuestionsId
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -12775,6 +16702,90 @@ export class APIService {
     )) as any;
     return <ListAnsweredQuestionsQuery>response.data.listAnsweredQuestions;
   }
+  async SyncAnsweredQuestions(
+    filter?: ModelAnsweredQuestionFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncAnsweredQuestionsQuery> {
+    const statement = `query SyncAnsweredQuestions($filter: ModelAnsweredQuestionFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncAnsweredQuestions(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            question
+            answer
+            sceening {
+              __typename
+              id
+              jobId
+              jobName
+              crewId
+              crewName
+              crewPhoneNumber
+              result
+              method
+              staffId
+              staffName
+              processed
+              location
+              processedAt
+              submittedAt
+              answeredQuestions {
+                __typename
+                items {
+                  __typename
+                  id
+                  question
+                  answer
+                  order
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                  sceeningAnsweredQuestionsId
+                }
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            order
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            sceeningAnsweredQuestionsId
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SyncAnsweredQuestionsQuery>response.data.syncAnsweredQuestions;
+  }
   async GetForm(id: string): Promise<GetFormQuery> {
     const statement = `query GetForm($id: ID!) {
         getForm(id: $id) {
@@ -12787,16 +16798,118 @@ export class APIService {
               __typename
               id
               title
+              options {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                  startedAt
+                }
+                jobs {
+                  __typename
+                  nextToken
+                  startedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
               order
               optionOrderDesc
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               formQuestionsId
             }
             nextToken
+            startedAt
+          }
+          jobs {
+            __typename
+            items {
+              __typename
+              id
+              formId
+              jobId
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                  startedAt
+                }
+                jobs {
+                  __typename
+                  nextToken
+                  startedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              job {
+                __typename
+                id
+                code
+                location
+                startDate
+                endDate
+                forms {
+                  __typename
+                  nextToken
+                  startedAt
+                }
+                crews {
+                  __typename
+                  nextToken
+                  startedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -12825,18 +16938,80 @@ export class APIService {
                 __typename
                 id
                 title
+                options {
+                  __typename
+                  nextToken
+                  startedAt
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
+            }
+            jobs {
+              __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  location
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -12853,6 +17028,119 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListFormsQuery>response.data.listForms;
+  }
+  async SyncForms(
+    filter?: ModelFormFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncFormsQuery> {
+    const statement = `query SyncForms($filter: ModelFormFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncForms(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            questions {
+              __typename
+              items {
+                __typename
+                id
+                title
+                options {
+                  __typename
+                  nextToken
+                  startedAt
+                }
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                order
+                optionOrderDesc
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+                formQuestionsId
+              }
+              nextToken
+              startedAt
+            }
+            jobs {
+              __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  location
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SyncFormsQuery>response.data.syncForms;
   }
   async GetJob(id: string): Promise<GetJobQuery> {
     const statement = `query GetJob($id: ID!) {
@@ -12877,13 +17165,18 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               job {
                 __typename
@@ -12895,18 +17188,27 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           crews {
             __typename
@@ -12925,13 +17227,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -12951,17 +17258,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -13000,6 +17318,76 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListJobsQuery>response.data.listJobs;
+  }
+  async SyncJobs(
+    filter?: ModelJobFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncJobsQuery> {
+    const statement = `query SyncJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncJobs(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            code
+            location
+            startDate
+            endDate
+            forms {
+              __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -13010,11 +17398,18 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             crews {
               __typename
@@ -13032,6 +17427,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -13050,16 +17448,27 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -13072,10 +17481,13 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <ListJobsQuery>response.data.listJobs;
+    return <SyncJobsQuery>response.data.syncJobs;
   }
   async GetQuestion(id: string): Promise<GetQuestionQuery> {
     const statement = `query GetQuestion($id: ID!) {
@@ -13097,6 +17509,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -13104,11 +17517,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -13119,15 +17538,23 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           form {
             __typename
@@ -13142,6 +17569,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -13149,14 +17577,21 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
             }
             jobs {
               __typename
@@ -13171,6 +17606,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -13181,19 +17619,32 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           optionOrderDesc
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           formQuestionsId
         }
       }`;
@@ -13232,6 +17683,9 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 option {
@@ -13242,11 +17696,18 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             form {
               __typename
@@ -13262,9 +17723,13 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 nextToken
+                startedAt
               }
               jobs {
                 __typename
@@ -13275,19 +17740,30 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             order
             optionOrderDesc
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
             formQuestionsId
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -13304,6 +17780,135 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListQuestionsQuery>response.data.listQuestions;
+  }
+  async SyncQuestions(
+    filter?: ModelQuestionFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncQuestionsQuery> {
+    const statement = `query SyncQuestions($filter: ModelQuestionFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncQuestions(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            title
+            options {
+              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            form {
+              __typename
+              id
+              name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                  formQuestionsId
+                }
+                nextToken
+                startedAt
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            order
+            optionOrderDesc
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            formQuestionsId
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SyncQuestionsQuery>response.data.syncQuestions;
   }
   async GetOption(id: string): Promise<GetOptionQuery> {
     const statement = `query GetOption($id: ID!) {
@@ -13326,6 +17931,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -13333,11 +17939,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -13348,19 +17960,30 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -13384,11 +18007,56 @@ export class APIService {
             id
             label
             value
+            questions {
+              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
             order
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -13405,6 +18073,90 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListOptionsQuery>response.data.listOptions;
+  }
+  async SyncOptions(
+    filter?: ModelOptionFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncOptionsQuery> {
+    const statement = `query SyncOptions($filter: ModelOptionFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncOptions(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            label
+            value
+            questions {
+              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            order
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SyncOptionsQuery>response.data.syncOptions;
   }
   async GetCrew(id: string): Promise<GetCrewQuery> {
     const statement = `query GetCrew($id: ID!) {
@@ -13440,13 +18192,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -13466,17 +18223,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -13526,6 +18294,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -13544,16 +18315,27 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -13570,6 +18352,108 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListCrewsQuery>response.data.listCrews;
+  }
+  async SyncCrews(
+    filter?: ModelCrewFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncCrewsQuery> {
+    const statement = `query SyncCrews($filter: ModelCrewFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncCrews(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            userName
+            role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
+            jobs {
+              __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  location
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SyncCrewsQuery>response.data.syncCrews;
   }
   async GetFormJob(id: string): Promise<GetFormJobQuery> {
     const statement = `query GetFormJob($id: ID!) {
@@ -13591,6 +18475,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -13598,14 +18483,21 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
             }
             jobs {
               __typename
@@ -13620,6 +18512,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -13630,14 +18525,24 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           job {
             __typename
@@ -13659,6 +18564,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -13669,11 +18577,18 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             crews {
               __typename
@@ -13691,6 +18606,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -13709,17 +18627,30 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -13757,9 +18688,13 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 nextToken
+                startedAt
               }
               jobs {
                 __typename
@@ -13770,11 +18705,18 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             job {
               __typename
@@ -13792,8 +18734,12 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               crews {
                 __typename
@@ -13804,16 +18750,27 @@ export class APIService {
                   crewId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -13831,175 +18788,64 @@ export class APIService {
     )) as any;
     return <ListFormJobsQuery>response.data.listFormJobs;
   }
-  async GetCrewJob(id: string): Promise<GetCrewJobQuery> {
-    const statement = `query GetCrewJob($id: ID!) {
-        getCrewJob(id: $id) {
-          __typename
-          id
-          jobId
-          crewId
-          job {
-            __typename
-            id
-            code
-            location
-            startDate
-            endDate
-            forms {
-              __typename
-              items {
-                __typename
-                id
-                formId
-                jobId
-                form {
-                  __typename
-                  id
-                  name
-                  createdAt
-                  updatedAt
-                }
-                job {
-                  __typename
-                  id
-                  code
-                  location
-                  startDate
-                  endDate
-                  createdAt
-                  updatedAt
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            crews {
-              __typename
-              items {
-                __typename
-                id
-                jobId
-                crewId
-                job {
-                  __typename
-                  id
-                  code
-                  location
-                  startDate
-                  endDate
-                  createdAt
-                  updatedAt
-                }
-                crew {
-                  __typename
-                  id
-                  userName
-                  role
-                  DOB
-                  healthCardNumber
-                  vaxxStatus
-                  userAgreement
-                  companyName
-                  address
-                  phonenumber
-                  name
-                  email
-                  defaultJobId
-                  createdAt
-                  updatedAt
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          crew {
-            __typename
-            id
-            userName
-            role
-            DOB
-            healthCardNumber
-            vaxxStatus
-            userAgreement
-            companyName
-            address
-            phonenumber
-            name
-            email
-            defaultJobId
-            jobs {
-              __typename
-              items {
-                __typename
-                id
-                jobId
-                crewId
-                job {
-                  __typename
-                  id
-                  code
-                  location
-                  startDate
-                  endDate
-                  createdAt
-                  updatedAt
-                }
-                crew {
-                  __typename
-                  id
-                  userName
-                  role
-                  DOB
-                  healthCardNumber
-                  vaxxStatus
-                  userAgreement
-                  companyName
-                  address
-                  phonenumber
-                  name
-                  email
-                  defaultJobId
-                  createdAt
-                  updatedAt
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id,
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetCrewJobQuery>response.data.getCrewJob;
-  }
-  async ListCrewJobs(
-    filter?: ModelCrewJobFilterInput,
+  async SyncFormJobs(
+    filter?: ModelFormJobFilterInput,
     limit?: number,
-    nextToken?: string
-  ): Promise<ListCrewJobsQuery> {
-    const statement = `query ListCrewJobs($filter: ModelCrewJobFilterInput, $limit: Int, $nextToken: String) {
-        listCrewJobs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncFormJobsQuery> {
+    const statement = `query SyncFormJobs($filter: ModelFormJobFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncFormJobs(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
           __typename
           items {
             __typename
             id
+            formId
             jobId
-            crewId
+            form {
+              __typename
+              id
+              name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                  formQuestionsId
+                }
+                nextToken
+                startedAt
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
             job {
               __typename
               id
@@ -14016,8 +18862,12 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               crews {
                 __typename
@@ -14028,46 +18878,27 @@ export class APIService {
                   crewId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
-            }
-            crew {
-              __typename
-              id
-              userName
-              role
-              DOB
-              healthCardNumber
-              vaxxStatus
-              userAgreement
-              companyName
-              address
-              phonenumber
-              name
-              email
-              defaultJobId
-              jobs {
-                __typename
-                items {
-                  __typename
-                  id
-                  jobId
-                  crewId
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -14080,415 +18911,13 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListCrewJobsQuery>response.data.listCrewJobs;
-  }
-  async GetQuestionOption(id: string): Promise<GetQuestionOptionQuery> {
-    const statement = `query GetQuestionOption($id: ID!) {
-        getQuestionOption(id: $id) {
-          __typename
-          id
-          questionId
-          optionId
-          question {
-            __typename
-            id
-            title
-            options {
-              __typename
-              items {
-                __typename
-                id
-                questionId
-                optionId
-                question {
-                  __typename
-                  id
-                  title
-                  order
-                  optionOrderDesc
-                  createdAt
-                  updatedAt
-                  formQuestionsId
-                }
-                option {
-                  __typename
-                  id
-                  label
-                  value
-                  order
-                  createdAt
-                  updatedAt
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            form {
-              __typename
-              id
-              name
-              questions {
-                __typename
-                items {
-                  __typename
-                  id
-                  title
-                  order
-                  optionOrderDesc
-                  createdAt
-                  updatedAt
-                  formQuestionsId
-                }
-                nextToken
-              }
-              jobs {
-                __typename
-                items {
-                  __typename
-                  id
-                  formId
-                  jobId
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            order
-            optionOrderDesc
-            createdAt
-            updatedAt
-            formQuestionsId
-          }
-          option {
-            __typename
-            id
-            label
-            value
-            questions {
-              __typename
-              items {
-                __typename
-                id
-                questionId
-                optionId
-                question {
-                  __typename
-                  id
-                  title
-                  order
-                  optionOrderDesc
-                  createdAt
-                  updatedAt
-                  formQuestionsId
-                }
-                option {
-                  __typename
-                  id
-                  label
-                  value
-                  order
-                  createdAt
-                  updatedAt
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            order
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id,
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetQuestionOptionQuery>response.data.getQuestionOption;
-  }
-  async ListQuestionOptions(
-    filter?: ModelQuestionOptionFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListQuestionOptionsQuery> {
-    const statement = `query ListQuestionOptions($filter: ModelQuestionOptionFilterInput, $limit: Int, $nextToken: String) {
-        listQuestionOptions(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            questionId
-            optionId
-            question {
-              __typename
-              id
-              title
-              options {
-                __typename
-                items {
-                  __typename
-                  id
-                  questionId
-                  optionId
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              form {
-                __typename
-                id
-                name
-                questions {
-                  __typename
-                  nextToken
-                }
-                jobs {
-                  __typename
-                  nextToken
-                }
-                createdAt
-                updatedAt
-              }
-              order
-              optionOrderDesc
-              createdAt
-              updatedAt
-              formQuestionsId
-            }
-            option {
-              __typename
-              id
-              label
-              value
-              questions {
-                __typename
-                items {
-                  __typename
-                  id
-                  questionId
-                  optionId
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              order
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
     }
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <ListQuestionOptionsQuery>response.data.listQuestionOptions;
-  }
-  async QuestionsByOrder(
-    order: number,
-    sortDirection?: ModelSortDirection,
-    filter?: ModelQuestionFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<QuestionsByOrderQuery> {
-    const statement = `query QuestionsByOrder($order: Int!, $sortDirection: ModelSortDirection, $filter: ModelQuestionFilterInput, $limit: Int, $nextToken: String) {
-        questionsByOrder(order: $order, sortDirection: $sortDirection, filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            title
-            options {
-              __typename
-              items {
-                __typename
-                id
-                questionId
-                optionId
-                question {
-                  __typename
-                  id
-                  title
-                  order
-                  optionOrderDesc
-                  createdAt
-                  updatedAt
-                  formQuestionsId
-                }
-                option {
-                  __typename
-                  id
-                  label
-                  value
-                  order
-                  createdAt
-                  updatedAt
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            form {
-              __typename
-              id
-              name
-              questions {
-                __typename
-                items {
-                  __typename
-                  id
-                  title
-                  order
-                  optionOrderDesc
-                  createdAt
-                  updatedAt
-                  formQuestionsId
-                }
-                nextToken
-              }
-              jobs {
-                __typename
-                items {
-                  __typename
-                  id
-                  formId
-                  jobId
-                  createdAt
-                  updatedAt
-                }
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            order
-            optionOrderDesc
-            createdAt
-            updatedAt
-            formQuestionsId
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      order,
-    };
-    if (sortDirection) {
-      gqlAPIServiceArguments.sortDirection = sortDirection;
-    }
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <QuestionsByOrderQuery>response.data.questionsByOrder;
-  }
-  async OptionsByOrder(
-    order: number,
-    sortDirection?: ModelSortDirection,
-    filter?: ModelOptionFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<OptionsByOrderQuery> {
-    const statement = `query OptionsByOrder($order: Int!, $sortDirection: ModelSortDirection, $filter: ModelOptionFilterInput, $limit: Int, $nextToken: String) {
-        optionsByOrder(order: $order, sortDirection: $sortDirection, filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            label
-            value
-            questions {
-              __typename
-              items {
-                __typename
-                id
-                questionId
-                optionId
-                question {
-                  __typename
-                  id
-                  title
-                  order
-                  optionOrderDesc
-                  createdAt
-                  updatedAt
-                  formQuestionsId
-                }
-                option {
-                  __typename
-                  id
-                  label
-                  value
-                  order
-                  createdAt
-                  updatedAt
-                }
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            order
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      order,
-    };
-    if (sortDirection) {
-      gqlAPIServiceArguments.sortDirection = sortDirection;
-    }
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <OptionsByOrderQuery>response.data.optionsByOrder;
+    return <SyncFormJobsQuery>response.data.syncFormJobs;
   }
   async FormJobsByFormId(
     formId: string,
@@ -14519,9 +18948,13 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 nextToken
+                startedAt
               }
               jobs {
                 __typename
@@ -14532,11 +18965,18 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             job {
               __typename
@@ -14554,8 +18994,12 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               crews {
                 __typename
@@ -14566,16 +19010,27 @@ export class APIService {
                   crewId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -14627,9 +19082,13 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 nextToken
+                startedAt
               }
               jobs {
                 __typename
@@ -14640,11 +19099,18 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             job {
               __typename
@@ -14662,8 +19128,12 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               crews {
                 __typename
@@ -14674,16 +19144,27 @@ export class APIService {
                   crewId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -14705,6 +19186,445 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <FormJobsByJobIdQuery>response.data.formJobsByJobId;
+  }
+  async GetCrewJob(id: string): Promise<GetCrewJobQuery> {
+    const statement = `query GetCrewJob($id: ID!) {
+        getCrewJob(id: $id) {
+          __typename
+          id
+          jobId
+          crewId
+          job {
+            __typename
+            id
+            code
+            location
+            startDate
+            endDate
+            forms {
+              __typename
+              items {
+                __typename
+                id
+                formId
+                jobId
+                form {
+                  __typename
+                  id
+                  name
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                job {
+                  __typename
+                  id
+                  code
+                  location
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            crews {
+              __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  location
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          crew {
+            __typename
+            id
+            userName
+            role
+            DOB
+            healthCardNumber
+            vaxxStatus
+            userAgreement
+            companyName
+            address
+            phonenumber
+            name
+            email
+            defaultJobId
+            jobs {
+              __typename
+              items {
+                __typename
+                id
+                jobId
+                crewId
+                job {
+                  __typename
+                  id
+                  code
+                  location
+                  startDate
+                  endDate
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                crew {
+                  __typename
+                  id
+                  userName
+                  role
+                  DOB
+                  healthCardNumber
+                  vaxxStatus
+                  userAgreement
+                  companyName
+                  address
+                  phonenumber
+                  name
+                  email
+                  defaultJobId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id,
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetCrewJobQuery>response.data.getCrewJob;
+  }
+  async ListCrewJobs(
+    filter?: ModelCrewJobFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListCrewJobsQuery> {
+    const statement = `query ListCrewJobs($filter: ModelCrewJobFilterInput, $limit: Int, $nextToken: String) {
+        listCrewJobs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            jobId
+            crewId
+            job {
+              __typename
+              id
+              code
+              location
+              startDate
+              endDate
+              forms {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              crews {
+                __typename
+                items {
+                  __typename
+                  id
+                  jobId
+                  crewId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            crew {
+              __typename
+              id
+              userName
+              role
+              DOB
+              healthCardNumber
+              vaxxStatus
+              userAgreement
+              companyName
+              address
+              phonenumber
+              name
+              email
+              defaultJobId
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  jobId
+                  crewId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListCrewJobsQuery>response.data.listCrewJobs;
+  }
+  async SyncCrewJobs(
+    filter?: ModelCrewJobFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncCrewJobsQuery> {
+    const statement = `query SyncCrewJobs($filter: ModelCrewJobFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncCrewJobs(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            jobId
+            crewId
+            job {
+              __typename
+              id
+              code
+              location
+              startDate
+              endDate
+              forms {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              crews {
+                __typename
+                items {
+                  __typename
+                  id
+                  jobId
+                  crewId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            crew {
+              __typename
+              id
+              userName
+              role
+              DOB
+              healthCardNumber
+              vaxxStatus
+              userAgreement
+              companyName
+              address
+              phonenumber
+              name
+              email
+              defaultJobId
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  jobId
+                  crewId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SyncCrewJobsQuery>response.data.syncCrewJobs;
   }
   async CrewJobsByJobId(
     jobId: string,
@@ -14737,8 +19657,12 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               crews {
                 __typename
@@ -14749,11 +19673,18 @@ export class APIService {
                   crewId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             crew {
               __typename
@@ -14779,16 +19710,27 @@ export class APIService {
                   crewId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -14842,8 +19784,12 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               crews {
                 __typename
@@ -14854,11 +19800,18 @@ export class APIService {
                   crewId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             crew {
               __typename
@@ -14884,16 +19837,27 @@ export class APIService {
                   crewId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -14915,6 +19879,413 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CrewJobsByCrewIdQuery>response.data.crewJobsByCrewId;
+  }
+  async GetQuestionOption(id: string): Promise<GetQuestionOptionQuery> {
+    const statement = `query GetQuestionOption($id: ID!) {
+        getQuestionOption(id: $id) {
+          __typename
+          id
+          questionId
+          optionId
+          question {
+            __typename
+            id
+            title
+            options {
+              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            form {
+              __typename
+              id
+              name
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                  formQuestionsId
+                }
+                nextToken
+                startedAt
+              }
+              jobs {
+                __typename
+                items {
+                  __typename
+                  id
+                  formId
+                  jobId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            order
+            optionOrderDesc
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            formQuestionsId
+          }
+          option {
+            __typename
+            id
+            label
+            value
+            questions {
+              __typename
+              items {
+                __typename
+                id
+                questionId
+                optionId
+                question {
+                  __typename
+                  id
+                  title
+                  order
+                  optionOrderDesc
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                  formQuestionsId
+                }
+                option {
+                  __typename
+                  id
+                  label
+                  value
+                  order
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              nextToken
+              startedAt
+            }
+            order
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id,
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetQuestionOptionQuery>response.data.getQuestionOption;
+  }
+  async ListQuestionOptions(
+    filter?: ModelQuestionOptionFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListQuestionOptionsQuery> {
+    const statement = `query ListQuestionOptions($filter: ModelQuestionOptionFilterInput, $limit: Int, $nextToken: String) {
+        listQuestionOptions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            questionId
+            optionId
+            question {
+              __typename
+              id
+              title
+              options {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                  startedAt
+                }
+                jobs {
+                  __typename
+                  nextToken
+                  startedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              order
+              optionOrderDesc
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              formQuestionsId
+            }
+            option {
+              __typename
+              id
+              label
+              value
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              order
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListQuestionOptionsQuery>response.data.listQuestionOptions;
+  }
+  async SyncQuestionOptions(
+    filter?: ModelQuestionOptionFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncQuestionOptionsQuery> {
+    const statement = `query SyncQuestionOptions($filter: ModelQuestionOptionFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncQuestionOptions(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            questionId
+            optionId
+            question {
+              __typename
+              id
+              title
+              options {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              form {
+                __typename
+                id
+                name
+                questions {
+                  __typename
+                  nextToken
+                  startedAt
+                }
+                jobs {
+                  __typename
+                  nextToken
+                  startedAt
+                }
+                createdAt
+                updatedAt
+                _version
+                _deleted
+                _lastChangedAt
+              }
+              order
+              optionOrderDesc
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+              formQuestionsId
+            }
+            option {
+              __typename
+              id
+              label
+              value
+              questions {
+                __typename
+                items {
+                  __typename
+                  id
+                  questionId
+                  optionId
+                  createdAt
+                  updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
+                }
+                nextToken
+                startedAt
+              }
+              order
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SyncQuestionOptionsQuery>response.data.syncQuestionOptions;
   }
   async QuestionOptionsByQuestionId(
     questionId: string,
@@ -14944,8 +20315,12 @@ export class APIService {
                   optionId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               form {
                 __typename
@@ -14954,18 +20329,26 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               optionOrderDesc
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               formQuestionsId
             }
             option {
@@ -14982,17 +20365,28 @@ export class APIService {
                   optionId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               order
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -15045,8 +20439,12 @@ export class APIService {
                   optionId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               form {
                 __typename
@@ -15055,18 +20453,26 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               optionOrderDesc
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               formQuestionsId
             }
             option {
@@ -15083,17 +20489,28 @@ export class APIService {
                   optionId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               order
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -15166,19 +20583,30 @@ export class APIService {
                 answeredQuestions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               sceeningAnsweredQuestionsId
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -15240,19 +20668,30 @@ export class APIService {
                 answeredQuestions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               sceeningAnsweredQuestionsId
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -15314,19 +20753,30 @@ export class APIService {
                 answeredQuestions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               sceeningAnsweredQuestionsId
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -15394,20 +20844,33 @@ export class APIService {
                   submittedAt
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 sceeningAnsweredQuestionsId
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           sceeningAnsweredQuestionsId
         }
       }`;
@@ -15478,20 +20941,33 @@ export class APIService {
                   submittedAt
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 sceeningAnsweredQuestionsId
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           sceeningAnsweredQuestionsId
         }
       }`;
@@ -15562,20 +21038,33 @@ export class APIService {
                   submittedAt
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 sceeningAnsweredQuestionsId
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           sceeningAnsweredQuestionsId
         }
       }`;
@@ -15617,8 +21106,12 @@ export class APIService {
                   optionId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               form {
                 __typename
@@ -15627,21 +21120,30 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               optionOrderDesc
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               formQuestionsId
             }
             nextToken
+            startedAt
           }
           jobs {
             __typename
@@ -15657,13 +21159,18 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               job {
                 __typename
@@ -15675,21 +21182,33 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -15728,8 +21247,12 @@ export class APIService {
                   optionId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               form {
                 __typename
@@ -15738,21 +21261,30 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               optionOrderDesc
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               formQuestionsId
             }
             nextToken
+            startedAt
           }
           jobs {
             __typename
@@ -15768,13 +21300,18 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               job {
                 __typename
@@ -15786,21 +21323,33 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -15839,8 +21388,12 @@ export class APIService {
                   optionId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               form {
                 __typename
@@ -15849,21 +21402,30 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               order
               optionOrderDesc
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
               formQuestionsId
             }
             nextToken
+            startedAt
           }
           jobs {
             __typename
@@ -15879,13 +21441,18 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               job {
                 __typename
@@ -15897,21 +21464,33 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -15952,13 +21531,18 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               job {
                 __typename
@@ -15970,18 +21554,27 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           crews {
             __typename
@@ -16000,13 +21593,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -16026,17 +21624,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -16077,13 +21686,18 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               job {
                 __typename
@@ -16095,18 +21709,27 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           crews {
             __typename
@@ -16125,13 +21748,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -16151,17 +21779,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -16202,13 +21841,18 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               job {
                 __typename
@@ -16220,18 +21864,27 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           crews {
             __typename
@@ -16250,13 +21903,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -16276,17 +21934,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -16324,6 +21993,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -16331,11 +22001,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -16346,15 +22022,23 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           form {
             __typename
@@ -16369,6 +22053,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -16376,14 +22061,21 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
             }
             jobs {
               __typename
@@ -16398,6 +22090,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -16408,19 +22103,32 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           optionOrderDesc
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           formQuestionsId
         }
       }`;
@@ -16459,6 +22167,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -16466,11 +22175,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -16481,15 +22196,23 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           form {
             __typename
@@ -16504,6 +22227,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -16511,14 +22235,21 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
             }
             jobs {
               __typename
@@ -16533,6 +22264,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -16543,19 +22277,32 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           optionOrderDesc
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           formQuestionsId
         }
       }`;
@@ -16594,6 +22341,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -16601,11 +22349,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -16616,15 +22370,23 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           form {
             __typename
@@ -16639,6 +22401,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -16646,14 +22409,21 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
             }
             jobs {
               __typename
@@ -16668,6 +22438,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -16678,19 +22451,32 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           order
           optionOrderDesc
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
           formQuestionsId
         }
       }`;
@@ -16730,6 +22516,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -16737,11 +22524,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -16752,19 +22545,30 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -16803,6 +22607,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -16810,11 +22615,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -16825,19 +22636,30 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -16876,6 +22698,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -16883,11 +22706,17 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               option {
@@ -16898,19 +22727,30 @@ export class APIService {
                 questions {
                   __typename
                   nextToken
+                  startedAt
                 }
                 order
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           order
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -16962,13 +22802,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -16988,17 +22833,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -17050,13 +22906,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -17076,17 +22937,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -17138,13 +23010,18 @@ export class APIService {
                 forms {
                   __typename
                   nextToken
+                  startedAt
                 }
                 crews {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               crew {
                 __typename
@@ -17164,17 +23041,28 @@ export class APIService {
                 jobs {
                   __typename
                   nextToken
+                  startedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             nextToken
+            startedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -17212,6 +23100,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -17219,14 +23108,21 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
             }
             jobs {
               __typename
@@ -17241,6 +23137,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -17251,14 +23150,24 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           job {
             __typename
@@ -17280,6 +23189,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -17290,11 +23202,18 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             crews {
               __typename
@@ -17312,6 +23231,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -17330,17 +23252,30 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -17378,6 +23313,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -17385,14 +23321,21 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
             }
             jobs {
               __typename
@@ -17407,6 +23350,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -17417,14 +23363,24 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           job {
             __typename
@@ -17446,6 +23402,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -17456,11 +23415,18 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             crews {
               __typename
@@ -17478,6 +23444,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -17496,17 +23465,30 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -17544,6 +23526,7 @@ export class APIService {
                 options {
                   __typename
                   nextToken
+                  startedAt
                 }
                 form {
                   __typename
@@ -17551,14 +23534,21 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 order
                 optionOrderDesc
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
                 formQuestionsId
               }
               nextToken
+              startedAt
             }
             jobs {
               __typename
@@ -17573,6 +23563,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -17583,14 +23576,24 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           job {
             __typename
@@ -17612,6 +23615,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -17622,11 +23628,18 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             crews {
               __typename
@@ -17644,6 +23657,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -17662,17 +23678,30 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -17717,6 +23746,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -17727,11 +23759,18 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             crews {
               __typename
@@ -17749,6 +23788,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -17767,14 +23809,24 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           crew {
             __typename
@@ -17807,6 +23859,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -17825,17 +23880,30 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -17880,6 +23948,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -17890,11 +23961,18 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             crews {
               __typename
@@ -17912,6 +23990,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -17930,14 +24011,24 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           crew {
             __typename
@@ -17970,6 +24061,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -17988,17 +24082,30 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -18043,6 +24150,9 @@ export class APIService {
                   name
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 job {
                   __typename
@@ -18053,11 +24163,18 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             crews {
               __typename
@@ -18075,6 +24192,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -18093,14 +24213,24 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           crew {
             __typename
@@ -18133,6 +24263,9 @@ export class APIService {
                   endDate
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 crew {
                   __typename
@@ -18151,17 +24284,30 @@ export class APIService {
                   defaultJobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -18207,6 +24353,9 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 option {
@@ -18217,11 +24366,18 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             form {
               __typename
@@ -18237,9 +24393,13 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 nextToken
+                startedAt
               }
               jobs {
                 __typename
@@ -18250,16 +24410,26 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             order
             optionOrderDesc
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
             formQuestionsId
           }
           option {
@@ -18282,6 +24452,9 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 option {
@@ -18292,18 +24465,31 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             order
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -18351,6 +24537,9 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 option {
@@ -18361,11 +24550,18 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             form {
               __typename
@@ -18381,9 +24577,13 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 nextToken
+                startedAt
               }
               jobs {
                 __typename
@@ -18394,16 +24594,26 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             order
             optionOrderDesc
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
             formQuestionsId
           }
           option {
@@ -18426,6 +24636,9 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 option {
@@ -18436,18 +24649,31 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             order
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -18495,6 +24721,9 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 option {
@@ -18505,11 +24734,18 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             form {
               __typename
@@ -18525,9 +24761,13 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 nextToken
+                startedAt
               }
               jobs {
                 __typename
@@ -18538,16 +24778,26 @@ export class APIService {
                   jobId
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 nextToken
+                startedAt
               }
               createdAt
               updatedAt
+              _version
+              _deleted
+              _lastChangedAt
             }
             order
             optionOrderDesc
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
             formQuestionsId
           }
           option {
@@ -18570,6 +24820,9 @@ export class APIService {
                   optionOrderDesc
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                   formQuestionsId
                 }
                 option {
@@ -18580,18 +24833,31 @@ export class APIService {
                   order
                   createdAt
                   updatedAt
+                  _version
+                  _deleted
+                  _lastChangedAt
                 }
                 createdAt
                 updatedAt
+                _version
+                _deleted
+                _lastChangedAt
               }
               nextToken
+              startedAt
             }
             order
             createdAt
             updatedAt
+            _version
+            _deleted
+            _lastChangedAt
           }
           createdAt
           updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};

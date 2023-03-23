@@ -19,8 +19,10 @@ export class AddEditJobComponent implements OnInit, OnDestroy {
   jobCodeDuplicated = false;
   loading = true;
   jobId;
+  jobOjb;
   header = "Edit Project";
   formId;
+  isAddition = false;
   cols = [
     { field: "name", header: "Name" },
     { field: "phonenumber", header: "Phone number" },
@@ -56,12 +58,14 @@ export class AddEditJobComponent implements OnInit, OnDestroy {
           this.questionForms.push({ label: f.name, value: f.id })
         );
         if (params.id === "-1") {
+          this.isAddition = true;
           this.header = "Add Project";
           this.loading = false;
           this.form.controls["questionForm"].setValue(
             this.questionForms[0].value
           );
         } else {
+          this.isAddition = false;
           this.getJob(params.id);
         }
       })
@@ -79,20 +83,17 @@ export class AddEditJobComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {}
 
-  public get isAddition() {
-    return this.jobId === "-1";
-  }
-
   async getJob(id) {
-    const jobOjb = await this.api.GetJob(id);
-    this.formId = jobOjb.forms.items[0] && jobOjb.forms.items[0].formId;
+    this.jobOjb = await this.api.GetJob(id);
+    this.formId =
+      this.jobOjb.forms.items[0] && this.jobOjb.forms.items[0].formId;
 
     const formValues = {
-      location: jobOjb.location,
-      code: jobOjb.code,
+      location: this.jobOjb.location,
+      code: this.jobOjb.code,
       questionForm: this.formId,
-      startDate: DateUtils.format(jobOjb.startDate),
-      endDate: DateUtils.format(jobOjb.endDate),
+      startDate: DateUtils.format(this.jobOjb.startDate),
+      endDate: DateUtils.format(this.jobOjb.endDate),
     };
     this.form.patchValue(formValues);
     this.loading = false;
@@ -156,11 +157,13 @@ export class AddEditJobComponent implements OnInit, OnDestroy {
         const job = await this.api.UpdateJob({
           id: this.jobId,
           code: values.code,
+          _version: this.jobOjb._version,
           startDate: this.getDateString(values.startDate),
           endDate: this.getDateString(values.endDate),
         });
         await this.api.UpdateFormJob({
           id: formJob.items[0].id,
+          _version: formJob.items[0]._version,
           formId: values.questionForm,
           jobId: job.id,
         });

@@ -10,60 +10,111 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "Jobs": {
-                    "name": "Jobs",
-                    "isArray": true,
-                    "type": {
-                        "model": "SceeningJob"
-                    },
+                "jobId": {
+                    "name": "jobId",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "sceening"
-                    }
+                    "attributes": []
                 },
-                "Crews": {
-                    "name": "Crews",
-                    "isArray": true,
-                    "type": {
-                        "model": "SceeningCrew"
-                    },
+                "jobName": {
+                    "name": "jobName",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "sceening"
-                    }
+                    "attributes": []
                 },
-                "Questions": {
-                    "name": "Questions",
-                    "isArray": true,
-                    "type": {
-                        "model": "SceeningQuestion"
-                    },
+                "crewId": {
+                    "name": "crewId",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "sceening"
-                    }
+                    "attributes": []
                 },
-                "Options": {
-                    "name": "Options",
+                "crewName": {
+                    "name": "crewName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "crewPhoneNumber": {
+                    "name": "crewPhoneNumber",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "result": {
+                    "name": "result",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "method": {
+                    "name": "method",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "staffId": {
+                    "name": "staffId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "staffName": {
+                    "name": "staffName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "processed": {
+                    "name": "processed",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "location": {
+                    "name": "location",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "processedAt": {
+                    "name": "processedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "submittedAt": {
+                    "name": "submittedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "answeredQuestions": {
+                    "name": "answeredQuestions",
                     "isArray": true,
                     "type": {
-                        "model": "SceeningOption"
+                        "model": "AnsweredQuestion"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "sceening"
+                        "associatedWith": [
+                            "sceeningAnsweredQuestionsId"
+                        ]
                     }
                 },
                 "createdAt": {
@@ -108,8 +159,8 @@ export const schema = {
                 }
             ]
         },
-        "Job": {
-            "name": "Job",
+        "AnsweredQuestion": {
+            "name": "AnsweredQuestion",
             "fields": {
                 "id": {
                     "name": "id",
@@ -118,54 +169,41 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "code": {
-                    "name": "code",
+                "question": {
+                    "name": "question",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "sceenings": {
-                    "name": "sceenings",
-                    "isArray": true,
+                "answer": {
+                    "name": "answer",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "sceening": {
+                    "name": "sceening",
+                    "isArray": false,
                     "type": {
-                        "model": "SceeningJob"
+                        "model": "Sceening"
                     },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "job"
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "sceeningAnsweredQuestionsId"
+                        ]
                     }
                 },
-                "forms": {
-                    "name": "forms",
-                    "isArray": true,
-                    "type": {
-                        "model": "FormJob"
-                    },
+                "order": {
+                    "name": "order",
+                    "isArray": false,
+                    "type": "Int",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "job"
-                    }
-                },
-                "crews": {
-                    "name": "crews",
-                    "isArray": true,
-                    "type": {
-                        "model": "CrewJob"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "job"
-                    }
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -182,10 +220,17 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
+                },
+                "sceeningAnsweredQuestionsId": {
+                    "name": "sceeningAnsweredQuestionsId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Jobs",
+            "pluralName": "AnsweredQuestions",
             "attributes": [
                 {
                     "type": "model",
@@ -226,22 +271,24 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Questions": {
-                    "name": "Questions",
+                "questions": {
+                    "name": "questions",
                     "isArray": true,
                     "type": {
-                        "model": "FormQuestion"
+                        "model": "Question"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "form"
+                        "associatedWith": [
+                            "formQuestionsId"
+                        ]
                     }
                 },
-                "Jobs": {
-                    "name": "Jobs",
+                "jobs": {
+                    "name": "jobs",
                     "isArray": true,
                     "type": {
                         "model": "FormJob"
@@ -251,7 +298,9 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "form"
+                        "associatedWith": [
+                            "form"
+                        ]
                     }
                 },
                 "createdAt": {
@@ -313,8 +362,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Options": {
-                    "name": "Options",
+                "options": {
+                    "name": "options",
                     "isArray": true,
                     "type": {
                         "model": "QuestionOption"
@@ -324,35 +373,24 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "question"
+                        "associatedWith": [
+                            "question"
+                        ]
                     }
                 },
-                "forms": {
-                    "name": "forms",
-                    "isArray": true,
+                "form": {
+                    "name": "form",
+                    "isArray": false,
                     "type": {
-                        "model": "FormQuestion"
+                        "model": "Form"
                     },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "question"
-                    }
-                },
-                "sceenings": {
-                    "name": "sceenings",
-                    "isArray": true,
-                    "type": {
-                        "model": "SceeningQuestion"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "question"
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "formQuestionsId"
+                        ]
                     }
                 },
                 "order": {
@@ -384,6 +422,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
+                },
+                "formQuestionsId": {
+                    "name": "formQuestionsId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -446,21 +491,9 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "option"
-                    }
-                },
-                "sceenings": {
-                    "name": "sceenings",
-                    "isArray": true,
-                    "type": {
-                        "model": "SceeningOption"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "option"
+                        "associatedWith": [
+                            "option"
+                        ]
                     }
                 },
                 "order": {
@@ -512,6 +545,118 @@ export const schema = {
                 }
             ]
         },
+        "Job": {
+            "name": "Job",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "code": {
+                    "name": "code",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "location": {
+                    "name": "location",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "startDate": {
+                    "name": "startDate",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "endDate": {
+                    "name": "endDate",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "forms": {
+                    "name": "forms",
+                    "isArray": true,
+                    "type": {
+                        "model": "FormJob"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "job"
+                        ]
+                    }
+                },
+                "crews": {
+                    "name": "crews",
+                    "isArray": true,
+                    "type": {
+                        "model": "CrewJob"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "job"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Jobs",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Crew": {
             "name": "Crew",
             "fields": {
@@ -529,22 +674,85 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "sceenings": {
-                    "name": "sceenings",
-                    "isArray": true,
-                    "type": {
-                        "model": "SceeningCrew"
-                    },
+                "role": {
+                    "name": "role",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "crew"
-                    }
+                    "attributes": []
                 },
-                "Jobs": {
-                    "name": "Jobs",
+                "DOB": {
+                    "name": "DOB",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "healthCardNumber": {
+                    "name": "healthCardNumber",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "vaxxStatus": {
+                    "name": "vaxxStatus",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userAgreement": {
+                    "name": "userAgreement",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "companyName": {
+                    "name": "companyName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "address": {
+                    "name": "address",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "phonenumber": {
+                    "name": "phonenumber",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "defaultJobId": {
+                    "name": "defaultJobId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "jobs": {
+                    "name": "jobs",
                     "isArray": true,
                     "type": {
                         "model": "CrewJob"
@@ -554,7 +762,9 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "crew"
+                        "associatedWith": [
+                            "crew"
+                        ]
                     }
                 },
                 "createdAt": {
@@ -599,326 +809,6 @@ export const schema = {
                 }
             ]
         },
-        "SceeningJob": {
-            "name": "SceeningJob",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "sceening": {
-                    "name": "sceening",
-                    "isArray": false,
-                    "type": {
-                        "model": "Sceening"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "sceeningID"
-                    }
-                },
-                "job": {
-                    "name": "job",
-                    "isArray": false,
-                    "type": {
-                        "model": "Job"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "jobID"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "SceeningJobs",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "bySceening",
-                        "fields": [
-                            "sceeningID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byJob",
-                        "fields": [
-                            "jobID"
-                        ]
-                    }
-                }
-            ]
-        },
-        "SceeningCrew": {
-            "name": "SceeningCrew",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "sceening": {
-                    "name": "sceening",
-                    "isArray": false,
-                    "type": {
-                        "model": "Sceening"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "sceeningID"
-                    }
-                },
-                "crew": {
-                    "name": "crew",
-                    "isArray": false,
-                    "type": {
-                        "model": "Crew"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "crewID"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "SceeningCrews",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "bySceening",
-                        "fields": [
-                            "sceeningID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byCrew",
-                        "fields": [
-                            "crewID"
-                        ]
-                    }
-                }
-            ]
-        },
-        "SceeningQuestion": {
-            "name": "SceeningQuestion",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "sceening": {
-                    "name": "sceening",
-                    "isArray": false,
-                    "type": {
-                        "model": "Sceening"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "sceeningID"
-                    }
-                },
-                "question": {
-                    "name": "question",
-                    "isArray": false,
-                    "type": {
-                        "model": "Question"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "questionID"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "SceeningQuestions",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "bySceening",
-                        "fields": [
-                            "sceeningID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byQuestion",
-                        "fields": [
-                            "questionID"
-                        ]
-                    }
-                }
-            ]
-        },
-        "SceeningOption": {
-            "name": "SceeningOption",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "sceening": {
-                    "name": "sceening",
-                    "isArray": false,
-                    "type": {
-                        "model": "Sceening"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "sceeningID"
-                    }
-                },
-                "option": {
-                    "name": "option",
-                    "isArray": false,
-                    "type": {
-                        "model": "Option"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "optionID"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "SceeningOptions",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "bySceening",
-                        "fields": [
-                            "sceeningID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byOption",
-                        "fields": [
-                            "optionID"
-                        ]
-                    }
-                }
-            ]
-        },
         "FormJob": {
             "name": "FormJob",
             "fields": {
@@ -929,18 +819,19 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "job": {
-                    "name": "job",
+                "formId": {
+                    "name": "formId",
                     "isArray": false,
-                    "type": {
-                        "model": "Job"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "jobID"
-                    }
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "jobId": {
+                    "name": "jobId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 },
                 "form": {
                     "name": "form",
@@ -952,7 +843,24 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "formID"
+                        "targetNames": [
+                            "formId"
+                        ]
+                    }
+                },
+                "job": {
+                    "name": "job",
+                    "isArray": false,
+                    "type": {
+                        "model": "Job"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "jobId"
+                        ]
                     }
                 },
                 "createdAt": {
@@ -982,178 +890,18 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byJob",
-                        "fields": [
-                            "jobID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
                         "name": "byForm",
                         "fields": [
-                            "formID"
+                            "formId"
                         ]
                     }
-                }
-            ]
-        },
-        "CrewJob": {
-            "name": "CrewJob",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "job": {
-                    "name": "job",
-                    "isArray": false,
-                    "type": {
-                        "model": "Job"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "jobID"
-                    }
-                },
-                "crew": {
-                    "name": "crew",
-                    "isArray": false,
-                    "type": {
-                        "model": "Crew"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "crewID"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "CrewJobs",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
                 },
                 {
                     "type": "key",
                     "properties": {
                         "name": "byJob",
                         "fields": [
-                            "jobID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byCrew",
-                        "fields": [
-                            "crewID"
-                        ]
-                    }
-                }
-            ]
-        },
-        "FormQuestion": {
-            "name": "FormQuestion",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "form": {
-                    "name": "form",
-                    "isArray": false,
-                    "type": {
-                        "model": "Form"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "formID"
-                    }
-                },
-                "question": {
-                    "name": "question",
-                    "isArray": false,
-                    "type": {
-                        "model": "Question"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "questionID"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "FormQuestions",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byForm",
-                        "fields": [
-                            "formID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byQuestion",
-                        "fields": [
-                            "questionID"
+                            "jobId"
                         ]
                     }
                 }
@@ -1169,6 +917,20 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "questionId": {
+                    "name": "questionId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "optionId": {
+                    "name": "optionId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "question": {
                     "name": "question",
                     "isArray": false,
@@ -1179,7 +941,9 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "questionID"
+                        "targetNames": [
+                            "questionId"
+                        ]
                     }
                 },
                 "option": {
@@ -1192,7 +956,9 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "optionID"
+                        "targetNames": [
+                            "optionId"
+                        ]
                     }
                 },
                 "createdAt": {
@@ -1224,7 +990,7 @@ export const schema = {
                     "properties": {
                         "name": "byQuestion",
                         "fields": [
-                            "questionID"
+                            "questionId"
                         ]
                     }
                 },
@@ -1233,7 +999,105 @@ export const schema = {
                     "properties": {
                         "name": "byOption",
                         "fields": [
-                            "optionID"
+                            "optionId"
+                        ]
+                    }
+                }
+            ]
+        },
+        "CrewJob": {
+            "name": "CrewJob",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "jobId": {
+                    "name": "jobId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "crewId": {
+                    "name": "crewId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "job": {
+                    "name": "job",
+                    "isArray": false,
+                    "type": {
+                        "model": "Job"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "jobId"
+                        ]
+                    }
+                },
+                "crew": {
+                    "name": "crew",
+                    "isArray": false,
+                    "type": {
+                        "model": "Crew"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "crewId"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "CrewJobs",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byJob",
+                        "fields": [
+                            "jobId"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byCrew",
+                        "fields": [
+                            "crewId"
                         ]
                     }
                 }
@@ -1243,5 +1107,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.1",
-    "version": "5f031516f155d78805a68cfdf1cf2747"
+    "version": "3f552148defea49fd9d4606da64a7f2c"
 };
