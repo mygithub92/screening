@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'app/@core/services/auth.service';
-import { DateUtils } from 'app/@shared/utils/date-utils';
-import { APIService } from 'app/API.service';
-import { MenuService } from 'app/app.menu.service';
-import * as moment from 'moment';
-import { MessageService } from 'primeng/api';
+import { Component, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from "app/@core/services/auth.service";
+import { DateUtils } from "app/@shared/utils/date-utils";
+import { APIService } from "app/API.service";
+import { MenuService } from "app/app.menu.service";
+import * as moment from "moment";
+import { MessageService } from "primeng/api";
 
 @Component({
   selector: "app-edit-profile",
@@ -18,13 +23,14 @@ export class EditProfileComponent implements OnInit {
   form: FormGroup;
   user;
   group;
+  showError = false;
   loading = true;
   firstTime = false;
   statuses = [
     { label: "Please select...", value: null },
     { label: "Yes", value: "Yes" },
     { label: "No", value: "No" },
-    { label: "Decline", value: "Decline" },
+    { label: "Decline to Answer", value: "Decline" },
   ];
   constructor(
     private router: Router,
@@ -38,8 +44,11 @@ export class EditProfileComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       name: [null, Validators.required],
-      email: [null, Validators.required],
-      phonenumber: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      phonenumber: new FormControl(null, [
+        Validators.required,
+        Validators.pattern("[0-9 ]{10}"),
+      ]),
       DOB: [null, Validators.required],
       healthCardNumber: null,
       vaxxStatus: [null, Validators.required],
@@ -94,9 +103,18 @@ export class EditProfileComponent implements OnInit {
 
   public isInvalid(controlName: string) {
     return (
-      this.form.controls[controlName].invalid &&
+      this.form.controls[controlName].hasError("required") &&
       (this.form.controls[controlName].dirty ||
         this.form.controls[controlName].touched)
+    );
+  }
+
+  public isInvalidPhoneNumber() {
+    return (
+      (this.form.controls["phonenumber"].hasError("maxlength") ||
+        this.form.controls["phonenumber"].hasError("minlength")) &&
+      (this.form.controls["phonenumber"].dirty ||
+        this.form.controls["phonenumber"].touched)
     );
   }
 
@@ -108,7 +126,8 @@ export class EditProfileComponent implements OnInit {
 
   public async save() {
     this.form.markAllAsTouched();
-    if (this.form.valid) {
+    this.showError = !this.form.controls["phonenumber"].valid;
+    if (this.form.valid && this.form.controls["phonenumber"].valid) {
       const userName = this.user.signInUserSession.accessToken.payload[
         "username"
       ];
@@ -139,12 +158,7 @@ export class EditProfileComponent implements OnInit {
         await this.api.CreateCrew(crew);
         this.menuService.onMenuStateChange("complete");
       }
-      this.messageService.add({
-        key: "tst",
-        severity: "success",
-        summary: "Success",
-        detail: "Profile updated.",
-      });
+      this.router.navigate(["main/screening"]);
     }
   }
 }

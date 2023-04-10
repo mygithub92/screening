@@ -1,0 +1,66 @@
+<p-toast key="tst"></p-toast>
+
+<p-blockUI [blocked]="loading" [target]="dt"
+  ><p class="center-spinner"></p
+></p-blockUI>
+<p-panel header="{{ header }}" #dt class="screening-panel">
+  <ng-container *ngIf="!loading">
+    <div class="card card-w-title">
+      <div [formGroup]="form">
+        <div class="ui-g form-group ui-fluid">
+          <div class="ui-g-12">
+            <ng-container formArrayName="locations">
+              <label>Locations</label>
+              <ng-container
+                *ngFor="let locationsForm of locations.controls; let i = index"
+              >
+                <div [formGroup]="locationsForm">
+                  <div class="ui-g">
+                    <div class="ui-g-11">
+                      <input
+                        type="text"
+                        pInputText
+                        formControlName="name"
+                        id="name"
+                        placeholder="name"
+                      />
+                      <p-message
+                        severity="error"
+                        text="Field is required"
+                        *ngIf="isInvalid(i)"
+                      ></p-message>
+                    </div>
+                    <div class="ui-g-1">
+                      <p-button
+                        icon="fa fa-trash"
+                        iconPos="left"
+                        (click)="deleteLocation(i)"
+                      ></p-button>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+        <div class="ui-g form-group">
+          <div class="ui-g-2">
+            <button
+              pButton
+              type="button"
+              label="Add Location"
+              (click)="addLocation()"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-w-title">
+      <div class="ui-g">
+        <div class="ui-g-2">
+          <button pButton type="button" label="Save" (click)="save()"></button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</p-panel>

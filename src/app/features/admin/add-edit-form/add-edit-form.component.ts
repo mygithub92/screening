@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { APIService } from 'app/API.service';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { APIService } from "app/API.service";
+import { DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
+import { Subscription } from "rxjs";
+import { take } from "rxjs/operators";
 
 @Component({
   selector: "app-add-edit-form",
@@ -18,7 +18,6 @@ export class AddEditFormComponent implements OnInit, OnDestroy {
   formQuestions = [];
   formId: string;
   header = "Edit Form";
-  existingQuestions = [];
   loading = true;
   public cols = [{ field: "title", header: "Title" }];
 

@@ -1109,6 +1109,39 @@ subscription OnDeleteJob($filter: ModelSubscriptionJobFilterInput) {
     _lastChangedAt
   }
 }
+subscription OnCreateLocation($filter: ModelSubscriptionLocationFilterInput) {
+  onCreateLocation(filter: $filter) {
+    id
+    name
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnUpdateLocation($filter: ModelSubscriptionLocationFilterInput) {
+  onUpdateLocation(filter: $filter) {
+    id
+    name
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnDeleteLocation($filter: ModelSubscriptionLocationFilterInput) {
+  onDeleteLocation(filter: $filter) {
+    id
+    name
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
 subscription OnCreateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
   onCreateQuestion(filter: $filter) {
     id

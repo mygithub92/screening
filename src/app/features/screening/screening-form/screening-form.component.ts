@@ -1,11 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'app/@core/services/auth.service';
-import { DateUtils } from 'app/@shared/utils/date-utils';
-import { APIService } from 'app/API.service';
-import * as moment from 'moment';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from "app/@core/services/auth.service";
+import { DateUtils } from "app/@shared/utils/date-utils";
+import { APIService } from "app/API.service";
+import * as moment from "moment";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-screening-form",
@@ -28,12 +33,7 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
   questionFormSub: Subscription;
   crew;
   noProject;
-  locations = [
-    { label: "Please select...", value: null },
-    { label: "Set", value: "Set" },
-    { label: "Basecamp", value: "Basecamp" },
-    { label: "Location", value: "Location" },
-  ];
+  locations = [{ label: "Please select...", value: null }];
   subscriptions: Subscription[] = [];
   constructor(
     private router: Router,
@@ -52,7 +52,7 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.subscriptions.push(
       this.authService.getCurrentAuthenticatedUser().subscribe(async (user) => {
         const userName = user.signInUserSession.accessToken.payload["username"];
@@ -62,13 +62,20 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
         this.projectForm.controls["projectCode"].setValue(this.defaultJobCode);
       })
     );
+
+    const locations = await this.api.ListLocations();
+
+    locations.items
+      .filter((location) => !location._deleted)
+      .sort((l1, l2) => l1.name.localeCompare(l2.name))
+      .forEach((l) => this.locations.push({ label: l.name, value: l.name }));
   }
 
   public async findJob() {
     this.projectForm.markAllAsTouched();
     if (this.projectForm.valid) {
       this.isExpired = false;
-
+      this.form.reset();
       this.projectFetched = false;
       this.loading = true;
       this.noProject = false;
@@ -79,12 +86,12 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
       if (jobs && jobs.items.length > 0) {
         this.projectFetched = true;
         this.foundJob = jobs.items[0];
-        this.checkExpired();
         const currentFormId = this.foundJob.forms.items[0].formId;
 
         if (this.formId !== currentFormId) {
           this.formId = currentFormId;
           this.getJobForm();
+          this.checkExpired();
         } else {
           this.loading = false;
         }
@@ -101,7 +108,7 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
       const jobEndDate = new Date(jobEndDateAws);
       if (moment(new Date()).isAfter(jobEndDate)) {
         this.isExpired = true;
-        this.expiredMessage = `The selected Project has expired on: ${DateUtils.format(
+        this.expiredMessage = `The selected Project has expired on:  ${DateUtils.format(
           jobEndDate
         )}`;
       }
@@ -116,8 +123,6 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
   }
 
   private async getJobForm() {
-    this.expiredMessage = null;
-
     if (this.questionFormSub) {
       this.questionFormSub.unsubscribe();
     }

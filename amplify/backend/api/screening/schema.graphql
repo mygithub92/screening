@@ -41,6 +41,11 @@ type Job @model @auth(rules: [{ allow: public }]) {
   crews: [Crew] @manyToMany(relationName: "CrewJob")
 }
 
+type Location @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  name: String
+}
+
 type Question @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String

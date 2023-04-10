@@ -290,6 +290,34 @@ export declare const Crew: (new (init: ModelInit<Crew>) => Crew) & {
   copyOf(source: Crew, mutator: (draft: MutableModel<Crew>) => MutableModel<Crew> | void): Crew;
 }
 
+type EagerLocation = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Location, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyLocation = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Location, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Location = LazyLoading extends LazyLoadingDisabled ? EagerLocation : LazyLocation
+
+export declare const Location: (new (init: ModelInit<Location>) => Location) & {
+  copyOf(source: Location, mutator: (draft: MutableModel<Location>) => MutableModel<Location> | void): Location;
+}
+
 type EagerFormJob = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<FormJob, 'id'>;

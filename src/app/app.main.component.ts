@@ -1,12 +1,23 @@
-import { Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ActivatedRoute, ActivationStart, Router, RouterOutlet } from '@angular/router';
-import { User } from 'app/@shared/api-interfaces';
-import { Subscription } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from "@angular/core";
+import {
+  ActivatedRoute,
+  ActivationStart,
+  Router,
+  RouterOutlet,
+} from "@angular/router";
+import { User } from "app/@shared/api-interfaces";
+import { Subscription } from "rxjs";
+import { filter, take } from "rxjs/operators";
 
-import { AuthService } from './@core/services/auth.service';
-import { APIService } from './API.service';
-import { MenuService } from './app.menu.service';
+import { AuthService } from "./@core/services/auth.service";
+import { APIService } from "./API.service";
+import { MenuService } from "./app.menu.service";
 
 enum MenuOrientation {
   STATIC,
@@ -108,6 +119,10 @@ export class AppMainComponent implements OnInit, OnDestroy {
               routerLink: "admin/forms",
             },
             {
+              label: "Locations",
+              routerLink: "admin/locations",
+            },
+            {
               label: "Crew",
               routerLink: "staff/crew",
             },
@@ -121,7 +136,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
         if (groups[0] === "Staff") {
           this.menuModel.push(
             {
-              label: "Projects",
+              label: "Screeners",
               routerLink: "staff",
             },
             {

@@ -1,24 +1,25 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
-import { CoreModule } from 'app/@core/@core.module';
-import { PipesModule } from 'app/@shared/pipes';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
+import { RouterModule, Routes } from "@angular/router";
+import { CoreModule } from "app/@core/@core.module";
+import { PipesModule } from "app/@shared/pipes";
+import { DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
 
-import { NgPrimeModule } from '../../app.ngprime.module';
-import { AddEditFormComponent } from './add-edit-form/add-edit-form.component';
-import { AddEditJobComponent } from './add-edit-job/add-edit-job.component';
-import { AddEditQuestionComponent } from './add-edit-question/add-edit-question.component';
-import { AdminComponent } from './admin.component';
-import { JobComponent } from './job/job.component';
-import { QuestionFormComponent } from './question-form/question-form.component';
-import { QuestionComponent } from './question/question.component';
+import { NgPrimeModule } from "../../app.ngprime.module";
+import { AddEditFormComponent } from "./add-edit-form/add-edit-form.component";
+import { AddEditJobComponent } from "./add-edit-job/add-edit-job.component";
+import { AddEditQuestionComponent } from "./add-edit-question/add-edit-question.component";
+import { AdminComponent } from "./admin.component";
+import { JobComponent } from "./job/job.component";
+import { LocationComponent } from "./location/location.component";
+import { QuestionFormComponent } from "./question-form/question-form.component";
+import { QuestionComponent } from "./question/question.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: AdminComponent,
+    component: LocationComponent,
   },
   {
     path: "jobs",
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: "forms",
     component: QuestionFormComponent,
+  },
+  {
+    path: "locations",
+    component: LocationComponent,
   },
   {
     path: "questions",
@@ -51,6 +56,7 @@ const routes: Routes = [
     AddEditQuestionComponent,
     AddEditFormComponent,
     AddEditJobComponent,
+    LocationComponent,
   ],
   imports: [
     CommonModule,

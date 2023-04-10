@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'app/@core/services/auth.service';
-import { APIService } from 'app/API.service';
-import { MessageService } from 'primeng/api';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from "app/@core/services/auth.service";
+import { APIService } from "app/API.service";
+import { MessageService } from "primeng/api";
 
 @Component({
   selector: "app-job",
@@ -59,12 +59,7 @@ export class JobComponent implements OnInit {
         defaultJobId: values.jobCode,
       });
       this.jobCode = values.jobCode;
-      this.messageService.add({
-        key: "tst",
-        severity: "success",
-        summary: "Success",
-        detail: "Default Project changed",
-      });
+      this.router.navigate(["main/screening"]);
     }
   }
 }

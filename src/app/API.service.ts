@@ -22,6 +22,9 @@ export type __SubscriptionContainer = {
   onCreateJob: OnCreateJobSubscription;
   onUpdateJob: OnUpdateJobSubscription;
   onDeleteJob: OnDeleteJobSubscription;
+  onCreateLocation: OnCreateLocationSubscription;
+  onUpdateLocation: OnUpdateLocationSubscription;
+  onDeleteLocation: OnDeleteLocationSubscription;
   onCreateQuestion: OnCreateQuestionSubscription;
   onUpdateQuestion: OnUpdateQuestionSubscription;
   onDeleteQuestion: OnDeleteQuestionSubscription;
@@ -464,6 +467,41 @@ export type DeleteJobInput = {
   _version?: number | null;
 };
 
+export type CreateLocationInput = {
+  id?: string | null;
+  name?: string | null;
+  _version?: number | null;
+};
+
+export type ModelLocationConditionInput = {
+  name?: ModelStringInput | null;
+  and?: Array<ModelLocationConditionInput | null> | null;
+  or?: Array<ModelLocationConditionInput | null> | null;
+  not?: ModelLocationConditionInput | null;
+};
+
+export type Location = {
+  __typename: "Location";
+  id: string;
+  name?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+};
+
+export type UpdateLocationInput = {
+  id: string;
+  name?: string | null;
+  _version?: number | null;
+};
+
+export type DeleteLocationInput = {
+  id: string;
+  _version?: number | null;
+};
+
 export type CreateQuestionInput = {
   id?: string | null;
   title?: string | null;
@@ -736,6 +774,21 @@ export type ModelJobConnection = {
   startedAt?: number | null;
 };
 
+export type ModelLocationFilterInput = {
+  id?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  and?: Array<ModelLocationFilterInput | null> | null;
+  or?: Array<ModelLocationFilterInput | null> | null;
+  not?: ModelLocationFilterInput | null;
+};
+
+export type ModelLocationConnection = {
+  __typename: "ModelLocationConnection";
+  items: Array<Location | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
+};
+
 export type ModelQuestionFilterInput = {
   id?: ModelIDInput | null;
   title?: ModelStringInput | null;
@@ -912,6 +965,13 @@ export type ModelSubscriptionJobFilterInput = {
   endDate?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionJobFilterInput | null> | null;
   or?: Array<ModelSubscriptionJobFilterInput | null> | null;
+};
+
+export type ModelSubscriptionLocationFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  name?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionLocationFilterInput | null> | null;
+  or?: Array<ModelSubscriptionLocationFilterInput | null> | null;
 };
 
 export type ModelSubscriptionQuestionFilterInput = {
@@ -2185,6 +2245,39 @@ export type DeleteJobMutation = {
     nextToken?: string | null;
     startedAt?: number | null;
   } | null;
+  createdAt: string;
+  updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+};
+
+export type CreateLocationMutation = {
+  __typename: "Location";
+  id: string;
+  name?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+};
+
+export type UpdateLocationMutation = {
+  __typename: "Location";
+  id: string;
+  name?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+};
+
+export type DeleteLocationMutation = {
+  __typename: "Location";
+  id: string;
+  name?: string | null;
   createdAt: string;
   updatedAt: string;
   _version: number;
@@ -5820,6 +5913,49 @@ export type SyncJobsQuery = {
       nextToken?: string | null;
       startedAt?: number | null;
     } | null;
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type GetLocationQuery = {
+  __typename: "Location";
+  id: string;
+  name?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+};
+
+export type ListLocationsQuery = {
+  __typename: "ModelLocationConnection";
+  items: Array<{
+    __typename: "Location";
+    id: string;
+    name?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+  } | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type SyncLocationsQuery = {
+  __typename: "ModelLocationConnection";
+  items: Array<{
+    __typename: "Location";
+    id: string;
+    name?: string | null;
     createdAt: string;
     updatedAt: string;
     _version: number;
@@ -9579,6 +9715,39 @@ export type OnDeleteJobSubscription = {
     nextToken?: string | null;
     startedAt?: number | null;
   } | null;
+  createdAt: string;
+  updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+};
+
+export type OnCreateLocationSubscription = {
+  __typename: "Location";
+  id: string;
+  name?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+};
+
+export type OnUpdateLocationSubscription = {
+  __typename: "Location";
+  id: string;
+  name?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+};
+
+export type OnDeleteLocationSubscription = {
+  __typename: "Location";
+  id: string;
+  name?: string | null;
   createdAt: string;
   updatedAt: string;
   _version: number;
@@ -13586,6 +13755,87 @@ export class APIService {
     )) as any;
     return <DeleteJobMutation>response.data.deleteJob;
   }
+  async CreateLocation(
+    input: CreateLocationInput,
+    condition?: ModelLocationConditionInput
+  ): Promise<CreateLocationMutation> {
+    const statement = `mutation CreateLocation($input: CreateLocationInput!, $condition: ModelLocationConditionInput) {
+        createLocation(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input,
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateLocationMutation>response.data.createLocation;
+  }
+  async UpdateLocation(
+    input: UpdateLocationInput,
+    condition?: ModelLocationConditionInput
+  ): Promise<UpdateLocationMutation> {
+    const statement = `mutation UpdateLocation($input: UpdateLocationInput!, $condition: ModelLocationConditionInput) {
+        updateLocation(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input,
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateLocationMutation>response.data.updateLocation;
+  }
+  async DeleteLocation(
+    input: DeleteLocationInput,
+    condition?: ModelLocationConditionInput
+  ): Promise<DeleteLocationMutation> {
+    const statement = `mutation DeleteLocation($input: DeleteLocationInput!, $condition: ModelLocationConditionInput) {
+        deleteLocation(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input,
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteLocationMutation>response.data.deleteLocation;
+  }
   async CreateQuestion(
     input: CreateQuestionInput,
     condition?: ModelQuestionConditionInput
@@ -17488,6 +17738,105 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <SyncJobsQuery>response.data.syncJobs;
+  }
+  async GetLocation(id: string): Promise<GetLocationQuery> {
+    const statement = `query GetLocation($id: ID!) {
+        getLocation(id: $id) {
+          __typename
+          id
+          name
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id,
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetLocationQuery>response.data.getLocation;
+  }
+  async ListLocations(
+    filter?: ModelLocationFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListLocationsQuery> {
+    const statement = `query ListLocations($filter: ModelLocationFilterInput, $limit: Int, $nextToken: String) {
+        listLocations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListLocationsQuery>response.data.listLocations;
+  }
+  async SyncLocations(
+    filter?: ModelLocationFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncLocationsQuery> {
+    const statement = `query SyncLocations($filter: ModelLocationFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncLocations(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SyncLocationsQuery>response.data.syncLocations;
   }
   async GetQuestion(id: string): Promise<GetQuestionQuery> {
     const statement = `query GetQuestion($id: ID!) {
@@ -21966,6 +22315,90 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
       SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteJob">>
+    >;
+  }
+
+  OnCreateLocationListener(
+    filter?: ModelSubscriptionLocationFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateLocation">>
+  > {
+    const statement = `subscription OnCreateLocation($filter: ModelSubscriptionLocationFilterInput) {
+        onCreateLocation(filter: $filter) {
+          __typename
+          id
+          name
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateLocation">>
+    >;
+  }
+
+  OnUpdateLocationListener(
+    filter?: ModelSubscriptionLocationFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateLocation">>
+  > {
+    const statement = `subscription OnUpdateLocation($filter: ModelSubscriptionLocationFilterInput) {
+        onUpdateLocation(filter: $filter) {
+          __typename
+          id
+          name
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateLocation">>
+    >;
+  }
+
+  OnDeleteLocationListener(
+    filter?: ModelSubscriptionLocationFilterInput
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteLocation">>
+  > {
+    const statement = `subscription OnDeleteLocation($filter: ModelSubscriptionLocationFilterInput) {
+        onDeleteLocation(filter: $filter) {
+          __typename
+          id
+          name
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteLocation">>
     >;
   }
 

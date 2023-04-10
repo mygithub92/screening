@@ -47,7 +47,7 @@
           <div class="ui-g-12 ui-lg-6">
             <div class="ui-g ui-fluid">
               <div class="ui-g-12">
-                <label for="phone-number" class="account-label"
+                <label for="phonenumber" class="account-label"
                   >Phone number<span style="color: red;">&nbsp;*</span></label
                 >
               </div>
@@ -56,18 +56,39 @@
                   type="text"
                   pInputText
                   formControlName="phonenumber"
-                  id="phone-number"
+                  maxlength="10"
+                  minlength="10"
+                  id="phonenumber"
                   placeholder="Phone number"
                 />
-                <p-message
-                  severity="error"
-                  text="Field is required"
-                  *ngIf="isInvalid('phonenumber')"
-                ></p-message>
+                <div
+                  *ngIf="
+                    showError ||
+                    (form.controls['phonenumber'].invalid &&
+                      (form.controls['phonenumber'].dirty ||
+                        form.controls['phonenumber'].touched))
+                  "
+                >
+                  wfwfwefwef
+                  <div
+                    *ngIf="form.controls['phonenumber'].hasError('required')"
+                  >
+                    <p-message
+                      severity="error"
+                      text="Field is required"
+                    ></p-message>
+                  </div>
+                  <div *ngIf="form.controls['phonenumber'].hasError('pattern')">
+                    <p-message
+                      severity="error"
+                      text="Must be 10 characters and only numbers"
+                    ></p-message>
+                  </div>
+                </div>
               </div>
               <div class="ui-g-12">
                 <label for="healthCardNumber" class="account-label"
-                  >Health card number</label
+                  >Health card number (optional)</label
                 >
               </div>
               <div class="ui-g-12">
@@ -107,7 +128,9 @@
 
               <div class="ui-g-12">
                 <label for="vaxxStatus" class="account-label"
-                  >Vax<span style="color: red;">&nbsp;*</span></label
+                  >Vaccination Status<span style="color: red;"
+                    >&nbsp;*</span
+                  ></label
                 >
               </div>
               <div class="ui-g-12">
