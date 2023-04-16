@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'app/@core/services/auth.service';
-import { DateUtils } from 'app/@shared/utils/date-utils';
-import { APIService } from 'app/API.service';
-import * as moment from 'moment';
-import { MessageService } from 'primeng/api';
+import { Component, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
+import { AuthService } from "app/@core/services/auth.service";
+import { DateUtils } from "app/@shared/utils/date-utils";
+import { APIService } from "app/API.service";
+import * as moment from "moment";
+import { MessageService } from "primeng/api";
 
-import { TextMessageService } from '../text-message-service';
+import { TextMessageService } from "../text-message-service";
 
 @Component({
   selector: "app-submitted-screening",
@@ -59,11 +64,6 @@ export class SubmittedScreeningComponent implements OnInit {
       .getCurrentAuthenticatedUser()
       .subscribe(async (user: any) => {
         this.user = user;
-        this.projects = (await this.api.ListJobs()).items;
-        this.projectCodeIdMap = this.projects.reduce((a, c) => {
-          a[c.location] = c.id;
-          return a;
-        }, {});
       });
   }
 
@@ -86,9 +86,9 @@ export class SubmittedScreeningComponent implements OnInit {
         submittedAt: {
           between: [startDateObj, endDateObj],
         },
-        not: { processed: { eq: true } },
+        processed: { eq: false },
+        jobCode: { eq: projectCode.toUpperCase() },
       } as any;
-      search.jobId = { eq: this.projectCodeIdMap[projectCode] };
       if (crewName) {
         search.crewName = { eq: crewName };
       }

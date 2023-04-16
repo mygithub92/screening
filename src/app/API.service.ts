@@ -1,9 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
-import { Injectable } from '@angular/core';
-import API, { graphqlOperation, GraphQLResult } from '@aws-amplify/api-graphql';
-import { Observable } from 'zen-observable-ts';
+import { Injectable } from "@angular/core";
+import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
+import { Observable } from "zen-observable-ts";
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -49,6 +49,7 @@ export type CreateSceeningInput = {
   id?: string | null;
   jobId?: string | null;
   jobName?: string | null;
+  jobCode?: string | null;
   crewId?: string | null;
   crewName?: string | null;
   crewPhoneNumber?: string | null;
@@ -707,6 +708,7 @@ export type ModelSceeningFilterInput = {
   id?: ModelIDInput | null;
   jobId?: ModelStringInput | null;
   jobName?: ModelStringInput | null;
+  jobCode?: ModelStringInput | null;
   crewId?: ModelStringInput | null;
   crewName?: ModelStringInput | null;
   crewPhoneNumber?: ModelStringInput | null;
@@ -2993,71 +2995,6 @@ export type CreateCrewMutation = {
   name?: string | null;
   email?: string | null;
   defaultJobId?: string | null;
-  jobs?: {
-    __typename: "ModelCrewJobConnection";
-    items: Array<{
-      __typename: "CrewJob";
-      id: string;
-      jobId: string;
-      crewId: string;
-      job: {
-        __typename: "Job";
-        id: string;
-        code?: string | null;
-        location?: string | null;
-        startDate?: string | null;
-        endDate?: string | null;
-        forms?: {
-          __typename: "ModelFormJobConnection";
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        crews?: {
-          __typename: "ModelCrewJobConnection";
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      };
-      crew: {
-        __typename: "Crew";
-        id: string;
-        userName?: string | null;
-        role?: string | null;
-        DOB?: string | null;
-        healthCardNumber?: string | null;
-        vaxxStatus?: string | null;
-        userAgreement?: string | null;
-        companyName?: string | null;
-        address?: string | null;
-        phonenumber?: string | null;
-        name?: string | null;
-        email?: string | null;
-        defaultJobId?: string | null;
-        jobs?: {
-          __typename: "ModelCrewJobConnection";
-          nextToken?: string | null;
-          startedAt?: number | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-        _version: number;
-        _deleted?: boolean | null;
-        _lastChangedAt: number;
-      };
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
-    } | null>;
-    nextToken?: string | null;
-    startedAt?: number | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
   _version: number;
@@ -12355,6 +12292,7 @@ export class APIService {
           id
           jobId
           jobName
+          jobCode
           crewId
           crewName
           crewPhoneNumber
@@ -16617,6 +16555,7 @@ export class APIService {
             id
             jobId
             jobName
+            jobCode
             crewId
             crewName
             crewPhoneNumber
@@ -16635,28 +16574,6 @@ export class APIService {
                 id
                 question
                 answer
-                sceening {
-                  __typename
-                  id
-                  jobId
-                  jobName
-                  crewId
-                  crewName
-                  crewPhoneNumber
-                  result
-                  method
-                  staffId
-                  staffName
-                  processed
-                  location
-                  processedAt
-                  submittedAt
-                  createdAt
-                  updatedAt
-                  _version
-                  _deleted
-                  _lastChangedAt
-                }
                 order
                 createdAt
                 updatedAt
@@ -17048,42 +16965,6 @@ export class APIService {
               __typename
               id
               title
-              options {
-                __typename
-                items {
-                  __typename
-                  id
-                  questionId
-                  optionId
-                  createdAt
-                  updatedAt
-                  _version
-                  _deleted
-                  _lastChangedAt
-                }
-                nextToken
-                startedAt
-              }
-              form {
-                __typename
-                id
-                name
-                questions {
-                  __typename
-                  nextToken
-                  startedAt
-                }
-                jobs {
-                  __typename
-                  nextToken
-                  startedAt
-                }
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
               order
               optionOrderDesc
               createdAt
@@ -17092,65 +16973,6 @@ export class APIService {
               _deleted
               _lastChangedAt
               formQuestionsId
-            }
-            nextToken
-            startedAt
-          }
-          jobs {
-            __typename
-            items {
-              __typename
-              id
-              formId
-              jobId
-              form {
-                __typename
-                id
-                name
-                questions {
-                  __typename
-                  nextToken
-                  startedAt
-                }
-                jobs {
-                  __typename
-                  nextToken
-                  startedAt
-                }
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              job {
-                __typename
-                id
-                code
-                location
-                startDate
-                endDate
-                forms {
-                  __typename
-                  nextToken
-                  startedAt
-                }
-                crews {
-                  __typename
-                  nextToken
-                  startedAt
-                }
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
             }
             nextToken
             startedAt
@@ -17571,6 +17393,24 @@ export class APIService {
                   _version
                   _deleted
                   _lastChangedAt
+                  questions {
+                    __typename
+                    items {
+                      __typename
+                      id
+                      title
+                      order
+                      optionOrderDesc
+                      createdAt
+                      updatedAt
+                      _version
+                      _deleted
+                      _lastChangedAt
+                      formQuestionsId
+                    }
+                    nextToken
+                    startedAt
+                  }
                 }
                 createdAt
                 updatedAt
@@ -18356,47 +18196,6 @@ export class APIService {
             id
             label
             value
-            questions {
-              __typename
-              items {
-                __typename
-                id
-                questionId
-                optionId
-                question {
-                  __typename
-                  id
-                  title
-                  order
-                  optionOrderDesc
-                  createdAt
-                  updatedAt
-                  _version
-                  _deleted
-                  _lastChangedAt
-                  formQuestionsId
-                }
-                option {
-                  __typename
-                  id
-                  label
-                  value
-                  order
-                  createdAt
-                  updatedAt
-                  _version
-                  _deleted
-                  _lastChangedAt
-                }
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
             order
             createdAt
             updatedAt
@@ -18627,56 +18426,6 @@ export class APIService {
             name
             email
             defaultJobId
-            jobs {
-              __typename
-              items {
-                __typename
-                id
-                jobId
-                crewId
-                job {
-                  __typename
-                  id
-                  code
-                  location
-                  startDate
-                  endDate
-                  createdAt
-                  updatedAt
-                  _version
-                  _deleted
-                  _lastChangedAt
-                }
-                crew {
-                  __typename
-                  id
-                  userName
-                  role
-                  DOB
-                  healthCardNumber
-                  vaxxStatus
-                  userAgreement
-                  companyName
-                  address
-                  phonenumber
-                  name
-                  email
-                  defaultJobId
-                  createdAt
-                  updatedAt
-                  _version
-                  _deleted
-                  _lastChangedAt
-                }
-                createdAt
-                updatedAt
-                _version
-                _deleted
-                _lastChangedAt
-              }
-              nextToken
-              startedAt
-            }
             createdAt
             updatedAt
             _version

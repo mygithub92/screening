@@ -155,8 +155,8 @@ export class EditProfileComponent implements OnInit {
         crew["name"] = this.user.attributes["name"];
         crew["email"] = this.user.attributes["email"];
         crew["userName"] = userName;
-        await this.api.CreateCrew(crew);
-        this.menuService.onMenuStateChange("complete");
+        const createdCrew = await this.api.CreateCrew(crew);
+        this.menuService.currentCrew = createdCrew;
       }
       this.router.navigate(["main/screening"]);
     }

@@ -6,9 +6,9 @@ import {
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService } from "app/@core/services/auth.service";
 import { DateUtils } from "app/@shared/utils/date-utils";
 import { APIService } from "app/API.service";
+import { MenuService } from "app/app.menu.service";
 import * as moment from "moment";
 import { Subscription } from "rxjs";
 
@@ -32,6 +32,11 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
   projectFetched = false;
   questionFormSub: Subscription;
   crew;
+  options = [
+    { label: "Yes", value: "Yes" },
+    { label: "No", value: "No" },
+  ];
+
   noProject;
   locations = [{ label: "Please select...", value: null }];
   subscriptions: Subscription[] = [];
@@ -40,7 +45,7 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private api: APIService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private menuService: MenuService
   ) {
     this.projectForm = this.fb.group({
       projectCode: [null, Validators.required],
@@ -53,15 +58,9 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    this.subscriptions.push(
-      this.authService.getCurrentAuthenticatedUser().subscribe(async (user) => {
-        const userName = user.signInUserSession.accessToken.payload["username"];
-        const crews = await this.api.ListCrews({ userName: { eq: userName } });
-        this.crew = crews.items[0];
-        this.defaultJobCode = this.crew.defaultJobId;
-        this.projectForm.controls["projectCode"].setValue(this.defaultJobCode);
-      })
-    );
+    this.crew = this.menuService.currentCrew;
+    this.defaultJobCode = this.crew.defaultJobId;
+    this.projectForm.controls["projectCode"].setValue(this.defaultJobCode);
 
     const locations = await this.api.ListLocations();
 
@@ -90,7 +89,8 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
 
         if (this.formId !== currentFormId) {
           this.formId = currentFormId;
-          this.getJobForm();
+          const questions = this.foundJob.forms.items[0].form.questions.items;
+          this.getJobForm(questions);
           this.checkExpired();
         } else {
           this.loading = false;
@@ -122,18 +122,15 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
     return "caution";
   }
 
-  private async getJobForm() {
+  private async getJobForm(questions) {
     if (this.questionFormSub) {
       this.questionFormSub.unsubscribe();
     }
-    const form = await this.api.GetForm(this.formId);
-    const options = await this.api.ListOptions();
-    options.items.sort((a, b) => a.order - b.order);
-    this.totalNumberQuestion = form.questions.items.length;
-    this.totalQuestions = form.questions.items.map((q, i) => {
+    this.totalNumberQuestion = questions.length;
+    this.totalQuestions = questions.map((q, i) => {
       return {
         ...q,
-        options: options.items,
+        options: this.options,
         resultForYes: this.getResultForIndex(i),
       };
     });
@@ -193,7 +190,10 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
         crewPhoneNumber: this.crew.phonenumber,
         submittedAt: new Date().toISOString(),
         location: rawValue.selectedLocation,
+        processed: false,
+        jobCode: this.projectForm.getRawValue().projectCode.toUpperCase(),
       });
+      console.log(sceeningObj);
       let result;
       this.totalQuestions.forEach((question, i) => {
         const questionIndex = `question${i + 1}`;
@@ -225,6 +225,7 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
       });
 
       const response = await Promise.all(answeredQuestionArray);
+      console.log(response);
       this.router.navigate(["result", { result }], {
         relativeTo: this.route,
       });

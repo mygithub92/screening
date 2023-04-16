@@ -2,6 +2,7 @@ type Sceening @model @auth(rules: [{ allow: public }]) {
   id: ID!
   jobId: String
   jobName: String
+  jobCode: String
   crewId: String
   crewName: String
   crewPhoneNumber: String

@@ -156,6 +156,7 @@ export class AppMainComponent implements OnInit, OnDestroy {
         });
 
         if (crews && crews.items.length) {
+          this.menuService.currentCrew = crews.items[0];
           this.menuModel.push(
             {
               label: "Project Screeners",

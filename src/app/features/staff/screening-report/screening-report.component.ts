@@ -1,12 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'app/@core/services/auth.service';
-import { DateUtils } from 'app/@shared/utils/date-utils';
-import { APIService } from 'app/API.service';
-import { saveAs } from 'file-saver';
-import * as moment from 'moment';
-import { MessageService } from 'primeng/api';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AuthService } from "app/@core/services/auth.service";
+import { DateUtils } from "app/@shared/utils/date-utils";
+import { APIService } from "app/API.service";
+import { saveAs } from "file-saver";
+import * as moment from "moment";
+import { MessageService } from "primeng/api";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-screening-report",
@@ -21,7 +21,6 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
   loading = false;
   screenings;
   filteredScreenings;
-  projectCodeIdMap = {};
   projects;
   positiveNum = 0;
   negativeNum = 0;
@@ -84,18 +83,7 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
     );
   }
 
-  async ngOnInit() {
-    this.authService
-      .getCurrentAuthenticatedUser()
-      .subscribe(async (user: any) => {
-        this.user = user;
-        this.projects = (await this.api.ListJobs()).items;
-        this.projectCodeIdMap = this.projects.reduce((a, c) => {
-          a[c.location] = c.id;
-          return a;
-        }, {});
-      });
-  }
+  async ngOnInit() {}
 
   public async fetch() {
     this.form.markAllAsTouched();
@@ -117,11 +105,11 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
       const search = {
         processedAt: { between: [startDateObj, endDateObj] },
         processed: { eq: true },
+        jobCode: { eq: projectCode.toUpperCase() },
       } as any;
       if (crewName) {
         search.crewName = { eq: crewName };
       }
-      search.jobId = { eq: this.projectCodeIdMap[projectCode] };
       const screeningObjs = await this.api.ListSceenings(search);
       this.screenings = screeningObjs.items.map((i) => {
         i.processedAt = DateUtils.formatDateTime(i.processedAt);
