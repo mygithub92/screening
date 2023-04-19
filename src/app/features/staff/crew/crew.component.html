@@ -1,4 +1,4 @@
-<p-toast key="tst"></p-toast>
+<p-toast key="tst" position="center"></p-toast>
 
 <p-blockUI [blocked]="loading" [target]="mainPanel"
   ><p class="center-spinner"></p
@@ -46,7 +46,7 @@
                 <button
                   pButton
                   type="button"
-                  label="Remind"
+                  [label]="getRemindButtonLabel(rowData)"
                   (click)="remind(rowData)"
                 ></button>
               </td>

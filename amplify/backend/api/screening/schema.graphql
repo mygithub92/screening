@@ -1,8 +1,7 @@
-type Sceening @model @auth(rules: [{ allow: public }]) {
+type Sceening @model @auth(rules: [{allow: public}]) {
   id: ID!
   jobId: String
   jobName: String
-  jobCode: String
   crewId: String
   crewName: String
   crewPhoneNumber: String
@@ -15,9 +14,10 @@ type Sceening @model @auth(rules: [{ allow: public }]) {
   processedAt: AWSDateTime
   submittedAt: AWSDateTime
   answeredQuestions: [AnsweredQuestion] @hasMany
+  jobCode: String
 }
 
-type AnsweredQuestion @model @auth(rules: [{ allow: public }]) {
+type AnsweredQuestion @model @auth(rules: [{allow: public}]) {
   id: ID!
   question: String
   answer: String
@@ -25,14 +25,14 @@ type AnsweredQuestion @model @auth(rules: [{ allow: public }]) {
   order: Int
 }
 
-type Form @model @auth(rules: [{ allow: public }]) {
+type Form @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
   questions: [Question] @hasMany
   jobs: [Job] @manyToMany(relationName: "FormJob")
 }
 
-type Job @model @auth(rules: [{ allow: public }]) {
+type Job @model @auth(rules: [{allow: public}]) {
   id: ID!
   code: String
   location: String
@@ -42,12 +42,12 @@ type Job @model @auth(rules: [{ allow: public }]) {
   crews: [Crew] @manyToMany(relationName: "CrewJob")
 }
 
-type Location @model @auth(rules: [{ allow: public }]) {
+type Location @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
 }
 
-type Question @model @auth(rules: [{ allow: public }]) {
+type Question @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String
   options: [Option] @manyToMany(relationName: "QuestionOption")
@@ -56,7 +56,7 @@ type Question @model @auth(rules: [{ allow: public }]) {
   optionOrderDesc: Boolean
 }
 
-type Option @model @auth(rules: [{ allow: public }]) {
+type Option @model @auth(rules: [{allow: public}]) {
   id: ID!
   label: String
   value: String
@@ -64,7 +64,7 @@ type Option @model @auth(rules: [{ allow: public }]) {
   order: Int
 }
 
-type Crew @model @auth(rules: [{ allow: public }]) {
+type Crew @model @auth(rules: [{allow: public}]) {
   id: ID!
   userName: String
   role: String
@@ -80,3 +80,4 @@ type Crew @model @auth(rules: [{ allow: public }]) {
   defaultJobId: String
   jobs: [Job] @manyToMany(relationName: "CrewJob")
 }
+ 

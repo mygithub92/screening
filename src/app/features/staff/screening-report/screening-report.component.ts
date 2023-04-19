@@ -110,7 +110,7 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
       if (crewName) {
         search.crewName = { eq: crewName };
       }
-      const screeningObjs = await this.api.ListSceenings(search);
+      const screeningObjs = await this.api.ListSceenings(search, 9999);
       this.screenings = screeningObjs.items.map((i) => {
         i.processedAt = DateUtils.formatDateTime(i.processedAt);
         i.submittedAt = DateUtils.formatDateTime(i.submittedAt);

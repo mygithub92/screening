@@ -8,3 +8,5 @@ export const questions = [
   "Do any of the following apply? You live with someone who is currently isolating because of a positive COVID-19 test. You live with someone who is currently isolating because of COVID-19 symptoms. You live with someone who is isolating while waiting for COVID-19 test results. Select “No” if you are 18 or older and have received your booster, and/or you are 17 or younger and are fully vaccinated, or you completed your isolation after testing positive in the last 90 days (using a rapid antigen, rapid molecular, or PCR test).",
   "Do you agree to 'Waiver'?",
 ];
+
+export const DEFAULT_LIMIT = 9999;

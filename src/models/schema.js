@@ -117,6 +117,13 @@ export const schema = {
                         ]
                     }
                 },
+                "jobCode": {
+                    "name": "jobCode",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -1166,5 +1173,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.1",
-    "version": "1697aef6dc8655bd1eb6c3aade402413"
+    "version": "2847d51b32fdc16d02a86860432a81e0"
 };

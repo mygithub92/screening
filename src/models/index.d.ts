@@ -26,6 +26,7 @@ type EagerSceening = {
   readonly processedAt?: string | null;
   readonly submittedAt?: string | null;
   readonly answeredQuestions?: (AnsweredQuestion | null)[] | null;
+  readonly jobCode?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -50,6 +51,7 @@ type LazySceening = {
   readonly processedAt?: string | null;
   readonly submittedAt?: string | null;
   readonly answeredQuestions: AsyncCollection<AnsweredQuestion>;
+  readonly jobCode?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

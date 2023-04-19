@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AuthService } from 'app/@core/services/auth.service';
-import { DateUtils } from 'app/@shared/utils/date-utils';
-import { APIService } from 'app/API.service';
-import { MessageService } from 'primeng/api';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { AuthService } from "app/@core/services/auth.service";
+import { DateUtils } from "app/@shared/utils/date-utils";
+import { APIService } from "app/API.service";
+import { MessageService } from "primeng/api";
+import { Subscription } from "rxjs";
 
-import { TextMessageService } from '../text-message-service';
+import { TextMessageService } from "../text-message-service";
 
 @Component({
   selector: "app-crew",
@@ -17,6 +17,7 @@ export class CrewComponent implements OnInit, OnDestroy {
   crews = [];
   loading = true;
   subscriptions: Subscription[] = [];
+  remaindButtonMap = {};
 
   cols = [];
   constructor(
@@ -54,7 +55,13 @@ export class CrewComponent implements OnInit, OnDestroy {
     this.loading = false;
   }
 
+  getRemindButtonLabel(rawData) {
+    return this.remaindButtonMap[rawData.id] ? "Sending..." : "Remind";
+  }
+
   async remind(crew) {
+    this.remaindButtonMap[crew.id] = true;
+
     const message = [
       {
         type: "reminder",
@@ -63,6 +70,8 @@ export class CrewComponent implements OnInit, OnDestroy {
       },
     ];
     const result = await this.textMessageService.sendMessage(message);
+    this.remaindButtonMap[crew.id] = false;
+
     this.messagetService.add({
       key: "tst",
       severity: "success",

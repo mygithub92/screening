@@ -27,6 +27,7 @@ export class SubmittedScreeningComponent implements OnInit {
   screenings;
   projects;
   projectCodeIdMap = {};
+  remaindButtonMap = {};
   result = {
     value: "",
   };
@@ -92,7 +93,8 @@ export class SubmittedScreeningComponent implements OnInit {
       if (crewName) {
         search.crewName = { eq: crewName };
       }
-      const screeningObjs = await this.api.ListSceenings(search);
+      const screeningObjs = await this.api.ListSceenings(search, 9999);
+      console.log(screeningObjs);
       this.screenings = screeningObjs.items;
       this.screenings.forEach((screening, i) => {
         this.screeningCrewMap[screening.id] = {
@@ -129,8 +131,13 @@ export class SubmittedScreeningComponent implements OnInit {
     );
   }
 
+  getRemindButtonLabel(rawData) {
+    return this.remaindButtonMap[rawData.id] ? "Sending..." : "Remind";
+  }
+
   async remind(rawData) {
     const { crewName, crewPhoneNumber } = this.screeningCrewMap[rawData.id];
+    this.remaindButtonMap[rawData.id] = true;
     const message = [
       {
         type: "reminder",
@@ -139,6 +146,7 @@ export class SubmittedScreeningComponent implements OnInit {
       },
     ];
     const result = await this.textMessageService.sendMessage(message);
+    this.remaindButtonMap[rawData.id] = false;
     this.messagetService.add({
       key: "tst",
       severity: "success",
@@ -154,6 +162,9 @@ export class SubmittedScreeningComponent implements OnInit {
     );
   }
   public async submit() {
+    if (!this.screenings) {
+      return;
+    }
     const updateSceenings = [];
     const SMSs = [];
     this.loading = true;
