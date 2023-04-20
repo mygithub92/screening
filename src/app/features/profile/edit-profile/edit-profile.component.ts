@@ -7,7 +7,7 @@ import {
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "app/@core/services/auth.service";
-import { DateUtils } from "app/@shared/utils/date-utils";
+import { getDOBYearRange } from "app/@shared/utils/app-utils";
 import { APIService } from "app/API.service";
 import { MenuService } from "app/app.menu.service";
 import * as moment from "moment";
@@ -26,6 +26,7 @@ export class EditProfileComponent implements OnInit {
   showError = false;
   loading = true;
   firstTime = false;
+  dobYearRange = getDOBYearRange();
   statuses = [
     { label: "Please select...", value: null },
     { label: "Yes", value: "Yes" },
@@ -39,8 +40,7 @@ export class EditProfileComponent implements OnInit {
     private fb: FormBuilder,
     private menuService: MenuService,
 
-    private authService: AuthService,
-    private messageService: MessageService
+    private authService: AuthService
   ) {
     this.form = this.fb.group({
       name: [null, Validators.required],
@@ -69,7 +69,6 @@ export class EditProfileComponent implements OnInit {
       .getCurrentAuthenticatedUser()
       .subscribe(async (user: any) => {
         this.user = user;
-        console.log(this.user);
         const crew = await this.api.ListCrews({
           userName: { eq: this.user.username },
         });
@@ -87,15 +86,18 @@ export class EditProfileComponent implements OnInit {
             userAgreement,
             vaxxStatus,
           } = crew.items[0];
-          this.form.patchValue({
+          const crewValue = {
             phonenumber,
-            DOB: DateUtils.formatDOB(DOB),
             healthCardNumber,
             userAgreement,
             vaxxStatus,
             name,
             email,
-          });
+          };
+          if (DOB) {
+            crewValue["DOB"] = new Date(DOB);
+          }
+          this.form.patchValue(crewValue);
         }
         this.loading = false;
       });

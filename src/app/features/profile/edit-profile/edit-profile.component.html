@@ -112,13 +112,13 @@
                 >
               </div>
               <div class="ui-g-12">
-                <input
-                  type="text"
-                  pInputText
+                <p-calendar
                   formControlName="DOB"
-                  id="dob"
-                  placeholder="Date of birth (DD/MM/YYYY)"
-                />
+                  monthNavigator="true"
+                  yearNavigator="true"
+                  [yearRange]="dobYearRange"
+                  dateFormat="dd/mm/yy"
+                ></p-calendar>
                 <p-message
                   severity="error"
                   text="Field is required"
