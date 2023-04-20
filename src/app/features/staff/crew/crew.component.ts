@@ -55,6 +55,10 @@ export class CrewComponent implements OnInit, OnDestroy {
     this.loading = false;
   }
 
+  getRemindButtonDisabled(rawData) {
+    return this.remaindButtonMap[rawData.id];
+  }
+
   getRemindButtonLabel(rawData) {
     return this.remaindButtonMap[rawData.id] ? "Sending..." : "Remind";
   }

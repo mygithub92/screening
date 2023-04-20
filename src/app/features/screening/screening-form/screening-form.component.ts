@@ -6,6 +6,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { sortQuestions } from "app/@shared/utils/app-utils";
 import { DateUtils } from "app/@shared/utils/date-utils";
 import { APIService } from "app/API.service";
 import { MenuService } from "app/app.menu.service";
@@ -85,6 +86,7 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
       if (jobs && jobs.items.length > 0) {
         this.projectFetched = true;
         this.foundJob = jobs.items[0];
+        console.log(this.foundJob);
         const currentFormId = this.foundJob.forms.items[0].formId;
 
         if (this.formId !== currentFormId) {
@@ -123,6 +125,7 @@ export class ScreeningFormComponent implements OnInit, OnDestroy {
   }
 
   private async getJobForm(questions) {
+    questions = sortQuestions(questions);
     if (this.questionFormSub) {
       this.questionFormSub.unsubscribe();
     }

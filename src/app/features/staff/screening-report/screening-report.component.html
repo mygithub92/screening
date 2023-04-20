@@ -1,4 +1,4 @@
-<p-toast key="tst"></p-toast>
+<p-toast key="tst" position="center"></p-toast>
 
 <p-blockUI [blocked]="loading" [target]="dt"
   ><p class="center-spinner"></p
@@ -163,7 +163,8 @@
               <button
                 pButton
                 type="button"
-                label="Duplicate"
+                [disabled]="getDuplicateButtonDisabled(rowData)"
+                [label]="getDuplicateButtonLabel(rowData)"
                 (click)="duplicate(rowData)"
               ></button>
             </td>

@@ -63,3 +63,7 @@ body .ui-table .ui-table-summary {
 body .screening-panel>.ui-widget-content {
   background-color: inherit;
 }
+
+button.disabled {
+  cursor: not-allowed;
+}

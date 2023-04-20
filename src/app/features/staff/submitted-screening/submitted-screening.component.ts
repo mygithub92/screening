@@ -23,11 +23,10 @@ export class SubmittedScreeningComponent implements OnInit {
   user;
   form: FormGroup;
   resultForm: FormGroup;
+  remaindButtonMap = {};
   loading = false;
   screenings;
-  projects;
-  projectCodeIdMap = {};
-  remaindButtonMap = {};
+  selectedProject;
   result = {
     value: "",
   };
@@ -96,6 +95,12 @@ export class SubmittedScreeningComponent implements OnInit {
       const screeningObjs = await this.api.ListSceenings(search, 9999);
       console.log(screeningObjs);
       this.screenings = screeningObjs.items;
+      if (this.screenings && this.screenings.length > 0) {
+        this.selectedProject = {
+          projectCode: this.screenings[0].jobCode,
+          projectName: this.screenings[0].jobName,
+        };
+      }
       this.screenings.forEach((screening, i) => {
         this.screeningCrewMap[screening.id] = {
           crewName: screening.crewName,
@@ -129,6 +134,10 @@ export class SubmittedScreeningComponent implements OnInit {
       questionForm[controlName].invalid &&
       (questionForm[controlName].dirty || questionForm[controlName].touched)
     );
+  }
+
+  getRemindButtonDisabled(rowData) {
+    return this.remaindButtonMap[rowData.id];
   }
 
   getRemindButtonLabel(rawData) {
@@ -181,6 +190,7 @@ export class SubmittedScreeningComponent implements OnInit {
             type: "result",
             name: crewName,
             phonne: crewPhoneNumber,
+            project: `${this.selectedProject.projectName}(${this.selectedProject.projectCode})`,
             test: {
               result,
               method,
@@ -203,6 +213,7 @@ export class SubmittedScreeningComponent implements OnInit {
       }
     });
     await Promise.all(updateSceenings);
+    console.log(SMSs);
     await this.textMessageService.sendMessage(SMSs);
     await this.fetch();
     this.loading = false;

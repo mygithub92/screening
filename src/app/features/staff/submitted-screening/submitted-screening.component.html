@@ -190,6 +190,7 @@
               <button
                 pButton
                 type="button"
+                [disabled]="getRemindButtonDisabled(rowData)"
                 [label]="getRemindButtonLabel(rowData)"
                 (click)="remind(rowData)"
               ></button>

@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "app/@core/services/auth.service";
 import { DateUtils } from "app/@shared/utils/date-utils";
 import { APIService } from "app/API.service";
 import { saveAs } from "file-saver";
@@ -26,6 +25,8 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
   negativeNum = 0;
   notTestedNum = 0;
   projectCode;
+  duplicateButtonMap = {};
+
   result = {
     value: "",
   };
@@ -55,7 +56,6 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
   constructor(
     private api: APIService,
     private fb: FormBuilder,
-    private authService: AuthService,
     private messageService: MessageService
   ) {
     const start = moment().startOf("day");
@@ -168,17 +168,28 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
     return moment1;
   }
 
+  getDuplicateButtonDisabled(rowData) {
+    return this.duplicateButtonMap[rowData.id];
+  }
+
+  getDuplicateButtonLabel(rowData) {
+    return this.duplicateButtonMap[rowData.id] ? "Duplicating..." : "Duplicate";
+  }
+
   public async duplicate(rowData) {
+    this.duplicateButtonMap[rowData.id] = true;
     const sceeningObj = await this.api.CreateSceening({
       jobId: rowData.jobId,
       jobName: rowData.jobName,
       crewId: rowData.crewId,
       crewName: rowData.crewName,
       crewPhoneNumber: rowData.crewPhoneNumber,
+      jobCode: rowData.jobCode,
       submittedAt: moment(rowData.submittedAt, "MM/DD/YYYY HH:mm:ss")
         .toDate()
         .toISOString(),
       location: rowData.location,
+      processed: false,
     });
 
     const answeredQuestionArray = rowData.answeredQuestions.items.map((aq) =>
@@ -196,6 +207,7 @@ export class ScreeningReportComponent implements OnInit, OnDestroy {
       summary: "Success",
       detail: "The record has been duplicated.",
     });
+    this.duplicateButtonMap[rowData.id] = false;
   }
 
   public export() {
